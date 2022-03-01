@@ -3,11 +3,11 @@
   <title>闲渔的博客</title>
   
   
-  <link href="http://example.com/atom.xml" rel="self"/>
+  <link href="http://vitaminzl.com/atom.xml" rel="self"/>
   
-  <link href="http://example.com/"/>
-  <updated>2022-03-01T03:55:18.284Z</updated>
-  <id>http://example.com/</id>
+  <link href="http://vitaminzl.com/"/>
+  <updated>2022-03-01T05:34:08.938Z</updated>
+  <id>http://vitaminzl.com/</id>
   
   <author>
     <name>vitaminzl</name>
@@ -17,11 +17,11 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>Hello World</title>
-    <link href="http://example.com/2022/02/27/hello-world/"/>
-    <id>http://example.com/2022/02/27/hello-world/</id>
-    <published>2022-02-27T10:01:02.892Z</published>
-    <updated>2022-03-01T03:55:18.284Z</updated>
+    <title>typora-vue-theme主题介绍</title>
+    <link href="http://vitaminzl.com/2022/03/01/hello-world/"/>
+    <id>http://vitaminzl.com/2022/03/01/hello-world/</id>
+    <published>2022-03-01T01:25:00.000Z</published>
+    <updated>2022-03-01T05:34:08.938Z</updated>
     
     
       
@@ -34,6 +34,12 @@
     
     
     
+    <category term="Markdown" scheme="http://vitaminzl.com/categories/Markdown/"/>
+    
+    
+    <category term="Typora" scheme="http://vitaminzl.com/tags/Typora/"/>
+    
+    <category term="Markdown" scheme="http://vitaminzl.com/tags/Markdown/"/>
     
   </entry>
   
