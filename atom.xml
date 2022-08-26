@@ -6,7 +6,7 @@
   <link href="http://vitaminzl.com/atom.xml" rel="self"/>
   
   <link href="http://vitaminzl.com/"/>
-  <updated>2022-08-26T15:15:55.786Z</updated>
+  <updated>2022-08-26T15:21:22.640Z</updated>
   <id>http://vitaminzl.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://vitaminzl.com/2022/03/01/dong-shou-xie-yi-ge-bian-yi-qi/"/>
     <id>http://vitaminzl.com/2022/03/01/dong-shou-xie-yi-ge-bian-yi-qi/</id>
     <published>2022-03-01T01:25:00.000Z</published>
-    <updated>2022-08-26T15:15:55.786Z</updated>
+    <updated>2022-08-26T15:21:22.640Z</updated>
     
     
     <summary type="html">本文是对编译原理课程的大作业进行的记录，即编写一个简单编译器的前端，使用的语言为C++。</summary>
