@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-  <title>闲渔的博客</title>
+  <title>闲渔</title>
   
   <subtitle>VITAMINZL</subtitle>
   <link href="http://vitaminzl.com/atom.xml" rel="self"/>
@@ -32,6 +32,25 @@
 &lt;h1 id=&quot;一级标题&quot;&gt;&lt;a href=&quot;#一级标题&quot; class=&quot;headerlink&quot; title=&quot;一级标题&quot;&gt;&lt;/a&gt;一级标题&lt;/h1&gt;&lt;h2 id=&quot;二级标题&quot;&gt;&lt;a href=&quot;#二级标题&quot; class=&quot;headerlink&quot;</summary>
         
       
+    
+    
+    
+    <category term="Markdown" scheme="http://vitaminzl.com/categories/Markdown/"/>
+    
+    
+    <category term="Typora" scheme="http://vitaminzl.com/tags/Typora/"/>
+    
+    <category term="Markdown" scheme="http://vitaminzl.com/tags/Markdown/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>动手写一个编译器</title>
+    <link href="http://vitaminzl.com/2022/03/01/dong-shou-xie-yi-ge-bian-yi-qi/"/>
+    <id>http://vitaminzl.com/2022/03/01/dong-shou-xie-yi-ge-bian-yi-qi/</id>
+    <published>2022-03-01T01:25:00.000Z</published>
+    <updated>2022-03-02T08:41:45.231Z</updated>
+    
     
     
     
