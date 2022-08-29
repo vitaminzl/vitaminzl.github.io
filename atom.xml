@@ -6,7 +6,7 @@
   <link href="http://vitaminzl.com/atom.xml" rel="self"/>
   
   <link href="http://vitaminzl.com/"/>
-  <updated>2022-08-26T15:27:04.673Z</updated>
+  <updated>2022-08-29T06:14:56.786Z</updated>
   <id>http://vitaminzl.com/</id>
   
   <author>
@@ -15,6 +15,35 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>上线测试</title>
+    <link href="http://vitaminzl.com/2022/08/15/tu-graph-shu-ju-de-pin-yu/"/>
+    <id>http://vitaminzl.com/2022/08/15/tu-graph-shu-ju-de-pin-yu/</id>
+    <published>2022-08-15T04:00:00.000Z</published>
+    <updated>2022-08-29T06:14:56.786Z</updated>
+    
+    
+    <summary type="html">本文是对图（Graph）</summary>
+    
+    
+    
+    <category term="机器学习" scheme="http://vitaminzl.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    
+    <category term="GNN" scheme="http://vitaminzl.com/tags/GNN/"/>
+    
+    <category term="谱图理论" scheme="http://vitaminzl.com/tags/%E8%B0%B1%E5%9B%BE%E7%90%86%E8%AE%BA/"/>
+    
+    <category term="深度学习" scheme="http://vitaminzl.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="傅里叶变换" scheme="http://vitaminzl.com/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
+    
+    <category term="机器学习" scheme="http://vitaminzl.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="线性代数" scheme="http://vitaminzl.com/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
+    
+  </entry>
   
   <entry>
     <title>动手写一个编译器</title>
