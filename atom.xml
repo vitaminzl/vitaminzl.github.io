@@ -6,7 +6,7 @@
   <link href="http://vitaminzl.com/atom.xml" rel="self"/>
   
   <link href="http://vitaminzl.com/"/>
-  <updated>2022-08-29T15:25:49.678Z</updated>
+  <updated>2022-08-30T03:22:30.886Z</updated>
   <id>http://vitaminzl.com/</id>
   
   <author>
@@ -17,27 +17,33 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>上线测试</title>
+    <title>图（Graph）数据的频域</title>
     <link href="http://vitaminzl.com/2022/08/20/tu-graph-shu-ju-de-pin-yu/"/>
     <id>http://vitaminzl.com/2022/08/20/tu-graph-shu-ju-de-pin-yu/</id>
     <published>2022-08-20T04:00:00.000Z</published>
-    <updated>2022-08-29T15:25:49.678Z</updated>
+    <updated>2022-08-30T03:22:30.886Z</updated>
     
     
-    <summary type="html">图神经网络（GNN）是近年来愈发火热，用以对图（Graph）数据进行特征提取以及各种下游任务。注意这里的图（Graph）应和图像（Image）区分，图是一种由点集与边集组成的数据结构，常记作$\mathcal{G}=(\mathcal{V,E})$。以下是我学习谱图理论时的一些记录。本文先先从基变换的角度入手，说明了标准正交基的性质，并从实数域拓展到了复数域，接着从基变换的角度阐述了傅里叶变换的原理，然后从特征值与特征向量入手，通过分析拉普拉斯算子的特征向量，理解其与傅里叶变换的等价性。最后使用图的数据结构表示图像，可视化其特征向量，直观感受低频到高频分量的差异。本人才疏学浅，错误难免，欢迎交流指正。</summary>
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;图graph数据的频域&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#图graph数据的频域&quot;&gt;&lt;/a&gt;</summary>
+        
+      
     
     
     
     <category term="机器学习" scheme="http://vitaminzl.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
     
     
+    <category term="频域" scheme="http://vitaminzl.com/tags/%E9%A2%91%E5%9F%9F/"/>
+    
     <category term="谱图理论" scheme="http://vitaminzl.com/tags/%E8%B0%B1%E5%9B%BE%E7%90%86%E8%AE%BA/"/>
     
     <category term="傅里叶变换" scheme="http://vitaminzl.com/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
     
     <category term="线性代数" scheme="http://vitaminzl.com/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
-    
-    <category term="频域" scheme="http://vitaminzl.com/tags/%E9%A2%91%E5%9F%9F/"/>
     
   </entry>
   
@@ -46,7 +52,7 @@
     <link href="http://vitaminzl.com/2022/06/20/dong-shou-xie-yi-ge-bian-yi-qi/"/>
     <id>http://vitaminzl.com/2022/06/20/dong-shou-xie-yi-ge-bian-yi-qi/</id>
     <published>2022-06-20T01:25:00.000Z</published>
-    <updated>2022-08-26T15:27:04.673Z</updated>
+    <updated>2022-08-30T02:59:25.434Z</updated>
     
     
     <summary type="html">本文是对编译原理课程的大作业进行的记录，即编写一个简单编译器的前端，使用的语言为C++。</summary>
@@ -67,7 +73,7 @@
     <link href="http://vitaminzl.com/2022/03/01/shang-xian-ce-shi/"/>
     <id>http://vitaminzl.com/2022/03/01/shang-xian-ce-shi/</id>
     <published>2022-03-01T01:25:00.000Z</published>
-    <updated>2022-08-26T15:28:44.588Z</updated>
+    <updated>2022-08-30T02:59:17.188Z</updated>
     
     
     <summary type="html">本文用于博客的上线测试</summary>

@@ -1,90 +1,721 @@
-<!DOCTYPE html><html lang="zh-CN"><head><meta http-equiv="content-type" content="text/html; charset=utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport"><meta content="yes" name="apple-mobile-web-app-capable"><meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"><meta content="telephone=no" name="format-detection"><meta name="description" content=""><title>动手写一个编译器 | 闲渔</title><link rel="stylesheet" type="text/css" href="/css/style.css?v=1.0.0"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/normalize/latest/normalize.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/pure-min.min.css"><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/pure/latest/grids-responsive-min.min.css"><link rel="stylesheet" href="//lib.baomitu.com/font-awesome/4.7.0/css/font-awesome.min.css"><script type="text/javascript" src="//lib.baomitu.com/jquery/latest/jquery.min.js"></script><link rel="icon" mask="" sizes="any" href="/favicon.ico"><link rel="Shortcut Icon" type="image/x-icon" href="/favicon.ico"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="apple-touch-icon-precomposed" href="/apple-touch-icon.png"><link rel="alternate" type="application/atom+xml" href="/atom.xml"><script type="text/javascript" src="//lib.baomitu.com/clipboard.js/latest/clipboard.min.js"></script><script type="text/javascript" src="//lib.baomitu.com/toastr.js/latest/toastr.min.js"></script><link rel="stylesheet" href="//lib.baomitu.com/toastr.js/latest/toastr.min.css"><meta name="generator" content="Hexo 6.0.0">
-<!-- hexo-inject:begin --><!-- hexo-inject:end --><style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
-</head><body><div class="body_container"><div id="header"><div class="site-name"><h1 class="hidden">动手写一个编译器</h1><a id="logo" href="/.">闲渔</a><p class="description">VITAMINZL</p></div><div id="nav-menu"><a class="current" href="/."><i class="fa fa-home"> 首页</i></a><a href="/archives/"><i class="fa fa-archive"> 归档</i></a><a href="/tags/"><i class="fa fa-tags"> 标签</i></a></div></div><div class="pure-g" id="layout"><div class="pure-u-1 pure-u-md-3-4"><div class="content_container"><div class="post"><h1 class="post-title">动手写一个编译器</h1><div class="post-meta">2022-06-20<span> | </span><span class="category"><a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></span></div><div class="clear"><div class="toc-article" id="toc"><div class="toc-title">文章目录</div><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#ToyC%E8%AF%AD%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">ToyC语言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%96%E8%AF%91%E5%99%A8%E7%9A%84%E7%BB%93%E6%9E%84"><span class="toc-number">1.1.</span> <span class="toc-text">编译器的结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#UML"><span class="toc-number">1.1.1.</span> <span class="toc-text">UML</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%8D%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8-Lexer"><span class="toc-number">1.1.2.</span> <span class="toc-text">词法分析器(Lexer)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E8%AE%A1Token"><span class="toc-number">1.1.2.1.</span> <span class="toc-text">设计Token</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%86%E5%88%AB%E7%AE%97%E6%B3%95"><span class="toc-number">1.1.2.2.</span> <span class="toc-text">识别算法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">1.1.2.3.</span> <span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AF%AD%E6%B3%95%E5%88%86%E6%9E%90%E5%99%A8-Parser"><span class="toc-number">1.1.3.</span> <span class="toc-text">语法分析器(Parser)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%AC%A6%E5%8F%B7%E8%A1%A8-Symbol-Table"><span class="toc-number">1.1.4.</span> <span class="toc-text">符号表(Symbol Table)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81-Intermediate-Code"><span class="toc-number">1.1.5.</span> <span class="toc-text">中间代码(Intermediate Code)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A1%A8%E8%BE%BE%E5%BC%8F%E7%9A%84%E8%AE%A1%E7%AE%97"><span class="toc-number">1.1.5.1.</span> <span class="toc-text">表达式的计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8E%A7%E5%88%B6%E6%B5%81%E8%AF%AD%E5%8F%A5%E7%9A%84%E4%B8%AD%E9%97%B4%E4%BB%A3%E7%A0%81"><span class="toc-number">1.1.5.2.</span> <span class="toc-text">控制流语句的中间代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-number">1.1.5.3.</span> <span class="toc-text">总结</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%99%84%E5%BD%95"><span class="toc-number">1.2.</span> <span class="toc-text">附录</span></a></li></ol></li></ol></div></div><div class="post-content"><h1 id="ToyC语言"><a href="#ToyC语言" class="headerlink" title="ToyC语言"></a>ToyC语言</h1><p>本项目用于学习编译原理。</p>
-<!-- hexo-inject:begin --><!-- hexo-inject:end --><p>将参照龙书版本的《编译原理》，</p>
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="vitaminzl">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="本文是对编译原理课程的大作业进行的记录，即编写一个简单编译器的前端，使用的语言为C++。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="动手写一个编译器">
+<meta property="og:url" content="http://vitaminzl.com/2022/06/20/dong-shou-xie-yi-ge-bian-yi-qi/index.html">
+<meta property="og:site_name" content="闲渔">
+<meta property="og:description" content="本文是对编译原理课程的大作业进行的记录，即编写一个简单编译器的前端，使用的语言为C++。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imagehost.vitaminz-image.top/ToyC-1.png">
+<meta property="og:image" content="https://imagehost.vitaminz-image.top/UML.png">
+<meta property="og:image" content="https://imagehost.vitaminz-image.top/ToyC-2.png">
+<meta property="og:image" content="https://imagehost.vitaminz-image.top/ToyC-3.png">
+<meta property="og:image" content="https://imagehost.vitaminz-image.top/ToyC-5.png">
+<meta property="article:published_time" content="2022-06-20T01:25:00.000Z">
+<meta property="article:modified_time" content="2022-08-30T02:59:25.434Z">
+<meta property="article:author" content="vitaminzl">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="编译原理">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://imagehost.vitaminz-image.top/ToyC-1.png">
+  
+  
+  
+  <title>动手写一个编译器 - 闲渔</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"vitaminzl.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="闲渔" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<body>
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="动手写一个编译器"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-06-20 09:25" pubdate>
+          2022年6月20日 上午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          5.6k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          47 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">动手写一个编译器</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="toyc语言"><a class="markdownIt-Anchor" href="#toyc语言"></a> ToyC语言</h1>
+<p>本项目用于学习编译原理。</p>
+<p>将参照龙书版本的《编译原理》，</p>
 <p>以及LLVM的编译器制作教程：<a target="_blank" rel="noopener" href="https://llvm.org/docs/tutorial/MyFirstLanguageFrontend/LangImpl01.html">https://llvm.org/docs/tutorial/MyFirstLanguageFrontend/LangImpl01.html</a></p>
 <p>制作一个完整的编译器前端。</p>
-<h2 id="编译器的结构"><a href="#编译器的结构" class="headerlink" title="编译器的结构"></a>编译器的结构</h2><p><img src="https://imagehost.vitaminz-image.top/ToyC-1.png"></p>
+<h2 id="编译器的结构"><a class="markdownIt-Anchor" href="#编译器的结构"></a> 编译器的结构</h2>
+<p><img src="https://imagehost.vitaminz-image.top/ToyC-1.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <center>图1：摘自《Compilers Principles, Techniques &amp; Tools》第二版Figure 2.3</center>
-
-<h3 id="UML"><a href="#UML" class="headerlink" title="UML"></a>UML</h3><p><img src="https://imagehost.vitaminz-image.top/UML.png"></p>
+<h3 id="uml"><a class="markdownIt-Anchor" href="#uml"></a> UML</h3>
+<p><img src="https://imagehost.vitaminz-image.top/UML.png" srcset="/img/loading.gif" lazyload alt=""></p>
 <center>图2：UML</center>
-
-
-
-<h3 id="词法分析器-Lexer"><a href="#词法分析器-Lexer" class="headerlink" title="词法分析器(Lexer)"></a>词法分析器(Lexer)</h3><h4 id="设计Token"><a href="#设计Token" class="headerlink" title="设计Token"></a>设计Token</h4><p>Token主要分为: 多字符保留字、标识符、数字以及其余单个字符。</p>
+<h3 id="词法分析器lexer"><a class="markdownIt-Anchor" href="#词法分析器lexer"></a> 词法分析器(Lexer)</h3>
+<h4 id="设计token"><a class="markdownIt-Anchor" href="#设计token"></a> 设计Token</h4>
+<p>Token主要分为: 多字符保留字、标识符、数字以及其余单个字符。</p>
 <ul>
-<li>多字符保留字：<ul>
+<li>多字符保留字：
+<ul>
 <li>控制流语句：if, else, do, while, break</li>
 <li>布尔运算：true, false, &amp;&amp;, ||</li>
 <li>比较运算：&gt;=, &lt;=, ==, !=</li>
 <li>变量类型：int, float, bool, char</li>
 </ul>
 </li>
-<li>标识符：<ul>
+<li>标识符：
+<ul>
 <li>正则表达式：[_a-zA-Z][_a-zA-Z0-9]*</li>
 </ul>
 </li>
-<li>数字：<ul>
+<li>数字：
+<ul>
 <li>整型正则表达式：[0-9]+</li>
 <li>浮点型正则表达式：[0-9]+.[0-9]*</li>
 </ul>
 </li>
 <li>其余单个字字符</li>
 </ul>
-<h4 id="识别算法"><a href="#识别算法" class="headerlink" title="识别算法"></a>识别算法</h4><figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-
-<h4 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h4><p>输入：字符串<br>输出：按序输出token流，每个token占一行</p>
+<h4 id="识别算法"><a class="markdownIt-Anchor" href="#识别算法"></a> 识别算法</h4>
+<figure class="highlight"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs"><br></code></pre></td></tr></tbody></table></figure>
+<h4 id="测试"><a class="markdownIt-Anchor" href="#测试"></a> 测试</h4>
+<p>输入：字符串<br>
+输出：按序输出token流，每个token占一行</p>
 <p>词法分析器的步骤可用如下伪代码表示：</p>
-<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">Input:  </span><br><span class="line">Output: </span><br><span class="line">cache = <span class="string">' '</span></span><br><span class="line">Scan() {</span><br><span class="line">    <span class="keyword">do</span>{</span><br><span class="line">        <span class="keyword">if</span> cache != 空格、换行、制表符</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">    }<span class="keyword">while</span>(read(cache));</span><br><span class="line"></span><br><span class="line">    t = readKey(cache)     <span class="comment">// 识别保留字</span></span><br><span class="line">    t = readNumber(cache); <span class="comment">// 识别实数</span></span><br><span class="line">    t = </span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> t;</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-<h3 id="语法分析器-Parser"><a href="#语法分析器-Parser" class="headerlink" title="语法分析器(Parser)"></a>语法分析器(Parser)</h3><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line">PROGRAM -&gt; BLOCK</span><br><span class="line">BLOCK 	-&gt; <span class="string">'{'</span> DECLS STMTS <span class="string">'}'</span></span><br><span class="line">DECLS 	-&gt; DECLS DECL</span><br><span class="line">    	-&gt; eps</span><br><span class="line">DECL 	-&gt; TYPE id<span class="number">'</span>;'</span><br><span class="line">TYPE	-&gt; basic DIMS</span><br><span class="line">DIMS	-&gt; <span class="string">'['</span>DIMS<span class="number">'</span>]'</span><br><span class="line">	-&gt; eps</span><br><span class="line">STMTS	-&gt; STMTS STMT</span><br><span class="line">    	-&gt; eps</span><br><span class="line"></span><br><span class="line">STMT	-&gt; ASSIGN<span class="number">'</span>;'</span><br><span class="line">	-&gt; <span class="keyword">if</span> ( BOOL ) STMT</span><br><span class="line">        -&gt; <span class="keyword">if</span> ( BOOL ) STMT <span class="keyword">else</span> STMT</span><br><span class="line">        -&gt; <span class="keyword">while</span> ( BOOL ) STMT</span><br><span class="line">        -&gt; <span class="keyword">do</span> STMT <span class="keyword">while</span> ( BOOL )</span><br><span class="line">        -&gt; <span class="keyword">break</span><span class="number">'</span>;'</span><br><span class="line">        -&gt; BLOCK</span><br><span class="line">ASSIGN  -&gt; id OFFSET = BOOL</span><br><span class="line">OFFSET  -&gt; [ BOOL ] OFFSET</span><br><span class="line">        -&gt; eps</span><br><span class="line">            </span><br><span class="line">BOOL	-&gt; BOOL <span class="string">"||"</span> JOIN</span><br><span class="line">        -&gt; JOIN</span><br><span class="line">JOIN	-&gt; JOIN <span class="string">"&amp;&amp;"</span> EQAULITY</span><br><span class="line">        -&gt; EQUALITY</span><br><span class="line">EQUALITY-&gt; EQUALITY <span class="string">"=="</span> CMP</span><br><span class="line">        -&gt; EQUALITY <span class="string">"!="</span> CMP</span><br><span class="line">        -&gt; CMP</span><br><span class="line">CMP	-&gt; EXPR &lt; EXPR</span><br><span class="line">        -&gt; EXPR &lt;= EXPR</span><br><span class="line">        -&gt; EXPR &gt;= EXPR</span><br><span class="line">        -&gt; EXPR &gt; EXPR</span><br><span class="line">        -&gt; EXPR</span><br><span class="line">EXPR	-&gt; EXPR + TERM</span><br><span class="line">        -&gt; EXPR - TERM</span><br><span class="line">        -&gt; TERM</span><br><span class="line">TERM	-&gt; TERM * UNARY</span><br><span class="line">        -&gt; TERM / UNARY</span><br><span class="line">        -&gt; UNARY</span><br><span class="line">UNARY	-&gt; <span class="string">'!'</span> UNARY</span><br><span class="line">        -&gt; <span class="string">'-'</span> UNARY</span><br><span class="line">        -&gt; FACTOR</span><br><span class="line">FACTOR	-&gt; ( BOOL )</span><br><span class="line">        -&gt; id OFFSET</span><br><span class="line">        -&gt; number</span><br><span class="line">        -&gt; real</span><br><span class="line">        -&gt; <span class="literal">true</span></span><br><span class="line">        -&gt; <span class="literal">false</span></span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h3 id="符号表-Symbol-Table"><a href="#符号表-Symbol-Table" class="headerlink" title="符号表(Symbol Table)"></a>符号表(Symbol Table)</h3><img src="https://imagehost.vitaminz-image.top/ToyC-2.png" style="zoom:50%;">
-
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c">Input:  <br>Output: <br>cache = <span class="hljs-string">' '</span><br>Scan() {<br>    <span class="hljs-keyword">do</span>{<br>        <span class="hljs-keyword">if</span> cache != 空格、换行、制表符<br>            <span class="hljs-keyword">break</span>;<br>    }<span class="hljs-keyword">while</span>(read(cache));<br><br>    t = readKey(cache)     <span class="hljs-comment">// 识别保留字</span><br>    t = readNumber(cache); <span class="hljs-comment">// 识别实数</span><br>    t = <br><br>    <span class="hljs-keyword">return</span> t;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="语法分析器parser"><a class="markdownIt-Anchor" href="#语法分析器parser"></a> 语法分析器(Parser)</h3>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs c++">PROGRAM -&gt; BLOCK<br>BLOCK 	-&gt; <span class="hljs-string">'{'</span> DECLS STMTS <span class="hljs-string">'}'</span><br>DECLS 	-&gt; DECLS DECL<br>    	-&gt; eps<br>DECL 	-&gt; TYPE id<span class="hljs-number">'</span>;'<br>TYPE	-&gt; basic DIMS<br>DIMS	-&gt; <span class="hljs-string">'['</span>DIMS<span class="hljs-number">'</span>]'<br>	-&gt; eps<br>STMTS	-&gt; STMTS STMT<br>    	-&gt; eps<br><br>STMT	-&gt; ASSIGN<span class="hljs-number">'</span>;'<br>	-&gt; <span class="hljs-keyword">if</span> ( BOOL ) STMT<br>        -&gt; <span class="hljs-keyword">if</span> ( BOOL ) STMT <span class="hljs-keyword">else</span> STMT<br>        -&gt; <span class="hljs-keyword">while</span> ( BOOL ) STMT<br>        -&gt; <span class="hljs-keyword">do</span> STMT <span class="hljs-keyword">while</span> ( BOOL )<br>        -&gt; <span class="hljs-keyword">break</span><span class="hljs-number">'</span>;'<br>        -&gt; BLOCK<br>ASSIGN  -&gt; id OFFSET = BOOL<br>OFFSET  -&gt; [ BOOL ] OFFSET<br>        -&gt; eps<br>            <br>BOOL	-&gt; BOOL <span class="hljs-string">"||"</span> JOIN<br>        -&gt; JOIN<br>JOIN	-&gt; JOIN <span class="hljs-string">"&amp;&amp;"</span> EQAULITY<br>        -&gt; EQUALITY<br>EQUALITY-&gt; EQUALITY <span class="hljs-string">"=="</span> CMP<br>        -&gt; EQUALITY <span class="hljs-string">"!="</span> CMP<br>        -&gt; CMP<br>CMP	-&gt; EXPR &lt; EXPR<br>        -&gt; EXPR &lt;= EXPR<br>        -&gt; EXPR &gt;= EXPR<br>        -&gt; EXPR &gt; EXPR<br>        -&gt; EXPR<br>EXPR	-&gt; EXPR + TERM<br>        -&gt; EXPR - TERM<br>        -&gt; TERM<br>TERM	-&gt; TERM * UNARY<br>        -&gt; TERM / UNARY<br>        -&gt; UNARY<br>UNARY	-&gt; <span class="hljs-string">'!'</span> UNARY<br>        -&gt; <span class="hljs-string">'-'</span> UNARY<br>        -&gt; FACTOR<br>FACTOR	-&gt; ( BOOL )<br>        -&gt; id OFFSET<br>        -&gt; number<br>        -&gt; real<br>        -&gt; <span class="hljs-literal">true</span><br>        -&gt; <span class="hljs-literal">false</span><br></code></pre></td></tr></tbody></table></figure>
+<h3 id="符号表symbol-table"><a class="markdownIt-Anchor" href="#符号表symbol-table"></a> 符号表(Symbol Table)</h3>
+<img src="https://imagehost.vitaminz-image.top/ToyC-2.png" srcset="/img/loading.gif" lazyload style="zoom:50%;">
 <center>图2：符号表示意图</center>
-
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">PROGRAM -&gt; {top = null;} BLOCK</span><br><span class="line">BLOCK -&gt; <span class="string">'{'</span> </span><br><span class="line">		{ saved = top;				<span class="comment">// 保留现场，saved</span></span><br><span class="line">		  top = <span class="keyword">new</span> <span class="built_in">Scope</span>(top); } 	<span class="comment">// 碰到块建立符号表，top指向当前块符号表</span></span><br><span class="line">		DECLS DECL </span><br><span class="line">		{ top = saved; }			<span class="comment">// 恢复现场，</span></span><br><span class="line">		<span class="string">'}'</span></span><br><span class="line">DECLS -&gt; DECLS DECL</span><br><span class="line">      -&gt; eps</span><br><span class="line">DECL  -&gt; TYPE id<span class="number">'</span>;<span class="string">' { s = new Symbol(id);			// </span></span><br><span class="line"><span class="string">					  s.type = TYPE.lexeme;</span></span><br><span class="line"><span class="string">					  top.put(id.lexeme, s); }</span></span><br><span class="line"><span class="string">TYPE  -&gt; basic {DIMS.type = basic; } </span></span><br><span class="line"><span class="string">		 DIMS {TYPE.lexeme = DIMS.type; }</span></span><br><span class="line"><span class="string">DIMS  -&gt; '</span>[<span class="string">'num'</span>]<span class="string">' DIMS { Array.sz = num * Array.sz;</span></span><br><span class="line"><span class="string">    					  DIMS.type = Array; }</span></span><br><span class="line"><span class="string">      -&gt; eps { Array.sz = 1; </span></span><br><span class="line"><span class="string">               Array.type = Dims.type; }</span></span><br><span class="line"><span class="string">STMTS -&gt; STMTS STMT </span></span><br><span class="line"><span class="string">      -&gt; eps</span></span><br><span class="line"><span class="string">STMT  -&gt; BLOCK</span></span><br><span class="line"><span class="string">STMT  -&gt; .... &gt; ... id { s = top.get(id.lexeme); } ....</span></span><br></pre></td></tr></tbody></table></figure>
-
-
-
-
-
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs c++">PROGRAM -&gt; {top = null;} BLOCK<br>BLOCK -&gt; <span class="hljs-string">'{'</span> <br>		{ saved = top;				<span class="hljs-comment">// 保留现场，saved</span><br>		  top = <span class="hljs-keyword">new</span> <span class="hljs-built_in">Scope</span>(top); } 	<span class="hljs-comment">// 碰到块建立符号表，top指向当前块符号表</span><br>		DECLS DECL <br>		{ top = saved; }			<span class="hljs-comment">// 恢复现场，</span><br>		<span class="hljs-string">'}'</span><br>DECLS -&gt; DECLS DECL<br>      -&gt; eps<br>DECL  -&gt; TYPE id<span class="hljs-number">'</span>;<span class="hljs-string">' { s = new Symbol(id);			// </span><br><span class="hljs-string">					  s.type = TYPE.lexeme;</span><br><span class="hljs-string">					  top.put(id.lexeme, s); }</span><br><span class="hljs-string">TYPE  -&gt; basic {DIMS.type = basic; } </span><br><span class="hljs-string">		 DIMS {TYPE.lexeme = DIMS.type; }</span><br><span class="hljs-string">DIMS  -&gt; '</span>[<span class="hljs-string">'num'</span>]<span class="hljs-string">' DIMS { Array.sz = num * Array.sz;</span><br><span class="hljs-string">    					  DIMS.type = Array; }</span><br><span class="hljs-string">      -&gt; eps { Array.sz = 1; </span><br><span class="hljs-string">               Array.type = Dims.type; }</span><br><span class="hljs-string">STMTS -&gt; STMTS STMT </span><br><span class="hljs-string">      -&gt; eps</span><br><span class="hljs-string">STMT  -&gt; BLOCK</span><br><span class="hljs-string">STMT  -&gt; .... &gt; ... id { s = top.get(id.lexeme); } ....</span><br></code></pre></td></tr></tbody></table></figure>
 <p>单元测试：</p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">PROGRAM -&gt; BLOCK</span><br><span class="line">BLOCK 	-&gt; <span class="string">'{'</span> DECLS STMTS <span class="string">'}'</span></span><br><span class="line">DECLS 	-&gt; DECLS DECL</span><br><span class="line">    	-&gt; eps</span><br><span class="line">DECL 	-&gt; TYPE id <span class="string">';'</span></span><br><span class="line">TYPE	-&gt; basic DIMS</span><br><span class="line">DIMS	-&gt; <span class="string">'['</span>num<span class="number">'</span>]<span class="string">'DIMS</span></span><br><span class="line"><span class="string">	-&gt; eps</span></span><br><span class="line"><span class="string">STMTS	-&gt; STMTS STMT</span></span><br><span class="line"><span class="string">    	-&gt; eps</span></span><br><span class="line"><span class="string">STMT	-&gt; BLOCK</span></span><br><span class="line"><span class="string">    	-&gt; FACTOR '</span>;'</span><br><span class="line">FACTOR	-&gt; id</span><br></pre></td></tr></tbody></table></figure>
-
-
-
-<h3 id="中间代码-Intermediate-Code"><a href="#中间代码-Intermediate-Code" class="headerlink" title="中间代码(Intermediate Code)"></a>中间代码(Intermediate Code)</h3><h4 id="表达式的计算"><a href="#表达式的计算" class="headerlink" title="表达式的计算"></a>表达式的计算</h4><img src="https://imagehost.vitaminz-image.top/ToyC-3.png" style="zoom: 25%;">
-
-<p><img src="https://imagehost.vitaminz-image.top/ToyC-5.png" style="zoom: 25%;"></p>
-<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">PROGRAM -&gt; STMTS</span><br><span class="line">STMTS	-&gt; STMTS STMT</span><br><span class="line">    	-&gt; eps</span><br><span class="line">STMT	-&gt; ASSIGN<span class="number">'</span>;'</span><br><span class="line">ASSIGN  -&gt; id OFFSET = BOOL</span><br><span class="line">OFFSET  -&gt; [ BOOL ] OFFSET</span><br><span class="line">        -&gt; eps</span><br><span class="line"></span><br><span class="line">BOOL	-&gt; BOOL <span class="string">"||"</span> JOIN</span><br><span class="line">        -&gt; JOIN</span><br><span class="line">JOIN	-&gt; JOIN <span class="string">"&amp;&amp;"</span> EQAULITY</span><br><span class="line">        -&gt; EQUALITY</span><br><span class="line">EQUALITY-&gt; EQUALITY <span class="string">"=="</span> CMP</span><br><span class="line">        -&gt; EQUALITY <span class="string">"!="</span> CMP</span><br><span class="line">        -&gt; CMP</span><br><span class="line">CMP	-&gt; EXPR &lt; EXPR</span><br><span class="line">        -&gt; EXPR &lt;= EXPR</span><br><span class="line">        -&gt; EXPR &gt;= EXPR</span><br><span class="line">        -&gt; EXPR &gt; EXPR</span><br><span class="line">EXPR	-&gt; EXPR + TERM</span><br><span class="line">        -&gt; EXPR - TERM</span><br><span class="line">        -&gt; TERM</span><br><span class="line">TERM	-&gt; TERM * UNARY</span><br><span class="line">        -&gt; TERM / UNARY</span><br><span class="line">        -&gt; UNARY</span><br><span class="line">UNARY	-&gt; <span class="string">'!'</span> UNARY</span><br><span class="line">        -&gt; <span class="string">'-'</span> UNARY</span><br><span class="line">        -&gt; FACTOR</span><br><span class="line">FACTOR	-&gt; ( BOOL )</span><br><span class="line">        -&gt; OFFSET</span><br><span class="line">        -&gt; number</span><br><span class="line">        -&gt; real</span><br><span class="line">        -&gt; <span class="literal">true</span></span><br><span class="line">        -&gt; <span class="literal">false</span></span><br><span class="line">        -&gt; id OFFSET</span><br></pre></td></tr></tbody></table></figure>
-
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++">PROGRAM -&gt; BLOCK<br>BLOCK 	-&gt; <span class="hljs-string">'{'</span> DECLS STMTS <span class="hljs-string">'}'</span><br>DECLS 	-&gt; DECLS DECL<br>    	-&gt; eps<br>DECL 	-&gt; TYPE id <span class="hljs-string">';'</span><br>TYPE	-&gt; basic DIMS<br>DIMS	-&gt; <span class="hljs-string">'['</span>num<span class="hljs-number">'</span>]<span class="hljs-string">'DIMS</span><br><span class="hljs-string">	-&gt; eps</span><br><span class="hljs-string">STMTS	-&gt; STMTS STMT</span><br><span class="hljs-string">    	-&gt; eps</span><br><span class="hljs-string">STMT	-&gt; BLOCK</span><br><span class="hljs-string">    	-&gt; FACTOR '</span>;'<br>FACTOR	-&gt; id<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="中间代码intermediate-code"><a class="markdownIt-Anchor" href="#中间代码intermediate-code"></a> 中间代码(Intermediate Code)</h3>
+<h4 id="表达式的计算"><a class="markdownIt-Anchor" href="#表达式的计算"></a> 表达式的计算</h4>
+<img src="https://imagehost.vitaminz-image.top/ToyC-3.png" srcset="/img/loading.gif" lazyload style="zoom: 25%;">
+<p><img src="https://imagehost.vitaminz-image.top/ToyC-5.png" srcset="/img/loading.gif" lazyload style="zoom: 25%;"></p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs c++">PROGRAM -&gt; STMTS<br>STMTS	-&gt; STMTS STMT<br>    	-&gt; eps<br>STMT	-&gt; ASSIGN<span class="hljs-number">'</span>;'<br>ASSIGN  -&gt; id OFFSET = BOOL<br>OFFSET  -&gt; [ BOOL ] OFFSET<br>        -&gt; eps<br><br>BOOL	-&gt; BOOL <span class="hljs-string">"||"</span> JOIN<br>        -&gt; JOIN<br>JOIN	-&gt; JOIN <span class="hljs-string">"&amp;&amp;"</span> EQAULITY<br>        -&gt; EQUALITY<br>EQUALITY-&gt; EQUALITY <span class="hljs-string">"=="</span> CMP<br>        -&gt; EQUALITY <span class="hljs-string">"!="</span> CMP<br>        -&gt; CMP<br>CMP	-&gt; EXPR &lt; EXPR<br>        -&gt; EXPR &lt;= EXPR<br>        -&gt; EXPR &gt;= EXPR<br>        -&gt; EXPR &gt; EXPR<br>EXPR	-&gt; EXPR + TERM<br>        -&gt; EXPR - TERM<br>        -&gt; TERM<br>TERM	-&gt; TERM * UNARY<br>        -&gt; TERM / UNARY<br>        -&gt; UNARY<br>UNARY	-&gt; <span class="hljs-string">'!'</span> UNARY<br>        -&gt; <span class="hljs-string">'-'</span> UNARY<br>        -&gt; FACTOR<br>FACTOR	-&gt; ( BOOL )<br>        -&gt; OFFSET<br>        -&gt; number<br>        -&gt; real<br>        -&gt; <span class="hljs-literal">true</span><br>        -&gt; <span class="hljs-literal">false</span><br>        -&gt; id OFFSET<br></code></pre></td></tr></tbody></table></figure>
 <p>输入</p>
-<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">a = b + 1;</span><br><span class="line">c = a + 32 * 43 - b / ( g - 2);</span><br><span class="line">d = e + f;</span><br><span class="line">c = -e[3];</span><br><span class="line">c[33+34+sd3*c] = de*c + c2;</span><br><span class="line">f[c[2*d]+4] = df + de[23-s[f]];</span><br><span class="line">s[m][n][o] = -d[3][x];</span><br><span class="line">a = !a || s &amp;&amp; (c || d) || !f &amp;&amp; kk ;</span><br><span class="line">b = (a + c) &gt; (b * 2 - 1) || a &lt; b &amp;&amp; c;</span><br></pre></td></tr></tbody></table></figure>
-
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs txt">a = b + 1;<br>c = a + 32 * 43 - b / ( g - 2);<br>d = e + f;<br>c = -e[3];<br>c[33+34+sd3*c] = de*c + c2;<br>f[c[2*d]+4] = df + de[23-s[f]];<br>s[m][n][o] = -d[3][x];<br>a = !a || s &amp;&amp; (c || d) || !f &amp;&amp; kk ;<br>b = (a + c) &gt; (b * 2 - 1) || a &lt; b &amp;&amp; c;<br></code></pre></td></tr></tbody></table></figure>
 <p>输出</p>
-<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">	a = b + 1</span><br><span class="line">L3:	t1 = 32 * 43</span><br><span class="line">	t2 = a + t1</span><br><span class="line">	t3 = g - 2</span><br><span class="line">	t4 = b / t3</span><br><span class="line">	c = t2 - t4</span><br><span class="line">L4:	d = e + f</span><br><span class="line">L5:	t5 = 3 * 10</span><br><span class="line">	t6 = e[t5]</span><br><span class="line">	c = -t6</span><br><span class="line">L6:	t7 = 33 + 34</span><br><span class="line">	t8 = sd3 * c</span><br><span class="line">	t9 = t7 + t8</span><br><span class="line">	t10 = t9 * 10</span><br><span class="line">	t11 = c[t10]</span><br><span class="line">	t12 = de * c</span><br><span class="line">	t13 = t12 + c2</span><br><span class="line">	c[t11] = t13</span><br><span class="line">L7:	t14 = 2 * d</span><br><span class="line">	t15 = t14 * 10</span><br><span class="line">	t16 = c[t15]</span><br><span class="line">	t17 = t16 + 4</span><br><span class="line">	t18 = t17 * 10</span><br><span class="line">	t19 = f[t18]</span><br><span class="line">	t20 = f * 10</span><br><span class="line">	t21 = s[t20]</span><br><span class="line">	t22 = 23 - t21</span><br><span class="line">	t23 = t22 * 10</span><br><span class="line">	t24 = de[t23]</span><br><span class="line">	t25 = df + t24</span><br><span class="line">	f[t19] = t25</span><br><span class="line">L8:	t26 = m * 10</span><br><span class="line">	t27 = n * 10</span><br><span class="line">	t28 = t26 + t27</span><br><span class="line">	t29 = o * 10</span><br><span class="line">	t30 = t28 + t29</span><br><span class="line">	t31 = s[t30]</span><br><span class="line">	t32 = 3 * 10</span><br><span class="line">	t33 = x * 10</span><br><span class="line">	t34 = t32 + t33</span><br><span class="line">	t35 = d[t34]</span><br><span class="line">	t36 = -t35</span><br><span class="line">	s[t31] = t36</span><br><span class="line">L9:	if False a goto L13</span><br><span class="line">	t37 = 23 * 10</span><br><span class="line">	t38 = f * 10</span><br><span class="line">	t39 = t37 + t38</span><br><span class="line">	t40 = sp[t39]</span><br><span class="line">	if False t40 goto L14</span><br><span class="line">	if c goto L13</span><br><span class="line">	if d goto L13</span><br><span class="line">	goto L14</span><br><span class="line">L14:	if f goto L11</span><br><span class="line">	if kk goto L13</span><br><span class="line">	goto L11</span><br><span class="line">L13:	t41 = true</span><br><span class="line">	goto L12</span><br><span class="line">L11:	t41 = false</span><br><span class="line">L12:	a = t41</span><br><span class="line">L10:	t42 = a + c</span><br><span class="line">	t43 = b * 2</span><br><span class="line">	t44 = t43 - 1</span><br><span class="line">	if t42 &gt; t44 goto L17</span><br><span class="line">	if False a &lt; b goto L15</span><br><span class="line">	if c goto L17</span><br><span class="line">	goto L15</span><br><span class="line">L17:	t45 = true</span><br><span class="line">	goto L16</span><br><span class="line">L15:	t45 = false</span><br><span class="line">L16:	b = t45</span><br><span class="line">L2:</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-
-
-<h4 id="控制流语句的中间代码"><a href="#控制流语句的中间代码" class="headerlink" title="控制流语句的中间代码"></a>控制流语句的中间代码</h4><figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">PROGRAM -&gt; BLOCK</span><br><span class="line">BLOCK 	-&gt; <span class="string">'{'</span> STMTS <span class="string">'}'</span></span><br><span class="line">STMTS	-&gt; STMTS STMT</span><br><span class="line">    	-&gt; eps</span><br><span class="line"></span><br><span class="line">STMT	-&gt; ASSIGN<span class="number">'</span>;'</span><br><span class="line">	-&gt; <span class="keyword">if</span> ( BOOL ) STMT</span><br><span class="line">        -&gt; <span class="keyword">if</span> ( BOOL ) STMT <span class="keyword">else</span> STMT</span><br><span class="line">        -&gt; <span class="keyword">while</span> ( BOOL ) STMT</span><br><span class="line">        -&gt; <span class="keyword">do</span> STMT <span class="keyword">while</span> ( BOOL )</span><br><span class="line">        -&gt; <span class="keyword">break</span><span class="number">'</span>;'</span><br><span class="line">        -&gt; BLOCK</span><br><span class="line">ASSIGN  -&gt; id OFFSET = BOOL</span><br><span class="line">OFFSET  -&gt; [ BOOL ]</span><br><span class="line">        -&gt; eps</span><br><span class="line">            </span><br><span class="line">BOOL	-&gt; BOOL <span class="string">"||"</span> JOIN</span><br><span class="line">        -&gt; JOIN</span><br><span class="line">JOIN	-&gt; JOIN <span class="string">"&amp;&amp;"</span> EQAULITY</span><br><span class="line">        -&gt; EQUALITY</span><br><span class="line">EQUALITY-&gt; EQUALITY <span class="string">"=="</span> CMP</span><br><span class="line">        -&gt; EQUALITY <span class="string">"!="</span> CMP</span><br><span class="line">        -&gt; CMP</span><br><span class="line">CMP	-&gt; EXPR &lt; EXPR</span><br><span class="line">        -&gt; EXPR &lt;= EXPR</span><br><span class="line">        -&gt; EXPR &gt;= EXPR</span><br><span class="line">        -&gt; EXPR &gt; EXPR</span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
-
-
-
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><code class="hljs txt">	a = b + 1<br>L3:	t1 = 32 * 43<br>	t2 = a + t1<br>	t3 = g - 2<br>	t4 = b / t3<br>	c = t2 - t4<br>L4:	d = e + f<br>L5:	t5 = 3 * 10<br>	t6 = e[t5]<br>	c = -t6<br>L6:	t7 = 33 + 34<br>	t8 = sd3 * c<br>	t9 = t7 + t8<br>	t10 = t9 * 10<br>	t11 = c[t10]<br>	t12 = de * c<br>	t13 = t12 + c2<br>	c[t11] = t13<br>L7:	t14 = 2 * d<br>	t15 = t14 * 10<br>	t16 = c[t15]<br>	t17 = t16 + 4<br>	t18 = t17 * 10<br>	t19 = f[t18]<br>	t20 = f * 10<br>	t21 = s[t20]<br>	t22 = 23 - t21<br>	t23 = t22 * 10<br>	t24 = de[t23]<br>	t25 = df + t24<br>	f[t19] = t25<br>L8:	t26 = m * 10<br>	t27 = n * 10<br>	t28 = t26 + t27<br>	t29 = o * 10<br>	t30 = t28 + t29<br>	t31 = s[t30]<br>	t32 = 3 * 10<br>	t33 = x * 10<br>	t34 = t32 + t33<br>	t35 = d[t34]<br>	t36 = -t35<br>	s[t31] = t36<br>L9:	if False a goto L13<br>	t37 = 23 * 10<br>	t38 = f * 10<br>	t39 = t37 + t38<br>	t40 = sp[t39]<br>	if False t40 goto L14<br>	if c goto L13<br>	if d goto L13<br>	goto L14<br>L14:	if f goto L11<br>	if kk goto L13<br>	goto L11<br>L13:	t41 = true<br>	goto L12<br>L11:	t41 = false<br>L12:	a = t41<br>L10:	t42 = a + c<br>	t43 = b * 2<br>	t44 = t43 - 1<br>	if t42 &gt; t44 goto L17<br>	if False a &lt; b goto L15<br>	if c goto L17<br>	goto L15<br>L17:	t45 = true<br>	goto L16<br>L15:	t45 = false<br>L16:	b = t45<br>L2:<br><br></code></pre></td></tr></tbody></table></figure>
+<h4 id="控制流语句的中间代码"><a class="markdownIt-Anchor" href="#控制流语句的中间代码"></a> 控制流语句的中间代码</h4>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c++">PROGRAM -&gt; BLOCK<br>BLOCK 	-&gt; <span class="hljs-string">'{'</span> STMTS <span class="hljs-string">'}'</span><br>STMTS	-&gt; STMTS STMT<br>    	-&gt; eps<br><br>STMT	-&gt; ASSIGN<span class="hljs-number">'</span>;'<br>	-&gt; <span class="hljs-keyword">if</span> ( BOOL ) STMT<br>        -&gt; <span class="hljs-keyword">if</span> ( BOOL ) STMT <span class="hljs-keyword">else</span> STMT<br>        -&gt; <span class="hljs-keyword">while</span> ( BOOL ) STMT<br>        -&gt; <span class="hljs-keyword">do</span> STMT <span class="hljs-keyword">while</span> ( BOOL )<br>        -&gt; <span class="hljs-keyword">break</span><span class="hljs-number">'</span>;'<br>        -&gt; BLOCK<br>ASSIGN  -&gt; id OFFSET = BOOL<br>OFFSET  -&gt; [ BOOL ]<br>        -&gt; eps<br>            <br>BOOL	-&gt; BOOL <span class="hljs-string">"||"</span> JOIN<br>        -&gt; JOIN<br>JOIN	-&gt; JOIN <span class="hljs-string">"&amp;&amp;"</span> EQAULITY<br>        -&gt; EQUALITY<br>EQUALITY-&gt; EQUALITY <span class="hljs-string">"=="</span> CMP<br>        -&gt; EQUALITY <span class="hljs-string">"!="</span> CMP<br>        -&gt; CMP<br>CMP	-&gt; EXPR &lt; EXPR<br>        -&gt; EXPR &lt;= EXPR<br>        -&gt; EXPR &gt;= EXPR<br>        -&gt; EXPR &gt; EXPR<br><br></code></pre></td></tr></tbody></table></figure>
 <p>输入</p>
-<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">    if ((a + c) &gt; (b * 2 - 1) || a &lt; b &amp;&amp; c){</span><br><span class="line">        a = b * 2 - c + (b + 2 * d);</span><br><span class="line">    }</span><br><span class="line">    while (a &gt; 3){</span><br><span class="line">        a = a + 1;</span><br><span class="line">        do a = a + 3; while( b &gt; 2);</span><br><span class="line">        if (c - 3){</span><br><span class="line">            b = c + 5;</span><br><span class="line">            d = a + 3;</span><br><span class="line">        }</span><br><span class="line">        else {</span><br><span class="line">            c = 3;</span><br><span class="line">            break;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    while (c &lt; b){</span><br><span class="line">        a = 3;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></tbody></table></figure>
-
-
-
+<figure class="highlight txt"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs txt">{<br>    if ((a + c) &gt; (b * 2 - 1) || a &lt; b &amp;&amp; c){<br>        a = b * 2 - c + (b + 2 * d);<br>    }<br>    while (a &gt; 3){<br>        a = a + 1;<br>        do a = a + 3; while( b &gt; 2);<br>        if (c - 3){<br>            b = c + 5;<br>            d = a + 3;<br>        }<br>        else {<br>            c = 3;<br>            break;<br>        }<br>    }<br>    while (c &lt; b){<br>        a = 3;<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
 <p>输出</p>
-<figure class="highlight vbnet"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">L1:</span>	t1 = a + c</span><br><span class="line">	t2 = b * <span class="number">2</span></span><br><span class="line">	t3 = t2 - <span class="number">1</span></span><br><span class="line">	<span class="keyword">if</span> t1 &gt; t3 <span class="keyword">goto</span> L5</span><br><span class="line">	<span class="keyword">if</span> <span class="literal">False</span> a &lt; b <span class="keyword">goto</span> L3</span><br><span class="line">	<span class="keyword">if</span> c <span class="keyword">goto</span> L5</span><br><span class="line">	<span class="keyword">goto</span> L3</span><br><span class="line"><span class="symbol">L5:</span>L4:	t4 = b * <span class="number">2</span></span><br><span class="line">	t5 = t4 - c</span><br><span class="line">	t6 = <span class="number">2</span> * d</span><br><span class="line">	t7 = b + t6</span><br><span class="line">	a = t5 + t7</span><br><span class="line"><span class="symbol">L3:</span>	<span class="keyword">if</span> <span class="literal">False</span> a &gt; <span class="number">3</span> <span class="keyword">goto</span> L6</span><br><span class="line"><span class="symbol">L7:</span>	a = a + <span class="number">1</span></span><br><span class="line"><span class="symbol">L8:</span>	a = a + <span class="number">3</span></span><br><span class="line"><span class="symbol">L10:</span>	<span class="keyword">if</span> b &gt; <span class="number">2</span> <span class="keyword">goto</span> L8</span><br><span class="line">	<span class="keyword">goto</span> L9</span><br><span class="line"><span class="symbol">L9:</span>	<span class="keyword">if</span> <span class="literal">False</span> c - <span class="number">3</span> <span class="keyword">goto</span> L12</span><br><span class="line"><span class="symbol">L11:</span>	b = c + <span class="number">5</span></span><br><span class="line"><span class="symbol">L13:</span>	d = a + <span class="number">3</span></span><br><span class="line">	<span class="keyword">goto</span> L3</span><br><span class="line"><span class="symbol">L12:</span>	c = <span class="number">3</span></span><br><span class="line"><span class="symbol">L14:</span>	<span class="keyword">goto</span> L6</span><br><span class="line">	<span class="keyword">goto</span> L3</span><br><span class="line"><span class="symbol">L6:</span>	<span class="keyword">if</span> <span class="literal">False</span> c &lt; b <span class="keyword">goto</span> L2</span><br><span class="line"><span class="symbol">L15:</span>	a = <span class="number">3</span></span><br><span class="line">	<span class="keyword">goto</span> L6</span><br><span class="line"><span class="symbol">L2:</span></span><br><span class="line"></span><br></pre></td></tr></tbody></table></figure>
+<figure class="highlight vbnet"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><code class="hljs vbnet"><span class="hljs-symbol">L1:</span>	t1 = a + c<br>	t2 = b * <span class="hljs-number">2</span><br>	t3 = t2 - <span class="hljs-number">1</span><br>	<span class="hljs-keyword">if</span> t1 &gt; t3 <span class="hljs-keyword">goto</span> L5<br>	<span class="hljs-keyword">if</span> <span class="hljs-literal">False</span> a &lt; b <span class="hljs-keyword">goto</span> L3<br>	<span class="hljs-keyword">if</span> c <span class="hljs-keyword">goto</span> L5<br>	<span class="hljs-keyword">goto</span> L3<br><span class="hljs-symbol">L5:</span>L4:	t4 = b * <span class="hljs-number">2</span><br>	t5 = t4 - c<br>	t6 = <span class="hljs-number">2</span> * d<br>	t7 = b + t6<br>	a = t5 + t7<br><span class="hljs-symbol">L3:</span>	<span class="hljs-keyword">if</span> <span class="hljs-literal">False</span> a &gt; <span class="hljs-number">3</span> <span class="hljs-keyword">goto</span> L6<br><span class="hljs-symbol">L7:</span>	a = a + <span class="hljs-number">1</span><br><span class="hljs-symbol">L8:</span>	a = a + <span class="hljs-number">3</span><br><span class="hljs-symbol">L10:</span>	<span class="hljs-keyword">if</span> b &gt; <span class="hljs-number">2</span> <span class="hljs-keyword">goto</span> L8<br>	<span class="hljs-keyword">goto</span> L9<br><span class="hljs-symbol">L9:</span>	<span class="hljs-keyword">if</span> <span class="hljs-literal">False</span> c - <span class="hljs-number">3</span> <span class="hljs-keyword">goto</span> L12<br><span class="hljs-symbol">L11:</span>	b = c + <span class="hljs-number">5</span><br><span class="hljs-symbol">L13:</span>	d = a + <span class="hljs-number">3</span><br>	<span class="hljs-keyword">goto</span> L3<br><span class="hljs-symbol">L12:</span>	c = <span class="hljs-number">3</span><br><span class="hljs-symbol">L14:</span>	<span class="hljs-keyword">goto</span> L6<br>	<span class="hljs-keyword">goto</span> L3<br><span class="hljs-symbol">L6:</span>	<span class="hljs-keyword">if</span> <span class="hljs-literal">False</span> c &lt; b <span class="hljs-keyword">goto</span> L2<br><span class="hljs-symbol">L15:</span>	a = <span class="hljs-number">3</span><br>	<span class="hljs-keyword">goto</span> L6<br><span class="hljs-symbol">L2:</span><br><br></code></pre></td></tr></tbody></table></figure>
+<h4 id="总结"><a class="markdownIt-Anchor" href="#总结"></a> 总结</h4>
+<h2 id="附录"><a class="markdownIt-Anchor" href="#附录"></a> 附录</h2>
 
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><h2 id="附录"><a href="#附录" class="headerlink" title="附录"></a>附录</h2></div><div id="donate"><link rel="stylesheet" type="text/css" href="/css/donate.css?v=1.0.0"><script type="text/javascript" src="/js/donate.js?v=1.0.0" successtext="复制成功!"></script><a class="pos-f tr3" id="github" href="https://github.com/Kaiyuan/donate-page" target="_blank" title="Github"></a><div id="DonateText">Donate</div><ul class="list pos-f" id="donateBox"><li id="AliPay" qr="/img/AlipayQR.jpg"></li><li id="WeChat" qr="/img/WechatQR.png"></li></ul><div class="pos-f left-100" id="QRBox"><div id="MainBox"></div></div></div><div class="tags"><a href="/tags/C++"><i class="fa fa-tag">C++</i></a><a href="/tags/编译原理"><i class="fa fa-tag">编译原理</i></a></div><div class="post-nav"><a class="pre" href="/2022/08/20/tu-graph-shu-ju-de-pin-yu/">上线测试</a><a class="next" href="/2022/03/01/shang-xian-ce-shi/">上线测试</a></div></div></div></div><div class="pure-u-1-4 hidden_mid_and_down"><div id="sidebar"><div class="widget"><div class="search-form"><input id="local-search-input" placeholder="Search" type="text" name="q" results="0"/><div id="local-search-result"></div></div></div><div class="widget"><div class="author-info"><a class="info-avatar" href="/about/" title="关于"><img src="/img/avatar.png"/></a><p>海明威说：“这个世界很美好，值得我们为之奋斗。”我只同意后半句</p><a class="info-icon" href="mailto:lzeng1507@gmail.com" title="Email" target="_blank" style="margin-inline:5px"> <i class="fa fa-envelope-square" style="margin-inline:5px"></i></a><a class="info-icon" href="https://github.com/vitaminzl" title="Github" target="_blank" style="margin-inline:5px"> <i class="fa fa-github-square" style="margin-inline:5px"></i></a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-folder-o"> 分类</i></div><ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Markdown/">Markdown</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/">机器学习</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/">计算机基础</a></li></ul></div><div class="widget"><div class="widget-title"><i class="fa fa-star-o"> 标签</i></div><div class="tagcloud"><a href="/tags/Typora/" style="font-size: 15px;">Typora</a> <a href="/tags/Markdown/" style="font-size: 15px;">Markdown</a> <a href="/tags/C/" style="font-size: 15px;">C++</a> <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/" style="font-size: 15px;">编译原理</a> <a href="/tags/%E8%B0%B1%E5%9B%BE%E7%90%86%E8%AE%BA/" style="font-size: 15px;">谱图理论</a> <a href="/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/" style="font-size: 15px;">傅里叶变换</a> <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/" style="font-size: 15px;">线性代数</a> <a href="/tags/%E9%A2%91%E5%9F%9F/" style="font-size: 15px;">频域</a></div></div><div class="widget"><div class="widget-title"><i class="fa fa-file-o"> 最近文章</i></div><ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2022/08/20/tu-graph-shu-ju-de-pin-yu/">上线测试</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/06/20/dong-shou-xie-yi-ge-bian-yi-qi/">动手写一个编译器</a></li><li class="post-list-item"><a class="post-list-link" href="/2022/03/01/shang-xian-ce-shi/">上线测试</a></li></ul></div></div></div><div class="pure-u-1 pure-u-md-3-4"><div id="footer">Copyright © 2022 <a href="/." rel="nofollow">闲渔.</a> Powered by<a rel="nofollow" target="_blank" href="https://hexo.io"> Hexo.</a><a rel="nofollow" target="_blank" href="https://github.com/tufu9441/maupassant-hexo"> Theme</a> by<a rel="nofollow" target="_blank" href="https://github.com/pagecho"> Cho.</a></div></div></div><a class="show" id="rocket" href="#top"></a><script type="text/javascript" src="/js/totop.js?v=1.0.0" async></script><script type="text/javascript" src="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.js" async></script><script type="text/javascript" src="/js/fancybox.js?v=1.0.0" async></script><link rel="stylesheet" type="text/css" href="//lib.baomitu.com/fancybox/latest/jquery.fancybox.min.css"><link rel="stylesheet" type="text/css" href="/css/search.css?v=1.0.0"><script type="text/javascript" src="/js/search.js?v=1.0.0"></script><script>var search_path = 'search.xml';
-if (search_path.length == 0) {
-  search_path = 'search.xml';
-}
-var path = '/' + search_path;
-searchFunc(path, 'local-search-input', 'local-search-result');
-</script><script type="text/javascript" src="/js/love.js?v=1.0.0"></script><script type="text/javascript" src="/js/copycode.js?v=1.0.0" successtext="复制成功!"></script><link rel="stylesheet" type="text/css" href="/css/copycode.css?v=1.0.0"><script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML" async></script><script type="text/javascript" src="/js/codeblock-resizer.js?v=1.0.0"></script><script type="text/javascript" src="/js/smartresize.js?v=1.0.0"></script></div><!-- hexo-inject:begin --><!-- hexo-inject:end --></body></html>
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9F%BA%E7%A1%80/" class="category-chain-item">计算机基础</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/C/">#C++</a>
+      
+        <a href="/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/">#编译原理</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>动手写一个编译器</div>
+      <div>http://vitaminzl.com/2022/06/20/dong-shou-xie-yi-ge-bian-yi-qi/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>vitaminzl</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年6月20日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/20/tu-graph-shu-ju-de-pin-yu/" title="图（Graph）数据的频域">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">图（Graph）数据的频域</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/03/01/shang-xian-ce-shi/" title="上线测试">
+                        <span class="hidden-mobile">上线测试</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://lib.baomitu.com/gitalk/1.7.2/gitalk.min.js', function() {
+        var options = Object.assign(
+          {"clientID":"e9144b1025036ec8c784","clientSecret":"cd0ead5c5184e057cd33c31921147ec7a30cc8e7","repo":"blogcomment","owner":"vitaminzl","admin":["name"],"language":"zh-CN","labels":["Gitalk"],"perPage":10,"pagerDirection":"last","distractionFreeMode":false,"createIssueManually":true,"proxy":"https://cors-anywhere.azm.workers.dev/https://github.com/login/oauth/access_token"},
+          {
+            id: 'f142830b773450aedb5bcfba19899083'
+          }
+        )
+        var gitalk = new Gitalk(options);
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>
