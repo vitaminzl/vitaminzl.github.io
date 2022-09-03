@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/li-spectral-cluster-15.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/li-spectral-cluster-16.png">
 <meta property="article:published_time" content="2022-08-30T04:00:00.000Z">
-<meta property="article:modified_time" content="2022-09-02T17:14:33.779Z">
+<meta property="article:modified_time" content="2022-09-03T08:43:46.711Z">
 <meta property="article:author" content="vitaminzl">
 <meta property="article:tag" content="频域">
 <meta property="article:tag" content="python">
@@ -300,7 +300,9 @@
               <div class="markdown-body">
                 
                 <h1 id="谱在聚类中的应用">谱在聚类中的应用</h1>
-<p>本文主要对谱聚类的几篇论文进行解读，并对一部分的结果进行复现。本文首先从谱聚类的一般过程入手，介绍传统的谱聚类方法NCuts、NJW。针对传统方法的相似度量的缺陷，引入改进方法ZP；又针对特征向量的选择问题，引入改进方法PI。结合以上2种方式，加入TKNN，引入改进方法ROSC，接着对ROSC中修正相似度矩阵的缺陷，结合trace lasso正则项，引入改进方法CAST。最后，对于ROSC和CAST中都提到的Group Effect进行解读。文章结尾补充了幂代法和矩阵求导的内容。其中我分别对PI方法和ROSC方法进行代码复现。代码的仓库地址：<a target="_blank" rel="noopener" href="https://github.com/vitaminzl/SpectralCluster">https://github.com/vitaminzl/SpectralCluster</a> (备用镜像：<a target="_blank" rel="noopener" href="https://gitee.com/murphy_z/spectral-cluster">https://gitee.com/murphy_z/spectral-cluster</a>)。</p>
+<p>本文主要对谱聚类的几篇论文进行解读，并对一部分的结果进行复现。本文首先从谱聚类的一般过程入手，介绍传统的谱聚类方法NCuts、NJW。针对传统方法的相似度量的缺陷，引入改进方法ZP；又针对特征向量的选择问题，引入改进方法PI。结合以上2种方式，加入TKNN，引入改进方法ROSC，接着对ROSC中修正相似度矩阵的缺陷，结合trace lasso正则项，引入改进方法CAST。最后，对于ROSC和CAST中都提到的Group Effect进行解读。文章结尾补充了幂代法和矩阵求导的内容。其中我分别对PI方法和ROSC方法进行代码复现。</p>
+<p>代码的仓库地址：<a target="_blank" rel="noopener" href="https://github.com/vitaminzl/SpectralCluster">https://github.com/vitaminzl/SpectralCluster</a></p>
+<p>备用镜像：<a target="_blank" rel="noopener" href="https://gitee.com/murphy_z/spectral-cluster">https://gitee.com/murphy_z/spectral-cluster</a></p>
 <h2 id="pipeline">Pipeline</h2>
 <p><img src="https://imagehost.vitaminz-image.top/gnn-note-10.png" srcset="/img/loading.gif" lazyload></p>
 <p>谱聚类的一般过程如上图所示<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Li X, Kao B, Shan C, et al. CAST: a correlation-based adaptive spectral clustering algorithm on multi-scale data[C]//Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining. 2020: 439-449.](https://dl.acm.org/doi/abs/10.1145/3394486.3403086)">[2]</span></a></sup>。对于一系列的数据，我们首先计算数据之间的相似度矩阵<span class="math inline">\(S\)</span>，常用的相似度度量为高斯核<span class="math inline">\(S_{ij}=\exp(-\frac{||\vec x_i-\vec x_j||^2}{2\sigma^2})\)</span>，然后求其拉普拉斯矩阵<span class="math inline">\(L=D-S\)</span>，其中<span class="math inline">\(D\)</span>为对角矩阵，且<span class="math inline">\(D_{ii}=\sum A_{ij}\)</span>。然后求出拉普拉斯矩阵的特征向量，选择特征值<span class="math inline">\(k\)</span>小的特征向量进行k-means聚类。</p>
@@ -332,7 +334,7 @@ D^{-\frac{1}{2}}LD^{-\frac{1}{2}}&amp;=D^{-\frac{1}{2}}(D-S)D^{-\frac{1}{2}}\\
 <p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-8.png" srcset="/img/loading.gif" lazyload></p>
 <p>ZP方法提出里一种局部调整<span class="math inline">\(\sigma\)</span>的设定，距离度量修正为<span class="math inline">\(S_{ij}=\exp(-\frac{||\vec x_i-\vec x_j||^2}{2\sigma_i\sigma_j})\)</span>。其中<span class="math inline">\(\sigma_i, \sigma_j\)</span>是依附于<span class="math inline">\(\vec x_i, \vec x_j\)</span>的是一种局部的参数。这一参数的设定应通过样本的特征取选取。在论文中<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Zelnik-Manor L, Perona P. Self-tuning spectral clustering[J]. Advances in neural information processing systems, 2004, 17.](https://proceedings.neurips.cc/paper/2004/hash/40173ea48d9567f1f393b20c855bb40b-Abstract.html)">[3]</span></a></sup>中选择的方法是<span class="math inline">\(\vec x_i\)</span>到第<span class="math inline">\(K\)</span>个邻居的欧式距离，实验表明<span class="math inline">\(K\)</span>取7在多个数据集上的效果表现良好。如上图所示，结点之间的边厚度表示数据间的权重大小（仅显示周围数据的权重）。图b是原来的高斯核距离度量，图c是修正后的。可以看到图b中靠近蓝点的边仍然比较厚，而图c则避免了的这种现象。</p>
 <h2 id="pi">PI</h2>
-<p>PI(Power Iteration)为幂迭代法<sup id="fnref:5" class="footnote-ref"><a href="#fn:5" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Lin F, Cohen W W. Power iteration clustering[C]//ICML. 2010.](https://openreview.net/forum?id=SyWcksbu-H)">[5]</span></a></sup>。其灵感来源于幂迭代法用求主特征值（在<a href="#Dominant%20Eigenvalue">文章的后面部分</a>会更详细地说明）。</p>
+<p>PI(Power Iteration)为幂迭代法<sup id="fnref:5" class="footnote-ref"><a href="#fn:5" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Lin F, Cohen W W. Power iteration clustering[C]//ICML. 2010.](https://openreview.net/forum?id=SyWcksbu-H)">[5]</span></a></sup>。其灵感来源于幂迭代法用求主特征值（在<a href="##Dominant%20Eigenvalue">文章的后面部分</a>会更详细地说明）。</p>
 <p>我们设<span class="math inline">\(W=D^{-1}A\)</span>，该矩阵有时候叫转移矩阵，因为它和马尔可夫的状态转移矩阵非常类似。每行的和为1，每个元素<span class="math inline">\(W_{i,j}\)</span>可以看作是<span class="math inline">\(i\)</span>结点到<span class="math inline">\(j\)</span>结点转移的概率。它和归一化随机游走矩阵<span class="math inline">\(L_r=I-W\)</span>有着重要的联系。NCuts算法证明了<span class="math inline">\(L_r\)</span>第2小的特征值所对应的特征向量可以作为NCuts算法的一种近似。</p>
 <p>这里需要说明的是，<span class="math inline">\(L_r\)</span>最小的特征值为0，容易证明<span class="math inline">\(\vec 1=[1, 1, ..., 1]\)</span>是<span class="math inline">\(L_r\)</span>的0所对应的特征向量。而对于<span class="math inline">\(W\)</span>来说则，其最大的特征值为1，且<span class="math inline">\(\vec 1\)</span>是对应的特征向量。需要说明的是，<span class="math inline">\(L_r\)</span>最小的几个特征向量或<span class="math inline">\(W\)</span>最大的几个特征向量是有效的，其余可能是噪声。</p>
 <p>首先给定一个向量<span class="math inline">\(\vec v^{(0)}= c_1\vec e_1 + c_2\vec e_2,..., +c_n\vec e_n\)</span>，其中<span class="math inline">\(\vec e_i\)</span>为<span class="math inline">\(W\)</span>的特征向量。且<span class="math inline">\(\vec e_i\)</span>所对应的特征值<span class="math inline">\(\lambda_i\)</span>满足<span class="math inline">\(1=\lambda_1 &gt; \lambda_2&gt;...&gt;\lambda_n\)</span>。</p>
@@ -387,7 +389,7 @@ X=XZ+O
 <p>定义优化问题 <span class="math display">\[
 \min_{Z}||X-XZ||_F^2+\alpha_1||Z||_F+\alpha_2||W-Z||_F
 \]</span> 优化问题的第一项表示最小化噪声，第二项则是<span class="math inline">\(Z\)</span>的Frobenius 范数<sup id="fnref:12" class="footnote-ref"><a href="#fn:12" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://mathworld.wolfram.com/FrobeniusNorm.html](https://mathworld.wolfram.com/FrobeniusNorm.html)">[12]</span></a></sup>），为正则化项，用于平衡其他2项，第三项则是减小与前文中TKNN的邻接矩阵<span class="math inline">\(W\)</span>的差距。<span class="math inline">\(\alpha_1,\alpha_2\)</span>是平衡参数，需要人工设置。</p>
-<p>求解以上优化问题，可以先对<span class="math inline">\(Z\)</span>求导（<a href="#Derivatives%20of%20Matrix">文章的后面</a>还会做一些补充），使导数为0即可。对三项项求导有 <span class="math display">\[
+<p>求解以上优化问题，可以先对<span class="math inline">\(Z\)</span>求导（<a href="##Derivatives%20of%20Matrix">文章的后面</a>还会做一些补充），使导数为0即可。对三项项求导有 <span class="math display">\[
 \begin{align*}
 \frac{\partial ||X-XZ||^2_F}{\partial Z}&amp;=-2X^T(X-XZ)\\
 \frac{\partial\alpha_1||Z||^2_F}{\partial Z}&amp;=2\alpha_1Z\\

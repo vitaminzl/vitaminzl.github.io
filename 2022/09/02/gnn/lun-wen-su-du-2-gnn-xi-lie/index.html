@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-4.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-13.png">
 <meta property="article:published_time" content="2022-09-02T04:00:00.000Z">
-<meta property="article:modified_time" content="2022-09-03T08:25:34.656Z">
+<meta property="article:modified_time" content="2022-09-03T08:42:24.165Z">
 <meta property="article:author" content="vitaminzl">
 <meta property="article:tag" content="GNN">
 <meta property="article:tag" content="图">
@@ -291,7 +291,7 @@
               <div class="markdown-body">
                 
                 <h1 id="论文速读gnn系列">论文速读&lt;二&gt;：GNN系列</h1>
-<p>论文速读系列的第二期，论文速读主要提取论文的Key Idea，本期为GNN系列的论文速读，选取了4篇经典论文和3篇近期的论文。<a href="">上期</a>为知识图谱领域的关系抽取。</p>
+<p>论文速读系列的第二期，论文速读主要提取论文的Key Idea，本期为GNN系列的论文速读，选取了4篇经典论文和3篇近期的论文。<a href="https://vitaminzl.com/2022/07/16/kg/lun-wen-su-du-1-guan-xi-chou-qu/">上期</a>为知识图谱领域的关系抽取。</p>
 <h2 id="key-idea">Key Idea</h2>
 <h3 id="semi-supervised-classification-with-graph-convolutional-networks1"><em>Semi-supervised Classification with Graph Convolutional Networks</em><sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Kipf T N, Welling M. Semi-supervised classification with graph convolutional networks[J]. arXiv preprint arXiv:1609.02907, 2016.](https://arxiv.org/abs/1609.02907)">[1]</span></a></sup></h3>
 <p>GCN的核心公式如下，其中<span class="math inline">\(\sigma\)</span>表示激活函数，<span class="math inline">\(\tilde A=A+I\)</span>，也就是给每个结点加个自环，<span class="math inline">\(\tilde D=\sum_i A_{ij}\)</span>。<span class="math inline">\(H^{(l)}\)</span>为第<span class="math inline">\(l\)</span>层的embedding，<span class="math inline">\(W\)</span>是参数矩阵。它的形式看起来非常简单。 <span class="math display">\[
