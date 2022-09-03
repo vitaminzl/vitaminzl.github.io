@@ -6,7 +6,7 @@
   <link href="http://vitaminzl.com/atom.xml" rel="self"/>
   
   <link href="http://vitaminzl.com/"/>
-  <updated>2022-08-30T10:54:08.478Z</updated>
+  <updated>2022-09-03T08:25:34.656Z</updated>
   <id>http://vitaminzl.com/</id>
   
   <author>
@@ -17,15 +17,65 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://vitaminzl.com/2022/08/30/gnn/gnn-xi-lie-lun-wen-yue-du-1/"/>
-    <id>http://vitaminzl.com/2022/08/30/gnn/gnn-xi-lie-lun-wen-yue-du-1/</id>
-    <published>2022-08-30T11:00:43.084Z</published>
-    <updated>2022-08-30T10:54:08.478Z</updated>
+    <title>论文速读&lt;二&gt;：GNN系列</title>
+    <link href="http://vitaminzl.com/2022/09/02/gnn/lun-wen-su-du-2-gnn-xi-lie/"/>
+    <id>http://vitaminzl.com/2022/09/02/gnn/lun-wen-su-du-2-gnn-xi-lie/</id>
+    <published>2022-09-02T04:00:00.000Z</published>
+    <updated>2022-09-03T08:25:34.656Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;论文速读gnn系列&quot;&gt;论文速读&amp;lt;二&amp;gt;：GNN系列&lt;/h1&gt;
+&lt;p&gt;论文速读系列的第二期，论文速读主要提取论文的Key Idea，本期为GNN系列的论文速读，选取了4篇经典论文和3篇近期的论文。&lt;a</summary>
+        
+      
     
     
     
+    <category term="GNN" scheme="http://vitaminzl.com/categories/GNN/"/>
     
+    
+    <category term="GNN" scheme="http://vitaminzl.com/tags/GNN/"/>
+    
+    <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
+    
+    <category term="论文速读" scheme="http://vitaminzl.com/tags/%E8%AE%BA%E6%96%87%E9%80%9F%E8%AF%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>谱在聚类中的应用</title>
+    <link href="http://vitaminzl.com/2022/08/30/gnn/pin-pu-zai-ju-lei-zhong-de-ying-yong/"/>
+    <id>http://vitaminzl.com/2022/08/30/gnn/pin-pu-zai-ju-lei-zhong-de-ying-yong/</id>
+    <published>2022-08-30T04:00:00.000Z</published>
+    <updated>2022-09-02T17:14:33.779Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1</summary>
+        
+      
+    
+    
+    
+    <category term="谱图理论" scheme="http://vitaminzl.com/categories/%E8%B0%B1%E5%9B%BE%E7%90%86%E8%AE%BA/"/>
+    
+    
+    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
+    
+    <category term="频域" scheme="http://vitaminzl.com/tags/%E9%A2%91%E5%9F%9F/"/>
+    
+    <category term="聚类" scheme="http://vitaminzl.com/tags/%E8%81%9A%E7%B1%BB/"/>
+    
+    <category term="谱聚类" scheme="http://vitaminzl.com/tags/%E8%B0%B1%E8%81%9A%E7%B1%BB/"/>
+    
+    <category term="多尺度数据" scheme="http://vitaminzl.com/tags/%E5%A4%9A%E5%B0%BA%E5%BA%A6%E6%95%B0%E6%8D%AE/"/>
     
   </entry>
   
@@ -34,47 +84,49 @@
     <link href="http://vitaminzl.com/2022/08/20/gnn/tu-graph-shu-ju-de-pin-yu/"/>
     <id>http://vitaminzl.com/2022/08/20/gnn/tu-graph-shu-ju-de-pin-yu/</id>
     <published>2022-08-20T04:00:00.000Z</published>
-    <updated>2022-08-31T06:12:53.511Z</updated>
+    <updated>2022-09-02T03:18:15.840Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;图graph数据的频域&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#图graph数据的频域&quot;&gt;&lt;/a&gt;</summary>
+    <summary type="html">&lt;h1</summary>
         
       
     
     
     
-    <category term="机器学习" scheme="http://vitaminzl.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    <category term="谱图理论" scheme="http://vitaminzl.com/categories/%E8%B0%B1%E5%9B%BE%E7%90%86%E8%AE%BA/"/>
     
+    
+    <category term="傅里叶变换" scheme="http://vitaminzl.com/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
+    
+    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
     
     <category term="频域" scheme="http://vitaminzl.com/tags/%E9%A2%91%E5%9F%9F/"/>
     
     <category term="谱图理论" scheme="http://vitaminzl.com/tags/%E8%B0%B1%E5%9B%BE%E7%90%86%E8%AE%BA/"/>
     
-    <category term="傅里叶变换" scheme="http://vitaminzl.com/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
-    
     <category term="线性代数" scheme="http://vitaminzl.com/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
-    
-    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
     
   </entry>
   
   <entry>
-    <title>高级算法：快速傅里叶变换（FFT）</title>
-    <link href="http://vitaminzl.com/2022/08/20/dsandalg/gao-ji-suan-fa-kuai-su-fu-li-xie-bian-huan-fft/"/>
-    <id>http://vitaminzl.com/2022/08/20/dsandalg/gao-ji-suan-fa-kuai-su-fu-li-xie-bian-huan-fft/</id>
-    <published>2022-08-20T04:00:00.000Z</published>
-    <updated>2022-08-30T08:08:57.017Z</updated>
+    <title>数据结构知识点整理</title>
+    <link href="http://vitaminzl.com/2022/07/20/dsandalg/shu-ju-jie-gou-zhi-shi-dian-zheng-li/"/>
+    <id>http://vitaminzl.com/2022/07/20/dsandalg/shu-ju-jie-gou-zhi-shi-dian-zheng-li/</id>
+    <published>2022-07-20T04:00:00.000Z</published>
+    <updated>2022-09-03T02:52:32.512Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;高级算法快速傅里叶变换fft&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#高级算法快速傅里叶变换fft&quot;&gt;&lt;/a&gt;</summary>
+    <summary type="html">&lt;h1 id=&quot;数据结构&quot;&gt;数据结构&lt;/h1&gt;
+&lt;h2 id=&quot;树&quot;&gt;树&lt;/h2&gt;
+&lt;h3</summary>
         
       
     
@@ -83,155 +135,62 @@
     <category term="数据结构与算法" scheme="http://vitaminzl.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
     
-    <category term="傅里叶变换" scheme="http://vitaminzl.com/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
+    <category term="C++" scheme="http://vitaminzl.com/tags/C/"/>
     
     <category term="算法" scheme="http://vitaminzl.com/tags/%E7%AE%97%E6%B3%95/"/>
     
-    <category term="高级算法" scheme="http://vitaminzl.com/tags/%E9%AB%98%E7%BA%A7%E7%AE%97%E6%B3%95/"/>
-    
-    <category term="FFT" scheme="http://vitaminzl.com/tags/FFT/"/>
-    
     <category term="数据结构" scheme="http://vitaminzl.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>PAT甲级典型题型总结</title>
-    <link href="http://vitaminzl.com/2022/08/20/dsandalg/pat-jia-ji-dian-xing-ti-xing-zong-jie/"/>
-    <id>http://vitaminzl.com/2022/08/20/dsandalg/pat-jia-ji-dian-xing-ti-xing-zong-jie/</id>
-    <published>2022-08-20T04:00:00.000Z</published>
-    <updated>2022-08-30T08:27:26.735Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;pat甲级典型题型总结&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#pat甲级典型题型总结&quot;&gt;&lt;/a&gt;</summary>
-        
-      
-    
-    
-    
-    <category term="数据结构与算法" scheme="http://vitaminzl.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="频域" scheme="http://vitaminzl.com/tags/%E9%A2%91%E5%9F%9F/"/>
-    
-    <category term="谱图理论" scheme="http://vitaminzl.com/tags/%E8%B0%B1%E5%9B%BE%E7%90%86%E8%AE%BA/"/>
-    
-    <category term="傅里叶变换" scheme="http://vitaminzl.com/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
-    
-    <category term="线性代数" scheme="http://vitaminzl.com/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>频域在聚类中的应用</title>
-    <link href="http://vitaminzl.com/2022/08/20/gnn/pin-pu-zai-ju-lei-zhong-de-ying-yong/"/>
-    <id>http://vitaminzl.com/2022/08/20/gnn/pin-pu-zai-ju-lei-zhong-de-ying-yong/</id>
-    <published>2022-08-20T04:00:00.000Z</published>
-    <updated>2022-09-01T15:16:10.207Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;谱在聚类中的应用&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#谱在聚类中的应用&quot;&gt;&lt;/a&gt;</summary>
-        
-      
-    
-    
-    
-    <category term="机器学习" scheme="http://vitaminzl.com/categories/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
-    
-    
-    <category term="频域" scheme="http://vitaminzl.com/tags/%E9%A2%91%E5%9F%9F/"/>
-    
-    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
-    
-    <category term="聚类" scheme="http://vitaminzl.com/tags/%E8%81%9A%E7%B1%BB/"/>
-    
-    <category term="多尺度数据" scheme="http://vitaminzl.com/tags/%E5%A4%9A%E5%B0%BA%E5%BA%A6%E6%95%B0%E6%8D%AE/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>操作系统实验-Pintos</title>
-    <link href="http://vitaminzl.com/2022/08/20/os/cao-zuo-xi-tong-shi-yan-pintos/"/>
-    <id>http://vitaminzl.com/2022/08/20/os/cao-zuo-xi-tong-shi-yan-pintos/</id>
-    <published>2022-08-20T04:00:00.000Z</published>
-    <updated>2022-09-01T15:15:48.677Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;pintos&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#pintos&quot;&gt;&lt;/a&gt; Pintos&lt;/h1&gt;
-&lt;h2 id=&quot;环境篇&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#环境篇&quot;&gt;&lt;/a&gt;</summary>
-        
-      
-    
-    
-    
-    <category term="操作系统" scheme="http://vitaminzl.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-    <category term="操作系统" scheme="http://vitaminzl.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    <category term="Git" scheme="http://vitaminzl.com/tags/Git/"/>
-    
-    <category term="GDB" scheme="http://vitaminzl.com/tags/GDB/"/>
-    
-    <category term="Linux" scheme="http://vitaminzl.com/tags/Linux/"/>
     
     <category term="C" scheme="http://vitaminzl.com/tags/C/"/>
     
   </entry>
   
   <entry>
-    <title>操作系统知识整理</title>
-    <link href="http://vitaminzl.com/2022/08/20/os/cao-zuo-xi-tong-zhi-shi-dian-zheng-li/"/>
-    <id>http://vitaminzl.com/2022/08/20/os/cao-zuo-xi-tong-zhi-shi-dian-zheng-li/</id>
-    <published>2022-08-20T04:00:00.000Z</published>
-    <updated>2022-09-01T15:14:12.647Z</updated>
+    <title>论文速读&lt;一&gt;：关系抽取与提示学习</title>
+    <link href="http://vitaminzl.com/2022/07/16/kg/lun-wen-su-du-1-guan-xi-chou-qu/"/>
+    <id>http://vitaminzl.com/2022/07/16/kg/lun-wen-su-du-1-guan-xi-chou-qu/</id>
+    <published>2022-07-16T04:00:00.000Z</published>
+    <updated>2022-09-03T07:18:00.889Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;pintos&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#pintos&quot;&gt;&lt;/a&gt; Pintos&lt;/h1&gt;
-&lt;h2 id=&quot;环境篇&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#环境篇&quot;&gt;&lt;/a&gt;</summary>
+    <summary type="html">&lt;h1 id=&quot;论文速读关系抽取与提示学习&quot;&gt;论文速读&amp;lt;一&amp;gt;：关系抽取与提示学习&lt;/h1&gt;
+&lt;p&gt;论文速读系列为对论文的核心思想进行快速抓取，仅记录论文的Key Idea。本期为论文速读系列的第一期，选取了5篇近期知识图谱领域的关系抽取相关论文。&lt;/p&gt;
+&lt;h2</summary>
         
       
     
     
     
-    <category term="操作系统" scheme="http://vitaminzl.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    <category term="知识图谱" scheme="http://vitaminzl.com/categories/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
     
     
-    <category term="操作系统" scheme="http://vitaminzl.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
+    
+    <category term="知识图谱" scheme="http://vitaminzl.com/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
+    
+    <category term="关系抽取" scheme="http://vitaminzl.com/tags/%E5%85%B3%E7%B3%BB%E6%8A%BD%E5%8F%96/"/>
+    
+    <category term="提示学习" scheme="http://vitaminzl.com/tags/%E6%8F%90%E7%A4%BA%E5%AD%A6%E4%B9%A0/"/>
     
   </entry>
   
   <entry>
-    <title>高级算法：初等数论</title>
-    <link href="http://vitaminzl.com/2022/07/21/dsandalg/gao-ji-suan-fa-chu-deng-shu-lun/"/>
-    <id>http://vitaminzl.com/2022/07/21/dsandalg/gao-ji-suan-fa-chu-deng-shu-lun/</id>
-    <published>2022-07-21T04:00:00.000Z</published>
-    <updated>2022-08-30T07:30:03.575Z</updated>
+    <title>PAT甲级典型题型总结</title>
+    <link href="http://vitaminzl.com/2022/07/05/dsandalg/pat-jia-ji-dian-xing-ti-xing-zong-jie/"/>
+    <id>http://vitaminzl.com/2022/07/05/dsandalg/pat-jia-ji-dian-xing-ti-xing-zong-jie/</id>
+    <published>2022-07-05T04:00:00.000Z</published>
+    <updated>2022-09-03T02:52:13.391Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;高级算法初等数论&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#高级算法初等数论&quot;&gt;&lt;/a&gt;</summary>
+    <summary type="html">&lt;h1</summary>
         
       
     
@@ -239,47 +198,14 @@
     
     <category term="数据结构与算法" scheme="http://vitaminzl.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
     
-    
-    <category term="初等数论" scheme="http://vitaminzl.com/tags/%E5%88%9D%E7%AD%89%E6%95%B0%E8%AE%BA/"/>
-    
-    <category term="算法" scheme="http://vitaminzl.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-    <category term="高级算法" scheme="http://vitaminzl.com/tags/%E9%AB%98%E7%BA%A7%E7%AE%97%E6%B3%95/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>高级数据结构：树状数组、线段树</title>
-    <link href="http://vitaminzl.com/2022/07/15/dsandalg/gao-ji-shu-ju-jie-gou-shu-zhuang-shu-zu-xian-duan-shu/"/>
-    <id>http://vitaminzl.com/2022/07/15/dsandalg/gao-ji-shu-ju-jie-gou-shu-zhuang-shu-zu-xian-duan-shu/</id>
-    <published>2022-07-15T04:00:00.000Z</published>
-    <updated>2022-08-30T13:43:35.373Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;高级数据结构树状数组-线段树&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#高级数据结构树状数组-线段树&quot;&gt;&lt;/a&gt;</summary>
-        
-      
-    
-    
-    
-    <category term="数据结构与算法" scheme="http://vitaminzl.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="数据结构" scheme="http://vitaminzl.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
     <category term="C++" scheme="http://vitaminzl.com/tags/C/"/>
     
-    <category term="区间树" scheme="http://vitaminzl.com/tags/%E5%8C%BA%E9%97%B4%E6%A0%91/"/>
+    <category term="PAT" scheme="http://vitaminzl.com/tags/PAT/"/>
     
-    <category term="线段树" scheme="http://vitaminzl.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    <category term="算法" scheme="http://vitaminzl.com/tags/%E7%AE%97%E6%B3%95/"/>
     
-    <category term="字典树" scheme="http://vitaminzl.com/tags/%E5%AD%97%E5%85%B8%E6%A0%91/"/>
-    
-    <category term="高级数据结构" scheme="http://vitaminzl.com/tags/%E9%AB%98%E7%BA%A7%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    <category term="数据结构" scheme="http://vitaminzl.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
     
   </entry>
   
@@ -295,7 +221,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;toyc语言&quot;&gt;&lt;a class=&quot;markdownIt-Anchor&quot; href=&quot;#toyc语言&quot;&gt;&lt;/a&gt;</summary>
+    <summary type="html">&lt;h1</summary>
         
       
     
@@ -307,6 +233,106 @@
     <category term="C++" scheme="http://vitaminzl.com/tags/C/"/>
     
     <category term="编译原理" scheme="http://vitaminzl.com/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>高级数据结构：树状数组、线段树</title>
+    <link href="http://vitaminzl.com/2022/03/15/dsandalg/gao-ji-shu-ju-jie-gou-shu-zhuang-shu-zu-xian-duan-shu/"/>
+    <id>http://vitaminzl.com/2022/03/15/dsandalg/gao-ji-shu-ju-jie-gou-shu-zhuang-shu-zu-xian-duan-shu/</id>
+    <published>2022-03-15T04:00:00.000Z</published>
+    <updated>2022-09-03T02:52:21.540Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1</summary>
+        
+      
+    
+    
+    
+    <category term="数据结构与算法" scheme="http://vitaminzl.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
+    
+    
+    <category term="C++" scheme="http://vitaminzl.com/tags/C/"/>
+    
+    <category term="数据结构" scheme="http://vitaminzl.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+    <category term="区间树" scheme="http://vitaminzl.com/tags/%E5%8C%BA%E9%97%B4%E6%A0%91/"/>
+    
+    <category term="线段树" scheme="http://vitaminzl.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
+    
+    <category term="字典树" scheme="http://vitaminzl.com/tags/%E5%AD%97%E5%85%B8%E6%A0%91/"/>
+    
+    <category term="高级数据结构" scheme="http://vitaminzl.com/tags/%E9%AB%98%E7%BA%A7%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>操作系统实验-Pintos</title>
+    <link href="http://vitaminzl.com/2022/02/10/os/cao-zuo-xi-tong-shi-yan-pintos/"/>
+    <id>http://vitaminzl.com/2022/02/10/os/cao-zuo-xi-tong-shi-yan-pintos/</id>
+    <published>2022-02-10T04:00:00.000Z</published>
+    <updated>2022-09-01T15:32:30.717Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;pintos&quot;&gt;Pintos&lt;/h1&gt;
+&lt;h2 id=&quot;环境篇&quot;&gt;环境篇&lt;/h2&gt;
+&lt;h3 id=&quot;wsl-ubuntu18.04&quot;&gt;WSL: Ubuntu18.04&lt;/h3&gt;
+&lt;p&gt;Windows Subsystem for</summary>
+        
+      
+    
+    
+    
+    <category term="操作系统" scheme="http://vitaminzl.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+    <category term="C" scheme="http://vitaminzl.com/tags/C/"/>
+    
+    <category term="操作系统" scheme="http://vitaminzl.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    <category term="Git" scheme="http://vitaminzl.com/tags/Git/"/>
+    
+    <category term="GDB" scheme="http://vitaminzl.com/tags/GDB/"/>
+    
+    <category term="Linux" scheme="http://vitaminzl.com/tags/Linux/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>操作系统知识整理</title>
+    <link href="http://vitaminzl.com/2022/02/09/os/cao-zuo-xi-tong-zhi-shi-dian-zheng-li/"/>
+    <id>http://vitaminzl.com/2022/02/09/os/cao-zuo-xi-tong-zhi-shi-dian-zheng-li/</id>
+    <published>2022-02-09T04:00:00.000Z</published>
+    <updated>2022-09-01T15:32:39.554Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;operating-system&quot;&gt;Operating System&lt;/h1&gt;
+&lt;h2 id=&quot;操作系统概述&quot;&gt;操作系统概述&lt;/h2&gt;
+&lt;h3 id=&quot;计算机资源的管理者&quot;&gt;计算机资源的管理者&lt;/h3&gt;
+&lt;p&gt;主要管理处理机、存储器、文件、设备。&lt;/p&gt;
+&lt;h3</summary>
+        
+      
+    
+    
+    
+    <category term="操作系统" scheme="http://vitaminzl.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
+    
+    
+    <category term="操作系统" scheme="http://vitaminzl.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   

@@ -1,0 +1,774 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/image/cat.png">
+  <link rel="icon" href="/image/cat.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="vitaminzl">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="论文速读&lt;二&gt;：GNN系列 论文速读系列的第二期，论文速读主要提取论文的Key Idea，本期为GNN系列的论文速读，选取了4篇经典论文和3篇近期的论文。上期为知识图谱领域的关系抽取。 Key Idea Semi-supervised Classification with Graph Convolutional Networks[1] GCN的核心公式如下，其中\(\sigma\)表">
+<meta property="og:type" content="article">
+<meta property="og:title" content="论文速读&lt;二&gt;：GNN系列">
+<meta property="og:url" content="http://vitaminzl.com/2022/09/02/gnn/lun-wen-su-du-2-gnn-xi-lie/index.html">
+<meta property="og:site_name" content="闲渔">
+<meta property="og:description" content="论文速读&lt;二&gt;：GNN系列 论文速读系列的第二期，论文速读主要提取论文的Key Idea，本期为GNN系列的论文速读，选取了4篇经典论文和3篇近期的论文。上期为知识图谱领域的关系抽取。 Key Idea Semi-supervised Classification with Graph Convolutional Networks[1] GCN的核心公式如下，其中\(\sigma\)表">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://imagehost.vitaminz-image.top/li-spectral-cluster-21.png">
+<meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-3.png">
+<meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-12.png">
+<meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-14.png">
+<meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-2.png">
+<meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-4.png">
+<meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-13.png">
+<meta property="article:published_time" content="2022-09-02T04:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-03T08:25:34.656Z">
+<meta property="article:author" content="vitaminzl">
+<meta property="article:tag" content="GNN">
+<meta property="article:tag" content="图">
+<meta property="article:tag" content="论文速读">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://imagehost.vitaminz-image.top/li-spectral-cluster-21.png">
+  
+  
+  
+  <title>论文速读&lt;二&gt;：GNN系列 - 闲渔</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"vitaminzl.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="闲渔" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<body>
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>闲渔</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/image/snow-small.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="论文速读&lt;二&gt;：GNN系列"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-09-02 12:00" pubdate>
+          2022年9月2日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          3.5k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          15 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">论文速读&lt;二&gt;：GNN系列</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="论文速读gnn系列">论文速读&lt;二&gt;：GNN系列</h1>
+<p>论文速读系列的第二期，论文速读主要提取论文的Key Idea，本期为GNN系列的论文速读，选取了4篇经典论文和3篇近期的论文。<a href="">上期</a>为知识图谱领域的关系抽取。</p>
+<h2 id="key-idea">Key Idea</h2>
+<h3 id="semi-supervised-classification-with-graph-convolutional-networks1"><em>Semi-supervised Classification with Graph Convolutional Networks</em><sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Kipf T N, Welling M. Semi-supervised classification with graph convolutional networks[J]. arXiv preprint arXiv:1609.02907, 2016.](https://arxiv.org/abs/1609.02907)">[1]</span></a></sup></h3>
+<p>GCN的核心公式如下，其中<span class="math inline">\(\sigma\)</span>表示激活函数，<span class="math inline">\(\tilde A=A+I\)</span>，也就是给每个结点加个自环，<span class="math inline">\(\tilde D=\sum_i A_{ij}\)</span>。<span class="math inline">\(H^{(l)}\)</span>为第<span class="math inline">\(l\)</span>层的embedding，<span class="math inline">\(W\)</span>是参数矩阵。它的形式看起来非常简单。 <span class="math display">\[
+H^{(l+1)}=\sigma (\tilde D^{-\frac{1}{2}}\tilde A\tilde D^{-\frac{1}{2}}H^{(l)}W^{(l)})
+\]</span> 从卷积的参数共享角度来看，其实就是每个结点的将自己与附近的参数聚合。第1次聚合后每个结点获取了直接邻居结点的特征，但第2次聚合就可以获取间接邻居的特征（因为直接邻居包含了它的邻居的特征）。所以在多层聚合下，每个结点可以获得全局的信息。</p>
+<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-21.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<h3 id="graph-attention-networks2"><em>Graph Attention Networks</em><sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Veličković P, Cucurull G, Casanova A, et al. Graph attention networks[J]. arXiv preprint arXiv:1710.10903, 2017.](https://arxiv.org/abs/1710.10903)">[2]</span></a></sup></h3>
+<p>GAN就是在GNN中加入注意力机制</p>
+<p><img src="https://imagehost.vitaminz-image.top/gnn-note-3.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p>以下是注意力的计算公式，其中<span class="math inline">\(\vec h_i,shape(F,1);W,shape(F',F);\vec a,shape(2F',1)\)</span>。<span class="math inline">\(||\)</span>表示连接。看起来就是对2个向量进行线性变换后连接，再通过<span class="math inline">\(\vec a\)</span>他们获取之间的相关性，再做一个归一化。</p>
+<p><span class="math display">\[
+\alpha_{ij}=\frac{\exp(LeakyReLU(\vec a^T[W\vec h_i|| W\vec h_j]))}{\sum_{k\in N_i}\exp(LeakyReLU(\vec a^T[W\vec h_i||W\vec h_j]))}
+\]</span> 和普通神经网络的注意力机制相同，GAN中也分为多头和单头的注意力机制。</p>
+<p><span class="math inline">\(\vec h_i\)</span>的更新，单头注意力 <span class="math display">\[
+\vec h'_i = \sigma(\sum_{j\in N_i} \alpha_{ij}W\vec h^i)
+\]</span> 2种多头注意力的实现 <span class="math display">\[
+\vec h'_i = ||^{K}_{k=1} \sigma(\sum_{j\in N_i} \alpha^k_{ij}W^k\vec h^i)\\
+\vec h'_i = \sigma(\frac{1}{K}\sum^{K}_{k=1}\sum_{j\in N_i} \alpha^k_{ij}W^k\vec h^i)
+\]</span></p>
+<h3 id="how-powerful-are-graph-neural-networks3"><em>How Powerful are Graph Neural Networks?</em><sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Xu K, Hu W, Leskovec J, et al. How powerful are graph neural networks?[J]. arXiv preprint arXiv:1810.00826, 2018.](https://arxiv.org/abs/1810.00826)">[3]</span></a></sup></h3>
+<p>这篇文章理论方面证明了GNN的上限是WL test(图同构测试)的上接，总结了信息聚合的方法以及对GNN的评价指标。 <span class="math display">\[
+h_{k+1}(u) = MLP((1+\epsilon) h_k(u) + \sum_{(u,v) \in E} h_k(v))
+\]</span> 其中<span class="math inline">\(\epsilon\)</span>是一个可学习的无理数参数。该论证证明了其可以达到WL test的上界。</p>
+<h3 id="inductive-representation-learning-on-large-graphs4"><em>Inductive Representation Learning on Large Graphs</em><sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Hamilton W, Ying Z, Leskovec J. Inductive representation learning on large graphs[J]. Advances in neural information processing systems, 2017, 30.](https://proceedings.neurips.cc/paper/2017/hash/5dd9db5e033da9c6fb5ba83c7a7ebea9-Abstract.html)">[4]</span></a></sup></h3>
+<p><img src="https://imagehost.vitaminz-image.top/gnn-note-12.png" srcset="/img/loading.gif" lazyload></p>
+<p>如上图所示，GraphSAGE可以分为3个步骤：1. 对图中每个顶点邻居顶点进行采样；2. 根据聚合函数聚合邻居顶点蕴含的信息；3. 得到图中各顶点的向量表示供下游任务使用。</p>
+<p><img src="https://imagehost.vitaminz-image.top/gnn-note-14.png" srcset="/img/loading.gif" lazyload></p>
+<p>每层的embedding生成可以用如上图的伪代码表示。其中AGGREGATE可以使用均值、池化以及LSTM函数。</p>
+<h3 id="finding-global-homophily-in-graph-neural-networks-when-meeting-heterophily5"><em>Finding Global Homophily in Graph Neural Networks When Meeting Heterophily</em><sup id="fnref:5" class="footnote-ref"><a href="#fn:5" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022.](https://arxiv.org/abs/2205.07308)">[5]</span></a></sup></h3>
+<p>全局同质性、异质图。现有的网络通过多次的领域聚合获取远距离的信息。本文通过相关系数矩阵（类似于注意力机制）获取全局信息。且相关系数矩阵可转换为有闭式解的优化问题，经过简化，可将计算复杂度缩小至线性。</p>
+<p>GloGNN，GloGNN++（系数矩阵加上了自相关）。</p>
+<p><img src="https://imagehost.vitaminz-image.top/gnn-note-2.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p>核心公式 <span class="math display">\[
+H^{(0)}=(1-\alpha)MLP_1(X)+\alpha MLP_2(A)\\
+H^{(l+1)}=(1-\gamma)Z^{(l)*}H^{(l)}+\gamma H^{(0)}\\
+\]</span> <span class="math inline">\(Z^{(l)*}\)</span>通过求解优化问题的闭式解获得。</p>
+<p>Grouping Effect：通过证明可得，<span class="math inline">\(Z^{(l*)},(Z^{(l*)})^T,H^{(l+1)}\)</span>都具有grouping effect。即当特征足够接近、结构足够接近时，对应结点的特征表示也足够接近，相关系数也足够接近。</p>
+<h3 id="large-scale-learning-on-non-homophilous-graphs-new-benchmarks-and-strong-simple-methods6"><em>Large Scale Learning on Non-Homophilous Graphs: New Benchmarks and Strong Simple Methods</em><sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Lim D, Hohne F, Li X, et al. Large scale learning on non-homophilous graphs: New benchmarks and strong simple methods[J]. Advances in Neural Information Processing Systems, 2021, 34: 20887-20902.](https://proceedings.neurips.cc/paper/2021/hash/ae816a80e4c1c56caa2eb4e1819cbb2f-Abstract.html)">[6]</span></a></sup></h3>
+<p><img src="https://imagehost.vitaminz-image.top/gnn-note-4.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p>LINKX是一个看起来很简单的模型，是基于MLP，并没有作卷积操作。它首先将结点的特征矩阵与邻接矩阵经过分别经过2个MLP，然后再做一个连接，接着与参数矩阵<span class="math inline">\(W\)</span>相乘，和前面经过MLP层的输出（类似于ResNet）</p>
+<p>相加，接着经过一个激活函数和MLP，输出结果。</p>
+<h3 id="gnnautoscale-scalable-and-expressive-graph-neural-networks-via-historical-embeddings7"><em>Gnnautoscale: Scalable and expressive graph neural networks via historical embeddings</em><sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Fey M, Lenssen J E, Weichert F, et al. Gnnautoscale: Scalable and expressive graph neural networks via historical embeddings[C]//International Conference on Machine Learning. PMLR, 2021: 3294-3304.](http://proceedings.mlr.press/v139/fey21a.html)">[7]</span></a></sup></h3>
+<p><img src="https://imagehost.vitaminz-image.top/gnn-note-13.png" srcset="/img/loading.gif" lazyload></p>
+<p>改论文主要聚焦于如何减小大型图数据训练的计算和内存开销。</p>
+<p>GAS 框架有两个主要组成部分：</p>
+<p>首先，第一部分是构建一个小批量节点（执行快速随机子采样）并修剪 GNN 计算图以仅保留小批量内的节点及其 1 跳邻居节点——这意味着 GAS 的尺度独立于 GNN 深度。其次，每当 GNN 聚合需要小批量节点嵌入时，GAS 就会从存储在 CPU 上的历史嵌入中检索它们。同时，当前小批量节点的历史嵌入也不断更新。</p>
+<p>第二部分是与子采样的关键区别——能够使 GNN 最大限度地表达信息，并将当前的小批量数据和历史嵌入组合起来，得到完整的邻域信息并加以利用，同时确保对大型图的可扩展性。</p>
+<p>GAS 的作者还将他们的想法整合到流行的 PyTorch 几何库中。于是可以在非常大的图上训练大多数的消息传递 GNN，同时降低 GPU 内存需求并保持接近全批次的性能（即在全图上训练时的性能）。</p>
+<h2 id="参考资料">参考资料</h2>
+<section class="footnotes">
+<div class="footnote-list">
+<ol>
+<li>
+<span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1609.02907">Kipf T N, Welling M. Semi-supervised classification with graph convolutional networks[J]. arXiv preprint arXiv:1609.02907, 2016.</a> <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1710.10903">Veličković P, Cucurull G, Casanova A, et al. Graph attention networks[J]. arXiv preprint arXiv:1710.10903, 2017.</a> <a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://arxiv.org/abs/1810.00826">Xu K, Hu W, Leskovec J, et al. How powerful are graph neural networks?[J]. arXiv preprint arXiv:1810.00826, 2018.</a> <a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper/2017/hash/5dd9db5e033da9c6fb5ba83c7a7ebea9-Abstract.html">Hamilton W, Ying Z, Leskovec J. Inductive representation learning on large graphs[J]. Advances in neural information processing systems, 2017, 30.</a> <a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:5" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.07308">Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022.</a> <a href="#fnref:5" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:6" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper/2021/hash/ae816a80e4c1c56caa2eb4e1819cbb2f-Abstract.html">Lim D, Hohne F, Li X, et al. Large scale learning on non-homophilous graphs: New benchmarks and strong simple methods[J]. Advances in Neural Information Processing Systems, 2021, 34: 20887-20902.</a> <a href="#fnref:6" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
+</li>
+<li>
+<span id="fn:7" class="footnote-text"><span><a target="_blank" rel="noopener" href="http://proceedings.mlr.press/v139/fey21a.html">Fey M, Lenssen J E, Weichert F, et al. Gnnautoscale: Scalable and expressive graph neural networks via historical embeddings[C]//International Conference on Machine Learning. PMLR, 2021: 3294-3304.</a> <a href="#fnref:7" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
+</li>
+</ol>
+</div>
+</section>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/GNN/" class="category-chain-item">GNN</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/GNN/">#GNN</a>
+      
+        <a href="/tags/%E5%9B%BE/">#图</a>
+      
+        <a href="/tags/%E8%AE%BA%E6%96%87%E9%80%9F%E8%AF%BB/">#论文速读</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>论文速读&lt;二&gt;：GNN系列</div>
+      <div>http://vitaminzl.com/2022/09/02/gnn/lun-wen-su-du-2-gnn-xi-lie/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>vitaminzl</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年9月2日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/30/gnn/pin-pu-zai-ju-lei-zhong-de-ying-yong/" title="谱在聚类中的应用">
+                        <span class="hidden-mobile">谱在聚类中的应用</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"N5b4uVEvRE5UcVcWvkv2ln10-gzGzoHsz","appKey":"KJFp10KGLr5F9HxFUUsL2AeD","path":"window.location.pathname","placeholder":"你的意见至关重要！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>

@@ -1,0 +1,1515 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/image/cat.png">
+  <link rel="icon" href="/image/cat.png">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="vitaminzl">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="数据结构 树 概念 结点的深度（自顶向下）、结点的高度（自底向上）、树的高度（最大层树）、结点的度、树的度（最大）、有序树和无序树、路径（树的路径长度&#x3D;所有结点路径长度总和）、分支结点（度不为0）、叶子结点 儿子-兄弟表示法 12345typedef struct TreeNode{	Element	struct TreeNode* FirstChild;	struct TreeNode* Nex">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构知识点整理">
+<meta property="og:url" content="http://vitaminzl.com/2022/07/20/dsandalg/shu-ju-jie-gou-zhi-shi-dian-zheng-li/index.html">
+<meta property="og:site_name" content="闲渔">
+<meta property="og:description" content="数据结构 树 概念 结点的深度（自顶向下）、结点的高度（自底向上）、树的高度（最大层树）、结点的度、树的度（最大）、有序树和无序树、路径（树的路径长度&#x3D;所有结点路径长度总和）、分支结点（度不为0）、叶子结点 儿子-兄弟表示法 12345typedef struct TreeNode{	Element	struct TreeNode* FirstChild;	struct TreeNode* Nex">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-6.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-1.webp">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-2.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-3.jpg">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-4.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-5.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-7.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-27.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-28.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-29.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-8.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-9.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-10.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-11.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-12.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-13.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-14.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-34.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-16.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-17.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-18.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-22.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-20.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-21.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-23.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-31.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-19.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-30.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-26.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-32.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-47.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-53.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-51.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-52.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-46.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-35.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-36.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-38.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-55.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-54.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-49.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-50.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-48.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-57.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-58.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-64.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-60.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-61.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-62.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-63.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-71.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-70.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-70.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-73.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-65.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-66.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-69.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-68.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-75.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-74.png">
+<meta property="og:image" content="http://imagehost.vitaminz-image.top/DS-76.png">
+<meta property="article:published_time" content="2022-07-20T04:00:00.000Z">
+<meta property="article:modified_time" content="2022-09-03T02:52:32.512Z">
+<meta property="article:author" content="vitaminzl">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="数据结构">
+<meta property="article:tag" content="C">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://imagehost.vitaminz-image.top/DS-6.png">
+  
+  
+  
+  <title>数据结构知识点整理 - 闲渔</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"vitaminzl.com","root":"/","version":"1.9.2","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
+<link rel="alternate" href="/atom.xml" title="闲渔" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</head>
+
+
+<body>
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>闲渔</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              &nbsp;<i class="iconfont icon-search"></i>&nbsp;
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/image/snow-small.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="数据结构知识点整理"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-07-20 12:00" pubdate>
+          2022年7月20日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          41k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          170 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">数据结构知识点整理</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="数据结构">数据结构</h1>
+<h2 id="树">树</h2>
+<h3 id="概念">概念</h3>
+<p>结点的深度（自顶向下）、结点的高度（自底向上）、树的高度（最大层树）、结点的度、树的度（最大）、有序树和无序树、路径（树的路径长度=所有结点路径长度总和）、分支结点（度不为0）、叶子结点</p>
+<h3 id="儿子-兄弟表示法">儿子-兄弟表示法</h3>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span>{</span><br>	Element<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span>* <span class="hljs-title">FirstChild</span>;</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span>* <span class="hljs-title">NextSibling</span>;</span><br>};<br></code></pre></td></tr></tbody></table></figure>
+<p>一般的树可以用儿子-兄弟法表示。森林也同样可以，原因是显然的，因为任何一颗树都可以看作是根节点下的几棵子树构成。</p>
+<p>因此一般的树都可以用<strong>二叉树</strong>来存储实现。</p>
+<p>此外还有<strong>双亲表示法</strong>【见并查集】。</p>
+<p>以及<strong>孩子表示法</strong>。下图摘自王道考研ppt。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-6.png" srcset="/img/loading.gif" lazyload style="zoom:33%;"></p>
+<h3 id="二叉树">二叉树</h3>
+<ul>
+<li><p>定义：与度为2的有序树间的区别，度为2的有序树至少有3个结点，二叉树可以为空。二叉树的有序性与另一个孩子无关，即若只有一个孩子，那他要么是左孩子，要么是有孩子；而度为2的有序树在该情况下则没有左右之分。</p></li>
+<li><p>类型：斜二叉树（退化为链表）、完美二叉树（或满二叉树）、完全二叉树。</p></li>
+</ul>
+<p><img src="http://imagehost.vitaminz-image.top/DS-1.webp" srcset="/img/loading.gif" lazyload style="zoom: 67%;"></p>
+<ul>
+<li><p>性质</p>
+<ul>
+<li><p>第<span class="math inline">\(i\)</span>层的最大结点数<span class="math inline">\(2^{i-1}\)</span>。</p></li>
+<li><p>深度为<span class="math inline">\(k\)</span>的二叉树最大结点数<span class="math inline">\(2^{k}-1\)</span>。如满二叉树可以达到</p>
+<ul>
+<li>推广，对于<span class="math inline">\(m\)</span>叉树，其最大结点数为<span class="math inline">\((m^k-1)/(m-1)\)</span>，等比数列求和。</li>
+</ul></li>
+<li><p>最小高度为<span class="math inline">\(\lceil log_2(n+1)\rceil\)</span>，由以上的最大结点公式可以推得。</p>
+<ul>
+<li>推广，对于<span class="math inline">\(m\)</span>叉树，其最大结点数为<span class="math inline">\(\lceil log_m(n(m-1)+1)\rceil\)</span>。</li>
+</ul></li>
+<li><p><span class="math inline">\(n_0, n_2\)</span>分别表示叶结点个数与度为2的结点个数，则有<span class="math inline">\(n_0=1+n_2\)</span>。利用该公式可以计算完全二叉树的结点，因为对于完全二叉树来说，<span class="math inline">\(n_1\)</span>要么是1要么是0。同时还可以求空指针数，控制指针数为<span class="math inline">\(2n_0+n_1=n_0+n_1+n_2+1=n+1\)</span></p>
+<ul>
+<li><p>简单地证明一下：</p></li>
+<li><p><span class="math display">\[
+n_0+n_1+n_2-1 = 0*n_0+1*n_1+2*n_2
+\]</span></p></li>
+<li><p>如上，等式两边表示边的数量，左边表示边的个数等于所有结点的数减1，这是显然的，除了根结点，所有的结点都有且仅有一个入边。等式右边则通过出边来计算总的边数。</p></li>
+<li><p>该性质的推广：在m叉树中，叶结点总数是<span class="math inline">\(n_0\)</span>，有一个儿子的结点总数是<span class="math inline">\(n_1\)</span>，有2个儿子的结点总数是<span class="math inline">\(n_2\)</span>，有3个儿子的结点总数是<span class="math inline">\(n_3\)</span>，...。那么，<span class="math inline">\(n_i\)</span>之间存在什么关系？</p></li>
+<li><p><span class="math display">\[
+n_0=1+n_2+2n_3+...+(m-1)n_m
+\]</span></p></li>
+</ul></li>
+</ul></li>
+</ul>
+<h3 id="存储方式">存储方式</h3>
+<h4 id="顺序">顺序</h4>
+<p>对于<strong>完全二叉树</strong></p>
+<p>对于非根结点，(<span class="math inline">\(i\)</span>从1开始)，父节点的编号为<span class="math inline">\(\lfloor i/2\rfloor\)</span>。左孩子为<span class="math inline">\(pos_{left}=2*i,(pos_{left}&lt;=n)\)</span>，右孩子为<span class="math inline">\(pos_{right}=2*i+1,(pos_{right}&lt;=n)\)</span>。</p>
+<p>推广：对于完全m叉树，子女<span class="math inline">\(k(k=1,2,..,m)\)</span>的位置为<span class="math inline">\(pos_{k}=(i-1)*m+k+1,(pos_{k}&lt;=n)\)</span>。父节点的编号为<span class="math inline">\(\lfloor (i-2)/m\rfloor+1\)</span>。</p>
+<p>对于<strong>一般二叉树</strong></p>
+<p>将一般二叉树补成完全二叉树（浪费太多空间）。</p>
+<h4 id="链式">链式</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span>{</span><br>	ElemType data<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span>* <span class="hljs-title">left</span>;</span><br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">TreeNode</span>* <span class="hljs-title">right</span>;</span><br>}*BinTree;<br><span class="hljs-comment">// 也可以用静态链表</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span>{</span><br>	ElemType data<br>	<span class="hljs-type">int</span> left;<br>	<span class="hljs-type">int</span> right;<br>}tree[MAXSIZE];<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="遍历">遍历</h3>
+<p>traversal</p>
+<p>遍历的核心问题是二维结构线性化，如何保存暂时不访问的结点：堆栈（前后中序）、队列（层序遍历）</p>
+<h4 id="前中后序">前中后序</h4>
+<p>下图摘自浙大的数据结构慕课ppt。先序(pre-order)、中序(in-order)、后序(post-order)的区别在于，在行走路线的过程中，碰到第一次就打印的为前序，第二此猜打印的为中序，碰到第三次打印的为后序。也可以理解为，前序是打印时左右子树都没打印过，中序为打印时左子树打印过（或者不存在）而右子树没有打印过，后序为打印时左右子树都打印过了（或者都不存在）。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-2.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;"></p>
+<p>以下为实现，分为递归实现与非递归实现。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/* 	递归实现	*/</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">preorderTraversal</span><span class="hljs-params">(BinTree T)</span>{<br>    <span class="hljs-keyword">if</span>(T){<br>        print(T-&gt;data);<br>        preorderTraversal(T-&gt;left);<br>        preorderTraversal(T-&gt;right);<br>    }<br>}<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">inorderTraversal</span><span class="hljs-params">(BinTree T)</span>{<br>    <span class="hljs-keyword">if</span>(T){<br>        inorderTraversal(T-&gt;data);<br>        print(T-&gt;data);<br>        inorderTraversal(T-&gt;right);<br>    }<br>}<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">postorderTraversal</span><span class="hljs-params">(BinTree T)</span>{<br>    <span class="hljs-keyword">if</span>(T){<br>        postorderTraversal(T-&gt;left);<br>        postorderTraversal(T-&gt;right);<br>        print(T-&gt;data);<br>	}<br>}<br><br><span class="hljs-comment">/* 	非递归实现	*/</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">preorderTraversal</span><span class="hljs-params">(BinTree T)</span>{<br>	Stack s = initStack();<br>    <span class="hljs-keyword">while</span>(T || isEmpty(s)){<br>        <span class="hljs-keyword">while</span>(T){<br>            push(S, T);<br>            <span class="hljs-comment">/* 第一次碰到 */</span><br>            print(T-&gt;data);<br>            T = T-&gt;left;<br>		}<br>        <span class="hljs-keyword">if</span>(isEmpty(s)){<br>            T = pop(s);<br>            T = T-&gt;right;<br>        }<br>    }<br>}<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">inorderTraversal</span><span class="hljs-params">(BinTree T)</span>{<br>	Stack s = initStack();<br>    <span class="hljs-keyword">while</span>(T || isEmpty(s)){<br>        <span class="hljs-keyword">while</span>(T){<br>            push(S, T);<br>            T = T-&gt;left;<br>		}<br>        <span class="hljs-keyword">if</span>(!isEmpty(s)){<br>            T = pop(s);<br>            <span class="hljs-comment">/* 第二次碰到 */</span><br>            <span class="hljs-comment">/* 每次打印的要么是无左孩子的结点，要么是左孩子已经打印过了 */</span><br>            print(T-&gt;data);<br>            T = T-&gt;right;<br>        }<br>    }<br>}<br><span class="hljs-comment">// 难点</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">postorderTraversal</span><span class="hljs-params">(BinTree T)</span>{<br>	Stack s = initStack();<br>    BinTree printed = <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">while</span>(T || isEmpty(s)){<br>        <span class="hljs-keyword">while</span>(T &amp;&amp; T-&gt;left != printed &amp;&amp; T-&gt;right != printed){<br>            push(S, T);<br>            T = T-&gt;left;<br>		}<br>        <span class="hljs-keyword">if</span>(isEmpty(s)){<br>            T = getTop(s);<br>            <span class="hljs-comment">/* 打印的时候要么没有右子树，要么右子树已经打印过 */</span><br>            <span class="hljs-keyword">if</span>(T-&gt;right &amp;&amp; T-&gt;right != printed){<br>                T = T-&gt;right;<br>            }<br>            <span class="hljs-keyword">else</span>{<br>             	T = pop(s);                <br>                print(T-&gt;data);  <br>                printed = T;<br>                T = getTop(s);<br>            }<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p><strong>拓展：</strong></p>
+<p>一般树的先根遍历、后根遍历、层序遍历。先根遍历=转化成二叉树后的先序遍历；后根遍历=转化成二叉树后的中序遍历。</p>
+<p>森林的先序遍历、中序遍历。森林的先序遍历就是依次对各个树的先根遍历，森林的中序遍历就是依次对各个树的后根遍历。</p>
+<p>至于具体实现，完全可以将他们转化为二叉树，利用遍历的等价性来解决。如下表所示</p>
+<table>
+<thead>
+<tr class="header">
+<th>树</th>
+<th>森林</th>
+<th>二叉树</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>先根遍历</td>
+<td>先序遍历</td>
+<td>先序遍历</td>
+</tr>
+<tr class="even">
+<td>后根遍历</td>
+<td>中序遍历</td>
+<td>中序遍历</td>
+</tr>
+</tbody>
+</table>
+<h4 id="层序遍历">层序遍历</h4>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">levelorderTraversal</span><span class="hljs-params">(BinTree T)</span>{<br>    <span class="hljs-keyword">if</span>(!T)<br>        <span class="hljs-keyword">return</span>;<br>	Queue q = initQueue(q);<br>    BinTree t;<br>    pushBack(q, T);<br>    <span class="hljs-keyword">while</span>(!isEmpty(q)){<br>        t = popFront(q);<br>        print(t-&gt;data);<br>        <span class="hljs-keyword">if</span>(t-&gt;left)<br>        	pushBack(q, t-&gt;left);<br>        <span class="hljs-keyword">if</span>(t-&gt;right)<br>            pushBack(q, t-&gt;right);<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="应用">应用</h4>
+<p>输出所有叶子结点（修改一下先序遍历）</p>
+<p>求树的高度（<span class="math inline">\(当前高度=max(左子树高度, 右子树高度)+1\)</span>）</p>
+<p>二元运算的表达式树（先序【前缀表达式】、中序【后缀表达式，需要加括号】、后序【后缀表达式】）</p>
+<p>两种遍历序列确定一课二叉树：必须要有中序遍历。先序+中序：先序确定根，中序分左右。</p>
+<p>树的同构问题。若一棵树可以通过若干次左右孩子交换得到另一棵树，则称这两棵树是同构的。</p>
+<h3 id="线索二叉树">线索二叉树</h3>
+<p>线索二叉树是一种物理结构。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ThreadTreeNode</span>{</span><br>	ElemType data<br>	<span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">ThreadTreeNode</span>* <span class="hljs-title">left</span>, * <span class="hljs-title">right</span>;</span>	<span class="hljs-comment">// 左右孩子或者左右线索</span><br>    <span class="hljs-type">int</span> ltag, rtag;							<span class="hljs-comment">// 用于区分孩子与线索，1表示线索</span><br>}ThreadTreeNode, *ThreadBinTree;<br></code></pre></td></tr></tbody></table></figure>
+<p>线索又分为前序、中序、后序线索。下图摘自王道考研网课。紫色为后继、黄色为前驱。他们都是拿着空指针做文章。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-3.jpg" srcset="/img/loading.gif" lazyload style="zoom: 33%;"></p>
+<p>线索化，注意前序与中序、后序的区别</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*-------------- 中序 --------------*/</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">threadling</span><span class="hljs-params">(ThreadBinTree q, ThreadBinTree* preptr)</span>{<br>    <span class="hljs-comment">/* 如果没有左孩子，那就链接为上一结点 */</span><br>    <span class="hljs-keyword">if</span> (!q-&gt;left){<br>    	q-&gt;left = pre;<br>        q-&gt;ltag = <span class="hljs-number">1</span>;<br>    }<br>    <span class="hljs-comment">/* 如果上一结点（如果存在的话）没有孩子 */</span><br>    <span class="hljs-keyword">if</span> (*preptr &amp;&amp; (*preptr)-&gt;left){<br>        (*preptr)-&gt;right = q;<br>        (*preptr)-&gt;rtag = <span class="hljs-number">1</span>;<br>    }<br>    <span class="hljs-comment">/* 每次结束更新pre，使得每次开始时</span><br><span class="hljs-comment">    pre为遍历序列中该结点的上一个结点 */</span><br>    *preptr = q;<br>}<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">inorderThreadAux</span><span class="hljs-params">(ThreadBinTree T)</span>{<br>    <span class="hljs-keyword">if</span>(T){<br>        inorderThread(T-&gt;left);<br>        threadling(T);<br>        inorderThread(T-&gt;right);<br>    }<br>}<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">inorderThread</span><span class="hljs-params">(ThreadBinTree T)</span>{<br>    ThreadBinTree pre = <span class="hljs-literal">NULL</span>;<br>    ThreadBinTree* preptr = &amp;pre;<br>    <span class="hljs-keyword">if</span> (T){<br>        inorderThreadAux(T, preptr);<br>    	pre-&gt;rtag = <span class="hljs-number">1</span>;<br>    }<br>}<br><br><span class="hljs-comment">/*-------------- 前序 --------------*/</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">preorderThreadAux</span><span class="hljs-params">(ThreadBinTree T)</span>{<br>    <span class="hljs-keyword">if</span>(T){<br>        threadling(T);<br>        <span class="hljs-comment">/* 注意这一段处理</span><br><span class="hljs-comment">        关键子在于访问结点的孩子是不是可能已经线索化了，</span><br><span class="hljs-comment">        并且考虑的是前驱（左孩子）的线索化（后继的线索化必然是在访问之后）</span><br><span class="hljs-comment">        在前序中，由于线索化的操作在最上面，左孩子有可能先线索化再访问 </span><br><span class="hljs-comment">        对于中序遍历，是先访问左孩子，再线索化处理，</span><br><span class="hljs-comment">        而后序遍历则更不用说，左右孩子都访问后才处理。 */</span><br>        <span class="hljs-keyword">if</span> (!pre-&gt;ltag)<br>        	inorderThread(T-&gt;left);<br>        inorderThread(T-&gt;right);<br>    }<br>}<br><br><span class="hljs-comment">/*-------------- 后序 --------------*/</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">postorderThreadAux</span><span class="hljs-params">(ThreadBinTree T)</span>{<br>    <span class="hljs-keyword">if</span>(T){<br>        inorderThread(T-&gt;left);<br>        inorderThread(T-&gt;right);<br>        threadling(T);<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>寻找前驱和后继结点</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>中序</th>
+<th>前序</th>
+<th>后序</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>找前驱</td>
+<td>Yes</td>
+<td>No, 需借助父节点</td>
+<td>Yes</td>
+</tr>
+<tr class="even">
+<td>找后继</td>
+<td>Yes</td>
+<td>Yes</td>
+<td>No，需借助父节点</td>
+</tr>
+</tbody>
+</table>
+<p>代码实现</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*-------------- 中序 --------------*/</span><br>ThreadBinTree <span class="hljs-title function_">mostLeftNode</span><span class="hljs-params">(ThreadBinTree p)</span>{<br>    <span class="hljs-keyword">while</span> (!p-&gt;ltag)<br>        p = p-&gt;left;<br>    <span class="hljs-keyword">return</span> p<br>}<br>ThreadBinTree nextNode(ThreadBinTree p){<br>    <span class="hljs-comment">// 右孩子的最左边的一个结点</span><br>    <span class="hljs-keyword">if</span> (!p-&gt;rtag)<br>        <span class="hljs-keyword">return</span> mostLeftNode(p-&gt;right);<br>    <span class="hljs-keyword">return</span> p-&gt;right;<br>}<br><span class="hljs-comment">// 空间复杂度O(1)</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">inorderTraversal</span><span class="hljs-params">(ThreadBinTree T)</span>{<br>    <span class="hljs-keyword">for</span>(TheradBinTree p = mostLeftNode(T); p != Null; p = nextNode(p))<br>        print(p-&gt;data);<br>}<br>ThreadBinTree <span class="hljs-title function_">mostRightNode</span><span class="hljs-params">(ThreadBinTree p)</span>{<br>    <span class="hljs-keyword">while</span> (p-&gt;rlag)<br>        p = p-&gt;right;<br>    <span class="hljs-keyword">return</span> p;<br>}<br>ThreadBinNode <span class="hljs-title function_">preNode</span><span class="hljs-params">(ThreadBinTree p)</span>{<br>    <span class="hljs-comment">// 左孩子的最右边的一个结点</span><br>    <span class="hljs-keyword">if</span> (!p-&gt;ltag)<br>        <span class="hljs-keyword">return</span> mostRightNode(p-&gt;left);<br>    <span class="hljs-keyword">return</span> p-&gt;left;<br>}<br><span class="hljs-comment">/*-------------- 前序 --------------*/</span><br>ThreadBinTree <span class="hljs-title function_">nextNode</span><span class="hljs-params">(ThreadBinTree p)</span>{<br>    <span class="hljs-comment">// 根 左(根左右) 右</span><br>    <span class="hljs-keyword">if</span> (!p-&gt;rtag)<br>        <span class="hljs-keyword">return</span> mostLeftNode(p-&gt;right);<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (p-&gt;left)<br>        <span class="hljs-keyword">return</span> p-&gt;left;<br>    <span class="hljs-keyword">else</span> <br>        <span class="hljs-keyword">return</span> p-&gt;right;<br>}<br><span class="hljs-comment">// 引入parent结点</span><br>ThreadBinTree <span class="hljs-title function_">mostRightNode</span><span class="hljs-params">(ThreadBinTree p)</span>{<br>    <span class="hljs-keyword">while</span> (p-&gt;rlag)<br>        p = p-&gt;right;<br>    <span class="hljs-keyword">return</span> p;<br>}<br>ThreadBinTree <span class="hljs-title function_">preNode</span><span class="hljs-params">(ThreadBinTree p)</span>{<br>    <span class="hljs-comment">// 根 左(根左右) 右</span><br>    <span class="hljs-keyword">if</span> (!p-&gt;parent)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!p-&gt;ltag){<br>        <span class="hljs-comment">// 如果是左孩子</span><br>		<span class="hljs-keyword">if</span> (p-&gt;parent-&gt;left == p || p-&gt;parent-&gt;ltag)<br>            <span class="hljs-keyword">return</span> p-&gt;parent;<br>        <span class="hljs-keyword">else</span><br>            <span class="hljs-comment">// 根 左(根左右(根左右(..右))) 右</span><br>            <span class="hljs-keyword">return</span> mostRightNode(p-&gt;parent-&gt;left);<br>    }<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">return</span> p-&gt;left;<br>}<br><span class="hljs-comment">/*-------------- 后序 --------------*/</span><br>ThreadBinTree <span class="hljs-title function_">preNode</span><span class="hljs-params">(ThreadBinTree p)</span>{<br>    <span class="hljs-comment">// 右孩子的最左边的一个结点</span><br>    <span class="hljs-comment">// 左 右(左右根) 根</span><br>    <span class="hljs-keyword">if</span> (!p-&gt;rtag)<br>        <span class="hljs-keyword">return</span> mostLeftNode(p-&gt;right);<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(p-&gt;right)<br>        <span class="hljs-keyword">return</span> p-&gt;right;<br>    <span class="hljs-keyword">else</span> <br>        <span class="hljs-keyword">return</span> p-&gt;left;<br>}<br>ThreadBinTree <span class="hljs-title function_">mostLeftNode</span><span class="hljs-params">(ThreadBinTree p)</span>{<br>    <span class="hljs-keyword">while</span> (!p-&gt;ltag)<br>        p = p-&gt;left;<br>    <span class="hljs-keyword">return</span> p<br>}<br><span class="hljs-comment">// 引入parent结点</span><br>ThreadBinTree nextNode(ThreadBinTree p){<br>    <span class="hljs-keyword">if</span> (!p-&gt;parent)<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (!p-&gt;rtag){<br>		<span class="hljs-keyword">if</span> (p-&gt;parent-&gt;right == p || p-&gt;parent-&gt;rtag)<br>            <span class="hljs-keyword">return</span> p-&gt;parent;<br>        <span class="hljs-keyword">else</span><br>            <span class="hljs-comment">// 左 ((左..)左右根)右 根</span><br>            <span class="hljs-keyword">return</span> mostLeftNode(p-&gt;parent-&gt;right);<br>    }<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">return</span> p-&gt;right;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="应用-1">应用</h3>
+<h4 id="哈夫曼编码">哈夫曼编码</h4>
+<p>概念：WPL-带权路径长度。哈夫曼树的WPL是最小的。</p>
+<p>哈夫曼(Huffman)树的特性：</p>
+<ul>
+<li>没有度为1的结点。</li>
+<li><span class="math inline">\(n_0\)</span>个叶子结点的哈夫曼树有<span class="math inline">\(n=2n_0-1\)</span>个结点</li>
+<li>任意非叶节点左右子树交换仍是哈夫曼树</li>
+<li>对于同一组权值，存在2个不同构的哈夫曼树</li>
+</ul>
+<p>前缀码(Prefix Code): 任何字符的编码都不是另一个字符编码的前缀。在一课树中，前缀码说明每一个字符的编码都在叶子结点结束，而不是在非叶子结点。，</p>
+<h4 id="并查集">并查集</h4>
+<p>disjoint set.</p>
+<p>双亲表示法。下图摘自浙大数据结构mooc。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-4.png" srcset="/img/loading.gif" lazyload style="zoom:30%;"></p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">SetType</span>{</span><br>	ElemType data;<br>    <span class="hljs-type">int</span> parent;<br>}SetType;<br></code></pre></td></tr></tbody></table></figure>
+<p>主要操作为查找与合并。他们都有优化版本。其优化的核心思想是尽量减少树的高度。</p>
+<p>王道当中推荐了这样一个算法可视化的网站：</p>
+<p>https://www.cs.usfca.edu/~galles/visualization/DisjointSets.html</p>
+<p>https://www.cs.usfca.edu/~galles/visualization/Algorithms.html</p>
+<ul>
+<li><p>查找</p>
+<p>下图摘自王道考研的ppt</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-5.png" srcset="/img/loading.gif" lazyload></p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">find</span><span class="hljs-params">( SetType s[], <span class="hljs-type">int</span> MaxSize, ElemType X )</span> {<br>    <span class="hljs-type">int</span> i;<br>    <span class="hljs-comment">/* 顺序查找X的下标 */</span><br>    <span class="hljs-keyword">for</span> ( i = <span class="hljs-number">0</span>; i &lt; MaxSize &amp;&amp; s[i].data != X; i++ );<br>    <span class="hljs-keyword">if</span> ( i &gt;= MaxSize ) <br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    <span class="hljs-comment">/* 找出根节点 */</span><br>    <span class="hljs-keyword">for</span> ( ; s[i].parent &gt;= <span class="hljs-number">0</span>; i = s[i].parent );<br>    <span class="hljs-keyword">return</span> i;<br>} <br><br><span class="hljs-comment">/* 优化 压缩路径 */</span><br><span class="hljs-type">int</span> <span class="hljs-title function_">find</span><span class="hljs-params">( SetType s[], <span class="hljs-type">int</span> MaxSize, ElemType X )</span> {<br>    <span class="hljs-type">int</span> r, x_idx;<br>    <span class="hljs-comment">/* 顺序查找X的下标 */</span><br>    <span class="hljs-keyword">for</span> ( r = <span class="hljs-number">0</span>; r &lt; MaxSize &amp;&amp; s[r].data != X; r++ );<br>    <span class="hljs-keyword">if</span> ( r &gt;= MaxSize ) <br>        <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>    x_idx = r;<br>    <span class="hljs-comment">/* 找出根节点 */</span><br>    <span class="hljs-keyword">for</span> ( ; s[r].parent &gt;= <span class="hljs-number">0</span>; r = s[r].parent );<br>    <span class="hljs-keyword">while</span> ( x_idx != r ) {<br>        <span class="hljs-type">int</span> temp = s[x_idx].parent;<br>        s[x_idx].parent = r;<br>        x_idx = temp;<br>    }<br>    <span class="hljs-keyword">return</span> i;<br>} <br></code></pre></td></tr></tbody></table></figure></li>
+<li><p>并</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">void</span> <span class="hljs-title function_">union</span><span class="hljs-params">(SetType s[], <span class="hljs-type">int</span> MaxSize, ElemType X, ElemType, Y)</span> {<br>    <span class="hljs-type">int</span> r1 = find(S, MaxSize, X);<br>    <span class="hljs-type">int</span> r2 = find(s, MaxSize, Y);<br>    <span class="hljs-keyword">if</span> ( r1 != r2 )<br>    	s[r2].parent = r1;<br>}<br><br><span class="hljs-comment">/* 利用优化根节点的绝对值表示树的结点数，如-3表示高度为3，然后让小树合并到大树上</span><br><span class="hljs-comment">   可以保证树的高度不超过$\lfoor log_2 n \rfloor +1$ */</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">union</span><span class="hljs-params">(SetType s[], <span class="hljs-type">int</span> MaxSize, ElemType X, ElemType, Y)</span> {<br>    <span class="hljs-type">int</span> r1 = find(S, MaxSize, X);<br>    <span class="hljs-type">int</span> r2 = find(s, MaxSize, Y);<br>    <span class="hljs-keyword">if</span> ( r1 == r2 )<br>        <span class="hljs-keyword">return</span>;<br>    <span class="hljs-keyword">if</span> ( s[r1].parent != s[r2].parent ) {<br>    	s[r1].parent += s[r2].parent;<br>        s[r2].parent = r1;<br>    }<br>    <span class="hljs-keyword">else</span> {<br>        s[r2].parent += s[r1].parent;<br>        s[r1].parent = r2;<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h4 id="查找">查找</h4>
+<p>此外，在查找中，大量使用了树的数据结构，请看下一章。</p>
+<h4 id="排序">排序</h4>
+<h5 id="堆">堆</h5>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">HNode</span> {</span><br>    ElemType *data; <span class="hljs-comment">/* 存储元素的数组 */</span><br>    <span class="hljs-type">int</span> size;          <span class="hljs-comment">/* 堆中当前元素个数 */</span><br>    <span class="hljs-type">int</span> capacity;      <span class="hljs-comment">/* 堆的最大容量 */</span><br>}HNode, *Heap;<br><span class="hljs-keyword">typedef</span> Heap MaxHeap; <span class="hljs-comment">/* 最大堆 */</span><br><span class="hljs-keyword">typedef</span> Heap MinHeap; <span class="hljs-comment">/* 最小堆 */</span><br></code></pre></td></tr></tbody></table></figure>
+<p>优先级队列。除了堆，可以使用插入排序的方式来维持。</p>
+<p>堆是一种完全二叉树。</p>
+<p>从根到任意结点都是有序的，最大堆是降序，最小堆则是升序。</p>
+<p>或者也可以说堆中，任意结点都大于等于（或小于等于）它的孩子结点。</p>
+<p>与其他队列相同，在尾部插入、头部删除，不一样的是插入、删除后还要进行一系列操作，以维持堆的特性。</p>
+<ul>
+<li><p>插入</p>
+<p>自下而上地调整。核心思想在于，对插入结点位置祖宗构成的路径进行插入排序。根节点集体下移，能够保证其依旧是个堆，因为下移后的根，必然比原来的根要大，也就必然比原来的孩子要大。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">bool</span> <span class="hljs-title function_">Insert</span><span class="hljs-params">( MaxHeap H, ElemType X )</span>{ <br>    <span class="hljs-comment">/* 将元素X插入最大堆H，其中H-&gt;Data[0]已经定义为哨兵 */</span><br>    <span class="hljs-comment">/* 哨兵为X的最大可能值 */</span><br>    <span class="hljs-keyword">if</span> (isFull(H)) { <br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"最大堆已满"</span>);<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>    }<br>	<span class="hljs-type">int</span> i = ++H-&gt;size;<br>    <span class="hljs-keyword">for</span> ( ; H-&gt;data[i] &lt; X; i /= <span class="hljs-number">2</span> ) {<br>        H-&gt;data[i] = H-&gt;data[i/<span class="hljs-number">2</span>];<br>    }<br>    H-&gt;data[i] = X;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;<br>}<br></code></pre></td></tr></tbody></table></figure></li>
+<li><p>删除</p>
+<p>自上而下地调整。将最后一个数据赋值给根节点，然后进行调整。核心思想在于，如果一个完全二叉树的左子树是个最大堆，右子树也是个最大堆，而自己不是一个最大堆。那么如何将其调整为一个最大堆。根结点与左右孩子结点进行比较，取左孩子与右孩子的较大者，与根结点进行交换，那么可以保证根结点大于左右孩子，对于被交换的子树，继续执行相同操作，每次操作由于是将较小者换到上面去，既可以保证原来上方满足堆，那么交换后依旧满足。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs c">ElemType <span class="hljs-title function_">DelMaxElem</span><span class="hljs-params">( MaxHeap H )</span> {<br>    <span class="hljs-keyword">if</span> (isFull(H)) {<br>        <span class="hljs-built_in">printf</span>(<span class="hljs-string">"最大堆已满"</span>);<br>        <span class="hljs-keyword">return</span>;<br>    }<br>    ElemType MaxElem = H-&gt;data[<span class="hljs-number">1</span>];<br>    ElemType temp = H-&gt;data[H-&gt;size--];<br>    <span class="hljs-type">int</span> i;<br>    <span class="hljs-comment">/* mooc上用了2个变量，不知道这样写是不是一样的 */</span><br>    <span class="hljs-keyword">for</span> ( i = <span class="hljs-number">2</span>; i &lt;= H-&gt;size; i *= <span class="hljs-number">2</span> ) {<br>        <span class="hljs-keyword">if</span> ( (i &lt; H-&gt;size) &amp;&amp; (H-&gt;data[i] &lt; H-&gt;data[i+<span class="hljs-number">1</span>]) )<br>            i++;<br>        <span class="hljs-keyword">if</span> ( temp &lt; H-&gt;data[i] )<br>        	H-&gt;data[i/<span class="hljs-number">2</span>] = H-&gt;data[i];<br>        <span class="hljs-keyword">else</span> <br>            <span class="hljs-keyword">break</span>;<br>    }<br>	H-&gt;data[i] = temp;<br>    <span class="hljs-keyword">return</span> MaxElem;<br>}<br></code></pre></td></tr></tbody></table></figure></li>
+<li><p>建堆</p>
+<p>自下而上+自上而下。利用删除的核心思想，如果左右子树是堆，如何调整整颗二叉树为堆。自下而上的都构造堆，再自上而下地调整。<strong>O(n)的时间复杂度</strong>，所有结点的高度之和。稍微求一下时间复杂度，设高度为<span class="math inline">\(h\)</span>，则所有结点高度之和为<span class="math inline">\(S=h\times1+(h-1)\times2+(h-2)\times 2^2+...+1\times 2^{h-2}\)</span>。这是一个差比数列，根据差比数列求法，可得<span class="math inline">\(S=-h+2^{h-3}-1+2^{h-1}\)</span>。又<span class="math inline">\(h=\log_2n\)</span>，因此<span class="math inline">\(S=O(n)\)</span>。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-comment">/*----------- 建造最大堆 -----------*/</span><br><span class="hljs-type">void</span> <span class="hljs-title function_">percDown</span><span class="hljs-params">( MaxHeap H, <span class="hljs-type">int</span> p )</span> { <br>    <span class="hljs-comment">/* 下滤：将H中以H-&gt;Data[p]为根的子堆调整为最大堆 */</span><br>    ElementType temp = H-&gt;data[p]; <span class="hljs-comment">/* 取出 根结点存放的值 */</span><br>    <span class="hljs-type">int</span> parent, child;<br>    <span class="hljs-comment">/* mooc上用了2个变量，可读性更高 */</span><br>    <span class="hljs-keyword">for</span> (parent = p; parent * <span class="hljs-number">2</span> &lt;= H-&gt;size; parent = child) {<br>        child = parent * <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">if</span> ((child &lt; H-&gt;size) &amp;&amp; (H-&gt;data[child] &lt; H-&gt;data[child+<span class="hljs-number">1</span>]))<br>            child++;<br>        <span class="hljs-keyword">if</span> (temp &lt; H-&gt;data[child])<br>        	H-&gt;data[parent] = H-&gt;data[child];<br>        <span class="hljs-keyword">else</span> <br>            <span class="hljs-keyword">break</span>;<br>    }<br>	H-&gt;data[parent] = temp;<br>}<br><br><span class="hljs-type">void</span> <span class="hljs-title function_">buildHeap</span><span class="hljs-params">( MaxHeap H )</span> { <br>    <span class="hljs-comment">/* 调整H-&gt;data[]中的元素，使满足最大堆的有序性  */</span><br>  	<span class="hljs-comment">/* 这里假设所有H-&gt;size个元素已经存在H-&gt;data[]中 */</span><br>    <span class="hljs-type">int</span> i;<br>    <span class="hljs-comment">/* 从最后一个结点的父节点开始，到根结点1 */</span><br>    <span class="hljs-keyword">for</span>( i = H-&gt;size/<span class="hljs-number">2</span>; i&gt;<span class="hljs-number">0</span>; i-- )<br>        percDown( H, i );<br>}<br></code></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h2 id="查找-1">查找</h2>
+<p>查找的基本概念</p>
+<p>ASL (Average Search Length) : 平均查找长度。</p>
+<p>查找成功、查找失败的ASL。</p>
+<h3 id="顺序查找">顺序查找</h3>
+<p>带哨兵的顺序查找，其实就是少了一个判断，稍微提高了点效率</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> {</span><br>	ElemType data;<br>    <span class="hljs-type">int</span> len;<br>}table;<br><br><span class="hljs-type">int</span> <span class="hljs-title function_">search</span><span class="hljs-params">(table t, ElemType x)</span> {<br>    <span class="hljs-comment">/* 哨兵 */</span><br>    t.data[<span class="hljs-number">0</span>] = x;<br>    <span class="hljs-type">int</span> i;<br>    <span class="hljs-keyword">for</span> ( i = t.len; x != t.data[i]; i-- );<br>    <span class="hljs-keyword">return</span> i;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>等概率的情况。</p>
+<p>成功：<span class="math inline">\(ASL_{成功} = (n+1)/2 = O(n)；\)</span></p>
+<p>失败：<span class="math inline">\(ASL_{失败} = (n+1) = O(n)\)</span>（存在失败每个元素比较n+1次，1为与哨兵的比较）；也可以优化为<span class="math inline">\(ASL_{失败} = (1+2+...+n+n) / (n+1)\)</span>。</p>
+<h3 id="折半查找">折半查找</h3>
+<p>适合于<strong>静态查找</strong>（即不涉及插入删除数据）</p>
+<p>查找判定树。下图摘自王道考研ppt。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-7.png" srcset="/img/loading.gif" lazyload style="zoom:33%;"></p>
+<p>如上图所示的查找判定树。mid向下取整，是右撇类型，即同一层中，先有右孩子，并自右向左添加。再添左孩子，同时也是自右向左添加。</p>
+<p>构造方式很简单，就是自顶向下，每次取中作为根结点，分成左右两个集合。那么当集合中只有2个元素，由于向下取整，小的为根，大的就是叶子了。</p>
+<p><span class="math inline">\(ASL_{成功}=(1*1+2*2+3*4+4*4)/11=3\)</span>，分子=<span class="math inline">\(\sum\)</span>每个结点的高度，分母=绿色结点数=11，</p>
+<p><span class="math inline">\(ASL_{失败}=(3*4+4*8)/12=11/3\)</span>，分子=<span class="math inline">\(\sum\)</span><strong>每个空指针所在结点的高度</strong>，分母=空指针数=12。</p>
+<p>对于<span class="math inline">\(mid=\lfloor (l+r)/2 \rfloor\)</span>的计算方式来说，其查找判定数的右子树结点数-左子树结点数=0或1。</p>
+<p>只有最后一层的结点数是不满的，该性质与完全二叉树相同。</p>
+<p>查找效率<span class="math inline">\(O(log_2n)\)</span>。</p>
+<figure class="highlight c"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-type">int</span> <span class="hljs-title function_">binSearch</span><span class="hljs-params">(table t, ElemType x)</span> {<br>	<span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, t = t.len - <span class="hljs-number">1</span>;<br>	<span class="hljs-type">int</span> mid;<br>	<span class="hljs-keyword">while</span> (l &lt;= r) {<br>		mid = (l + r) / <span class="hljs-number">2</span>;<br>        <span class="hljs-keyword">if</span> ( x &gt; t.data[mid] )<br>            l = mid + <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ( x &lt; t.data[mid] )<br>            r = mid - <span class="hljs-number">1</span>;<br>        <span class="hljs-keyword">else</span><br>            <span class="hljs-keyword">return</span> mid;<br>	}<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>查找失败的话变量l和r分别在什么位置呢？</p>
+<p>首先在 l &gt; r 前，必然要经历 mid == l 。简单地说明一下，可设 r = l + k，可得mid = (l + r) / 2 = l + k/2。那么当l + k/2 - 1 &lt; l 或者 l + k/2 + 1 &gt; r = l + k 时，必然地，k == 1 或 0，此时mid == l。那么如果查找失败，可以肯定当(mid == l &amp;&amp; l &lt;= r)即(mid == l &amp;&amp; l +1 == r)时，t.data[l] &lt; x, t.data[r] &gt; x，那么下一步，t.data[l] &gt; x, t.data[r] &lt; x，因此最终形态是，l 指向的是<strong>第一个大于</strong> x 的数，而r指向的是<strong>最后一个小于</strong> x 的数。</p>
+<h3 id="分块查找">分块查找</h3>
+<p>也叫索引顺序查找，也属于静态查找（也可使用链接存储达到动态查找的效果）。块内无序、块间有序。如下图所示，摘自王道ppt。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-27.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p>块间可以使用顺序查找，也可以使用折半查找。块内使用顺序查找。</p>
+<p>如果块间使用折半查找，mid采用向下取整的方式，可使用折半查找中查找失败的结论，利用 l 来定位。因为查找失败的话，则说明 l 所在的位置是第一个大于 x 的数，正是 x 可能存在的块中。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-28.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p>假若将块的大小设置为固定值如上图所示（摘自王道ppt），那么有如下分析。</p>
+<p>假设都是用顺序查找的方式，<span class="math inline">\(ASL_{成功}=\frac{\sum_{i=1}^{b}\sum_{i,j=1}^s (Block_i+Elem_{i,j})}{b\times s}=\frac{b\times sum_{块内}+ s\times\sum_{i=1}^bBlock_i}{b\times s}=ASL_{块内}+ASL_{块间}\)</span>。</p>
+<p>进一步得：<span class="math inline">\(ASL_{成功}=\frac{b+1}{2}+\frac{s+1}{2}=\frac{s^2+2s+n}{2s}=\frac{s}{2}+\frac{n}{2s}+1\)</span>，利用基本不等式很快就能得到但他<span class="math inline">\(s=\sqrt{n}\)</span>时最小，且此时<span class="math inline">\(ASL_{成功}=\sqrt{n}+1\)</span>。</p>
+<p>下图摘自王道ppt。即当动态查找时，可以使用链接存储的方式。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-29.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<h3 id="二叉搜索树">二叉搜索树</h3>
+<h4 id="bst">BST</h4>
+<p>一般二叉搜索树要求不能有相同元素值。我们可以称这种元素为<strong>关键字(key)</strong>，与关键字关联的数据我们可以称为<strong>卫星数据</strong>(就像卫星一样跟着关键字)，这些数据包括左孩子、右孩子之类的指针，也可以包括与关键字相关联的<strong>记录</strong>。为了方便，以下的数据结构中，记录的数据结构暂且不考虑，因为这与查找无关。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 和普通的二叉树相同 */</span><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">BSTNode</span>{<br>    ElemType key;<br>	<span class="hljs-keyword">struct</span> <span class="hljs-title class_">BSTNode</span>* left;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">BSTNode</span>* right;    <br>}BSTNode, BST;<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li><p>查找</p>
+<p>ASL的分析与查找判定树的分析相同。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 非递归方法 */</span><br><span class="hljs-function">BSTNode* <span class="hljs-title">search</span><span class="hljs-params">(BST T, ElemType x)</span> </span>{<br>    <span class="hljs-keyword">while</span> (T &amp;&amp; x != T-&gt;data) {<br>        <span class="hljs-keyword">if</span> (x &lt; T-&gt;data) <br>            T = T-&gt;left;<br>        <span class="hljs-keyword">else</span> <br>            T = T-&gt;right;<br>    }<br>    <span class="hljs-keyword">return</span> T;<br>}<br><br><span class="hljs-comment">/* 递归方法，就硬递归，没有必要 */</span><br><span class="hljs-function">BSTNode* <span class="hljs-title">search</span><span class="hljs-params">(BST T, ElemType x)</span> </span>{<br>    <span class="hljs-keyword">if</span> (T) {<br>		<span class="hljs-keyword">if</span> (x == T-&gt;data)<br>            <span class="hljs-keyword">return</span> T;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x &lt; T-&gt;data)<br>            <span class="hljs-built_in">search</span>(T-&gt;left, x);<br>        <span class="hljs-keyword">else</span> <br>            <span class="hljs-built_in">search</span>(T-&gt;right, x);<br>    }<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>}<br></code></pre></td></tr></tbody></table></figure></li>
+<li><p>插入</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 非递归方法 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(BST T, ElemType x)</span> </span>{<br>    BST pre;<br>    <span class="hljs-keyword">while</span> (T) {<br>        pre = T;<br>        <span class="hljs-keyword">if</span> (x == T-&gt;data)<br>        	<span class="hljs-keyword">throw</span> <span class="hljs-string">"插入失败"</span>;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x &gt; T-&gt;data)<br>            T = T-&gt;left;<br>        <span class="hljs-keyword">else</span> <br>            T = T-&gt;right;<br>    }<br>    <br>    BST node = <span class="hljs-keyword">new</span> BSTNode;<br>    node-&gt;data = x;<br>    node-&gt;left = node-&gt;right = <span class="hljs-literal">NULL</span>;<br>    <br>    <span class="hljs-keyword">if</span> (pre-&gt;left == <span class="hljs-literal">NULL</span>)<br>        pre-&gt;left = node;<br>    <span class="hljs-keyword">else</span><br>        pre-&gt;right = node;<br>}<br><br><span class="hljs-comment">/* 递归方法 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(BST&amp; T, ElemType x)</span> </span>{<br>    <span class="hljs-keyword">if</span> (T) {<br>		<span class="hljs-keyword">if</span> (x == T-&gt;data)<br>            <span class="hljs-keyword">throw</span> <span class="hljs-string">"插入失败"</span>;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x &lt; T-&gt;data)<br>            <span class="hljs-built_in">insert</span>(T-&gt;left, x);<br>        <span class="hljs-keyword">else</span> <br>            <span class="hljs-built_in">insert</span>(T-&gt;right, x);<br>    }<br>    <span class="hljs-keyword">else</span> {<br>        <span class="hljs-comment">/* 注意这里是传引用，所以传进来的就是那存储NULL的地址，而不是NULL本身 */</span><br>        T = <span class="hljs-keyword">new</span> BSTNode;<br>        T-&gt;data = x;<br>        T-&gt;left = T-&gt;right = <span class="hljs-literal">NULL</span>;<br>    }<br>}<br><br><span class="hljs-comment">/* 二叉树的构造，不断地插入 */</span><br><br></code></pre></td></tr></tbody></table></figure></li>
+<li><p>删除</p>
+<p>寻找该结点中序遍历的前驱或后继进行替代。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 非递归方法 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">remove</span><span class="hljs-params">(BST T, ElemType x)</span> </span>{<br>    <span class="hljs-keyword">while</span> (!T &amp;&amp; T.data != x) {<br>        <span class="hljs-keyword">if</span> (x &lt; T.data)<br>            T = T-&gt;left;<br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x &gt; T.data)<br>            T = T-&gt;right;<br>    } <br>    <span class="hljs-keyword">if</span> (T) {<br>        <span class="hljs-comment">/* 2种方法，一种是往左找最右的结点，一种是往右找最左的结点 */</span><br>        <span class="hljs-comment">/* 第一种 */</span><br>        <span class="hljs-comment">/* 写的不太对，有空再改 */</span><br>        BST* ptr = &amp;(T-&gt;left);<br>        <span class="hljs-keyword">if</span> (*ptr){<br>        <span class="hljs-keyword">while</span> ((*ptr) &amp;&amp; (*ptr)-&gt;right) <br>            ptr = &amp;((*ptr)-&gt;right);<br>        BST tmp = (*ptr);<br>        (*ptr) = (*ptr)-&gt;left; <br>        T-&gt;data = tmp-&gt;dat<br>        <span class="hljs-keyword">delete</span> tmp;<br>        <span class="hljs-comment">/* 第二种略 */</span><br>    }<br>    <span class="hljs-keyword">else</span> {<br>        <span class="hljs-keyword">throw</span> <span class="hljs-string">"该元素不存在"</span>;<br>    }<br>}<br><br><span class="hljs-comment">/* 删除 递归写法 */</span><br><br><span class="hljs-function">BST <span class="hljs-title">mostRightNode</span><span class="hljs-params">(BST p)</span></span>{<br>    <span class="hljs-keyword">while</span> (p-&gt;right)<br>        p = p-&gt;right;<br>    <span class="hljs-keyword">return</span> p;<br>}<br><br><span class="hljs-function">BST <span class="hljs-title">remove</span><span class="hljs-params">(BST T, ElemType x)</span> </span>{<br>    <span class="hljs-type">int</span> tmp;<br>    <span class="hljs-keyword">if</span> (!T)<br>        <span class="hljs-keyword">throw</span> <span class="hljs-string">"没有该元素"</span>;<br>    <span class="hljs-keyword">if</span> (x &lt; BST-&gt;data)<br>        T-&gt;left = <span class="hljs-built_in">remove</span>(BST-&gt;left, x);<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x &gt; BST-&gt;data)<br>        T-&gt;right = <span class="hljs-built_in">remove</span>(BST-&gt;right, x);<br>    <span class="hljs-keyword">else</span>{<br>        <span class="hljs-keyword">if</span> (BST-&gt;left &amp;&amp; BST-&gt;right) {<br>            BST tmp = <span class="hljs-built_in">mostRightNode</span>(BST-&gt;left);<br>            T-&gt;data = tmp-&gt;data;<br>            T-&gt;left = <span class="hljs-built_in">remove</span>(T-&gt;left, T-&gt;data)<br>        }<br>        <span class="hljs-keyword">else</span> {<br>            BST tmp = T;<br>            <span class="hljs-keyword">if</span> (!T-&gt;left)<br>                T = T-&gt;right;<br>            <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (T-&gt;right)<br>                T = T-&gt;left;<br>            <span class="hljs-keyword">delete</span> tmp;<br>        }<br>    }<br>    <span class="hljs-keyword">return</span> T;<br>}<br></code></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h4 id="avl">AVL</h4>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">AVLNode</span>{<br>    ElemType data; 		<span class="hljs-comment">/* 结点数据 */</span><br>    AVLNode* left;     	<span class="hljs-comment">/* 指向左子树 */</span><br>    AVLNode* right;    	<span class="hljs-comment">/* 指向右子树 */</span><br>    <span class="hljs-type">int</span> height;       	<span class="hljs-comment">/* 树高 */</span><br>}AVLNode, *AVLTree;<br></code></pre></td></tr></tbody></table></figure>
+<p>平衡二叉树，任意结点的左子树和右子树高度不超过1。</p>
+<p>结点的平衡因子=左子树高度-右子树高度。下图摘自浙大数据结构mooc，有趣的证明。以及下面的高度是从0开始的，我们使用的是<strong>从1开始</strong>，这点要注意。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-8.png" srcset="/img/loading.gif" lazyload style="zoom:33%;"></p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-9.png" srcset="/img/loading.gif" lazyload style="zoom:33%;"></p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 更新树高 */</span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getMax</span><span class="hljs-params">(<span class="hljs-type">int</span> a, <span class="hljs-type">int</span> b)</span> </span>{<br>    <span class="hljs-keyword">return</span> a &gt; b ? a : b;<br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">getHeight</span><span class="hljs-params">(AVLTree T)</span> </span>{<br>    <span class="hljs-keyword">if</span> (!T)<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">else</span><br>    	<span class="hljs-keyword">return</span> <span class="hljs-number">1</span> + <span class="hljs-built_in">getMax</span>(<span class="hljs-built_in">getHeight</span>(T-&gt;left), <span class="hljs-built_in">getHeight</span>(T-&gt;right));<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>4种调整方式：LL(左孩子的左子树中插入导致不平衡)、RR、LR、RL。下图摘自浙大mooc。关于左右单旋的说法：采用《算法导论》中的说法，LL采取的方法是右旋，RR采用的是左旋；LR则是左、右旋，RL是右、左旋。这与mooc上的说法正好相反，但实际操作是相同的。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-10.png" srcset="/img/loading.gif" lazyload style="zoom:33%;"></p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-11.png" srcset="/img/loading.gif" lazyload style="zoom:33%;"></p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-12.png" srcset="/img/loading.gif" lazyload style="zoom:33%;"></p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-13.png" srcset="/img/loading.gif" lazyload style="zoom:33%;"></p>
+<ul>
+<li><p>插入</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 采用递归的写法 */</span><br><span class="hljs-function">AVLTree <span class="hljs-title">rightRotate</span><span class="hljs-params">(AVLTree T)</span> </span>{<br>    AVLTree Tl = T-&gt;left;<br>    T-&gt;left = Tl-&gt;right;<br>    Tl-&gt;right = T;<br>    T-&gt;height = <span class="hljs-built_in">getHeight</span>(T);<br>    Tl-&gt;height = <span class="hljs-built_in">getHeight</span>(Tl);<br>    <span class="hljs-keyword">return</span> Tl;<br>}<br><br><span class="hljs-function">AVLTree <span class="hljs-title">leftRotate</span><span class="hljs-params">(AVLTree T)</span> </span>{<br>    AVLTree Tr = T-&gt;right;<br>    T-&gt;right = Tr-&gt;left;<br>    Tr-&gt;left = T;<br>    T-&gt;height = <span class="hljs-built_in">getHeight</span>(T);<br>    Tr-&gt;height = <span class="hljs-built_in">getHeight</span>(Tr);<br>    <span class="hljs-keyword">return</span> Tr;<br>}<br><br><span class="hljs-function">AVLTree <span class="hljs-title">leftRightRotate</span><span class="hljs-params">(AVLTree T)</span> </span>{<br>	A-&gt;left = <span class="hljs-built_in">leftRotate</span>(A-&gt;left);<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">rightRotate</span>(A);<br>}<br><br><span class="hljs-function">AVLTree <span class="hljs-title">rightLeftRotate</span><span class="hljs-params">(AVLTree T)</span> </span>{<br>	A-&gt;right = <span class="hljs-built_in">rightRotate</span>(A-&gt;right);<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">leftRotate</span>(A);<br>}<br><br><span class="hljs-function">AVLTree <span class="hljs-title">insert</span><span class="hljs-params">(AVLTree T, ElemType x)</span> </span>{<br>    <span class="hljs-keyword">if</span> (!T){<br>        AVLTree T = <span class="hljs-keyword">new</span> AVLNode;<br>        T-&gt;data = x;<br>        T-&gt;left = T-&gt;right = <span class="hljs-literal">NULL</span>;<br>    }<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x &lt; T-&gt;data) {<br>        <span class="hljs-comment">/* 先插进去 */</span><br>        T = <span class="hljs-built_in">insert</span> (T-&gt;left, x);<br>        <span class="hljs-comment">/* 插完后发现，不平衡，进行LL或LR */</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">getHeight</span>(T-&gt;left) - <span class="hljs-built_in">getHeight</span>(T-&gt;right) == <span class="hljs-number">2</span>){<br>            <span class="hljs-keyword">if</span> (x &lt; x-&gt;left-&gt;data)<br>                <span class="hljs-comment">/* LL 右旋 */</span><br>                <span class="hljs-built_in">rightRotate</span>(T);<br>            <span class="hljs-keyword">else</span> <br>                <span class="hljs-built_in">leftRightRotate</span>(T);<br>        }<br>    }<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (x &gt; T-&gt;data) {<br>        <span class="hljs-comment">/* 先插进去 */</span><br>        T = <span class="hljs-built_in">insert</span> (T-&gt;left, x);<br>        <span class="hljs-comment">/* 插完后发现，不平衡，进行RR或RL */</span><br>        <span class="hljs-keyword">if</span> (<span class="hljs-built_in">getHeight</span>(T-&gt;left) - <span class="hljs-built_in">getHeight</span>(T-&gt;right) == <span class="hljs-number">-2</span>){<br>            <span class="hljs-keyword">if</span> (x &gt; x-&gt;right-&gt;data)<br>                <span class="hljs-built_in">leftRotate</span>(T);<br>            <span class="hljs-keyword">else</span> <br>                <span class="hljs-built_in">rightLeftRotate</span>(T);<br>        }        <br>    }<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">throw</span> <span class="hljs-string">"存在该元素"</span>;<br>    T-&gt;Height = <span class="hljs-built_in">getHeight</span>(T);<br>    <br>    <span class="hljs-keyword">return</span> T;<br>}<br></code></pre></td></tr></tbody></table></figure></li>
+<li><p>删除</p>
+<ul>
+<li>如普通BST相同的方法，先进行删除</li>
+<li>从删除的结点向上，找到最小的不平衡子树</li>
+<li>找到最高的儿子，再找到儿子的最高儿子（即最高孙子）。</li>
+<li>最高的儿子-最高的孙子构成LL, LR, RR, RL这4种可能，利用上述规律进行调整。</li>
+<li>继续往上找最小的不平衡子树，重复操作。</li>
+</ul></li>
+</ul>
+<h4 id="红黑树">红黑树</h4>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">struct</span> <span class="hljs-title class_">RBTNode</span>{<br>	ElemType data;<br>	RBTNode* parent;<br>	RBTNode* left;<br>	RBTNode* right;<br>	<span class="hljs-type">int</span> color;			<span class="hljs-comment">// 结点的颜色，0/1表示红黑</span><br>};<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">RedBlackTree</span> {<br><span class="hljs-keyword">private</span>:<br>    RBTNode* root;<br>    <span class="hljs-type">static</span> RBTNode* NIL;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">RedBlcakTree</span>();<br>    ~<span class="hljs-built_in">RedBlackTree</span>();<br>    <span class="hljs-built_in">insert</span>(ElemType x);<br>    <span class="hljs-built_in">remove</span>(ElemType x);<br>};<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>定义
+<ul>
+<li>它首先是一棵二叉排序树</li>
+<li>根节点和叶结点是黑色的</li>
+<li>叶结点是NULL结点，或叫外部结点（对应的，非空结点为<strong>内部节点</strong>）</li>
+<li>不存在2个相邻的红色结点</li>
+<li>任一结点到叶结点的路径上，所经过的黑结点的数量（<strong>黑高</strong>，不包含该结点）是相同的。</li>
+</ul></li>
+</ul>
+<p>下图摘自《算法导论》，图(a)即为一棵红黑树，在实际编程中，为了方便同时节省空间，我们会用一个统一的哨兵来表示外部结点，如图(b)所示。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-14.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;"></p>
+<ul>
+<li><p>性质</p>
+<ul>
+<li><p>一棵有<span class="math inline">\(n\)</span>个内部结点的红黑树的高度至多为<span class="math inline">\(2log_2(n+1)\)</span>。</p>
+<ul>
+<li>小小地证明一下，首先需要知道的一个结论，对于黑高为<span class="math inline">\(h\)</span>的树，其结点数最少为<span class="math inline">\(2^h-1\)</span>。其原因是显然的，为了是在黑高为一定时，应当使黑色结点尽量多，红色结点尽量少，即没有红色结点。而当全部为黑色结点时，其必然是一棵满二叉树（也是显然的），其内部结点的高度为<span class="math inline">\(h-1+1=h\)</span>，根据满二叉树的性质，结点数量为<span class="math inline">\(2^h-1\)</span>。</li>
+<li>又由于没有2个相邻的红色结点，根节点又是黑色。因此对于高度为<span class="math inline">\(h\)</span>的红黑树，其黑高至少为<span class="math inline">\(h/2\)</span>，因此<span class="math inline">\(n\ge 2^{\frac{h}{2}}-1\)</span>，因此<span class="math inline">\(h\le 2log_2(n+1)\)</span>，证毕。</li>
+<li>由此可见，红黑树是一棵不错的搜索二叉树，因为其搜索的效率为<span class="math inline">\(O(log_2n)\)</span>。</li>
+</ul></li>
+<li><p>任意结点到NIL结点的最长路径不超过最短路径的2倍。该定理不需要证明，下图一目了然。也可以说，任意结点的左右子树高度之差不超过2倍。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-34.png" srcset="/img/loading.gif" lazyload style="zoom: 25%;"></p></li>
+</ul></li>
+<li><p>插入</p>
+<p>首先考虑插入结点之后会破坏红黑树的哪些性质。答案是仅有“不存在相邻2个红结点”这一性质会受到破坏（显然）。那么只需当插入的结点与父结点同为红色时，才需要进行调整。为了简化过程，<strong>以下仅考虑父亲为祖父左孩子的情况，另一种情况同理可得</strong>。而该情况调整又可分为以下情况。</p>
+<ul>
+<li><p>如果插入结点的叔叔是红色：如下图所示，以插入到左孩子为例。那么为了保持“不存在相邻2个红结点”这一性质，自然地能想到将父亲改为黑色。而又为了保证“树高相同”性质，叔叔也得染成黑色。这样虽然能保持结点C的左右子树树高相同，但C的父结点则又被破坏了（因为多了1），为了抵消，自然应当将C改为红色。值得注意的是，这样的更改是递归的，一直改到根节点，但我们知道，根节点没有父结点，且必须为黑色，因此<strong>对于根节点应当保持黑色</strong>。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-16.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;"></p></li>
+<li><p>如果插入结点的叔叔是黑色或者不存在，又分为</p>
+<ul>
+<li>自己是父亲的左孩子，与AVL的LL调整方式一样，即使用右旋，如【图(c)-&gt;图(d)】过程。然后，我们需要考虑的是，如何对结点重新着色，为了保持左右子树的黑高相等，原本的根节点需要转换为红色，而为了向上保持平衡，有变红就有变黑，旋转后的根节点变黑即可。</li>
+<li>自己是孩子的右节点，与AVL的LL调整方式一样，即使用左右旋。对根节点的左孩子进行左旋操作，接下来就是上一种情况了。总的过程如【图(b)-&gt;图(d)】所示。</li>
+</ul>
+<p><img src="http://imagehost.vitaminz-image.top/DS-17.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;"></p></li>
+</ul></li>
+<li><p>删除</p>
+<p>不考？？</p></li>
+</ul>
+<h3 id="b树和b树">B树和B+树</h3>
+<h4 id="b树">B树</h4>
+<p>磁盘、数据库中常常使用的数据结构。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">BTreeNode</span>{<br>    ElemType key[m<span class="hljs-number">-1</span>];<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">BtreeNode</span> *parent;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">BTreeNode</span> *child[m];		<br>    <span class="hljs-type">int</span> key_num;						<span class="hljs-comment">// 记录实际存储的孩子个数</span><br>}; <span class="hljs-comment">// m阶查找树</span><br></code></pre></td></tr></tbody></table></figure>
+<p>下图摘自王道考研ppt。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-18.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<ul>
+<li><p>定义</p>
+<ul>
+<li>若为m阶B树，则每个结点最多有m个孩子，关键字的个数比孩子的个数少1，除根结点（因为如果只有一个数据，则不可能做到）以外最少有<span class="math inline">\(\lceil m/2\rceil\)</span>个孩子，注意关键字的数量是<span class="math inline">\(\lceil m/2\rceil-1\ne \lfloor m/2\rfloor\)</span>。孩子数量的下限是为了保证树高不宜过高。</li>
+<li>每个结点内部数据是有序排放的。</li>
+<li>叶子结点、终端节点如上图所示。</li>
+</ul></li>
+<li><p>性质</p>
+<ul>
+<li><p>树高的上下限：计算方法 <span class="math inline">\(n=\sum 结点*关键字个数\)</span></p>
+<ul>
+<li><p>上限：设<span class="math inline">\(t=\lceil m/2 \rceil\)</span> ，上限即每层结点数最少。</p>
+<p>则有<span class="math inline">\(n\ge 1*1+(t-1)*(2+2t+2t^2+...+2t^{h-1})\)</span>，</p>
+<p>即<span class="math inline">\(n\ge 2t^{h-1}-1\)</span>。</p>
+<p>则<span class="math inline">\(h\le log_t (\frac{n+1}{2})+1\)</span></p></li>
+<li><p>下限：就是一个满m叉树</p>
+<p><span class="math inline">\(n\le \frac{m^h-1}{m-1}*(m-1)=m^h-1\)</span>，</p>
+<p>则<span class="math inline">\(h\ge log_m(n+1)\)</span></p></li>
+</ul></li>
+<li><p>若所有关键字的数量为<span class="math inline">\(n\)</span>，则叶结点的数量为<span class="math inline">\(n+1\)</span>。</p>
+<ul>
+<li>当<span class="math inline">\(i&gt;1\)</span>时，<span class="math inline">\(第i层的孩子数=第i层的关键字数+结点数\)</span>，而<span class="math inline">\(第i层的结点数=第i-1层的孩子数\)</span>。则可得<span class="math inline">\(第i层的孩子数=第i层的关键字数+第i-1层的孩子数\)</span>。</li>
+<li>当<span class="math inline">\(i=1\)</span>时，则可得<span class="math inline">\(第i层的孩子数=第i层的关键字数+1\)</span>。</li>
+<li>因此<span class="math inline">\(第j层的孩子数=\sum_{i=1}^{i=j}{第i层关键字数+1}\)</span>。</li>
+<li>根据以上结论，显然可得叶子结点为<span class="math inline">\(n+1\)</span>。</li>
+</ul></li>
+</ul></li>
+<li><p>搜索</p>
+<p>结点内有序排放，固既可以用顺序查找（有序版），也可以使用二分查找。以下为顺序查找版本的伪码。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 顺序查找，递归，伪码 */</span><br><span class="hljs-function">Btree <span class="hljs-title">search</span><span class="hljs-params">(Btree T, ElemType x)</span> </span>{<br>    <span class="hljs-keyword">if</span> (T){<br>        <span class="hljs-type">int</span> i;<br>        <span class="hljs-comment">/* 找到第一个比它小或相等的数 */</span><br>        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; T-&gt;key_num &amp;&amp; x &gt; T-&gt;key[i] ; i++);<br>        <span class="hljs-keyword">if</span> (i &lt; T-&gt;key_num &amp;&amp; x == T-&gt;key[i])<br>            <span class="hljs-keyword">return</span> T;<br>        <span class="hljs-keyword">else</span><br>            <span class="hljs-keyword">return</span> <span class="hljs-built_in">search</span>(T-&gt;child[i], x);<br>	}<br>    <span class="hljs-keyword">else</span><br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">NULL</span>;<br>}<br></code></pre></td></tr></tbody></table></figure></li>
+<li><p>插入</p>
+<p>所有的关键字（如果树中不存在的话）<strong>插入都应插入在终端结点中</strong>。对应的为查找失败的情况。下入摘自王道考研ppt。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-22.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p>为了保证B树的特性，我们首先向根结点逐个插入数据，一旦满了就执行分裂。如下图所示。下图摘自《算法导论》。这是根节点的情况。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-20.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p>如果是非根结点，则如下图所示。<strong>取中、上提、分两边</strong>。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-21.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;"></p>
+<p>这种分裂，显然是向上递归进行的。</p>
+<p>一个连续的过程如下（摘自《算法导论》）。有点<strong>小问题</strong>：如图（d）所示，插入L时，从根结点出发，发现根结点是满的，则分裂。但实际上，L的插入并不会使根结点溢出。而<em>王道</em>的网课中，则是每次插入后查看有没有溢出，溢出则进行分裂。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-23.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p></li>
+<li><p>删除</p>
+<p>如果被删除的结点为非终端结点，则于BST相同，利用该结点的前驱或后继代替。然后再删除前驱或者后继。由于前驱和后继必定处于终端结点，因此非终端结点的删除又可以转化为终端结点的删除。<strong>以下只需讨论终端结点的删除。</strong></p>
+<p>如果删除关键字后，依旧<span class="math inline">\(\lceil m/2\rceil -1\)</span>的数量下限，则直接删除，并注意移位处理。如下图（b）情况。摘自《算法导论》。</p>
+<p>如果删除关键字后，不满足则（下图摘自王道书）</p>
+<ul>
+<li>相邻兄弟是否可以移动一个元素给他，若可以则顺势移动</li>
+<li>若不够则合并</li>
+</ul>
+<p><img src="http://imagehost.vitaminz-image.top/DS-31.png" srcset="/img/loading.gif" lazyload style="zoom: 25%;"></p></li>
+</ul>
+<h4 id="b树-1">B+树</h4>
+<p><img src="http://imagehost.vitaminz-image.top/DS-19.png" srcset="/img/loading.gif" lazyload style="zoom: 40%;"></p>
+<p>主要明确B+树与B树之间的区别即可。如下图所示，摘自王道ppt。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-30.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<h3 id="散列查找">散列查找</h3>
+<p>基本思想：设计对象到位置的映射（哈希函数，不一定是一一映射，因此可能产生<strong>冲突</strong>）。2个关键词：<strong>哈希函数、冲突</strong></p>
+<ul>
+<li><p>常用的哈希函数</p>
+<ul>
+<li>直接定址法：<span class="math inline">\(h(key)=a\times key+b\)</span></li>
+<li>除留余数法：<span class="math inline">\(h(key)=key \mod p\)</span>，<span class="math inline">\(p\)</span>都是素数。之所以取素数</li>
+<li>数字分析法：取比较随机的位作为散列地址。比如手机号的后四位、身份证号的特定位组合</li>
+<li>折叠法：如对数字拆成几部分然后相加</li>
+<li>平方取中法：平方数取中间几位，该方法上面2种的目的都是希望充分利用数字的各位信息</li>
+<li>ascii码相加法：并不是很理想，如字母位置不同。改进：移位法</li>
+</ul></li>
+<li><p>常见的冲突处理</p>
+<ul>
+<li><p>开放地址法</p>
+<p>注意开放地址法使用<strong>懒惰删除</strong>，并未实际释放存储空间。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">Cell</span>{<br>    <span class="hljs-type">int</span> empty;			<span class="hljs-comment">// 存在位</span><br>    ElemType data;<br>};<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">Hash</span> {<br>    <span class="hljs-type">int</span> size;<br>    Cell * elem;<br>}Hash, * HashTable;<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li><p>线性探测：冲突后，偏移量<span class="math inline">\(\Delta_i=i\)</span>，缺陷：<strong>聚集现象</strong>。ASL分析：<span class="math inline">\(ASL_{失败}\)</span>可以利用哈希值的所有可能值进行分类，分别求其比较次数再取平均。</p></li>
+<li><p>平方探测：冲突后，偏移量<span class="math inline">\(\Delta_i= \pm i^2\)</span>，缺陷：<strong>可能找不到空闲，但可以避免：只要表长是某个4k+3形式的素数，平方探测就可以探查到整个表</strong>。</p></li>
+<li><p>双散列：再设计一个哈希函数，<span class="math inline">\(\Delta_i= i*h_2(key)\)</span>。较好的<span class="math inline">\(h_2\)</span>设计：<span class="math inline">\(h_2(key)=p-(key \mod p)\)</span>，<span class="math inline">\(p\)</span>和表长都是素数。</p></li>
+<li><p>再散列：扩大散列表。如当装填因子<span class="math inline">\(0.5\le\alpha\le0.85\)</span>的范围左右，可能就要重新设计散列表。扩大散列表后，并不是直接把原来的数复制进去，而是要进行重新的散列计算装填到新的散列表中。</p></li>
+</ul></li>
+<li><p>分离链接法（王道中叫拉链法）</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">ListNode</span> {<br>    ElemType data;<br>    <span class="hljs-keyword">struct</span> <span class="hljs-title class_">ListNode</span>* next;<br>}ListNode, *List;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">Hash</span> {<br>    <span class="hljs-type">int</span> size;<br>    List list;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>王道中的小优化。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-26.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p></li>
+</ul></li>
+<li><p>性能评估</p>
+<ul>
+<li><p>评估指标</p>
+<ul>
+<li><p>查找效率ASL</p>
+<p><span class="math inline">\(ASL_{成功}=\sum{已装填元素查找次数}/元素个数\)</span></p>
+<p><span class="math inline">\(ASL_{失败}=\sum{所有可能的哈希值在找不到的情况下查找次数}/哈希值取值数量\)</span></p></li>
+<li><p>存储效率</p>
+<p>暂时没有找到这个定义，不过根据浙大mooc推测，开放地址法的存储效率比链地址法要高，好像就跟顺序存储和链接存储有关。</p></li>
+</ul></li>
+<li><p>影响因素</p>
+<ul>
+<li><p>装填因子<span class="math inline">\(\alpha\)</span>：散列表的空间为m，实际装入散列表为n。装填因子为m/n。装填因子越大，冲突越多，在超过一定大小的装填因子后，冲突数量可能急剧上升。因此散列查找可以视作一种<strong>空间换时间</strong>的查找手段。</p></li>
+<li><p>散列函数是否均匀</p></li>
+<li><p>冲突处理的方法</p></li>
+</ul></li>
+<li><p>各种冲突处理方法与装填因子的ASL期望值（考试应该会给）</p>
+<ul>
+<li>线性探测法：<span class="math inline">\(ASL_{成功}=\frac{1}{2}(1+\frac{1}{1-\alpha}), ASL_{失败}=\frac{1}{2}(1+\frac{1}{(1-\alpha)^2})\)</span></li>
+<li>平方探测与双散列探测：<span class="math inline">\(ASL_{成功}=-\frac{1}{\alpha}\ln(1-\alpha) , ASL_{失败}=\frac{1}{1-\alpha}\)</span></li>
+<li>分离链接：<span class="math inline">\(ASL_{成功}=1+\frac{\alpha}{2} , ASL_{失败}=\alpha+e^{-\alpha}\)</span></li>
+</ul>
+<p>下图来看的话再0.5之前没有什么区别，而后的差距急剧上升，线性探测平均要劣于双散列与平方探测。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-32.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;"></p></li>
+</ul></li>
+</ul>
+<h2 id="图">图</h2>
+<h3 id="概念-1">概念</h3>
+<ul>
+<li><p>定义</p>
+<ul>
+<li><strong>非空</strong>顶点集合V和有限边集合E组成。</li>
+</ul></li>
+<li><p>类型</p>
+<ul>
+<li>有向图、无向图。带权图（网络）</li>
+</ul></li>
+<li><p>子图</p>
+<ul>
+<li><span class="math inline">\(V'\sube V,E'\sube E\)</span>，子图前提得是图，边须有顶点关联</li>
+<li>生成子图：<span class="math inline">\(V'=V\)</span>时。</li>
+</ul></li>
+<li><p>完全图</p>
+<ul>
+<li>无向图：n个点，n(n-1)/2条边</li>
+<li>有向图：n个点，n(n-1)条边</li>
+</ul></li>
+<li><p>路径</p>
+<ul>
+<li>顶点构成的序列，且顶点间需要有边关联</li>
+<li>简单路径：顶点不重复出现</li>
+<li>简单回路：除起点的顶点不重复出现</li>
+</ul></li>
+<li><p>连通性</p>
+<ul>
+<li><p>连通：2个点存在一条路径</p></li>
+<li><p>连通图：任意两个点连通</p></li>
+<li><p>连通分量：无向图的<strong>极大</strong>连通子图【极大体现在加一个顶点就不连通了，子图种所有顶点相连的边】</p></li>
+<li><p>强连通：2个顶点存在双向路径</p></li>
+<li><p>强连通图：任意两个顶点都是强连通</p></li>
+<li><p>强连通分量：有向图的极大强连通子图</p></li>
+</ul></li>
+</ul>
+<h3 id="表示法">表示法</h3>
+<p>图有多种存储方式，而不同的存储方式效率会有所不同，因此下述有关图的算法都使用伪代码来表示，屏蔽了图在存储结构不同时所带来的区别。</p>
+<ul>
+<li><p>邻接矩阵</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">GNode</span>{<br>    <span class="hljs-type">int</span> Nv;			<span class="hljs-comment">// 顶点数</span><br>    <span class="hljs-type">int</span> Ne;			<span class="hljs-comment">// 边数</span><br>	WeightType Graph[MaxVertexNum][MaxVertexNum];<br>    DataType Data[MaxVertexNum];<br>}GNode, *MGraph;<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-type">int</span> Vertex;<br><br><span class="hljs-function">MGraph <span class="hljs-title">initGraph</span><span class="hljs-params">(<span class="hljs-type">int</span> VertexNum)</span> </span>{<br>    MGraph G;<br>    G = (MGraph)<span class="hljs-built_in">malloc</span>(<span class="hljs-built_in">sizeof</span>(<span class="hljs-keyword">struct</span> GNode));<br>    G-&gt;Nv = VertexNum;<br>    G-&gt;Ne = <span class="hljs-number">0</span>;<br>    <br>    Vertex V, W;<br>    <span class="hljs-keyword">for</span> (V = <span class="hljs-number">0</span>; V &lt; G-&gt;Nv; V++) {<br>        <span class="hljs-keyword">for</span> (W = <span class="hljs-number">0</span>; W &lt; G-&gt;Nv; V++)<br>            G-&gt;Graph[V][W] = <span class="hljs-number">0</span>;<br>    }<br>    <span class="hljs-keyword">return</span> G;<br>}<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">ENode</span> {<br>    Vertex V1, V2;<br>    WeightType Weight;<br>}*Edge;<br><br><span class="hljs-function">MGraph <span class="hljs-title">insertEdge</span><span class="hljs-params">(MGraph G, Edge E)</span> </span>{<br>	G-&gt;Graph[E-&gt;V1][E-&gt;V2] = E-&gt;Weight;<br>    G-&gt;Graph[E-&gt;V2][E-&gt;V1] = E-&gt;Weight;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>无向图可用三角矩阵，构建原矩阵索引到物理存储数组的映射</li>
+<li>邻接结点、度</li>
+<li>空间复杂度<span class="math inline">\(O(|V|^2)\)</span></li>
+</ul></li>
+<li><p>邻接表</p>
+<p>下图摘自王道ppt</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-47.png" srcset="/img/loading.gif" lazyload style="zoom: 40%;"></p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">typedef</span> AdjVNode * PtrAdjVNode;<br><span class="hljs-keyword">typedef</span> AdjVNode {<br>    Vertex AdjV;			<span class="hljs-comment">// 该结点编号</span><br>    WeightType Weight;<br>    PtrToAdjVNode Next;<br>};<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">VNode</span> {<br>    PtrToAdjVNode FirstNode;<br>    DataType data;<br>}AdjList[MaxVerTexNum];<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">GNode</span>{<br>    <span class="hljs-type">int</span> Nv;			<span class="hljs-comment">// 顶点数</span><br>    <span class="hljs-type">int</span> Ne;			<span class="hljs-comment">// 边数</span><br>	AdjList Graph;<br>}GNode, *LGraph;<br><br><br><span class="hljs-function">LGraph <span class="hljs-title">initGraph</span><span class="hljs-params">(<span class="hljs-type">int</span> VertexNum)</span> </span>{<br>    LGraph G;<br>    G = (LGraph)<span class="hljs-built_in">malloc</span>(<span class="hljs-built_in">sizeof</span>(<span class="hljs-keyword">struct</span> GNode));<br>    G-&gt;Nv = VertexNum;<br>    G-&gt;Ne = <span class="hljs-number">0</span>;<br>    <br>    Vertex V;<br>    <span class="hljs-keyword">for</span> (V = <span class="hljs-number">0</span>; V &lt; G-&gt;Nv; V++) {<br>        G-&gt;Graph[V] = <span class="hljs-literal">NULL</span>;<br>    }<br>    <span class="hljs-keyword">return</span> G;<br>}<br><br><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">struct</span> <span class="hljs-title class_">ENode</span> {<br>    Vertex V1, V2;<br>    WeightType Weight;<br>}*Edge;<br><br><span class="hljs-function">MGraph <span class="hljs-title">insertEdge</span><span class="hljs-params">(MGraph G, Edge E)</span> </span>{<br>	AdjNode* NewNode = <span class="hljs-keyword">new</span> AdjVNode;<br>    NewNode-&gt;AdjV = E-&gt;V2;<br>    NewNode-&gt;Weight = E-&gt;Weight;<br>    NewNode-&gt;Next = G-&gt;Graph[E-&gt;V1].FirstNode;<br>    G-&gt;Graph[E-&gt;V1].FirstNode = NewNode;<br>    <br>    <span class="hljs-comment">/* 如果是无向图还要反一反再插，以下省略 */</span><br>}<br><br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li>无向图：空间复杂度<span class="math inline">\(O(|V|+2|E|)\)</span></li>
+<li>有向图：空间复杂度<span class="math inline">\(O(|V|+|E|)\)</span></li>
+</ul></li>
+<li><p>此外还有十字链表法（<strong>有向图</strong>）和邻接多重结点法（<strong>无向图</strong>）</p>
+<ul>
+<li><p><strong>十字链表法</strong></p>
+<p>在存储稀疏矩阵时，有讲到过十字链表，其样式如下图所示。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-53.png" srcset="/img/loading.gif" lazyload style="zoom:33%;"></p>
+<p>以下不过是对上面的变形，边结点，是相同的，但表头指针做了合并。这是因为在图中的矩阵是个方阵，因此行列结点可以放在一个结构体里，再加上顶点可能存在一些数据（如顶点名），所有也有数据域。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-51.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;"></p>
+<p>空间复杂度<span class="math inline">\(O(|V|+|E|)\)</span></p></li>
+<li><p><strong>邻接多重表法</strong></p>
+<p>该表示方法很自由，因为一条边的关联不具有方向性，又不具有出入度之分从x，所以算是十字链表的阉割版。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-52.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;"></p>
+<p>空间复杂度<span class="math inline">\(O(|V|+|E|)\)</span></p></li>
+</ul></li>
+<li><p>比较，下图摘自王道ppt</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-46.png" srcset="/img/loading.gif" lazyload style="zoom: 40%;"></p>
+<p>不唯一性体现在链表中的次序是任意的，本质是一个顶点和每个邻接点没有顺序关系。</p></li>
+</ul>
+<h3 id="遍历-1">遍历</h3>
+<h4 id="dfs">DFS</h4>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 伪码 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">DFS</span><span class="hljs-params">(Vertix V)</span> </span>{<br>    visited[V] = <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">for</span> (V的每个邻接点W) {<br>        <span class="hljs-keyword">if</span> (!visited[W])<br>            <span class="hljs-built_in">DFS</span>(W);<br>    }<br>}<br><br><span class="hljs-comment">/* 图并非一定连通，因此考虑所有子图 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">listComponents</span> <span class="hljs-params">(Graph G)</span> </span>{<br>    <span class="hljs-keyword">for</span> (each V in G) {<br>        <span class="hljs-keyword">if</span> (!visited[V]) {<br>            <span class="hljs-built_in">DFS</span>(V);<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>邻接表：时间复杂度，<span class="math inline">\(O(|V|+|E|)\)</span>，联系树的遍历路径，就是每个顶点和边都会经过3次；空间复杂度，栈，<span class="math inline">\(O(|V|)\)</span>，最坏是<span class="math inline">\(|V|\)</span>，最好是<span class="math inline">\(1\)</span></p>
+<p>邻接矩阵：时间复杂度，<span class="math inline">\(O(|V|^2)\)</span>，对于每个点都要扫描一整行获得邻接点；空间复杂度，<span class="math inline">\(O(|V|)\)</span></p>
+<h4 id="bfs">BFS</h4>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 伪码 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">BFS</span><span class="hljs-params">(Vertix V)</span> </span>{<br>    visited[V] = <span class="hljs-literal">true</span>;<br>    <span class="hljs-built_in">enqueue</span>(V, Q);<br>    <span class="hljs-keyword">while</span> (!<span class="hljs-built_in">isempty</span>(Q)) {<br>        V = <span class="hljs-built_in">dequeue</span>(Q);<br>        <span class="hljs-keyword">for</span> (V的每个邻接结点W) {<br>            <span class="hljs-keyword">if</span> (visited[W]) {<br>                visited[W] = <span class="hljs-literal">true</span>;<br>                <span class="hljs-built_in">Enqueue</span>(W, Q);<br>            }<br>		}<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>邻接表：时间复杂度，<span class="math inline">\(O(|V|+|E|)\)</span>，联系树的层序遍历，就是每个顶点和边都会经过1次；空间复杂度，辅助队列，<span class="math inline">\(O(|V|)\)</span></p>
+<p>邻接矩阵：时间复杂度，<span class="math inline">\(O(|V|^2)\)</span>，对于每个点都要扫描一整行获得邻接点；空间复杂度，<span class="math inline">\(O(|V|)\)</span></p>
+<h3 id="应用-2">应用</h3>
+<h4 id="最短路径">最短路径</h4>
+<h5 id="单源最短路径">单源最短路径</h5>
+<ul>
+<li><p>无权图</p>
+<p>以<span class="math inline">\(V_3\)</span>为起点的起始状态如下图所示</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-35.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;"></p>
+<p>最终态如下图所示</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-36.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;"></p>
+<p>算法表示如下</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 伪码 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">getShortestPath</span><span class="hljs-params">(Vertex V)</span> </span>{<br>    <span class="hljs-comment">/* dist为最短路径 path为到该点的最短路径的上一结点</span><br><span class="hljs-comment">    通过path可以逆回去找到整条路经 它们都初始化为-1 整体框架类似于BFS */</span><br>    <span class="hljs-built_in">Enqueue</span>(V, Q);<br>    dist[V] = <span class="hljs-number">0</span>;<br>    <span class="hljs-keyword">while</span> (<span class="hljs-built_in">isEmpty</span>(Q)) {<br>        V = <span class="hljs-built_in">Dequeue</span>(Q);<br>        <span class="hljs-keyword">for</span> (V的每个邻接点W) {<br>            <span class="hljs-keyword">if</span> (dist[W] == <span class="hljs-number">-1</span>) {<br>                dist[W] = dist[V] + <span class="hljs-number">1</span>;<br>                path[W] = V;<br>                <span class="hljs-built_in">Enqueue</span>(W, Q);<br>            }<br>		}<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>它的正确性可以联系树的层序遍历。上述图案可以换个样式，如下图所示。下面的图案可以视为高度是4的“树”，而上述算法则是对下面这样的“树“进行层序遍历。之所以会是最短路径是因为，每层的任何一个结点都不可能跨过一层指向下一层结点。每个结点所在的高度就是最短路径。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-38.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;"></p>
+<p>以上是一种粗略的理解。时间复杂度为<span class="math inline">\(O(|V|+|E|)\)</span>。因为该算法就类似于一次DFS。</p></li>
+<li><p>有权图：<strong>Dijkstra 算法</strong></p>
+<p><strong>不可以有负权边</strong></p>
+<p>下面是当年学Dijkstra算法时做的笔记（二次复习可以直接略过）</p>
+<hr>
+<p>该算法基于<strong>贪心算法</strong>、动态规划、广度优先搜索的思想，基本思想可用以下语言描述：</p>
+<ul>
+<li><p><strong>结论：若已知源点<span class="math inline">\(P_0\)</span>各个点的最短距离，将这些点根据到源点<span class="math inline">\(P_0\)</span>的最短距离升序排序，则可得到有序序列<span class="math inline">\([P_1, P_2, P_3,..., P_n]\)</span>，记<span class="math inline">\(P_0\rightarrow P_k\)</span>表示<span class="math inline">\(P_0\)</span>到<span class="math inline">\(P_k\)</span>的最短距离，<span class="math inline">\(P_s\Rightarrow P_k\)</span>表示<span class="math inline">\(P_s\)</span>到<span class="math inline">\(P_k\)</span>的邻接距离，那么<span class="math inline">\(P_0\rightarrow P_k=\min\limits_{s=0,1,...,k-1}(P_0\rightarrow P_s\Rightarrow P_k)\)</span>。</strong></p>
+<ul>
+<li><p>证明如下：</p>
+<p>可采用反证法，设存在<span class="math inline">\(P_t\)</span>，使得<span class="math inline">\(P_0\rightarrow P_k = P_0\rightarrow P_t\Rightarrow P_k &lt; \min\limits_{s=0,1,..,k-1}(P_0\rightarrow P_s\Rightarrow P_k)\)</span>，且<span class="math inline">\(t&gt; k\)</span>。显然<span class="math inline">\(P_0\rightarrow P_t &lt; P_0\rightarrow P_t\Rightarrow P_k\)</span>，那么<span class="math inline">\(P_0\rightarrow P_t &lt; P_0\rightarrow P_k\)</span>，则<span class="math inline">\(t &lt; k\)</span>，这与假设矛盾，证明完毕。</p></li>
+</ul></li>
+<li><p>有了以上结论，接下来我们需要解决的如何根据上述结论的递推关系，获得序列<span class="math inline">\([P_1, P_2, P_3,..., P_n]\)</span>。</p>
+<p>根据以上结论，显然，<span class="math inline">\(P_0\rightarrow P_1 = P_0\Rightarrow P_1\)</span>。</p>
+<p>根据以上结论，我们对算法进行逐行剖析。</p>
+<p>设非源点的其他所有点构成的集合为<span class="math inline">\(V=\{Q_1,Q_2,Q_2,...,Q_n\}, P_i\in V\)</span>。那么算法中的<span class="math inline">\(Flag\)</span>数组即用来表示各个点是否在集合<span class="math inline">\(V\)</span>中。算法中的<span class="math inline">\(MinDist\)</span>，表示<span class="math inline">\(MinDist[k]=\min\limits_{j=0,1,2...,i}P_0\rightarrow P_j\Rightarrow P_k\)</span>，其中$ k=1,2,..,n$。算法可以用语言描述如下：</p>
+<p>step1：初始化，<span class="math inline">\(MinDist[k]=\min\limits_{j=0}P_0\rightarrow P_j\Rightarrow Q_k=\min P_0\Rightarrow Q_k\)</span>。<span class="math inline">\(i=0\)</span>。</p>
+<p>step2：当<span class="math inline">\(i=n\)</span>时退出程序。由于<span class="math inline">\(P_{i+1}\in V\)</span>，则<span class="math inline">\(P_{i+1}=Q_m,P_{0}\rightarrow Q_m=\min\limits_{Q_k\in V}MinDist[k]\)</span>。</p>
+<p>setp3：<span class="math inline">\(V=V-P_{i+1}\)</span>，<span class="math inline">\(MinDist[k]=\min(\min\limits_{j=0,1,2...,i}P_0\rightarrow P_j\Rightarrow Q_k,P_0\rightarrow P_{i+1}\Rightarrow Q_k)\)</span><span class="math inline">\(=\min\limits_{j=0,1,2...,i+1}P_0\rightarrow P_j\Rightarrow Q_k=\min(MinDist[k], P_0\rightarrow Q_m\Rightarrow Q_k)\)</span>。<span class="math inline">\(i=i+1\)</span>，转step2。</p></li>
+</ul>
+<hr>
+<p>虽然，上面的分析看着严谨华丽，<strong>但不便于记忆以及快速直观地理解</strong>。记住3个关键词：收录、最小、更新</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 伪码 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Dijkstra</span> <span class="hljs-params">(Vertex V)</span> </span>{<br>    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) {<br>        V = 未收录顶点中dist的最小者;<br>        <span class="hljs-keyword">if</span> (这样的V不存在)<br>            <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">for</span> (V的每个邻接点W) {<br>            <span class="hljs-keyword">if</span> (collected[W] == <span class="hljs-literal">false</span>) {<br>                <span class="hljs-keyword">if</span> (dist[V] + E[V, W] &lt; dist[W]) {<br>                    dist[W] = dist[W] + E[V, W];<br>                    path[W] = V;<br>                }<br>            }<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>时间复杂度分析：上述过程只是伪码描述，屏蔽了一些具体实现细节。根据dist的存储结构不同可以有以下2种实现</p>
+<ul>
+<li>直接扫描所有未收录顶点（较常用）
+<ul>
+<li>伪码中第4行语句“V = 未收录顶点中dist的最小者”变成一个|V|次的循环</li>
+<li>更新距离时需要扫描所有边，<span class="math inline">\(|E|\)</span>次</li>
+<li>时间复杂度是<span class="math inline">\(O(|V|^2+|E|)\)</span></li>
+<li>对稠密图效果更好</li>
+</ul></li>
+<li>dist存在最小堆中
+<ul>
+<li>伪码中第4行语句“V = 未收录顶点中dist的最小者”变成一个log|V|的时间复杂度</li>
+<li>每次更新距离的时候，需要对堆进行调整，也是log|V|的时间复杂度</li>
+<li>时间复杂度是<span class="math inline">\(O(|V|\log|V|+|E|\log|V|)=O(|E|\log|V|)\)</span>，（一般边数大于点数）</li>
+<li>对稀疏图更好</li>
+</ul></li>
+</ul></li>
+</ul>
+<h5 id="多源最短路径">多源最短路径</h5>
+<ul>
+<li><p>一种方法是调用|V|次Dijkstra算法。以常用实现方法来说，时间复杂度为<span class="math inline">\(O(|V|^3+|E|\times|V|)\)</span>，对稀疏图更好。</p></li>
+<li><p>Floyd算法</p>
+<p>可以有负权边，但不能有带负权边的回路（这是王道上说的，<strong>但我认为准确地说应该是回路权重之和是负的</strong>）。像下图所示，就没有最短路径。因为一直转圈路径会持续变小。下图摘自王道ppt。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-55.png" srcset="/img/loading.gif" lazyload style="zoom:25%;"></p>
+<p>同样运用了动态规划的思想。</p>
+<p>如果要获得<span class="math inline">\(i\rightarrow j\)</span>的最小距离<span class="math inline">\(MinDist[i\rightarrow j]\)</span>，那么假如路径上有一点<span class="math inline">\(k\)</span>，则<span class="math inline">\(MinDist[i\rightarrow j]=\min\limits_{k=1,2,...,|V|}{MinDist[i\rightarrow k]+MinDist[k\rightarrow j]}\)</span>。这是显然的，其满足最优子结构。</p>
+<p>我们可以这么去考虑，对于点<span class="math inline">\(MinDist[i\rightarrow j]\)</span>，一开始可以假设只有<span class="math inline">\(i,j\)</span>这2个结点，或者说<span class="math inline">\(i,j\)</span> 结点不能通过任何结点中转，那么它们的最短路径就是邻接距离，即<span class="math inline">\(MinDist^0[i\rightarrow j]=Dist[i\rightarrow j]\)</span>。再逐步地往里加结点。</p>
+<p>加入结点1后，即任意两个结点可以通过结点1。</p>
+<p><span class="math inline">\(MinDist^1[i\rightarrow j]=\min(\min\limits_{k=1}({MinDist^0[i\rightarrow k]+MinDist^0[k\rightarrow j]}), MinDist^0[i\rightarrow j])\)</span></p>
+<p>加入结点2后，即任意两个结点可以通过结点1、结点2。</p>
+<p><span class="math inline">\(MinDist^2[i\rightarrow j]=\min(\min\limits_{k=1,2}({MinDist^1[i\rightarrow k]+MinDist^1[k\rightarrow j]}), MinDist^1[i\rightarrow j])\)</span></p>
+<p>依次类推，得到递推式。</p>
+<p><span class="math inline">\(MinDist^{m}[i\rightarrow j]=\min(\min\limits_{k=1,2,...m}({MinDist^{m-1}[i\rightarrow k]+MinDist^{m-1}[k\rightarrow j]}), MinDist^{m-1}[i\rightarrow j])\)</span></p>
+<p>该递推式想说明的事实是，已经得到<span class="math inline">\(MinDist[i\rightarrow j]\)</span>，当加入一个结点后，那么新的最短距离<span class="math inline">\(MinDist'[i\rightarrow j]\)</span>的路径要么有新加入的结点，要么没有。<strong>如果有，那么该距离一定等于【<span class="math inline">\(i\)</span>通过原有的结点到达新结点的最短距离+新结点到达<span class="math inline">\(j\)</span>的最短距离】；如果没有，那就是原来的最短距离。</strong></p>
+<p>下图摘自王道ppt。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-54.png" srcset="/img/loading.gif" lazyload style="zoom:33%;"></p>
+<p>算法伪码如下。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 伪码 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">floyd</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; N; i++) {<br>        <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; N; j++) {<br>            dist[i][j] = graph[i][j];<br>            path[i][j] = <span class="hljs-number">-1</span>;<br>        }<br>    }<br>    <span class="hljs-keyword">for</span> (k = <span class="hljs-number">0</span>; k &lt; N; k++) {<br>        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; N; i++) {<br>            <span class="hljs-keyword">for</span> (j = <span class="hljs-number">0</span>; j &lt; N; j++) {<br>                <span class="hljs-keyword">if</span> (dist[i][k] + dist[k][j] &lt; dist[i][j]) {<br>                    dist[i][j] = dist[i][k] + dist[k][j];<br>                    path[i][j] = k;<br>                }<br>            }<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>时间复杂度为<span class="math inline">\(O(|V|^3)\)</span>。</p></li>
+</ul>
+<h4 id="最小生成树">最小生成树</h4>
+<p>对于一个带权连通<strong>无向图</strong></p>
+<p>最小生成树(<strong>M</strong>aximum <strong>S</strong>panning <strong>T</strong>ree)：无回路，<span class="math inline">\(V\)</span>个顶点<span class="math inline">\(|V|-1\)</span>条边，是原图的子集，边权之和最小。</p>
+<p>最小生成树不唯一。</p>
+<h5 id="prim算法">Prim算法</h5>
+<p>选点，从一棵小树慢慢的长大。</p>
+<p>这个算法的正确性是显然的，假如得到了一张图的最小生成树，那么若往图中新加一个结点，以及若干条与之相关联的边。那么求整张图的最小生成树，必然是在原来的最小生成树上选择一条最短的边到达新结点。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 伪码 */</span><br><span class="hljs-comment">/* dist数组用于存储整棵树所有结点到它们最近的邻接顶点的距离</span><br><span class="hljs-comment"> parent数组则用于存储树，它的存储方式采用类似于并查集的双亲表示法 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">prim</span><span class="hljs-params">(Graph G)</span> </span>{<br>    parent[s] = <span class="hljs-number">-1</span>; <span class="hljs-comment">/* MST = {S} */</span><br>    <span class="hljs-keyword">for</span> (s的每个邻接点W) {<br>        dist[W] = E[s, W];<br>        <span class="hljs-comment">/* 暂且定义所有顶点的父结点都是初始点s */</span><br>        parent[W] = s; <br>    <br>    <span class="hljs-keyword">while</span> (<span class="hljs-number">1</span>) {<br>        V = <span class="hljs-built_in">findMinDist</span>(G) 	<span class="hljs-comment">// 未收录顶点中dist的最小者;</span><br>        <span class="hljs-keyword">if</span> (这样的V不存在) <br>            <span class="hljs-keyword">break</span>;<br>        将V收录到MST中: dist[V] = <span class="hljs-number">0</span>;	<span class="hljs-comment">// 0为收录标记</span><br>        <span class="hljs-keyword">for</span> (V的每个邻接点W) {<br>            <span class="hljs-keyword">if</span> (dist[W] != <span class="hljs-number">0</span>) {<br>                <span class="hljs-keyword">if</span> (E[V, W] &lt; dist[W]) {<br>                    dist[W] = E[V, W];<br>                    parent[W] = V;<br>                }<br>            }<br>        }<br>        <span class="hljs-keyword">if</span> (MST中收的顶点不到|V|个)<br>            <span class="hljs-keyword">throw</span> <span class="hljs-string">"生成树不存在"</span>;<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>当第4行语句findMinDist使用顺序扫描的方式，则时间复杂度为<span class="math inline">\(O(|V|^2)\)</span>。</p>
+<p>适合于稠密图</p>
+<h5 id="kruskal算法">Kruskal算法</h5>
+<p>森林合并称一棵树，星星之火可以燎原</p>
+<p>这个算法的正确性同样显然。若有2个图的最小生成树，然后再将2张图的选择若干结点相连（添加边的2个点不在同一张图上），那么新图的最小生成树，必然是2个最小生成树的基础上，选择权值最小的使他们连通的边。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 伪码 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Kruskal</span> <span class="hljs-params">(Graph G)</span> </span>{<br>    MST = {};<br>    <span class="hljs-keyword">while</span> (MST中不到|V|<span class="hljs-number">-1</span>条边 &amp;&amp; E中还有边) {<br>        从E中取一条权重最小的边E[V, W];		 <span class="hljs-comment">/* 最小堆 */</span><br>        将E[V, W]从E中删除;<br>        <span class="hljs-keyword">if</span> (E[V, W]不再MST中构成回路) {		<span class="hljs-comment">/* 并查集, 由于是无向图 */</span><br>            将E[V, W]加入MST;				   <span class="hljs-comment">/* 顶点在同一个集合里就是回路 */</span><br>        }<br>        <span class="hljs-keyword">else</span>{<br>            将E[V, W]从E中删除;<br>        }<br>    }<br>    <span class="hljs-keyword">if</span> (MST中收的顶点不到 |V|<span class="hljs-number">-1</span> 条边)<br>            <span class="hljs-keyword">throw</span> <span class="hljs-string">"生成树不存在"</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>时间复杂度为<span class="math inline">\(O(|E|\log |E|)\)</span>，当<span class="math inline">\(|E|\)</span>较小时其值近似于<span class="math inline">\(|V|\)</span>，时间复杂度近似为<span class="math inline">\(O(|V|\log |V|)\)</span>。</p>
+<p>适合于稀疏图。</p>
+<h4 id="dag">DAG</h4>
+<p>DAG，即有向无环图</p>
+<h5 id="dag描述表达式">DAG描述表达式</h5>
+<p>如下图所示，就是将表达式树合并重复部分，变成一个最简的有向无环图。下图摘自王道ppt</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-49.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;"></p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-50.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;"></p>
+<p>以下是王道ppt给出的做题步骤。个人认为操作数不重复以及分层的想法可以借鉴。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-48.png" srcset="/img/loading.gif" lazyload style="zoom: 60%;"></p>
+<h5 id="aov网拓扑排序">AOV网：拓扑排序</h5>
+<p>顶点表示活动的网</p>
+<p>先修课程问题</p>
+<p>每次删除入度为0，拓扑排序不唯一。</p>
+<p>以下算法亦可以用来判断该图是否为DAG</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 伪码 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">topSort</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-keyword">for</span> (cnt = <span class="hljs-number">0</span>; cnt &lt; |V|; cnt++) {<br>        V = 未输出的入度为<span class="hljs-number">0</span>的顶点;<br>        <span class="hljs-keyword">if</span> (这样的V不存在) {<br>            <span class="hljs-keyword">throw</span> <span class="hljs-string">"图中有回路"</span>;<br>            <span class="hljs-keyword">break</span>;<br>        }<br>        输出V，或者记录V的输出序号;<br>        <span class="hljs-keyword">for</span> (V的每个邻接点W)<br>            InDegree[W]--;<br>    }<br>}<br><span class="hljs-comment">/* 细化实现 邻接表 时间复杂度为 O(|V|+|E|) */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">topSort</span><span class="hljs-params">()</span> </span>{<br>    <span class="hljs-keyword">for</span> (每个顶点V) {<br>        <span class="hljs-keyword">if</span> (InDegree[V] == <span class="hljs-number">0</span>) <br>            <span class="hljs-built_in">Enqueue</span>(V, Q);			<span class="hljs-comment">// 不一定使用队列，可以是其他容器</span><br>    }<br>    <span class="hljs-keyword">while</span> (!<span class="hljs-built_in">isempty</span>(Q)) {<br>        V = <span class="hljs-built_in">Dequeue</span>(Q);<br>        输出V，或者记录V的输出序号;<br>        v_num++;<br>        <span class="hljs-keyword">for</span> (V的每个邻接点W) {<br>            <span class="hljs-keyword">if</span> (--InDegree[W] == <span class="hljs-number">0</span>) {<br>                <span class="hljs-built_in">Enqueue</span>(W, Q);<br>            }<br>        }<br>    }<br>    <span class="hljs-comment">/* 如果出现环的话说明在没删完顶点的时候，剩余的顶点入度都不是0 */</span><br>    <span class="hljs-keyword">if</span> (v_num != |V|) {<br>        <span class="hljs-keyword">throw</span> <span class="hljs-string">"图中有回路"</span>;<br>        <span class="hljs-keyword">break</span>;<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>逆拓扑排序：每次删除出度为0，逆邻接表。</p>
+<p>使用DFS完成逆拓扑排序</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 伪码 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">DFS</span><span class="hljs-params">(Vertix V)</span> </span>{<br>    visited[V] = <span class="hljs-literal">true</span>;<br>    <span class="hljs-keyword">for</span> (V的每个邻接点W) {<br>        <span class="hljs-keyword">if</span> (!visited[W])<br>            <span class="hljs-built_in">DFS</span>(W);<br>    }<br>    输出V，或者记录V的输出序号;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h5 id="aoe网络关键路径">AOE网络：关键路径</h5>
+<p>边表示活动，点表示事件</p>
+<p>具有最大路径长度的路径（路径上的权值相加）称为<strong>关键路径</strong>，关键路径上的活动叫<strong>关键活动</strong>。</p>
+<p>根据拓扑排序序列计算最早时刻EET，EET=max(入度的最早时刻+持续时间)，开始事件最早时刻为0。</p>
+<p>根据逆拓扑排序序列计算最晚时刻LET，LET=min(出度的最晚时刻-持续时间)，结束事件最晚时刻=最早时刻。</p>
+<p>最早时刻和最晚时刻的区别发生在，并行事件中，一些事件的执行是由灵活空间的，那么自然就有最早和最晚的区别。而这个灵活空间就是机动时间。</p>
+<p>下图摘自《软件工程导论》，粗箭头有点不太明显，仔细看。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-57.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;"></p>
+<p>以下是王道给出的写法。王道的写法非常不直观。比上图多的是所谓的活动的最早时间、最晚时间。活动的最早时间是活动的左顶点的最早时刻，而活动的最晚时间则是右顶点的最迟时刻减去持续时间，所谓的时间余量是指机动时间，而余量时间就是活动的最早时刻-最晚时刻，也就等于右顶点的最晚时刻-持续时间-左顶点的最早时刻。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-58.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p>4个结论：</p>
+<ul>
+<li>关键活动耗时增加，则整个工程工期增长</li>
+<li>缩短关键活动时间，可以缩短整个工程的工期</li>
+<li>当缩短一定程度时，关键活动可能变成非关键活动。</li>
+<li>可能存在多条关键路径，因此需要改变所有关键路径或其交集</li>
+</ul>
+<h2 id="排序-1">排序</h2>
+<h3 id="简单排序">简单排序</h3>
+<h4 id="冒泡排序">冒泡排序</h4>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">bubbleSort</span> <span class="hljs-params">(ElemType* Arr, <span class="hljs-type">int</span> N)</span> </span>{<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = N - <span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; i--) {<br>        <span class="hljs-type">bool</span> flag = <span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> j = <span class="hljs-number">0</span>; j &lt; i; j++) {<br>            <span class="hljs-keyword">if</span> (Arr[j] &gt; Arr[j+<span class="hljs-number">1</span>]) {<br>                flag = <span class="hljs-number">1</span>;<br>                <span class="hljs-built_in">swap</span>(Arr[j], Arr[j+<span class="hljs-number">1</span>]);<br>            }<br>        }<br>        <span class="hljs-keyword">if</span> (flag == <span class="hljs-number">0</span>)<br>            <span class="hljs-keyword">break</span>;<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>时间复杂度：最好情况，<span class="math inline">\(O(N)\)</span>，最坏情况，<span class="math inline">\(O(N^2)\)</span></p>
+<p>适用于链表和数组</p>
+<h4 id="插入排序">插入排序</h4>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">insertionSort</span> <span class="hljs-params">(ElemType* Arr, <span class="hljs-type">int</span> N)</span> </span>{<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; N; i++) {<br>        <span class="hljs-keyword">if</span> (Arr[i<span class="hljs-number">-1</span>] &gt; Arr[i]) {<br>            <span class="hljs-type">int</span> j;<br>            ElemType tmp = Arr[i];<br>            <span class="hljs-keyword">for</span> (j = i; (j &gt;= <span class="hljs-number">1</span>) &amp;&amp; (tmp &lt; Arr[j<span class="hljs-number">-1</span>]); j--) {<br>                Arr[j] = Arr[j<span class="hljs-number">-1</span>];<br>            }<br>            Arr[j] = tmp;<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>时间复杂度：最好情况，<span class="math inline">\(O(N)\)</span>，最坏情况，<span class="math inline">\(O(N^2)\)</span></p>
+<p>适用于链表和数组</p>
+<h4 id="折半插入排序">折半插入排序</h4>
+<p>由于插入的数据段是有序，固可以用折半扫描的方式，插入到合适位置。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">insertionBinSort</span><span class="hljs-params">(ElemType* Arr, <span class="hljs-type">int</span> N)</span> </span>{<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">1</span>; i &lt; N; i++) {<br>        <span class="hljs-keyword">if</span> (Arr[i<span class="hljs-number">-1</span>] &gt; Arr[i]) {<br>            ElemType tmp = Arr[i];<br>            <span class="hljs-type">int</span> l = <span class="hljs-number">0</span>, r = i - <span class="hljs-number">1</span>;<br>            <span class="hljs-type">int</span> mid;<br>            <span class="hljs-keyword">while</span> (l &lt;= r) {<br>                mid = (l + r) / <span class="hljs-number">2</span>;<br>                <span class="hljs-keyword">if</span> (tmp &gt;= Arr[mid])<br>                    l = mid + <span class="hljs-number">1</span>;<br>                <span class="hljs-keyword">else</span><br>                    r = mid - <span class="hljs-number">1</span>;<br>            }<br>            <span class="hljs-type">int</span> j;<br>            <span class="hljs-keyword">for</span> (j = i; j &gt; l; j--){<br>                Arr[j] = Arr[j<span class="hljs-number">-1</span>];<br>            }<br>            Arr[j] = tmp;<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>折半插入排序只是减少了比较次数，约为，但元素的移动次数并没有变，因此总的时间复杂度仍未<span class="math inline">\(O(n^2)\)</span></p>
+<h4 id="时间复杂度下界">时间复杂度下界</h4>
+<p>逆序对，对于下标<span class="math inline">\(i\lt j\)</span>，有<span class="math inline">\(Array[i]&gt;Array[j]\)</span>，则称其为1个逆序对。</p>
+<p>插入排序：<span class="math inline">\(O(N+I)\)</span>，<span class="math inline">\(I\)</span> 表示逆序对数</p>
+<p>冒泡排序和插入排序都是每次交换仅消除1个逆序对。</p>
+<p>一个序列逆序对数量最少是<span class="math inline">\(0\)</span>，最多是<span class="math inline">\(\frac{(N-1)N}{2}\)</span>，平均是<span class="math inline">\(\frac{(N-1)N}{4}\)</span>，</p>
+<p>因此仅以交换<strong>相邻</strong>两个元素来排序的算法，平均时间复杂度为<span class="math inline">\(O(n^2)\)</span>。</p>
+<h3 id="希尔排序">希尔排序</h3>
+<p>升级版的插入排序</p>
+<p>定义的增量序列最好互质</p>
+<p>Hibbard增量序列，<span class="math inline">\(D_k=2^k-1\)</span></p>
+<p>Sedgewick增量序列，<span class="math inline">\(4^i-3\times 2^i+1\)</span></p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">shellSort</span> <span class="hljs-params">(ElemType* Arr, <span class="hljs-type">int</span> N)</span> </span>{<br>    <span class="hljs-type">const</span> <span class="hljs-type">int</span> DeltaSize = <span class="hljs-number">5</span>;<br>    <span class="hljs-type">int</span> Delta[DeltaSize] = {<span class="hljs-number">109</span>, <span class="hljs-number">41</span>, <span class="hljs-number">19</span>, <span class="hljs-number">5</span>, <span class="hljs-number">1</span>};<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> d = <span class="hljs-number">0</span>; d &lt; DeltaSize; d++) {<br>        <span class="hljs-comment">/* 就是把插入排序的所有1都改成Delta[d] */</span><br>        <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = Delta[d]; i &lt; N; i += Delta[d]) {<br>            <span class="hljs-keyword">if</span> (Arr[i-Delta[d]] &gt; Arr[i]) {<br>                <span class="hljs-type">int</span> j;<br>                ElemType tmp = Arr[i];<br>                <span class="hljs-keyword">for</span> (j = i; (j &gt;= Delta[d]) &amp;&amp; (tmp &lt; Arr[j-Delta[d]]); j -= Delta[d]) {<br>                    Arr[j] = Arr[j-Delta[d]];<br>                }<br>                Arr[j] = tmp;<br>            }<br>        }<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="选择排序">选择排序</h3>
+<p><span class="math inline">\(T=\Theta(n^2)\)</span>，稳定的慢。</p>
+<p>但其也有优点，简单选择排序的移动次数只有<span class="math inline">\(O(n)\)</span>，尽管其比较次数是<span class="math inline">\(O(n^2)\)</span></p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">findMinElem</span><span class="hljs-params">(ElemType* Arr, <span class="hljs-type">int</span> beg, <span class="hljs-type">int</span> end)</span> </span>{<br>    ElemType MinElem = Arr[beg];<br>    <span class="hljs-type">int</span> MinElemPos = beg;<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = beg + <span class="hljs-number">1</span>; i &lt; end; i++) {<br>        <span class="hljs-keyword">if</span> (Arr[i] &lt; MinElem) {<br>            MinElem = Arr[i];<br>            MinElemPos = i;<br>        }<br>    }<br>    <span class="hljs-keyword">return</span> MinElemPos;<br>}<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">selectionSort</span> <span class="hljs-params">(ElemType* Arr, <span class="hljs-type">int</span> N)</span> </span>{<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++) {<br>        <span class="hljs-type">int</span> MinElemPos = <span class="hljs-built_in">findMinElem</span>(Arr, i, N);<br>        <span class="hljs-built_in">swap</span>(Arr[i], Arr[MinElemPos]);<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h4 id="堆排序">堆排序</h4>
+<p>选择排序的改进：最大堆，每次“删除”最大元素（不是实际地删除，是将它放在队尾，并将队列长度减1）。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">percdown</span> <span class="hljs-params">(ElemType* Arr, <span class="hljs-type">int</span> pos, <span class="hljs-type">int</span> N)</span> </span>{<br>    <span class="hljs-type">int</span> parent, child;<br>    ElemType Tmp = Arr[pos];<br>    <span class="hljs-keyword">for</span> (parent = pos; (parent * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>) &lt; N; parent = child){<br>        child = parent * <span class="hljs-number">2</span> + <span class="hljs-number">1</span>;<br>        <span class="hljs-comment">/* 选择孩子的较大者 */</span><br>        <span class="hljs-keyword">if</span> (child &lt; N<span class="hljs-number">-1</span> &amp;&amp; Arr[child] &lt; Arr[child+<span class="hljs-number">1</span>])<br>            child++;<br>        <span class="hljs-comment">/* 不是Arr[parent] &lt; Arr[child]! */</span><br>        <span class="hljs-keyword">if</span> (Tmp &lt; Arr[child])<br>            Arr[parent] = Arr[child];<br>        <span class="hljs-keyword">else</span> <br>            <span class="hljs-keyword">break</span>;<br>    }<br>    Arr[parent] = Tmp;<br>}<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">buildHeap</span> <span class="hljs-params">(ElemType* Arr, <span class="hljs-type">int</span> N)</span> </span>{<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = (N - <span class="hljs-number">2</span>) / <span class="hljs-number">2</span>; i &gt;= <span class="hljs-number">0</span>; i--) {<br>        <span class="hljs-built_in">percdown</span>(Arr, i, N);<br>    }<br>}<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">heapSort</span> <span class="hljs-params">(ElemType* Arr, <span class="hljs-type">int</span> N)</span> </span>{<br>    <span class="hljs-built_in">buildHeap</span>(Arr, N);<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = N - <span class="hljs-number">1</span>; i &gt; <span class="hljs-number">0</span>; i--) {<br>        <span class="hljs-built_in">swap</span>(Arr[<span class="hljs-number">0</span>], Arr[i]);<br>        <span class="hljs-built_in">percdown</span>(Arr, <span class="hljs-number">0</span>, i);<br>    }<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="快速排序">快速排序</h3>
+<p>取主元，其他元素分两边</p>
+<p>怎么取主元？怎么分两边？</p>
+<ul>
+<li><p>选主元</p>
+<ul>
+<li>第一个元素，实际效果差，但考研主要以该种方法为主</li>
+<li>随机数，花时间</li>
+<li>头、中、尾的中位数，实际情况种常用，编程采用该种</li>
+</ul></li>
+<li><p>分两边</p>
+<ul>
+<li><p>分两边的方法有很多变种，浙大mooc和王道上介绍的不同，以下是王道版本。取第一个数为主元，然后<strong>右指针</strong>往左移，直到碰到<strong>比主元小</strong>的数（<strong>等于也要移动</strong>），赋值到左指针指向的数；左指针右移，直到碰到<strong>比主元大</strong>的数，赋值到右指针指向的数。重复以上操作，直至左右指针相遇。该算法<strong>有很多细节</strong>需要注意。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-64.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;"></p></li>
+<li><p><strong>有相等的元素怎么办？</strong></p>
+<p>上述说法的黑体字表示等于的情况也必须移动，这是<strong>重要的</strong>。考虑极端情况，如果一个序列全部相等，等于的时候不移动，那么会造成右边的元素赋值到左边，左边的元素赋值到右边，然后每次重复执行该操作，就是一步也不动，左右指针永远无法相遇，陷入死循环。以下是王道的写法。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span> (l &lt; r) {<br>    <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; Arr[r] &gt;= Pivot)<br>        r--;<br>    Arr[l] = Arr[r];<br>    <span class="hljs-keyword">while</span> (l &lt; r &amp;&amp; Arr[l] &lt;= Pivot)<br>        l++;<br>    Arr[r] = Arr[l];<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>但这样的做法也有个坏处那就是会造成不均衡，比如碰到一连串的相等值，一个指针会一直往一个方向移动，使得左右子序列长度严重不等，降低效率。浙大版本的交换模式，可以减轻这样的情况。</p>
+<p>不过也可以采用我写的一个版本，即每次比较时，先移动指针，再看对不对，这样保证了 l 和 r 始终是在移动的，并且遇到一连串相等元素有利于均衡移动。不过需要注意的是，这样写 l, r 的初始值需是左闭右开区间。</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span> (l &lt; r) {<br>    <span class="hljs-comment">/* 先移动再判断，可以消除遇到相等元素不动而陷入死循环的情况</span><br><span class="hljs-comment">    并且也能使左右指针移动地更加均衡 */</span><br>    <span class="hljs-keyword">while</span> (l &lt; --r &amp;&amp; Arr[r] &gt; Pivot);<br>    Arr[l] = Arr[r];<br>    <span class="hljs-keyword">while</span> (++l &lt; r &amp;&amp; Arr[l] &lt; Pivot);<br>    Arr[r] = Arr[l];<br>}<br></code></pre></td></tr></tbody></table></figure></li>
+<li><p><strong>可不可以先移动左指针？</strong></p>
+<p>这取决于主元一开始放的位置，若采用上述写法，不管是王道写法还是我的写法，都会导致最后的序列出现2个主元，<strong>因此上述写法是不可以的</strong>。</p></li>
+<li><p><strong>最后返回的位置是 l 还是 r ?</strong></p>
+<p>如果采用王道写法，先判断再移动的方式，那么不管是 l 还是 r 都是可以的。但<strong>采用先移动再判断的方法，应当返回 r !</strong></p></li>
+<li><p><strong>以上都是快排的各种细节问题，稍有不慎，快排将变错排、慢排、死循环排！血泪教训。</strong></p></li>
+</ul></li>
+<li><p>小规模数据时，用简单排序</p></li>
+</ul>
+<p>完整实现</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">setMedianPivot</span><span class="hljs-params">(ElemType* Arr, <span class="hljs-type">int</span> beg, <span class="hljs-type">int</span> end)</span> </span>{<br>    <span class="hljs-comment">/* 左闭右开 */</span><br>    end--;<br>    <span class="hljs-type">int</span> mid = (beg + end) / <span class="hljs-number">2</span>;<br>    <span class="hljs-keyword">if</span> ((Arr[mid] &lt;= Arr[end] &amp;&amp; Arr[mid] &gt;= Arr[beg]) || (Arr[mid] &lt;= Arr[beg] &amp;&amp; Arr[mid] &gt;= Arr[end]))<br>        <span class="hljs-built_in">swap</span>(Arr[mid], Arr[beg]);<br>    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> ((Arr[end] &lt;= Arr[mid] &amp;&amp; Arr[end] &gt;= Arr[beg]) || (Arr[end] &lt;= Arr[beg] &amp;&amp; Arr[end] &gt;= Arr[mid]))<br>        <span class="hljs-built_in">swap</span>(Arr[end], Arr[beg]);<br>}<br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">partition</span><span class="hljs-params">(ElemType* Arr, <span class="hljs-type">int</span> beg, <span class="hljs-type">int</span> end)</span> </span>{<br>    <span class="hljs-built_in">setMedianPivot</span>(Arr, beg, end);<br>    ElemType Pivot = Arr[beg];<br>    <span class="hljs-comment">/* 左闭右开区间 */</span><br>    <span class="hljs-type">int</span> l = beg, r = end;<br>    <span class="hljs-keyword">while</span> (l &lt; r) {<br>        <span class="hljs-comment">/* 先移动再判断，可以消除遇到相等元素不动而陷入死循环的情况</span><br><span class="hljs-comment">    	并且也能使左右指针移动地更加均衡 */</span><br>        <span class="hljs-keyword">while</span> (l &lt; --r &amp;&amp; Arr[r] &gt; Pivot);<br>        Arr[l] = Arr[r];<br>        <span class="hljs-keyword">while</span> (++l &lt; r &amp;&amp; Arr[l] &lt; Pivot);<br>        Arr[r] = Arr[l];<br>    }<br>    <span class="hljs-comment">/* 是r，不是l */</span><br>    Arr[r] = Pivot;<br>    <span class="hljs-keyword">return</span> r;<br>}<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">quickSortAux</span><span class="hljs-params">(ElemType* Arr, <span class="hljs-type">int</span> beg, <span class="hljs-type">int</span> end)</span> </span>{<br>    <span class="hljs-keyword">if</span> (beg + <span class="hljs-number">1</span> &gt;= end)<br>        <span class="hljs-keyword">return</span>;<br>    <span class="hljs-type">int</span> PivotPos = <span class="hljs-built_in">partition</span>(Arr, beg, end);<br>    <span class="hljs-built_in">quickSortAux</span>(Arr, beg, PivotPos);<br>    <span class="hljs-built_in">quickSortAux</span>(Arr, PivotPos+<span class="hljs-number">1</span>, end);<br>}<br><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">quickSort</span><span class="hljs-params">(ElemType* Arr, <span class="hljs-type">int</span> N)</span> </span>{<br>    <span class="hljs-built_in">quickSortAux</span>(Arr, <span class="hljs-number">0</span>, N);<br>}<br></code></pre></td></tr></tbody></table></figure>
+<h3 id="归并排序">归并排序</h3>
+<p>2个有序序列的归并</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 复制数组Arr2到Arr1中 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">copyArray</span> <span class="hljs-params">(ElemType* Arr1, ElemType* Arr2, <span class="hljs-type">int</span> N)</span> </span>{<br>    <span class="hljs-keyword">for</span> (<span class="hljs-type">int</span> i = <span class="hljs-number">0</span>; i &lt; N; i++)<br>        Arr1[i] = Arr2[i];<br>}<br><span class="hljs-comment">/* 合并2个有序序列，左闭右开区间 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">merge</span><span class="hljs-params">(ElemType* Arr, ElemType* TmpArr, <span class="hljs-type">int</span> beg, <span class="hljs-type">int</span> mid, <span class="hljs-type">int</span> end)</span> </span>{<br>    <span class="hljs-type">int</span> i = beg, j = mid, k = beg;<br>    <span class="hljs-keyword">while</span> (i &lt; mid &amp;&amp; j &lt; end) {<br>        <span class="hljs-keyword">if</span> (Arr[i] &lt;= Arr[j])<br>            TmpArr[k++] = Arr[i++];<br>        <span class="hljs-keyword">else</span><br>            TmpArr[k++] = Arr[j++];<br>    }<br>    <span class="hljs-keyword">while</span> (i &lt; mid)<br>        TmpArr[k++] = Arr[i++];<br>    <span class="hljs-keyword">while</span> (j &lt; end)<br>        TmpArr[k++] = Arr[j++];<br>    <span class="hljs-comment">/* 别忘了复制回去 */</span><br>    <span class="hljs-built_in">copyArray</span>(Arr + beg, TmpArr + beg, end - beg);<br>}<br></code></pre></td></tr></tbody></table></figure>
+<ul>
+<li><p>递归实现</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 归并接口 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">mergeSortAux</span><span class="hljs-params">(ElemType* Arr, ElemType* TmpArr, <span class="hljs-type">int</span> beg, <span class="hljs-type">int</span> end)</span> </span>{<br>    <span class="hljs-comment">/* 左闭右开区间 */</span><br>    <span class="hljs-keyword">if</span> (beg + <span class="hljs-number">1</span> == end)<br>        <span class="hljs-keyword">return</span>;<br>    <span class="hljs-type">int</span> mid = (beg + end) / <span class="hljs-number">2</span>;<br>    <span class="hljs-built_in">mergeSortAux</span>(Arr, TmpArr, beg, mid);<br>    <span class="hljs-built_in">mergeSortAux</span>(Arr, TmpArr, mid, end);<br>    <span class="hljs-built_in">merge</span>(Arr, TmpArr, beg, mid, end);<br>}<br><br><span class="hljs-comment">/* 递归版本归并排序 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">mergeSort</span><span class="hljs-params">(ElemType* Arr, <span class="hljs-type">int</span> N)</span> </span>{<br>    <span class="hljs-comment">/* 在外部定义TmpArr，有利于避免频繁释放开辟空间 */</span><br>    ElemType *TmpArr = <span class="hljs-keyword">new</span> ElemType[N];<br>    <span class="hljs-built_in">mergeSortAux</span>(Arr, TmpArr, <span class="hljs-number">0</span>, N);<br>    <span class="hljs-keyword">delete</span>[] TmpArr;<br>}<br></code></pre></td></tr></tbody></table></figure></li>
+<li><p>非递归实现</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">/* 循环版本归并排序 */</span><br><span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">mergeSortLoop</span><span class="hljs-params">(ElemType* Arr, <span class="hljs-type">int</span> N)</span> </span>{<br>    ElemType* TmpArr = <span class="hljs-keyword">new</span> ElemType[N];<br>    <span class="hljs-type">int</span> d, i;<br>    <span class="hljs-keyword">for</span> (d = <span class="hljs-number">1</span>; d &lt;= N; d *= <span class="hljs-number">2</span>) {<br>        <span class="hljs-comment">/* 也有其他写法，每个间隔做了2次赋值，其实比较浪费</span><br><span class="hljs-comment">        Arr 和 TmpArr 可以来回赋值，为了更高的可读性，还是采用该写法 */</span><br>        <span class="hljs-keyword">for</span> (i = <span class="hljs-number">0</span>; i &lt; N - <span class="hljs-number">2</span> * d; i += <span class="hljs-number">2</span> * d) {<br>            <span class="hljs-built_in">merge</span>(Arr, TmpArr, i, i + d, i + <span class="hljs-number">2</span> * d);<br>        }<br>        <span class="hljs-keyword">if</span> (i + d &lt; N)<br>            <span class="hljs-built_in">merge</span>(Arr, TmpArr, i, i + d, N);<br>    }<br>    <span class="hljs-keyword">delete</span>[] TmpArr;<br>}<br></code></pre></td></tr></tbody></table></figure></li>
+</ul>
+<h3 id="基数排序">基数排序</h3>
+<p>桶排序：将所有可能值，设置成1个1个桶，然后再往里填入即可。</p>
+<p>基数排序是将数据拆成少数的几个基数构成，然后将这些基数作为桶。</p>
+<p>如下图所示（摘自浙大mooc），采用次位优先（<strong>L</strong>east <strong>S</strong>ignificant <strong>D</strong>igit）的方法。</p>
+<p>基本思想是，先比较优先级最低的位次（比如我们比较整数大小时，先从最高位看起，最后才是末位，那么整数中优先级从低到高则是末尾到高位）。第1次操作，根据整数的个位放入桶中；第2次操作则是，<strong>从小到大</strong>，一个一个从桶中按顺序取出数据，按照十位放到新的桶中，<strong>注意取下一个桶的数前要先把上一个桶按顺序全部取完</strong>。</p>
+<p>正确性需要稍微解释：第1次操作后，同1个桶中的数据个位相同，因此第2次操作时，同一个桶中的数据取出按照十位放入各个桶中后，再取下一个桶时，下一个桶的某个数据十位和上一个桶的某个数据十位若相同，则下一个桶的数据将排在上一个桶的后面，这保证了正确性。因为下一个桶的个位要比上一个桶大，十位相同的话自然是下一个桶在后，上一个桶在前。</p>
+<p>更一般的解释：第 <span class="math inline">\(i\)</span> 次操作时，若保证<strong>每个桶在第 <span class="math inline">\(i-1\)</span> 位及以前保持有序</strong>，且<strong>不同的桶在第 <span class="math inline">\(i-1\)</span> 位及以前也保持有序</strong>（即桶1的数在第 <span class="math inline">\(i-1\)</span> 位及以前小于桶2的数）；第 <span class="math inline">\(i+1\)</span> 次操作时，按序取出1个桶中所有数据，放入下一轮桶中时，同1个桶第 <span class="math inline">\(i\)</span> 位相同，而第 <span class="math inline">\(i-1\)</span> 位及以前有序放入，则保证了第 <span class="math inline">\(i\)</span> 位及以前有序；而不同桶间自然是第 <span class="math inline">\(i\)</span> 位及以前有序（不管第<span class="math inline">\(i-1\)</span>位，第<span class="math inline">\(i\)</span>位大则达）。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-60.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p>多关键字</p>
+<p>主位优先（<strong>M</strong>ost <strong>S</strong>ignificant <strong>D</strong>igit）</p>
+<h3 id="内部排序的比较">内部排序的比较</h3>
+<p>以上介绍的所有排序算法，<strong>除了基数排序、桶排序</strong>，都是<strong>基于比较的排序</strong>。</p>
+<p>基于比较的排序有结论：</p>
+<ul>
+<li><p>在最坏的情况下，任何基于比较的排序至少需要<span class="math inline">\(\log_2(n!)=\Omega(n\log_2n)\)</span>次比较。</p>
+<ul>
+<li><p>基于排序的实质，其实是在序列<span class="math inline">\(n!\)</span>种排序可能中，寻找正确的可能。根据排列组合，假如一个序列有<span class="math inline">\(n\)</span>个元素，<span class="math inline">\(m\)</span>个元素的相对位置已经确定，则可能的排列有<span class="math inline">\(\frac{n!}{m!}\)</span> 中。而每次比较，可以确定其中2个元素的相对位置，因此每次比较后，可能性从原来的<span class="math inline">\(n!\)</span>，缩减为原来的一半。最坏的情况就是，一直缩减，直至只有1种可能为止。即<span class="math inline">\(\lceil \log_2n! \rceil\)</span>次。这种结构是一种决策树，如下图所示，摘自算法导论。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-61.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;"></p></li>
+</ul></li>
+</ul>
+<p><strong>稳定性</strong>：排序前后元素相等的相对位置不发生改变。</p>
+<p>归并的稳定性有点不太显然，考虑假如是2个块合并，那么当第一个块的指针和第二个块的指针走到相同元素时，使用判断语句“若第一个块的值小于等于第二个块的值，则输出”，便保证了2个块的相等值，总是第1个块先输出。</p>
+<p>快排辅助空间是堆栈的个数，显然最少的个数就是树高<span class="math inline">\(O(\log_2n)\)</span>，最坏的情况是，每次都分配到极端，复杂度是<span class="math inline">\(O(n)\)</span>。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-62.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p>以下是实验结果。可以发现，快排是最快的。<strong>快排在平均性能上是所有内部排序中最优的</strong>。</p>
+<p>在实际编程中，出现了1个Bug。为了提高计时准确率，每个算法都执行了1000次。但第2次及以后的执行，没有对数组进行初始化，使得后面的排序数组已经是有序的了，结果中，冒泡排序、插入排序、希尔排序比其他算法快得多。这是因为，<strong>在有序序列中，冒泡排序、插入排序是线性时间复杂度！</strong></p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-63.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<h3 id="表排序">表排序</h3>
+<p>间接排序：不移动数据，移动指针</p>
+<p>物理排序，N个数字的</p>
+<h3 id="外部排序多路归并">外部排序：多路归并</h3>
+<h4 id="一般过程">一般过程</h4>
+<ol type="1">
+<li><p>构造初始归并段</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-71.png" srcset="/img/loading.gif" lazyload></p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-70.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p></li>
+<li><p>多路归并</p>
+<p><strong>一个归并段对应一个缓冲区</strong></p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-70.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p></li>
+</ol>
+<p>归并次数：如下图所示，一课k叉归并树的归并次数为<span class="math inline">\(h-1\)</span>，<span class="math inline">\(h\)</span>是树高。则<span class="math inline">\(k^{h-1}=叶子结点数=初始归并段=n\)</span>。因此<span class="math inline">\(归并次数=h-1=\lceil\log_k n\rceil\)</span>。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-73.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p>磁盘读写次数=读次数+写次数=<span class="math inline">\(2n\lceil\log_k n\rceil\)</span>，</p>
+<p>k路平衡归并：1. 最多只能有k个段归并为1个；2. 每1趟归并中，若有m个归并段参与归并，则经过这一趟处理得到<span class="math inline">\(\lceil m/k \rceil\)</span>个新的归并段。</p>
+<p><strong>外部排序时间开销</strong> = 读写外存时间+内部排序时间所需+内部归并所需时间。</p>
+<p>以下内容通过败者树、置换-选择排序、最佳归并树分别优化内部归并时间、初始归并段长度、读写外存次数。</p>
+<h4 id="败者树">败者树</h4>
+<p>内部归并的优化。原先是顺序扫描各个队首元素取最小者。</p>
+<p>败者树要和堆区分。败者树是每个分支结点虽然是失败者，但它必然比其中的一个孩子强。这和堆不一样，堆是要比2个孩子都强。如下图所示，败者树的每个叶结点，为当前各个归并段的队首。而分支结点记录的是各个归并段队首胜者。在完成一轮比拼后，如下图所示，胜者为3号归并段。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-65.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;"></p>
+<p>然后从胜者的归并段中，取出下一个原色。不断地和父结点进行比拼。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-66.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p>这里的正确性需要稍微解释：</p>
+<p>首先，如下图所示，选择某一败者结点，<strong>若败者结点来源于败者的某一子树，那么该败者结点与该子树构成一个败者树</strong>。这个结论是显然的，因为该败者正是通过与其来源的子树遴选上来的胜者。也可以用另一种眼光看他，<strong>整个比拼的过程可以看作如下图所示的2棵败者树的合并</strong>。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-69.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p>新结点的插入其实和初始构建败者树是相同的原理，它区别在于原来的败者树，它将线程的子树拆成败者树。如下图所示，已经比较直观了。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-68.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<h4 id="置换-选择排序">置换-选择排序</h4>
+<p>优化初始归并段长度，每个归并段长度不等。</p>
+<p>懒得解释，看看图差不多就懂了。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-75.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;"></p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-74.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;"></p>
+<h4 id="最佳归并树">最佳归并树</h4>
+<p>优化磁盘读写次数</p>
+<p>初始归并段的大小不同</p>
+<p>磁盘读/写（I/O）次数 = WPL * 2</p>
+<p>k叉哈夫曼树，<strong>段不足要添加长度为0的虚段</strong>。</p>
+<p><img src="http://imagehost.vitaminz-image.top/DS-76.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p>如何知道要添加多少个虚段？</p>
+<p>对于一个<span class="math inline">\(k\)</span>叉哈夫曼树有点数等式：<span class="math inline">\(n=n_k+n_0\)</span>。边数等式：<span class="math inline">\(kn_k=n-1\)</span>。则<span class="math inline">\(n_k=\frac{n_0-1}{k-1}\)</span>。由于<span class="math inline">\(n_k\)</span>是整数，如果整除，则不需补充，否则需补充的结点为<span class="math inline">\((k-1)-((n_0-1) \mod{(k-1)})\)</span>个虚段。</p>
+<h2 id="串">串</h2>
+<h3 id="模式匹配">模式匹配</h3>
+<h4 id="kmp算法">KMP算法</h4>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/" class="category-chain-item">数据结构与算法</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/C/">#C++</a>
+      
+        <a href="/tags/%E7%AE%97%E6%B3%95/">#算法</a>
+      
+        <a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">#数据结构</a>
+      
+        <a href="/tags/C/">#C</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>数据结构知识点整理</div>
+      <div>http://vitaminzl.com/2022/07/20/dsandalg/shu-ju-jie-gou-zhi-shi-dian-zheng-li/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>vitaminzl</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年7月20日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/20/gnn/tu-graph-shu-ju-de-pin-yu/" title="图（Graph）数据的频域">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">图（Graph）数据的频域</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/16/kg/lun-wen-su-du-1-guan-xi-chou-qu/" title="论文速读&lt;一&gt;：关系抽取与提示学习">
+                        <span class="hidden-mobile">论文速读&lt;一&gt;：关系抽取与提示学习</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"N5b4uVEvRE5UcVcWvkv2ln10-gzGzoHsz","appKey":"KJFp10KGLr5F9HxFUUsL2AeD","path":"window.location.pathname","placeholder":"你的意见至关重要！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+</body>
+</html>

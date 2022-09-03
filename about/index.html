@@ -275,8 +275,8 @@
     <p>我是一名计算机系的在校大学生，就读于浙江工业大学。</p>
 <p>邮箱：lzeng1507@gmail.com</p>
 <p>微信：C2H8O6</p>
-<p>gitee：<a target="_blank" rel="noopener" href="https://gitee.com/murphy_z">https://gitee.com/murphy_z</a></p>
-<p>github：<a target="_blank" rel="noopener" href="https://github.com/vitaminzl">https://github.com/vitaminzl</a></p>
+<p>gitee：https://gitee.com/murphy_z</p>
+<p>github：https://github.com/vitaminzl</p>
 
   </div>
 
@@ -304,6 +304,12 @@
 
 
   
+
+
+  
+  
+
+
 
 
 
@@ -445,6 +451,40 @@
 
 
   <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.1/es5/tex-mml-chtml.js" ></script>
 
   <script  src="/js/local-search.js" ></script>
 
