@@ -49,9 +49,9 @@
       
         <tags>
             
-            <tag> python </tag>
-            
             <tag> 频域 </tag>
+            
+            <tag> python </tag>
             
             <tag> 聚类 </tag>
             
@@ -82,15 +82,15 @@
       
         <tags>
             
-            <tag> 傅里叶变换 </tag>
-            
-            <tag> python </tag>
-            
             <tag> 频域 </tag>
             
             <tag> 谱图理论 </tag>
             
+            <tag> 傅里叶变换 </tag>
+            
             <tag> 线性代数 </tag>
+            
+            <tag> python </tag>
             
         </tags>
       
