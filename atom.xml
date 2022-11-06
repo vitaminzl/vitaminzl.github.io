@@ -84,7 +84,7 @@
     <link href="http://vitaminzl.com/2022/08/20/gnn/tu-graph-shu-ju-de-pin-yu/"/>
     <id>http://vitaminzl.com/2022/08/20/gnn/tu-graph-shu-ju-de-pin-yu/</id>
     <published>2022-08-20T04:00:00.000Z</published>
-    <updated>2022-09-02T03:18:15.840Z</updated>
+    <updated>2022-10-15T08:47:49.387Z</updated>
     
     
       
@@ -109,39 +109,6 @@
     <category term="线性代数" scheme="http://vitaminzl.com/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
     
     <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>数据结构知识点整理</title>
-    <link href="http://vitaminzl.com/2022/07/20/dsandalg/shu-ju-jie-gou-zhi-shi-dian-zheng-li/"/>
-    <id>http://vitaminzl.com/2022/07/20/dsandalg/shu-ju-jie-gou-zhi-shi-dian-zheng-li/</id>
-    <published>2022-07-20T04:00:00.000Z</published>
-    <updated>2022-09-03T02:52:32.512Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;数据结构&quot;&gt;数据结构&lt;/h1&gt;
-&lt;h2 id=&quot;树&quot;&gt;树&lt;/h2&gt;
-&lt;h3</summary>
-        
-      
-    
-    
-    
-    <category term="数据结构与算法" scheme="http://vitaminzl.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="C++" scheme="http://vitaminzl.com/tags/C/"/>
-    
-    <category term="算法" scheme="http://vitaminzl.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-    <category term="数据结构" scheme="http://vitaminzl.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    <category term="C" scheme="http://vitaminzl.com/tags/C/"/>
     
   </entry>
   
@@ -179,37 +146,6 @@
   </entry>
   
   <entry>
-    <title>PAT甲级典型题型总结</title>
-    <link href="http://vitaminzl.com/2022/07/05/dsandalg/pat-jia-ji-dian-xing-ti-xing-zong-jie/"/>
-    <id>http://vitaminzl.com/2022/07/05/dsandalg/pat-jia-ji-dian-xing-ti-xing-zong-jie/</id>
-    <published>2022-07-05T04:00:00.000Z</published>
-    <updated>2022-09-03T02:52:13.391Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1</summary>
-        
-      
-    
-    
-    
-    <category term="数据结构与算法" scheme="http://vitaminzl.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="C++" scheme="http://vitaminzl.com/tags/C/"/>
-    
-    <category term="PAT" scheme="http://vitaminzl.com/tags/PAT/"/>
-    
-    <category term="算法" scheme="http://vitaminzl.com/tags/%E7%AE%97%E6%B3%95/"/>
-    
-    <category term="数据结构" scheme="http://vitaminzl.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
     <title>动手写一个编译器</title>
     <link href="http://vitaminzl.com/2022/06/20/compiler/dong-shou-xie-yi-ge-bian-yi-qi/"/>
     <id>http://vitaminzl.com/2022/06/20/compiler/dong-shou-xie-yi-ge-bian-yi-qi/</id>
@@ -233,106 +169,6 @@
     <category term="C++" scheme="http://vitaminzl.com/tags/C/"/>
     
     <category term="编译原理" scheme="http://vitaminzl.com/tags/%E7%BC%96%E8%AF%91%E5%8E%9F%E7%90%86/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>高级数据结构：树状数组、线段树</title>
-    <link href="http://vitaminzl.com/2022/03/15/dsandalg/gao-ji-shu-ju-jie-gou-shu-zhuang-shu-zu-xian-duan-shu/"/>
-    <id>http://vitaminzl.com/2022/03/15/dsandalg/gao-ji-shu-ju-jie-gou-shu-zhuang-shu-zu-xian-duan-shu/</id>
-    <published>2022-03-15T04:00:00.000Z</published>
-    <updated>2022-09-03T02:52:21.540Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1</summary>
-        
-      
-    
-    
-    
-    <category term="数据结构与算法" scheme="http://vitaminzl.com/categories/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E7%AE%97%E6%B3%95/"/>
-    
-    
-    <category term="C++" scheme="http://vitaminzl.com/tags/C/"/>
-    
-    <category term="数据结构" scheme="http://vitaminzl.com/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-    <category term="区间树" scheme="http://vitaminzl.com/tags/%E5%8C%BA%E9%97%B4%E6%A0%91/"/>
-    
-    <category term="线段树" scheme="http://vitaminzl.com/tags/%E7%BA%BF%E6%AE%B5%E6%A0%91/"/>
-    
-    <category term="字典树" scheme="http://vitaminzl.com/tags/%E5%AD%97%E5%85%B8%E6%A0%91/"/>
-    
-    <category term="高级数据结构" scheme="http://vitaminzl.com/tags/%E9%AB%98%E7%BA%A7%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>操作系统实验-Pintos</title>
-    <link href="http://vitaminzl.com/2022/02/10/os/cao-zuo-xi-tong-shi-yan-pintos/"/>
-    <id>http://vitaminzl.com/2022/02/10/os/cao-zuo-xi-tong-shi-yan-pintos/</id>
-    <published>2022-02-10T04:00:00.000Z</published>
-    <updated>2022-09-01T15:32:30.717Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;pintos&quot;&gt;Pintos&lt;/h1&gt;
-&lt;h2 id=&quot;环境篇&quot;&gt;环境篇&lt;/h2&gt;
-&lt;h3 id=&quot;wsl-ubuntu18.04&quot;&gt;WSL: Ubuntu18.04&lt;/h3&gt;
-&lt;p&gt;Windows Subsystem for</summary>
-        
-      
-    
-    
-    
-    <category term="操作系统" scheme="http://vitaminzl.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-    <category term="C" scheme="http://vitaminzl.com/tags/C/"/>
-    
-    <category term="操作系统" scheme="http://vitaminzl.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    <category term="Git" scheme="http://vitaminzl.com/tags/Git/"/>
-    
-    <category term="GDB" scheme="http://vitaminzl.com/tags/GDB/"/>
-    
-    <category term="Linux" scheme="http://vitaminzl.com/tags/Linux/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>操作系统知识整理</title>
-    <link href="http://vitaminzl.com/2022/02/09/os/cao-zuo-xi-tong-zhi-shi-dian-zheng-li/"/>
-    <id>http://vitaminzl.com/2022/02/09/os/cao-zuo-xi-tong-zhi-shi-dian-zheng-li/</id>
-    <published>2022-02-09T04:00:00.000Z</published>
-    <updated>2022-09-01T15:32:39.554Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;operating-system&quot;&gt;Operating System&lt;/h1&gt;
-&lt;h2 id=&quot;操作系统概述&quot;&gt;操作系统概述&lt;/h2&gt;
-&lt;h3 id=&quot;计算机资源的管理者&quot;&gt;计算机资源的管理者&lt;/h3&gt;
-&lt;p&gt;主要管理处理机、存储器、文件、设备。&lt;/p&gt;
-&lt;h3</summary>
-        
-      
-    
-    
-    
-    <category term="操作系统" scheme="http://vitaminzl.com/categories/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
-    
-    
-    <category term="操作系统" scheme="http://vitaminzl.com/tags/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F/"/>
     
   </entry>
   
