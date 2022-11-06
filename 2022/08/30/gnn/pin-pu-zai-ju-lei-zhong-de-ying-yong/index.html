@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/li-spectral-cluster-15.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/li-spectral-cluster-16.png">
 <meta property="article:published_time" content="2022-08-30T04:00:00.000Z">
-<meta property="article:modified_time" content="2022-09-03T08:43:46.711Z">
+<meta property="article:modified_time" content="2022-11-06T15:10:14.420Z">
 <meta property="article:author" content="vitaminzl">
 <meta property="article:tag" content="频域">
 <meta property="article:tag" content="python">
@@ -309,7 +309,7 @@
 <p>以上过程可以理解为，将原数据利用相似度度量转化为图数据，即使得每个数据间连着一条”虚边“，相似度即为边的权重。接下来将数据转换到频域上，选择一些低频作为数据的特征向量，这是因为低频成分往往具有更高层次、更具信息量的特征，而高频成分则更可能是噪声。然后对这些特征向量进行聚类。</p>
 <p>而这种一般的方法在多尺度的数据聚类中往往表现不佳。</p>
 <h2 id="ncuts">NCuts</h2>
-<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-4.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;"></p>
+<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-4.png" srcset="/img/loading.gif" lazyload></p>
 <p>我们首先介绍一些远古的谱聚类方法。Normalized Cut<sup id="fnref:8" class="footnote-ref"><a href="#fn:8" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Shi J, Malik J. Normalized cuts and image segmentation[J]. IEEE Transactions on pattern analysis and machine intelligence, 2000, 22(8): 888-905.](https://ieeexplore.ieee.org/abstract/document/868688)">[8]</span></a></sup>的想法来源于最小割。如果存在连通图<span class="math inline">\(\mathcal G=\{\mathcal V, \mathcal E\}\)</span>，每条边<span class="math inline">\(e_i\in \mathcal E\)</span>有着权重<span class="math inline">\(w_i\)</span>，为了使得连通图分割成2个连通子图，那么需要移掉一些边。若移掉这些边权之和最小，那么我们称这样的分割方法为最小割。这和聚类非常相似，边权可以表示点和点的联系，若存在两个类，那么类之间的联系应当是比较小的，类内的联系比较大。</p>
 <p>所以一种可行的想法是，首先对连通图进行一次取最小割，然后再对连通子图进一步地取最小割，直到到达某一阈值为止。但显然这样存在一个问题，如上图所示，要使去掉边权之和最小，那每次分割肯可能都会倾向于指割掉一条边，这自然不合理。</p>
 <p>一种自然的想法使对权重进行归一化处理 <span class="math display">\[
@@ -355,11 +355,11 @@ D^{-\frac{1}{2}}LD^{-\frac{1}{2}}&amp;=D^{-\frac{1}{2}}(D-S)D^{-\frac{1}{2}}\\
 \end{align*}
 \]</span> 当<span class="math inline">\(t\rightarrow +\infty\)</span>时，<span class="math inline">\(\frac{c_2}{c_1}(\frac{\lambda_i}{\lambda_1})^t\)</span>会趋向于0。该方法的提出者认为，在有效成分<span class="math inline">\(\vec e_i\)</span>的<span class="math inline">\(\lambda_i\)</span>往往会接近于<span class="math inline">\(\lambda_1\)</span>，而高频的一些噪声成分<span class="math inline">\(\lambda_j\)</span>会接近于0。在迭代过程中使得有效成分<span class="math inline">\(\vec e_i\)</span>前面的权重和噪声成分前的权重的差距会迅速扩大。</p>
 <p>但是迭代的次数不宜过多，因为最后的结果会趋向于<span class="math inline">\(k\vec 1\)</span>，因为<span class="math inline">\(W\)</span>的主特征向量就是<span class="math inline">\(\vec 1\)</span>。因此我们需设置一个迭代的门限值，以截断迭代过程。具体的算法如下。</p>
-<p><img src="https://imagehost.vitaminz-image.top/gnn-note-11.png" srcset="/img/loading.gif" lazyload style="zoom: 40%;"></p>
+<p><img src="https://imagehost.vitaminz-image.top/gnn-note-11.png" srcset="/img/loading.gif" lazyload></p>
 <p>这里以论文中开始提到的3圆圈数据集为例子，进行结果的复现，如下图所示。</p>
-<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-5.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-5.png" srcset="/img/loading.gif" lazyload></p>
 <p>通过以上的算法，我选取几次的迭代结果<span class="math inline">\(\vec v^{(t)}\)</span>进行可视化，同一个类别在后面的迭代过程中逐渐局部收敛到一个值。</p>
-<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-7.png" srcset="/img/loading.gif" lazyload style="zoom: 60%;"></p>
+<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-7.png" srcset="/img/loading.gif" lazyload></p>
 <p>在实验中发现，其结果和许多因素有关，其中包括高斯核距离度量中的<span class="math inline">\(\sigma\)</span>，初始的向量<span class="math inline">\(\vec v^{(0)}\)</span>（论文中取<span class="math inline">\(\vec v^{(0)}= \frac{\sum_j A_{ij}}{\sum_i\sum_j A_{ij}}\)</span>），结束时的<span class="math inline">\(\hat\epsilon\)</span>设置，甚至发现使用<span class="math inline">\(W^T\)</span>具有更好的效果，这是因为<span class="math inline">\(W^T\)</span>的主特征值的特征向量就已经具有分类的效果（其意义尚待研究），而<span class="math inline">\(W\)</span>的主特征向量是<span class="math inline">\(\vec 1\)</span>，但这仅仅针对于3圆圈这一数据集而言。在<a href="#问题与总结">问题与总结</a>中，会提到这一点。此外还有计算机的运算精度也会影响结果。</p>
 <p>该方法的一个重要优点是简单高效，其收敛速度快，在百万级别的数据中也能在几秒内收敛。缺陷是过分拔高了特征值大的部分，在多尺度数据中存在一些低特征值但仍然重要的信息。</p>
 <p>以下是主函数的代码，完整代码见：https://github.com/vitaminzl/SpectralCluster/blob/master/PI.py</p>

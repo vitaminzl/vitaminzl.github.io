@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-4.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-13.png">
 <meta property="article:published_time" content="2022-09-02T04:00:00.000Z">
-<meta property="article:modified_time" content="2022-09-03T08:42:24.165Z">
+<meta property="article:modified_time" content="2022-11-06T15:06:41.810Z">
 <meta property="article:author" content="vitaminzl">
 <meta property="article:tag" content="GNN">
 <meta property="article:tag" content="图">
@@ -297,10 +297,10 @@
 <p>GCN的核心公式如下，其中<span class="math inline">\(\sigma\)</span>表示激活函数，<span class="math inline">\(\tilde A=A+I\)</span>，也就是给每个结点加个自环，<span class="math inline">\(\tilde D=\sum_i A_{ij}\)</span>。<span class="math inline">\(H^{(l)}\)</span>为第<span class="math inline">\(l\)</span>层的embedding，<span class="math inline">\(W\)</span>是参数矩阵。它的形式看起来非常简单。 <span class="math display">\[
 H^{(l+1)}=\sigma (\tilde D^{-\frac{1}{2}}\tilde A\tilde D^{-\frac{1}{2}}H^{(l)}W^{(l)})
 \]</span> 从卷积的参数共享角度来看，其实就是每个结点的将自己与附近的参数聚合。第1次聚合后每个结点获取了直接邻居结点的特征，但第2次聚合就可以获取间接邻居的特征（因为直接邻居包含了它的邻居的特征）。所以在多层聚合下，每个结点可以获得全局的信息。</p>
-<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-21.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-21.png" srcset="/img/loading.gif" lazyload></p>
 <h3 id="graph-attention-networks2"><em>Graph Attention Networks</em><sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Veličković P, Cucurull G, Casanova A, et al. Graph attention networks[J]. arXiv preprint arXiv:1710.10903, 2017.](https://arxiv.org/abs/1710.10903)">[2]</span></a></sup></h3>
 <p>GAN就是在GNN中加入注意力机制</p>
-<p><img src="https://imagehost.vitaminz-image.top/gnn-note-3.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p><img src="https://imagehost.vitaminz-image.top/gnn-note-3.png" srcset="/img/loading.gif" lazyload></p>
 <p>以下是注意力的计算公式，其中<span class="math inline">\(\vec h_i,shape(F,1);W,shape(F',F);\vec a,shape(2F',1)\)</span>。<span class="math inline">\(||\)</span>表示连接。看起来就是对2个向量进行线性变换后连接，再通过<span class="math inline">\(\vec a\)</span>他们获取之间的相关性，再做一个归一化。</p>
 <p><span class="math display">\[
 \alpha_{ij}=\frac{\exp(LeakyReLU(\vec a^T[W\vec h_i|| W\vec h_j]))}{\sum_{k\in N_i}\exp(LeakyReLU(\vec a^T[W\vec h_i||W\vec h_j]))}
@@ -330,7 +330,7 @@ H^{(l+1)}=(1-\gamma)Z^{(l)*}H^{(l)}+\gamma H^{(0)}\\
 \]</span> <span class="math inline">\(Z^{(l)*}\)</span>通过求解优化问题的闭式解获得。</p>
 <p>Grouping Effect：通过证明可得，<span class="math inline">\(Z^{(l*)},(Z^{(l*)})^T,H^{(l+1)}\)</span>都具有grouping effect。即当特征足够接近、结构足够接近时，对应结点的特征表示也足够接近，相关系数也足够接近。</p>
 <h3 id="large-scale-learning-on-non-homophilous-graphs-new-benchmarks-and-strong-simple-methods6"><em>Large Scale Learning on Non-Homophilous Graphs: New Benchmarks and Strong Simple Methods</em><sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Lim D, Hohne F, Li X, et al. Large scale learning on non-homophilous graphs: New benchmarks and strong simple methods[J]. Advances in Neural Information Processing Systems, 2021, 34: 20887-20902.](https://proceedings.neurips.cc/paper/2021/hash/ae816a80e4c1c56caa2eb4e1819cbb2f-Abstract.html)">[6]</span></a></sup></h3>
-<p><img src="https://imagehost.vitaminz-image.top/gnn-note-4.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p><img src="https://imagehost.vitaminz-image.top/gnn-note-4.png" srcset="/img/loading.gif" lazyload></p>
 <p>LINKX是一个看起来很简单的模型，是基于MLP，并没有作卷积操作。它首先将结点的特征矩阵与邻接矩阵经过分别经过2个MLP，然后再做一个连接，接着与参数矩阵<span class="math inline">\(W\)</span>相乘，和前面经过MLP层的输出（类似于ResNet）</p>
 <p>相加，接着经过一个激活函数和MLP，输出结果。</p>
 <h3 id="gnnautoscale-scalable-and-expressive-graph-neural-networks-via-historical-embeddings7"><em>Gnnautoscale: Scalable and expressive graph neural networks via historical embeddings</em><sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Fey M, Lenssen J E, Weichert F, et al. Gnnautoscale: Scalable and expressive graph neural networks via historical embeddings[C]//International Conference on Machine Learning. PMLR, 2021: 3294-3304.](http://proceedings.mlr.press/v139/fey21a.html)">[7]</span></a></sup></h3>
