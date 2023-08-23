@@ -6,7 +6,7 @@
   <link href="http://vitaminzl.com/atom.xml" rel="self"/>
   
   <link href="http://vitaminzl.com/"/>
-  <updated>2023-08-22T08:21:19.782Z</updated>
+  <updated>2022-11-06T15:06:41.810Z</updated>
   <id>http://vitaminzl.com/</id>
   
   <author>
@@ -15,27 +15,6 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
-  
-  <entry>
-    <title></title>
-    <link href="http://vitaminzl.com/2023/08/23/gnn/notes-for-collection-2/"/>
-    <id>http://vitaminzl.com/2023/08/23/gnn/notes-for-collection-2/</id>
-    <published>2023-08-23T05:53:14.221Z</published>
-    <updated>2023-08-22T08:21:19.782Z</updated>
-    
-    
-      
-      
-        
-        
-    <summary type="html">&lt;h1 id=&quot;dropedge-towards-deep-graph-convolutional-networks-on-node-classification&quot;&gt;&lt;strong&gt;DropEdge&lt;/strong&gt; Towards Deep Graph</summary>
-        
-      
-    
-    
-    
-    
-  </entry>
   
   <entry>
     <title>论文速读&lt;二&gt;：GNN系列</title>
