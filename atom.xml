@@ -6,7 +6,7 @@
   <link href="http://vitaminzl.com/atom.xml" rel="self"/>
   
   <link href="http://vitaminzl.com/"/>
-  <updated>2022-11-06T15:06:41.810Z</updated>
+  <updated>2023-08-23T06:09:28.656Z</updated>
   <id>http://vitaminzl.com/</id>
   
   <author>
@@ -15,6 +15,37 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>GNN论文精选-第二组</title>
+    <link href="http://vitaminzl.com/2022/11/19/gnn/notes-for-collection-2/"/>
+    <id>http://vitaminzl.com/2022/11/19/gnn/notes-for-collection-2/</id>
+    <published>2022-11-19T04:00:00.000Z</published>
+    <updated>2023-08-23T06:09:28.656Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;dropedge-towards-deep-graph-convolutional-networks-on-node-classification&quot;&gt;&lt;strong&gt;DropEdge&lt;/strong&gt; Towards Deep Graph</summary>
+        
+      
+    
+    
+    
+    <category term="GNN" scheme="http://vitaminzl.com/categories/GNN/"/>
+    
+    
+    <category term="GNN" scheme="http://vitaminzl.com/tags/GNN/"/>
+    
+    <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
+    
+    <category term="综述" scheme="http://vitaminzl.com/tags/%E7%BB%BC%E8%BF%B0/"/>
+    
+    <category term="论文解读" scheme="http://vitaminzl.com/tags/%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/"/>
+    
+  </entry>
   
   <entry>
     <title>论文速读&lt;二&gt;：GNN系列</title>
@@ -38,9 +69,9 @@
     <category term="GNN" scheme="http://vitaminzl.com/categories/GNN/"/>
     
     
-    <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
-    
     <category term="GNN" scheme="http://vitaminzl.com/tags/GNN/"/>
+    
+    <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
     
     <category term="论文速读" scheme="http://vitaminzl.com/tags/%E8%AE%BA%E6%96%87%E9%80%9F%E8%AF%BB/"/>
     
@@ -135,9 +166,9 @@
     <category term="知识图谱" scheme="http://vitaminzl.com/categories/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
     
     
-    <category term="知识图谱" scheme="http://vitaminzl.com/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
-    
     <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
+    
+    <category term="知识图谱" scheme="http://vitaminzl.com/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
     
     <category term="关系抽取" scheme="http://vitaminzl.com/tags/%E5%85%B3%E7%B3%BB%E6%8A%BD%E5%8F%96/"/>
     
