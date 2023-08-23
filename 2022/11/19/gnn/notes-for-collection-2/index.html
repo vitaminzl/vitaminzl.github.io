@@ -16,12 +16,12 @@
   <meta name="author" content="vitaminzl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="DropEdge Towards Deep Graph Convolutional Networks On Node Classification Drop Edge Drop Edge[1]，其方法顾名思义，就是丢弃图中的边。 具体来说，对于一个邻接矩阵 \(A\) ,对于其中的每一个元素以 \(p\) 的概率置0。 这看起来和 dropout 如出一辙，事实上在实现的时候，也是采用 dropo">
+    <meta name="description" content="GNN论文精选-第二组 DropEdge Towards Deep Graph Convolutional Networks On Node Classification Drop Edge Drop Edge[1]，其方法顾名思义，就是丢弃图中的边。 具体来说，对于一个邻接矩阵 \(A\) ,对于其中的每一个元素以 \(p\) 的概率置0。 这看起来和 dropout 如出一辙，事实上在实现的时">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GNN论文精选-第二组">
 <meta property="og:url" content="http://vitaminzl.com/2022/11/19/gnn/notes-for-collection-2/index.html">
 <meta property="og:site_name" content="闲渔">
-<meta property="og:description" content="DropEdge Towards Deep Graph Convolutional Networks On Node Classification Drop Edge Drop Edge[1]，其方法顾名思义，就是丢弃图中的边。 具体来说，对于一个邻接矩阵 \(A\) ,对于其中的每一个元素以 \(p\) 的概率置0。 这看起来和 dropout 如出一辙，事实上在实现的时候，也是采用 dropo">
+<meta property="og:description" content="GNN论文精选-第二组 DropEdge Towards Deep Graph Convolutional Networks On Node Classification Drop Edge Drop Edge[1]，其方法顾名思义，就是丢弃图中的边。 具体来说，对于一个邻接矩阵 \(A\) ,对于其中的每一个元素以 \(p\) 的概率置0。 这看起来和 dropout 如出一辙，事实上在实现的时">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/20230806161528.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/20230806164029.png">
@@ -47,10 +47,10 @@
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/20230822144103.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/20230822144111.png">
 <meta property="article:published_time" content="2022-11-19T04:00:00.000Z">
-<meta property="article:modified_time" content="2023-08-23T06:04:38.085Z">
+<meta property="article:modified_time" content="2023-08-23T06:07:32.974Z">
 <meta property="article:author" content="vitaminzl">
-<meta property="article:tag" content="GNN">
 <meta property="article:tag" content="图">
+<meta property="article:tag" content="GNN">
 <meta property="article:tag" content="综述">
 <meta property="article:tag" content="论文解读">
 <meta name="twitter:card" content="summary_large_image">
@@ -307,7 +307,8 @@
             
               <div class="markdown-body">
                 
-                <h1 id="dropedge-towards-deep-graph-convolutional-networks-on-node-classification"><strong>DropEdge</strong> Towards Deep Graph Convolutional Networks On Node Classification</h1>
+                <h1 id="gnn论文精选-第二组">GNN论文精选-第二组</h1>
+<h1 id="dropedge-towards-deep-graph-convolutional-networks-on-node-classification"><strong>DropEdge</strong> Towards Deep Graph Convolutional Networks On Node Classification</h1>
 <h2 id="drop-edge">Drop Edge</h2>
 <p>Drop Edge<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="Y. Rong, W. Huang, T. Xu, and J. Huang, “DropEdge: Towards Deep Graph Convolutional Networks on Node Classification.” arXiv, Mar. 12, 2020. doi: [10.48550/arXiv.1907.10903](https://doi.org/10.48550/arXiv.1907.10903).">[1]</span></a></sup>，其方法顾名思义，就是丢弃图中的边。</p>
 <p>具体来说，对于一个邻接矩阵 <span class="math inline">\(A\)</span> ,对于其中的每一个元素以 <span class="math inline">\(p\)</span> 的概率置0。 这看起来和 dropout 如出一辙，事实上在实现的时候，也是采用 dropout 算子来对邻接矩阵进行处理的（dropout 算子在每一轮梯度下降时，使每一个神经元以 <span class="math inline">\(p\)</span> 的概率随机置0，使得被置0的神经元无法进行梯度更新）。</p>
@@ -592,9 +593,9 @@ M &amp;= \operatorname{drop}(\mathbf{1},p)\times \mathbf{1}^T\\
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/GNN/">#GNN</a>
-      
         <a href="/tags/%E5%9B%BE/">#图</a>
+      
+        <a href="/tags/GNN/">#GNN</a>
       
         <a href="/tags/%E7%BB%BC%E8%BF%B0/">#综述</a>
       

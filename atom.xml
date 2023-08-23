@@ -38,9 +38,9 @@
     <category term="GNN" scheme="http://vitaminzl.com/categories/GNN/"/>
     
     
-    <category term="GNN" scheme="http://vitaminzl.com/tags/GNN/"/>
-    
     <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
+    
+    <category term="GNN" scheme="http://vitaminzl.com/tags/GNN/"/>
     
     <category term="论文速读" scheme="http://vitaminzl.com/tags/%E8%AE%BA%E6%96%87%E9%80%9F%E8%AF%BB/"/>
     
@@ -135,9 +135,9 @@
     <category term="知识图谱" scheme="http://vitaminzl.com/categories/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
     
     
-    <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
-    
     <category term="知识图谱" scheme="http://vitaminzl.com/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
+    
+    <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
     
     <category term="关系抽取" scheme="http://vitaminzl.com/tags/%E5%85%B3%E7%B3%BB%E6%8A%BD%E5%8F%96/"/>
     
