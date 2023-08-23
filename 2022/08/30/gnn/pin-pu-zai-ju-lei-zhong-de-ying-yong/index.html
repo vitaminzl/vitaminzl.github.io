@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/li-spectral-cluster-15.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/li-spectral-cluster-16.png">
 <meta property="article:published_time" content="2022-08-30T04:00:00.000Z">
-<meta property="article:modified_time" content="2022-11-06T15:13:22.851Z">
+<meta property="article:modified_time" content="2022-11-12T04:30:51.865Z">
 <meta property="article:author" content="vitaminzl">
 <meta property="article:tag" content="频域">
 <meta property="article:tag" content="python">
@@ -482,10 +482,10 @@ Z^*=(2X^TX+\alpha_1 I+\alpha_2 I)^{-1}(X^TX+\alpha_2W)
 <p>对比ROSC，他们的区别就在于求解<span class="math inline">\(Z^*\)</span>的方法不同，其余都是一样的。</p>
 <p>由于Inexcat ALM的算法超出了我的知识范畴，并且最近事情较多，CAST算法的代码并没有复现。若后面有时间再填补空缺。</p>
 <h2 id="group-effect">Group Effect</h2>
-<p>Group Effect在ROSC和CAST论文中都提及了，以及一篇关于GNN的论文<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022](https://arxiv.org/abs/2205.07308)">[7]</span></a></sup>中也提及了，可以说精髓所在了。</p>
+<p>Group Effect在ROSC和CAST论文中都提及了，以及一篇关于GNN的论文<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022](https://arxiv.org/abs/2205.07308)">[7]</span></a></sup>中也提及了，可以说精髓所在了。</p>
 <p>首先定义一些符号：若有一系列的实体<span class="math inline">\(X=\{x_1,x_2,...,x_n\}\)</span>，设<span class="math inline">\(w_q\)</span>为<span class="math inline">\(W\)</span>的第<span class="math inline">\(q\)</span>列，设<span class="math inline">\(x_i\rightarrow x_j\)</span>表示，<span class="math inline">\(x_i^Tx_j\rightarrow 1\)</span>且<span class="math inline">\(||w_i-w_j||_2\rightarrow 0\)</span>。</p>
 <p>如果矩阵<span class="math inline">\(Z\)</span>满足当<span class="math inline">\(x_i\rightarrow x_j\)</span>时，有<span class="math inline">\(|Z_{ip}-Z_{jp}|\rightarrow 0\)</span>，则称<span class="math inline">\(Z\)</span>具有Group Effect。</p>
-<p>翻译成人话就是当2个实体足够接近，<span class="math inline">\(Z\)</span>矩阵中实体对应的元素也足够的接近。这说明了<span class="math inline">\(Z\)</span>矩阵确实能够反映实体之间的联系紧密程度。2个实体足够接近，它可以指实体的特征足够接近，也可以指实体附近的结构接近。事实上在另一篇关于GNN的论文<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span class="hint--top hint--rounded" aria-label="[[Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022](https://arxiv.org/abs/2205.07308)">[7]</span></a></sup>里还包括了实体附近的结构信息。</p>
+<p>翻译成人话就是当2个实体足够接近，<span class="math inline">\(Z\)</span>矩阵中实体对应的元素也足够的接近。这说明了<span class="math inline">\(Z\)</span>矩阵确实能够反映实体之间的联系紧密程度。2个实体足够接近，它可以指实体的特征足够接近，也可以指实体附近的结构接近。事实上在另一篇关于GNN的论文<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022](https://arxiv.org/abs/2205.07308)">[7]</span></a></sup>里还包括了实体附近的结构信息。</p>
 <p>可以证明的是，ROSC和CAST中的稀疏矩阵都有Group Effect，证明的过程过于复杂，也超出了我的能力范围了😂。</p>
 <h2 id="补充">补充</h2>
 <h3 id="dominant-eigenvalue">Dominant Eigenvalue</h3>
@@ -547,7 +547,7 @@ Z^*=(2X^TX+\alpha_1 I+\alpha_2 I)^{-1}(X^TX+\alpha_2W)
 <span id="fn:6" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper/2001/hash/801272ee79cfde7fa5960571fee36b9b-Abstract.html">Ng A, Jordan M, Weiss Y. On spectral clustering: Analysis and an algorithm[J]. Advances in neural information processing systems, 2001, 14.</a> <a href="#fnref:6" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
 </li>
 <li>
-<span id="fn:7" class="footnote-text"><span>[<a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.07308">Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022</a> <a href="#fnref:7" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
+<span id="fn:7" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.07308">Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022</a> <a href="#fnref:7" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
 </li>
 <li>
 <span id="fn:8" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/868688">Shi J, Malik J. Normalized cuts and image segmentation[J]. IEEE Transactions on pattern analysis and machine intelligence, 2000, 22(8): 888-905.</a> <a href="#fnref:8" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>

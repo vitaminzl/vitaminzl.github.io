@@ -24,7 +24,7 @@
 <meta property="og:description" content="从C++到Python 一直希望可以写一个C++开发者学习Python的博客。充分发挥知识迁移的能力，从而在较短时间里入门另一种语言。该系列并不是一个完整的教程，着重点出有C++基础的人，在学习Python时所需要注意的一些特征。 编译与解释 与编译型语言C++不同，Python是一种解释型语言，它不需要经历编译的过程，而是边解释边执行。这和Shell这类脚本语言类似，但Python相比于Shel">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-10-01T04:00:00.000Z">
-<meta property="article:modified_time" content="2022-11-06T14:24:28.912Z">
+<meta property="article:modified_time" content="2023-02-28T15:48:45.035Z">
 <meta property="article:author" content="vitaminzl">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="Python">
@@ -227,7 +227,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.6k 字
+          3.2k 字
         
       </span>
     
@@ -238,7 +238,7 @@
         
         
         
-          11 分钟
+          14 分钟
         
       </span>
     
@@ -284,11 +284,25 @@
                 <h1 id="从c到python">从C++到Python</h1>
 <p>一直希望可以写一个C++开发者学习Python的博客。充分发挥知识迁移的能力，从而在较短时间里入门另一种语言。该系列并不是一个完整的教程，着重点出有C++基础的人，在学习Python时所需要注意的一些特征。</p>
 <h2 id="编译与解释">编译与解释</h2>
-<p>与编译型语言C++不同，Python是一种解释型语言，它不需要经历编译的过程，而是边解释边执行。这和Shell这类脚本语言类似，但Python相比于Shell的优势<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://docs.python.org/3.8/tutorial/appetite.html](https://docs.python.org/3.8/tutorial/appetite.html)">[1]</span></a></sup>：更适用于GUI应用或者是游戏的开发；和C++这类编译型语言相比：它的开发周期更短，开发效率更高。和其他语言相同，编译器或者解释器的版本也是不断在更新迭代的，该系列的blog使用的是Python 3.8的解释器。</p>
+<p>与编译型语言C++不同，Python是一种解释型语言，它不需要经历编译的过程，而是边解释边执行。这和Shell这类脚本语言类似，但Python相比于Shell的优势<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://docs.python.org/3.8/tutorial/appetite.html](https://docs.python.org/3.8/tutorial/appetite.html)">[1]</span></a></sup>：更适用于GUI应用或者是游戏的开发；和C++这类编译型语言相比：它的开发周期更短，开发效率更高。和其他语言相同，编译器或者解释器的版本也是不断在更新迭代的，该系列的blog使用的是Python 3.9的解释器。</p>
 <p>Python源文件默认使用UTF-8进行编码，若要更改编码编码方式，可在首行添加注释：</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># -*- coding: 编码方式 -*-</span><br></code></pre></td></tr></tbody></table></figure>
 <p>如若要使用cp1252，则在首行添加：</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># -*- coding: cp1252 -*-</span><br></code></pre></td></tr></tbody></table></figure>
+<h2 id="环境安装">环境安装</h2>
+<h2 id="第一句代码">第一句代码</h2>
+<p>没什么新意，从经典“hello world”开始。如果使用C风格的代码，你或许会这么写：</p>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>{<br>    <span class="hljs-built_in">printf</span>(<span class="hljs-string">"hello world\n"</span>);<br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>}<br></code></pre></td></tr></tbody></table></figure>
+<p>来看看它的结构，需要从头文件中引入库函数，需要main函数作为入口，输出时为了美观需要加入换行符。但是使用Python达到相同的效果，只要一句话。</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-built_in">print</span>(<span class="hljs-string">"hello world"</span>)<br></code></pre></td></tr></tbody></table></figure>
+<p>可以看到这种脚本语言的方便之处了吧，不需要main函数作为入口，对于基本的I/O函数也不再需要引入头文件，以及需要注意的是使用print进行输出，是默认结尾换行的。</p>
+<p>当然如果偏要用C风格来写也是可以：</p>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">"hello world"</span>)<br><br>main()<br></code></pre></td></tr></tbody></table></figure>
+<p>先煞有介事地定义一个main函数，然后再调用就可以了。</p>
+<p>不过，从上述代码又可以发现它和C/C++的一个重要区别，定义函数使用def关键字，且不再需要声明函数的返回类型，不再使用大括弧"{}"分块，而是使用缩进，即TAB键，切记不要使用空格。这种分块方式强行规范了代码的外观，使得代码的可读性更强。</p>
+<p>至此，大概对Python这门语言有了一个初印象了吧。</p>
+<h2 id="计算器">计算器</h2>
+<figure class="highlight c++"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><br></code></pre></td></tr></tbody></table></figure>
 <h2 id="基本语法">基本语法</h2>
 <h3 id="控制流">控制流</h3>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># 使用缩进分块，而不再是{}，且条件、循环语句的条件表达式后加上:</span><br><span class="hljs-comment"># else if -&gt; elif</span><br><span class="hljs-keyword">while</span> a == <span class="hljs-number">3</span>:<br>    <span class="hljs-keyword">if</span> b == <span class="hljs-number">5</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">"b"</span>)<br>    <span class="hljs-keyword">elif</span> c == <span class="hljs-number">6</span>:<br>    	<span class="hljs-built_in">print</span>(<span class="hljs-string">"c"</span>)<br>    <span class="hljs-keyword">else</span>:<br>        <span class="hljs-built_in">print</span>(<span class="hljs-string">"d"</span>)<br></code></pre></td></tr></tbody></table></figure>

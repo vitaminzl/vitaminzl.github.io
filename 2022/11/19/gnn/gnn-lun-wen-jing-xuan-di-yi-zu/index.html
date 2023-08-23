@@ -16,21 +16,25 @@
   <meta name="author" content="vitaminzl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="我是一名计算机系的在校大学生，就读于浙江工业大学，同时也是华东师范大学大数据专业的准研究生。 邮箱：lzeng1507@gmail.com 微信：C2H8O6 github：https:&#x2F;&#x2F;github.com&#x2F;vitaminzl gitee：https:&#x2F;&#x2F;gitee.com&#x2F;murphy_z">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于">
-<meta property="og:url" content="http://vitaminzl.com/about/index.html">
+    <meta name="description" content="GNN论文精选-第一组 Semi-supervised Classification Graph Convolutional Networks 这篇文章可谓是图卷积网络的经典，该论文提出的模型还有一个更加广为人知的名称——GCN。 Semi-supervised Embedding 半监督学习是指使用少量有标签的数据和大量没有标签的数据对 模型进行训练，常见的方法如改论文开头的提到公式 \[ \m">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GNN论文精选-第一组">
+<meta property="og:url" content="http://vitaminzl.com/2022/11/19/gnn/gnn-lun-wen-jing-xuan-di-yi-zu/index.html">
 <meta property="og:site_name" content="闲渔">
-<meta property="og:description" content="我是一名计算机系的在校大学生，就读于浙江工业大学，同时也是华东师范大学大数据专业的准研究生。 邮箱：lzeng1507@gmail.com 微信：C2H8O6 github：https:&#x2F;&#x2F;github.com&#x2F;vitaminzl gitee：https:&#x2F;&#x2F;gitee.com&#x2F;murphy_z">
+<meta property="og:description" content="GNN论文精选-第一组 Semi-supervised Classification Graph Convolutional Networks 这篇文章可谓是图卷积网络的经典，该论文提出的模型还有一个更加广为人知的名称——GCN。 Semi-supervised Embedding 半监督学习是指使用少量有标签的数据和大量没有标签的数据对 模型进行训练，常见的方法如改论文开头的提到公式 \[ \m">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-03-01T04:02:34.000Z">
-<meta property="article:modified_time" content="2022-12-03T13:31:31.633Z">
+<meta property="article:published_time" content="2022-11-19T04:00:00.000Z">
+<meta property="article:modified_time" content="2022-12-21T15:33:21.280Z">
 <meta property="article:author" content="vitaminzl">
+<meta property="article:tag" content="GNN">
+<meta property="article:tag" content="图">
+<meta property="article:tag" content="综述">
+<meta property="article:tag" content="论文解读">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>关于 - 闲渔</title>
+  <title>GNN论文精选-第一组 - 闲渔</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -97,7 +101,7 @@
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><header>
     
 
-<div class="header-inner" style="height: 60vh;">
+<div class="header-inner" style="height: 70vh;">
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
@@ -202,9 +206,49 @@
       <div class="banner-text text-center fade-in-up">
         <div class="h2">
           
-            <span id="subtitle" data-typed-text="关于"></span>
+            <span id="subtitle" data-typed-text="GNN论文精选-第一组"></span>
           
         </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2022-11-19 12:00" pubdate>
+          2022年11月19日 中午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          599 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          3 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
 
         
       </div>
@@ -220,69 +264,182 @@
 
   <main>
     
-      <div class="container nopadding-x-md">
-        <div id="board"
-          >
-          
-            <div class="about-avatar">
-              <img src="/image/avatar.png" srcset="/img/loading.gif" lazyload class="img-fluid" alt="avatar">
-            </div>
-          
-          <div class="container">
-            <div class="row">
-              <div class="col-12 col-md-10 m-auto">
-                
+      
 
-<div class="text-center">
-  <div class="about-info">
-    <div class="about-name">Vitaminzl</div>
-    <div class="about-intro">海明威说：“这个世界很美好，值得我们为之奋斗。”
-我只同意后半句。</div>
-    <div class="about-icons">
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
       
-        
-        
-        
-        <a href=https://github.com/vitaminzl class="
-           hint--bottom hint--rounded"
-           aria-label=GitHub
-           target="_blank"
-        >
-          <i class="iconfont icon-github-fill" aria-hidden="true"></i>
-          
-        </a>
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">GNN论文精选-第一组</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <h1 id="gnn论文精选-第一组">GNN论文精选-第一组</h1>
+<h2 id="semi-supervised-classification-graph-convolutional-networks">Semi-supervised Classification Graph Convolutional Networks</h2>
+<p>这篇文章可谓是图卷积网络的经典，该论文提出的模型还有一个更加广为人知的名称——GCN。</p>
+<h3 id="semi-supervised-embedding">Semi-supervised Embedding</h3>
+<p>半监督学习是指使用少量有标签的数据和大量没有标签的数据对</p>
+<p>模型进行训练，常见的方法如改论文开头的提到公式 <span class="math display">\[
+\min \mathcal{L}=\mathcal{L}_0+\lambda\mathcal{L_{reg}}\\
+where~ \mathcal{L_{reg}}=\sum_{i,j}A_{i,j}||f_i-f_j||^2=f^TLf
+\]</span> 其中 <span class="math inline">\(\mathcal{L}\)</span> 表示总的损失，<span class="math inline">\(\mathcal{L_0}\)</span> 表示带标签数据的所训练的损失，<span class="math inline">\(\mathcal{L_reg}\)</span> 则是不带标签的损失值。<span class="math inline">\(L_0\)</span> 比较好理解，它就是监督学习当中的预测值和标签的损失，但是对于不带有标签的损失值，需要说明。</p>
+<h2 id="section"></h2>
+<h2 id="补充知识">补充知识</h2>
+<h2 id="参考文献">参考文献</h2>
+<p>[1]: <a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/9046288">Wu Z, Pan S, Chen F, et al. A comprehensive survey on graph neural networks[J]. IEEE transactions on neural networks and learning systems, 2020, 32(1): 4-24.</a></p>
+<p>off-the-shelf</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
       
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
         
-        
-        
-        <a  class="qr-trigger
-           "
-           
-           target="_self"
-        >
-          <i class="iconfont icon-wechat-fill" aria-hidden="true"></i>
-          
-            <img class="qr-img" src="/image/wechatIDQR.jpg" srcset="/img/loading.gif" lazyload alt="qrcode" />
-          
-        </a>
+  <a href="/categories/GNN/" class="category-chain-item">GNN</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
       
+        <a href="/tags/GNN/">#GNN</a>
+      
+        <a href="/tags/%E5%9B%BE/">#图</a>
+      
+        <a href="/tags/%E7%BB%BC%E8%BF%B0/">#综述</a>
+      
+        <a href="/tags/%E8%AE%BA%E6%96%87%E8%A7%A3%E8%AF%BB/">#论文解读</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>GNN论文精选-第一组</div>
+      <div>http://vitaminzl.com/2022/11/19/gnn/gnn-lun-wen-jing-xuan-di-yi-zu/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>vitaminzl</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2022年11月19日</div>
+        </div>
+      
+      
+      <div class="license-meta-item">
+        <div>许可协议</div>
+        <div>
+          
+            
+            
+              <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+              <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                <i class="iconfont icon-by"></i>
+              </span>
+              </a>
+            
+          
+        </div>
+      </div>
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+            </div>
+
+            
+  <article id="comments" lazyload>
+    
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.4.17/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"N5b4uVEvRE5UcVcWvkv2ln10-gzGzoHsz","appKey":"KJFp10KGLr5F9HxFUUsL2AeD","path":"window.location.pathname","placeholder":"你的意见至关重要！","avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+  </article>
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
     </div>
   </div>
 </div>
 
-<article class="about-content page-content mt-5">
-  <div class="markdown-body">
-    <p>我是一名计算机系的在校大学生，就读于浙江工业大学，同时也是华东师范大学大数据专业的准研究生。</p>
-<p>邮箱：lzeng1507@gmail.com</p>
-<p>微信：C2H8O6</p>
-<p>github：<a target="_blank" rel="noopener" href="https://github.com/vitaminzl">https://github.com/vitaminzl</a></p>
-<p>gitee：<a target="_blank" rel="noopener" href="https://gitee.com/murphy_z">https://gitee.com/murphy_z</a></p>
-
-  </div>
-
-  
-</article>
-
 
 
 
@@ -315,11 +472,8 @@
 
 
 
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
+
+
     
 
     
@@ -412,6 +566,34 @@
   
 
 
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      headingSelector : CONFIG.toc.headingSelector || 'h1,h2,h3,h4,h5,h6',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      collapseDepth   : CONFIG.toc.collapseDepth || 0,
+      scrollSmooth    : true,
+      headingsOffset  : -boardTop
+    });
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+  });
+</script>
 
 
   <script src=https://lib.baomitu.com/clipboard.js/2.0.10/clipboard.min.js></script>
