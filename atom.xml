@@ -6,7 +6,7 @@
   <link href="http://vitaminzl.com/atom.xml" rel="self"/>
   
   <link href="http://vitaminzl.com/"/>
-  <updated>2023-08-23T06:09:28.656Z</updated>
+  <updated>2023-08-30T04:02:09.134Z</updated>
   <id>http://vitaminzl.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://vitaminzl.com/2022/11/19/gnn/notes-for-collection-2/"/>
     <id>http://vitaminzl.com/2022/11/19/gnn/notes-for-collection-2/</id>
     <published>2022-11-19T04:00:00.000Z</published>
-    <updated>2023-08-23T06:09:28.656Z</updated>
+    <updated>2023-08-30T04:02:09.134Z</updated>
     
     
       
@@ -100,13 +100,13 @@
     
     <category term="频域" scheme="http://vitaminzl.com/tags/%E9%A2%91%E5%9F%9F/"/>
     
-    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
-    
     <category term="聚类" scheme="http://vitaminzl.com/tags/%E8%81%9A%E7%B1%BB/"/>
     
     <category term="谱聚类" scheme="http://vitaminzl.com/tags/%E8%B0%B1%E8%81%9A%E7%B1%BB/"/>
     
     <category term="多尺度数据" scheme="http://vitaminzl.com/tags/%E5%A4%9A%E5%B0%BA%E5%BA%A6%E6%95%B0%E6%8D%AE/"/>
+    
+    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
     
   </entry>
   
@@ -133,13 +133,13 @@
     
     <category term="频域" scheme="http://vitaminzl.com/tags/%E9%A2%91%E5%9F%9F/"/>
     
+    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
+    
     <category term="谱图理论" scheme="http://vitaminzl.com/tags/%E8%B0%B1%E5%9B%BE%E7%90%86%E8%AE%BA/"/>
     
     <category term="傅里叶变换" scheme="http://vitaminzl.com/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
     
     <category term="线性代数" scheme="http://vitaminzl.com/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
-    
-    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
     
   </entry>
   
