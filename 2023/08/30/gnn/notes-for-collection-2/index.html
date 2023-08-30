@@ -19,7 +19,7 @@
     <meta name="description" content="DropEdge Towards Deep Graph Convolutional Networks On Node Classification Drop Edge Drop Edge[1]，其方法顾名思义，就是丢弃图中的边。 具体来说，对于一个邻接矩阵 \(A\) ,对于其中的每一个元素以 \(p\) 的概率置0。 这看起来和 dropout 如出一辙，事实上在实现的时候，也是采用 dropo">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GNN论文精选-第二组">
-<meta property="og:url" content="http://vitaminzl.com/2022/11/19/gnn/notes-for-collection-2/index.html">
+<meta property="og:url" content="http://vitaminzl.com/2023/08/30/gnn/notes-for-collection-2/index.html">
 <meta property="og:site_name" content="闲渔">
 <meta property="og:description" content="DropEdge Towards Deep Graph Convolutional Networks On Node Classification Drop Edge Drop Edge[1]，其方法顾名思义，就是丢弃图中的边。 具体来说，对于一个邻接矩阵 \(A\) ,对于其中的每一个元素以 \(p\) 的概率置0。 这看起来和 dropout 如出一辙，事实上在实现的时候，也是采用 dropo">
 <meta property="og:locale" content="zh_CN">
@@ -46,8 +46,8 @@
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/20230822115204.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/20230822144103.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/20230822144111.png">
-<meta property="article:published_time" content="2022-11-19T04:00:00.000Z">
-<meta property="article:modified_time" content="2023-08-30T04:02:09.134Z">
+<meta property="article:published_time" content="2023-08-30T04:00:00.000Z">
+<meta property="article:modified_time" content="2023-08-30T04:05:55.561Z">
 <meta property="article:author" content="vitaminzl">
 <meta property="article:tag" content="GNN">
 <meta property="article:tag" content="图">
@@ -241,8 +241,8 @@
     
       <span class="post-meta">
         <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-        <time datetime="2022-11-19 12:00" pubdate>
-          2022年11月19日 中午
+        <time datetime="2023-08-30 12:00" pubdate>
+          2023年8月30日 中午
         </time>
       </span>
     
@@ -374,7 +374,7 @@ yk =
 \begin{align}
 &amp;\hat{A}^lX = \hat A·(\hat A^{l−1} X ) \\
 &amp;Z^{(l)} = f _{\theta}^{(l)} (\hat A^l X ) \\
-&amp;Z = \operatorname{AdaBoost}(Z^{(l)})
+&amp;Z = \operatorname{AdaBoost}(Z^{(l)}) %不能有多余的空行，不然在网页中也可能除左
 \end{align}
 \]</span> 其中 <span class="math inline">\(f_{\theta}^{(l)}\)</span> 为非线性函数，比如说2层的神经网络<span class="math inline">\(f^{(l)}_{\theta}(\hat A^l X) = \operatorname{ReLU}(\hat A^l XW ^{(0)})W^{(1)}\)</span>。但是，这里需要注意的是，该模型和Adaboost有一个重要区别，那就是对于所有的 <span class="math inline">\(l\)</span> 来说，<span class="math inline">\(f_{\theta}^{(l)}\)</span> 使用 <span class="math inline">\(\theta\)</span> 参数是基于上一层分类器 <span class="math inline">\(f_{\theta}^{(l-1)}\)</span>。而一般的Adaboost各个基分类器的参数都是独立的。</p>
 <p>模型架构可以由如下图表示。</p>
@@ -640,7 +640,7 @@ M =&amp; \operatorname{drop}(\mathbf{1},p)\times \mathbf{1}^T\\
   <div class="license-box my-3">
     <div class="license-title">
       <div>GNN论文精选-第二组</div>
-      <div>http://vitaminzl.com/2022/11/19/gnn/notes-for-collection-2/</div>
+      <div>http://vitaminzl.com/2023/08/30/gnn/notes-for-collection-2/</div>
     </div>
     <div class="license-meta">
       
@@ -652,7 +652,7 @@ M =&amp; \operatorname{drop}(\mathbf{1},p)\times \mathbf{1}^T\\
       
         <div class="license-meta-item license-meta-date">
           <div>发布于</div>
-          <div>2022年11月19日</div>
+          <div>2023年8月30日</div>
         </div>
       
       
