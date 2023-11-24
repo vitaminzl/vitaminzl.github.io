@@ -6,7 +6,7 @@
   <link href="http://vitaminzl.com/atom.xml" rel="self"/>
   
   <link href="http://vitaminzl.com/"/>
-  <updated>2023-08-30T04:05:55.561Z</updated>
+  <updated>2023-08-30T04:05:56.000Z</updated>
   <id>http://vitaminzl.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://vitaminzl.com/2023/08/30/gnn/notes-for-collection-2/"/>
     <id>http://vitaminzl.com/2023/08/30/gnn/notes-for-collection-2/</id>
     <published>2023-08-30T04:00:00.000Z</published>
-    <updated>2023-08-30T04:05:55.561Z</updated>
+    <updated>2023-08-30T04:05:56.000Z</updated>
     
     
       
@@ -37,9 +37,9 @@
     <category term="GNN" scheme="http://vitaminzl.com/categories/GNN/"/>
     
     
-    <category term="GNN" scheme="http://vitaminzl.com/tags/GNN/"/>
-    
     <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
+    
+    <category term="GNN" scheme="http://vitaminzl.com/tags/GNN/"/>
     
     <category term="综述" scheme="http://vitaminzl.com/tags/%E7%BB%BC%E8%BF%B0/"/>
     
@@ -52,7 +52,7 @@
     <link href="http://vitaminzl.com/2022/09/02/gnn/lun-wen-su-du-2-gnn-xi-lie/"/>
     <id>http://vitaminzl.com/2022/09/02/gnn/lun-wen-su-du-2-gnn-xi-lie/</id>
     <published>2022-09-02T04:00:00.000Z</published>
-    <updated>2022-11-06T15:06:41.810Z</updated>
+    <updated>2022-11-06T15:06:42.000Z</updated>
     
     
       
@@ -69,9 +69,9 @@
     <category term="GNN" scheme="http://vitaminzl.com/categories/GNN/"/>
     
     
-    <category term="GNN" scheme="http://vitaminzl.com/tags/GNN/"/>
-    
     <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
+    
+    <category term="GNN" scheme="http://vitaminzl.com/tags/GNN/"/>
     
     <category term="论文速读" scheme="http://vitaminzl.com/tags/%E8%AE%BA%E6%96%87%E9%80%9F%E8%AF%BB/"/>
     
@@ -82,7 +82,7 @@
     <link href="http://vitaminzl.com/2022/08/30/gnn/pin-pu-zai-ju-lei-zhong-de-ying-yong/"/>
     <id>http://vitaminzl.com/2022/08/30/gnn/pin-pu-zai-ju-lei-zhong-de-ying-yong/</id>
     <published>2022-08-30T04:00:00.000Z</published>
-    <updated>2022-11-12T04:30:51.865Z</updated>
+    <updated>2022-11-12T04:30:52.000Z</updated>
     
     
       
@@ -112,17 +112,18 @@
   
   <entry>
     <title>图（Graph）数据的频域</title>
-    <link href="http://vitaminzl.com/2022/08/20/gnn/tu-graph-shu-ju-de-pin-yu/"/>
-    <id>http://vitaminzl.com/2022/08/20/gnn/tu-graph-shu-ju-de-pin-yu/</id>
+    <link href="http://vitaminzl.com/2022/08/20/gnn/spetcral-theory/"/>
+    <id>http://vitaminzl.com/2022/08/20/gnn/spetcral-theory/</id>
     <published>2022-08-20T04:00:00.000Z</published>
-    <updated>2022-10-15T08:47:49.387Z</updated>
+    <updated>2023-11-24T11:44:39.930Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1</summary>
+    <summary type="html">&lt;h1 id=&quot;写在前面&quot;&gt;写在前面&lt;/h1&gt;
+&lt;p&gt;图神经网络（GNN）是近年来愈发火热，用以对图（Graph）数据进行特征提取以及各种下游任务。注意这里的图（Graph）应和图像（Image）区分，图是一种由点集与边集组成的数据结构，常记作&lt;span class=&quot;math</summary>
         
       
     
@@ -148,7 +149,7 @@
     <link href="http://vitaminzl.com/2022/07/16/kg/lun-wen-su-du-1-guan-xi-chou-qu/"/>
     <id>http://vitaminzl.com/2022/07/16/kg/lun-wen-su-du-1-guan-xi-chou-qu/</id>
     <published>2022-07-16T04:00:00.000Z</published>
-    <updated>2022-09-03T07:18:00.889Z</updated>
+    <updated>2022-09-03T07:18:02.000Z</updated>
     
     
       
@@ -166,9 +167,9 @@
     <category term="知识图谱" scheme="http://vitaminzl.com/categories/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
     
     
-    <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
-    
     <category term="知识图谱" scheme="http://vitaminzl.com/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
+    
+    <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
     
     <category term="关系抽取" scheme="http://vitaminzl.com/tags/%E5%85%B3%E7%B3%BB%E6%8A%BD%E5%8F%96/"/>
     
@@ -181,7 +182,7 @@
     <link href="http://vitaminzl.com/2022/06/20/compiler/dong-shou-xie-yi-ge-bian-yi-qi/"/>
     <id>http://vitaminzl.com/2022/06/20/compiler/dong-shou-xie-yi-ge-bian-yi-qi/</id>
     <published>2022-06-20T01:25:00.000Z</published>
-    <updated>2022-09-01T15:16:56.179Z</updated>
+    <updated>2022-09-01T15:16:58.000Z</updated>
     
     
       

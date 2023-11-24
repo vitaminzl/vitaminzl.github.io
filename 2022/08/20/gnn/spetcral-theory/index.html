@@ -16,19 +16,20 @@
   <meta name="author" content="vitaminzl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="图（Graph）数据的频域 图神经网络（GNN）是近年来愈发火热，用以对图（Graph）数据进行特征提取以及各种下游任务。注意这里的图（Graph）应和图像（Image）区分，图是一种由点集与边集组成的数据结构，常记作\(\mathcal{G}&#x3D;(\mathcal{V,E})\)。以下是我学习谱图理论时的一些记录。本文先先从基变换的角度入手，说明了标准正交基的性质，并从实数域拓展到了复数域，接着从">
+    <meta name="description" content="写在前面 图神经网络（GNN）是近年来愈发火热，用以对图（Graph）数据进行特征提取以及各种下游任务。注意这里的图（Graph）应和图像（Image）区分，图是一种由点集与边集组成的数据结构，常记作\(\mathcal{G}&#x3D;(\mathcal{V,E})\)。以下是我学习谱图理论时的一些记录。本文先介绍了线性代数的一些前置知识，包括内积与基、特征值与特征向量、二次型等内容。接着从基变换、频域信">
 <meta property="og:type" content="article">
 <meta property="og:title" content="图（Graph）数据的频域">
-<meta property="og:url" content="http://vitaminzl.com/2022/08/20/gnn/tu-graph-shu-ju-de-pin-yu/index.html">
+<meta property="og:url" content="http://vitaminzl.com/2022/08/20/gnn/spetcral-theory/index.html">
 <meta property="og:site_name" content="闲渔">
-<meta property="og:description" content="图（Graph）数据的频域 图神经网络（GNN）是近年来愈发火热，用以对图（Graph）数据进行特征提取以及各种下游任务。注意这里的图（Graph）应和图像（Image）区分，图是一种由点集与边集组成的数据结构，常记作\(\mathcal{G}&#x3D;(\mathcal{V,E})\)。以下是我学习谱图理论时的一些记录。本文先先从基变换的角度入手，说明了标准正交基的性质，并从实数域拓展到了复数域，接着从">
+<meta property="og:description" content="写在前面 图神经网络（GNN）是近年来愈发火热，用以对图（Graph）数据进行特征提取以及各种下游任务。注意这里的图（Graph）应和图像（Image）区分，图是一种由点集与边集组成的数据结构，常记作\(\mathcal{G}&#x3D;(\mathcal{V,E})\)。以下是我学习谱图理论时的一些记录。本文先介绍了线性代数的一些前置知识，包括内积与基、特征值与特征向量、二次型等内容。接着从基变换、频域信">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-5.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-7.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-8.png">
+<meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-8.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-9.png">
 <meta property="article:published_time" content="2022-08-20T04:00:00.000Z">
-<meta property="article:modified_time" content="2023-11-24T11:44:52.614Z">
+<meta property="article:modified_time" content="2023-11-24T11:44:39.930Z">
 <meta property="article:author" content="vitaminzl">
 <meta property="article:tag" content="频域">
 <meta property="article:tag" content="谱图理论">
@@ -235,7 +236,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          8.3k 字
+          8.5k 字
         
       </span>
     
@@ -246,7 +247,7 @@
         
         
         
-          35 分钟
+          36 分钟
         
       </span>
     
@@ -289,48 +290,51 @@
             
               <div class="markdown-body">
                 
-                <h1 id="图graph数据的频域">图（Graph）数据的频域</h1>
-<p>图神经网络（GNN）是近年来愈发火热，用以对图（Graph）数据进行特征提取以及各种下游任务。注意这里的图（Graph）应和图像（Image）区分，图是一种由点集与边集组成的数据结构，常记作<span class="math inline">\(\mathcal{G}=(\mathcal{V,E})\)</span>。以下是我学习谱图理论时的一些记录。本文先先从基变换的角度入手，说明了标准正交基的性质，并从实数域拓展到了复数域，接着从基变换的角度阐述了傅里叶变换的原理，然后从特征值与特征向量入手，通过分析拉普拉斯算子的特征向量，理解其与傅里叶变换的等价性。最后使用图的数据结构表示图像，可视化其特征向量，直观感受低频到高频分量的差异。本人才疏学浅，错误难免，欢迎交流指正。</p>
+                <h1 id="写在前面">写在前面</h1>
+<p>图神经网络（GNN）是近年来愈发火热，用以对图（Graph）数据进行特征提取以及各种下游任务。注意这里的图（Graph）应和图像（Image）区分，图是一种由点集与边集组成的数据结构，常记作<span class="math inline">\(\mathcal{G}=(\mathcal{V,E})\)</span>。以下是我学习谱图理论时的一些记录。本文先介绍了线性代数的一些前置知识，包括内积与基、特征值与特征向量、二次型等内容。接着从基变换、频域信号的角度阐述了傅里叶变换的原理。然后通过分析拉普拉斯矩阵的特征值与特征向量，利用二次型的形式说明了其特征值及其对应的特征向量，和傅里叶变换中的频域信号之间的联系。最后使用图的数据结构表示图像，可视化其特征向量，直观感受图的低频和高频分量的差异。本人才疏学浅，错误难免，欢迎交流指正。</p>
+<h1 id="线性代数基础">线性代数基础</h1>
 <h2 id="内积与基">内积与基</h2>
 <p>我们首先回顾一下线性代数的知识。本科第一次线性代数的时候，都是以繁杂的计算与证明为主，未曾有更直观、直觉的方式去理解。这里我想从线性变换的角度，讲述线性代数中与本文内容相关的知识。</p>
-<p>我们定义实数向量<span class="math inline">\(\vec x=[x_1, x_2,...,x_n]^T\)</span>与实数向量的<span class="math inline">\(\vec x=[x_1, x_2,...,x_n]^T\)</span>内积为<span class="math inline">\(&lt;\vec x,\vec y&gt;=\sum x_iy_i\)</span>。这是高中就学过的知识。但这里，我需要对向量的内积做一些扩充，即复数向量内积的定义。根据hermitian内积的定义<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://mathworld.wolfram.com/HermitianInnerProduct.html](https://mathworld.wolfram.com/HermitianInnerProduct.html)">[1]</span></a></sup>，复平面内积定义为<span class="math inline">\(&lt;\vec x,\vec y&gt;=\sum x_i\bar y_i\)</span>。</p>
-<p>如果我们将向量内积扩展到函数空间，我们可以将函数视为无限长的向量，如<span class="math inline">\(f(x)=[f(x_1),f(x_2),...]\)</span>，可以定义函数的内积<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://mathworld.wolfram.com/HilbertSpace.html](https://mathworld.wolfram.com/HilbertSpace.html)">[2]</span></a></sup><span class="math inline">\(&lt;f,g&gt;=\int_a^b f(x)g(x)dx\)</span>。若函数在复平面上，则可定义为<span class="math inline">\(&lt;f,g&gt;=\int_a^b f(x)\overline{g(x)}dx\)</span>（有时共轭会放在左边）。</p>
-<p>然后我们来回顾一下向量空间中的基。由一组线性无关的向量可以张成一个向量空间，空间中的任意向量都可以使用这一组向量的线性组合表示。这组向量称作基向量。如果基向量构成的矩阵<span class="math inline">\(A=[\vec\alpha_1,\vec\alpha_2,...,\vec\alpha_n]^T\)</span>满足<span class="math inline">\(AA^T=E\)</span>，则这组基向量称为正交基，若还满足<span class="math inline">\(||\vec\alpha_i||=1,(i=1,2,...,n)\)</span>，则称为标准正交基。如，二维向量<span class="math inline">\([1,0]^T,[0,1]^T\)</span>构成一组标准正交基。在复平面中<sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://math.mit.edu/~gs/linearalgebra/](https://math.mit.edu/~gs/linearalgebra/)">[6]</span></a></sup>，转置被描述为<span class="math inline">\((A^H)_{ij}=\overline{A_{ji}}\)</span>，相比实数域，处了转置还要做一次共轭，称为共轭转置。那么正交基构成的矩阵<span class="math inline">\(A\)</span>应满足<span class="math inline">\(AA^H=E\)</span>。</p>
+<p>我们定义实数向量 <span class="math inline">\(\vec x=[x_1, x_2,...,x_n]^T\)</span> 与实数向量的 <span class="math inline">\(\vec x=[x_1, x_2,...,x_n]^T\)</span> 内积为<span class="math inline">\(&lt;\vec x,\vec y&gt;=\sum x_iy_i\)</span>。这是高中就学过的知识。但这里，我需要对向量的内积做一些扩充，即复数向量内积的定义。根据 hermitian 内积的定义<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://mathworld.wolfram.com/HermitianInnerProduct.html](https://mathworld.wolfram.com/HermitianInnerProduct.html)">[1]</span></a></sup>，复平面内积定义为 <span class="math inline">\(&lt;\vec x,\vec y&gt;=\sum x_i\bar y_i\)</span>。</p>
+<p>如果我们将向量内积扩展到函数空间，我们可以将函数视为无限长的向量，如 <span class="math inline">\(f(x)=[f(x_1),f(x_2),...]\)</span>，可以定义函数的内积<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://mathworld.wolfram.com/HilbertSpace.html](https://mathworld.wolfram.com/HilbertSpace.html)">[2]</span></a></sup> <span class="math inline">\(&lt;f,g&gt;=\int_a^b f(x)g(x)dx\)</span> 。若函数在复平面上，则可定义为 <span class="math inline">\(&lt;f,g&gt;=\int_a^b f(x)\overline{g(x)}dx\)</span>（有时共轭会放在左边）。</p>
+<p>然后我们来回顾一下向量空间中的基。由一组线性无关的向量可以张成一个向量空间，空间中的任意向量都可以使用这一组向量的线性组合表示。这组向量称作基向量。如果基向量构成的矩阵 <span class="math inline">\(A=[\vec\alpha_1,\vec\alpha_2,...,\vec\alpha_n]^T\)</span> 满足 <span class="math inline">\(AA^T=E\)</span>，则这组基向量称为正交基，若还满足 <span class="math inline">\(||\vec\alpha_i||=1,(i=1,2,...,n)\)</span>，则称为标准正交基。如，二维向量 <span class="math inline">\([1,0]^T,[0,1]^T\)</span> 构成一组标准正交基。在复平面中<sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://math.mit.edu/~gs/linearalgebra/](https://math.mit.edu/~gs/linearalgebra/)">[6]</span></a></sup>，转置被描述为 <span class="math inline">\((A^H)_{ij}=\overline{A_{ji}}\)</span>，相比实数域，处了转置还要做一次共轭，称为共轭转置。那么正交基构成的矩阵 <span class="math inline">\(A\)</span> 应满足 <span class="math inline">\(AA^H=E\)</span> 。</p>
 <p>假如有标准正交基<span class="math inline">\(\vec e_1, \vec e_2,...,\vec e_n\)</span>，若该空间中向量 <span class="math display">\[
 \vec v=w_1\vec e_1+w_2\vec e_2+,...+w_n\vec e_n=[\vec e_1,\vec e_2,..., \vec e_n][w_1,w_2,...,w_m]^T
 \]</span> 则 <span class="math display">\[
 [w_1,w_2,...,w_m]^T=[\vec e_1,\vec e_2,... ,\vec e_n]^{-1}\vec v=[\vec e_1,\vec e_2,... ,\vec e_n]^{T}\vec v
-\]</span> 可以看到，若想获得一组某向量在一组标准正交基上的表示，只需要让该向量与这组正交基做内积即可。</p>
-<p>函数也存在着基的概念，若函数<span class="math inline">\(f(x)=a_ng(x)+b_nh(x)\)</span>。那么<span class="math inline">\(g(x)\)</span>和<span class="math inline">\(h(x)\)</span>就是<span class="math inline">\(f(x)\)</span>的基。若内积<span class="math inline">\(&lt;g,h&gt;=0\)</span>，<span class="math inline">\(g\)</span>和<span class="math inline">\(h\)</span>是一组正交基。</p>
-<h2 id="傅里叶变换">傅里叶变换</h2>
-<p><img src="https://imagehost.vitaminz-image.top/gnn-note-5.png" srcset="/img/loading.gif" lazyload></p>
-<p>在学习傅里叶变换时，想必类似上面的图大家已经见过很多次了，这里我们暂且不从几何的角度去解释，从基的角度去阐述。大多数教材都会先从傅里叶级数入手，周期函数可以表示为许多正弦信号的叠加，有如下形式 <span class="math display">\[
-f(t)=\frac{a_0}{2}+\sum_{n=1}^{+\infty} [a_n\sin(\frac{n\pi}{l} t )+b_n\cos({\frac{n\pi}{l} t})]
-\]</span> 其中，<span class="math inline">\(n\)</span>是整数，<span class="math inline">\(l\)</span>为半周期。<span class="math inline">\(1,\sin(n\omega t ),\cos({n\omega t})\)</span>可以看作是<span class="math inline">\(f(t)\)</span>许许多多相互正交的基。这是因为<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="同济大学数学系．高等数学 [M]，第七版，高等教育出版社，2014-07-04">[3]</span></a></sup>：<span class="math inline">\(\int^{\pi}_{-\pi}\cos nxdx=0\)</span>,<span class="math inline">\(\int^{\pi}_{-\pi}\sin nxdx=0\)</span>, <span class="math inline">\(\int^{\pi}_{-\pi}\cos n_1x\sin n_2xdx=0\)</span>, <span class="math inline">\(\int^{\pi}_{-\pi}\cos n_1x\cos n_2xdx=0\)</span>,<span class="math inline">\(\int^{\pi}_{-\pi}\sin n_1x\sin n_2xdx=0\)</span>。</p>
-<p>如果使用Euler公式替换， 可以转换为如下形式 <span class="math display">\[
-f(t)=\sum^{+\infty}_{n=-\infty}c_ne^{i\omega t}
-\]</span> 其中，<span class="math inline">\(c_n=\frac{1}{l}\int_{-l}^{l}f(t)e^{-i\omega t}dt\)</span>。<span class="math inline">\(l\)</span>为半周期，<span class="math inline">\(\omega=\frac{n\pi}{l}\)</span>，即频率（有些地方会将<span class="math inline">\(\omega\)</span>视作角速度，指数项写作<span class="math inline">\(e^{2i\pi\omega t}\)</span>）。这里<span class="math inline">\(e^{i\omega t}\)</span>也是许多的标准正交基，这是因为<span class="math inline">\(\int e^{i\omega_1 t}e^{-i\omega_2 t}=0\)</span>，<span class="math inline">\(||e^{i\omega}||=1\)</span>。那么当<span class="math inline">\(l\rightarrow +\infty\)</span>时，<span class="math inline">\(c_n\)</span>就是傅里叶变换的形式了。即 <span class="math display">\[
-\mathcal{F}[f(t)]=\hat f(\omega)=\int_{-\infty}^{+\infty}f(t)e^{-i\omega t}dt
-\]</span> 所以像函数<span class="math inline">\(\hat f(\omega)\)</span>其实就是<span class="math inline">\(\omega\)</span>对应的傅里叶基<span class="math inline">\(e^{i\omega t}\)</span>的系数。上述式子也可以看作是<span class="math inline">\(f(t)\)</span>与正交基<span class="math inline">\(e^{i\omega t}\)</span>的内积，在上一节中提到了，若某个向量希望使用某组正交基来表示，拿就让这个向量和这组标准正交基做内积，标准正交基就像一个筛子，把基方向的分量提取出来了。</p>
-<p>在计算机中，使用离散傅里叶变换（DFT）的算法计算：被描述为<sup id="fnref:8" class="footnote-ref"><a href="#fn:8" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://en.wikipedia.org/wiki/Discrete_Fourier_transform](https://en.wikipedia.org/wiki/Hilbert_space#Fourier_analysis)">[8]</span></a></sup> <span class="math display">\[
-X_k=\sum_{n=0}^{N-1}x_n \cdot e^{-\frac{i2\pi}{N}kn}
-\]</span> 实际计算时如快速傅里叶变换（FFT），使用如下DFT矩阵<sup id="fnref:9" class="footnote-ref"><a href="#fn:9" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://en.wikipedia.org/wiki/DFT_matrix](https://en.wikipedia.org/wiki/DFT_matrix)">[9]</span></a></sup>与向量<span class="math inline">\(\vec x=[x_1,x_2,...,x_n]^T\)</span>相乘。 <span class="math display">\[
-W = \frac{1}{\sqrt{N}} \begin{bmatrix}
-1&amp;1&amp;1&amp;1&amp;\cdots &amp;1 \\
-1&amp;\omega&amp;\omega^2&amp;\omega^3&amp;\cdots&amp;\omega^{N-1} \\
-1&amp;\omega^2&amp;\omega^4&amp;\omega^6&amp;\cdots&amp;\omega^{2(N-1)}\\ 1&amp;\omega^3&amp;\omega^6&amp;\omega^9&amp;\cdots&amp;\omega^{3(N-1)}\\
-\vdots&amp;\vdots&amp;\vdots&amp;\vdots&amp;\ddots&amp;\vdots\\
-1&amp;\omega^{N-1}&amp;\omega^{2(N-1)}&amp;\omega^{3(N-1)}&amp;\cdots&amp;\omega^{(N-1)(N-1)}
-\end{bmatrix}
-\]</span> 其中<span class="math inline">\(\omega = e^{-2\pi i/N}\)</span>。易证明<span class="math inline">\(WW^H=E\)</span>，即它由一组标准正交基构成。具体的计算方法使用快速傅里叶变换，可以将复杂度降至<span class="math inline">\(O(n\log n)\)</span>，具体过程可以参考<sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://www.bilibili.com/video/BV1za411F76U?spm_id_from=333.337.search-card.all.click&amp;vd_source=3eafcac5a31e0009a6433cea9bc7ab45](https://www.bilibili.com/video/BV1za411F76U?spm_id_from=333.337.search-card.all.click&amp;vd_source=3eafcac5a31e0009a6433cea9bc7ab45)">[4]</span></a></sup>。</p>
+\]</span> 可以看到，若想获得一组某向量在一组标准正交基上的表示，只需要<strong>让该向量与这组正交基做内积</strong>即可。</p>
+<p>函数也存在着基的概念，若函数 <span class="math inline">\(f(x)=a_ng(x)+b_nh(x)\)</span>。那么 <span class="math inline">\(g(x)\)</span> 和 <span class="math inline">\(h(x)\)</span> 就是 <span class="math inline">\(f(x)\)</span> 的基。若内积<span class="math inline">\(&lt;g,h&gt;=0\)</span>，<span class="math inline">\(g\)</span> 和 <span class="math inline">\(h\)</span> 是一组正交基。</p>
 <h2 id="特征值与特征向量">特征值与特征向量</h2>
 <p>简单地回顾一些特征值与特征向量的定义，设有矩阵<span class="math inline">\(A\)</span>，若存在<span class="math inline">\(\lambda,\vec x\)</span>，使得<span class="math inline">\(A\vec x=\lambda \vec x\)</span>，则<span class="math inline">\(\lambda\)</span>称为<span class="math inline">\(A\)</span>的特征值，<span class="math inline">\(\vec x\)</span>则称为特征向量，<span class="math inline">\(\lambda\)</span>的值可以不止一个，同一个<span class="math inline">\(\lambda\)</span>可以对应多个线性无关的<span class="math inline">\(\vec x\)</span>。如果想了解特征值与特征向量的几何解释，可以参考<sup id="fnref:5" class="footnote-ref"><a href="#fn:5" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://www.bilibili.com/video/BV1ys411472E?p=14&amp;vd_source=3eafcac5a31e0009a6433cea9bc7ab45](https://www.bilibili.com/video/BV1ys411472E?p=14&amp;vd_source=3eafcac5a31e0009a6433cea9bc7ab45)">[5]</span></a></sup>，这不是本文的重点。</p>
-<p>接下啦我想说明的是一种特殊的矩阵：实对称矩阵，即由实数组成的对称矩阵（若<span class="math inline">\(A=A^T\)</span>则称<span class="math inline">\(A\)</span>为对称矩阵）。该矩阵有很多优良的性质。首先，<span class="math inline">\(N\)</span>阶是对称矩阵，具有<span class="math inline">\(N\)</span>个特征值以及<span class="math inline">\(N\)</span>个正交的特征向量。且实对称矩阵一定可以相似对角化，即<span class="math inline">\(Q^{-1}AQ=Q^TAQ=\Lambda\)</span>。对角矩阵<span class="math inline">\(\Lambda\)</span>对角线上为特征值<span class="math inline">\(\lambda_1,\lambda_2,...\)</span>，分别对应<span class="math inline">\(Q=[\vec q_1, \vec q_2,...]\)</span>中的特征向量<span class="math inline">\(\vec q_1,\vec q_2,...\)</span>。</p>
-<p>由于其<span class="math inline">\(Q\)</span>由一组线性无关的正交特征向量组成，他们可以构成一组正交基，特征向量组成的基也成为特征基。我们举个相似对角化的简单应用。假如要求实对称矩阵<span class="math inline">\(A\)</span>的幂次预算，如<span class="math inline">\(A^{100}\)</span>。直接计算是很麻烦的，若首先将其转化为对角矩阵<span class="math inline">\(Q^{-1}AQ=\Lambda\)</span>，那么<span class="math inline">\(Q^{-1}AQ...Q^{-1}AQQ^{-1}AQ=Q^{-1}A^{100}Q=\Lambda^{100}\)</span>。则<span class="math inline">\(A^{100}=Q\Lambda^{100}Q^{-1}\)</span>。对角矩阵的100次幂是非常容易计算的，这就使得计算量大大减小。</p>
-<p>特征值与特征向量在微分方程中也有着重要应用<sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://math.mit.edu/~gs/linearalgebra/](https://math.mit.edu/~gs/linearalgebra/)">[6]</span></a></sup>。如对一个一阶微分方程<span class="math inline">\(\frac{du}{dt}=\lambda u\)</span>。它的特解为<span class="math inline">\(e^{\lambda t}\)</span>，通解为<span class="math inline">\(u(t)=Ce^t\)</span>。假如<span class="math inline">\(A\)</span>是一个常数矩阵，<span class="math inline">\(\vec u=[u_1,u_2,...,u_n]\)</span>。<span class="math inline">\(\frac{d\vec u}{dt}=A \vec u\)</span>，那么这就是在求解一个微分线性方程组。我们可以验证的是（将以下2式子带入原方程就可以证得），当<span class="math inline">\(A\vec x= \lambda \vec x\)</span>时，<span class="math inline">\(\vec u\)</span>的一个特解为<span class="math inline">\(\vec u = e^{\lambda t}\vec x\)</span>，<span class="math inline">\(\vec x\)</span>是一个常数向量。那么解原方程组转化为求<span class="math inline">\(A\vec x= \lambda \vec x\)</span>的问题求出特征值与特征向量，最后的通解即为<span class="math inline">\(C_1e^{\lambda_1 t}\vec x_1+C_2e^{\lambda_2 t}\vec x_2,....\)</span>。</p>
-<p>若我们将一阶微分记作<span class="math inline">\(\nabla\)</span>，则<span class="math inline">\(\frac{d\vec u}{dt} = \nabla \vec u\)</span>，带入一个特解可以得到<span class="math inline">\(\nabla \vec u=\nabla e^{\lambda t}\vec x = \lambda e^{\lambda t}\vec x\)</span>。我们可以将<span class="math inline">\(\lambda\)</span>视为<span class="math inline">\(\Delta\)</span>的特征值，<span class="math inline">\(e^{\lambda t}\)</span>为特征向量。假如是二阶微分方程<span class="math inline">\(\frac{d^2\vec u}{dt^2}=A \vec u\)</span>，会有所不同，若满足<span class="math inline">\(A\vec x= \lambda \vec x\)</span>，其特解为<span class="math inline">\(\lambda e^{i\omega t} \vec x\)</span>，其中<span class="math inline">\(\omega^2=-\lambda\)</span>。同上，若我们将二阶微分算子记为<span class="math inline">\(\Delta\)</span>，则有<span class="math inline">\(\Delta \vec u =\Delta e^{i\omega t}\vec x= \lambda e^{i\omega t}\vec x\)</span>。那么<span class="math inline">\(e^{i\omega t}\vec x\)</span>就是<span class="math inline">\(\Delta\)</span>的特征向量。</p>
+<p>接下啦我想说明的是一种特殊的矩阵：实对称矩阵，即由实数组成的对称矩阵（若<span class="math inline">\(A=A^T\)</span>则称<span class="math inline">\(A\)</span>为对称矩阵。该矩阵有很多优良的性质。首先，<span class="math inline">\(N\)</span> 阶是对称矩阵，具有 <span class="math inline">\(N\)</span> 个特征值以及 <span class="math inline">\(N\)</span> 个正交的特征向量。且实对称矩阵一定可以正交对角化（事实上，一个方阵能够正交对角化的<strong>充要条件</strong>就是该矩阵为对称矩阵），即 <span class="math display">\[
+Q^{-1}AQ=Q^TAQ=\Lambda
+\]</span> 对角矩阵 <span class="math inline">\(\Lambda\)</span> 对角线上为特征值 <span class="math inline">\(\lambda_1,\lambda_2,...\lambda_{N}\)</span> ，分别对应 <span class="math inline">\(Q=[\vec q_1, \vec q_2,...,\vec{q}_{N}]\)</span> 中的特征向量 <span class="math inline">\(\vec q_1,\vec q_2,...\vec{q}_{N}\)</span> 。</p>
+<p>由于其<span class="math inline">\(Q\)</span>由一组线性无关的正交特征向量组成，他们可以构成一组正交基，特征向量组成的基也成为特征基。我们举个相似对角化的简单应用。假如要求实对称矩阵<span class="math inline">\(A\)</span>的幂次预算，如<span class="math inline">\(A^{100}\)</span>。直接计算是很麻烦的，若首先将其转化为对角矩阵 <span class="math inline">\(Q^{-1}AQ=\Lambda\)</span>，那么 <span class="math inline">\(Q^{-1}AQ...Q^{-1}AQQ^{-1}AQ=Q^{-1}A^{100}Q=\Lambda^{100}\)</span> 。则<span class="math inline">\(A^{100}=Q\Lambda^{100}Q^{-1}\)</span> 。对角矩阵的100次幂是非常容易计算的，这就使得计算量大大减小。</p>
+<h2 id="二次型">二次型</h2>
+<p>二次型是线性代数中的一个重要概念，它涉及到二次多项式的表达和研究。在线性代数中，一个定义在 n 维向量空间上的二次型可以表示为一个二次多项式。一般地，一个n维向量 <span class="math inline">\(\mathbf{x} = [x_1, x_2, \ldots, x_n]^T\)</span> 的二次型可表示为： <span class="math display">\[
+Q(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}
+\]</span> 其中，<span class="math inline">\(A\)</span> 是一个对称矩阵。对称矩阵的重要性在于它保证了二次型中交叉项的系数相等。在这个表达中，<span class="math inline">\(A\)</span>是二次型的系数矩阵，<span class="math inline">\(\mathbf{x}\)</span>是变量向量，<span class="math inline">\(\mathbf{x}^T\)</span>表示向量的转置。</p>
+<p>对于一个实二次型 <span class="math inline">\(Q(\mathbf{x}) = \mathbf{x}^T A \mathbf{x}\)</span>，其中 <span class="math inline">\(A\)</span> 是对称矩阵，展开的形式如下： <span class="math display">\[
+Q(\mathbf{x}) = \mathbf{x}^T A \mathbf{x} = \sum_{i=1}^{n} \sum_{j=1}^{n} a_{ij} x_i x_j
+\]</span> 其中，<span class="math inline">\(a_{ij}\)</span> 是矩阵 <span class="math inline">\(A\)</span> 的元素。这个展开形式表示了二次型中所有可能的平方项和交叉项。</p>
+<p>如果<span class="math inline">\(A\)</span>是实对称矩阵，那么二次型称为实二次型。如果<span class="math inline">\(A\)</span>是复对称矩阵，那么二次型称为复二次型。实二次型在应用中更为常见，因此下文主要讨论实二次型。</p>
+<p>二次型 <span class="math inline">\(Q(\mathbf{x})\)</span> 被称为<strong>正定</strong>的，如果对于所有非零的<span class="math inline">\(\mathbf{x}\)</span>，都有<span class="math inline">\(Q(\mathbf{x}) &gt; 0\)</span>，如果在 0 处可以取等号，则称之为<strong>半正定</strong>的。负定的定义类似，只是符号相反。</p>
+<p>实际应用中，二次型在优化问题、统计学、物理学等领域发挥着重要作用。例如，正定二次型常常出现在凸优化问题中，而负定二次型则在稳定性分析中有所应用。</p>
+<p>注：该小结内容由 chatgpt 辅助编写。</p>
+<h1 id="谱分析">谱分析</h1>
+<h2 id="傅里叶变换">傅里叶变换</h2>
+<p><img src="https://imagehost.vitaminz-image.top/gnn-note-5.png" srcset="/img/loading.gif" lazyload></p>
+<p>在学习傅里叶变换时，想必类似上面的图大家已经见过很多次了，大多数教材都会先从傅里叶级数入手，周期函数可以表示为许多正弦信号的叠加，有如下形式 <span class="math display">\[
+f(t)=\frac{a_0}{2}+\sum_{n=1}^{+\infty} [a_n\sin(\frac{n\pi}{l} t )+b_n\cos({\frac{n\pi}{l} t})]
+\]</span> 其中，<span class="math inline">\(n\)</span>是整数，<span class="math inline">\(l\)</span>为半周期。<span class="math inline">\(1,\sin(n\omega t ),\cos({n\omega t})\)</span> 可以看作是 <span class="math inline">\(f(t)\)</span> 许许多多相互正交的基。这是因为<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="同济大学数学系．高等数学 [M]，第七版，高等教育出版社，2014-07-04">[3]</span></a></sup>：<span class="math inline">\(\int^{\pi}_{-\pi}\cos nxdx=0\)</span>,<span class="math inline">\(\int^{\pi}_{-\pi}\sin nxdx=0\)</span>, <span class="math inline">\(\int^{\pi}_{-\pi}\cos n_1x\sin n_2xdx=0\)</span>, <span class="math inline">\(\int^{\pi}_{-\pi}\cos n_1x\cos n_2xdx=0\)</span>,<span class="math inline">\(\int^{\pi}_{-\pi}\sin n_1x\sin n_2xdx=0\)</span>。</p>
+<p>因此我们可以将傅里叶变换看作是将时序信号使用不同频率的信号来表示，而这些信号之间是正交的如果使用 Euler 公式替换，可以转换为如下形式 <span class="math display">\[
+f(t)=\sum^{+\infty}_{n=-\infty}c_ne^{i\omega t}
+\]</span> 其中，<span class="math inline">\(c_n=\frac{1}{l}\int_{-l}^{l}f(t)e^{-i\omega t}dt\)</span>。<span class="math inline">\(l\)</span>为半周期，<span class="math inline">\(\omega=\frac{n\pi}{l}\)</span>，即频率（有些地方会将<span class="math inline">\(\omega\)</span>视作角速度，指数项写作<span class="math inline">\(e^{2i\pi\omega t}\)</span>）。这里 <span class="math inline">\(e^{i\omega t}\)</span> 也是许多的标准正交基，这是因为 <span class="math inline">\(\int e^{i\omega_1 t}e^{-i\omega_2 t}=0\)</span>，<span class="math inline">\(||e^{i\omega}||=1\)</span>。那么当 <span class="math inline">\(l\rightarrow +\infty\)</span> 时，<span class="math inline">\(c_n\)</span> 就是傅里叶变换的形式了。即 <span class="math display">\[
+\mathcal{F}[f(t)]=\hat f(\omega)=\int_{-\infty}^{+\infty}f(t)e^{-i\omega t}dt
+\]</span> 所以像函数 <span class="math inline">\(\hat f(\omega)\)</span> 其实就是<span class="math inline">\(\omega\)</span>对应的傅里叶基 <span class="math inline">\(e^{i\omega t}\)</span> 的系数。上述式子也可以看作是 <span class="math inline">\(f(t)\)</span> 与正交基 <span class="math inline">\(e^{i\omega t}\)</span> 的内积，在<a href="#内积与基">内积与基</a>中提到了，若某个向量希望使用某组正交基来表示，拿就让这个向量和这组标准正交基做内积（函数的内积公式见小节<a href="#内积与基">内积与基</a>），就可以把基方向的分量提取出来了（仿佛一个筛子）。</p>
 <h2 id="拉普拉斯矩阵">拉普拉斯矩阵</h2>
 <p><img src="https://imagehost.vitaminz-image.top/gnn-note-7.png" srcset="/img/loading.gif" lazyload></p>
+<p>我们假设存在图 <span class="math inline">\(\mathcal{G}=(\mathcal{V}, \mathcal{E})\)</span>，结点 <span class="math inline">\(v\in \mathcal{V}\)</span> 的特征为 <span class="math inline">\(x_{v}\in\mathcal{X}\)</span>。为了简单起见，我们假设图为<strong>无向图</strong>，并且结点特征 <strong>仅有 1 个维度</strong>，因此<strong>所有的结点特征</strong>可以构成一个向量 <span class="math inline">\(x\)</span>。</p>
 <p>对于如上的图数据，它的拉普拉斯矩阵如下。其计算方法是<span class="math inline">\(D-A\)</span>。<span class="math inline">\(D\)</span>是每个结点的度组成的对角矩阵，<span class="math inline">\(A\)</span>是图的邻接矩阵。 <span class="math display">\[
 L=\left(\begin{array}{rrrrrr}
    2 &amp; -1 &amp;  0 &amp;  0 &amp; -1 &amp;  0\\
@@ -340,17 +344,37 @@ L=\left(\begin{array}{rrrrrr}
   -1 &amp; -1 &amp;  0 &amp; -1 &amp;  3 &amp;  0\\
    0 &amp;  0 &amp;  0 &amp; -1 &amp;  0 &amp;  1\\
 \end{array}\right)
-\]</span> 拉普拉斯矩阵是拉普拉斯算子在图数据中的表示方式<sup id="fnref:10" class="footnote-ref"><a href="#fn:10" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://csustan.csustan.edu/~tom/Clustering/GraphLaplacian-tutorial.pdf](https://csustan.csustan.edu/~tom/Clustering/GraphLaplacian-tutorial.pdf)">[10]</span></a></sup>，也被称为离散拉普拉斯算子。拉普拉斯算子是一个二阶微分算子，记作<span class="math inline">\(\Delta f = \sum_{i=1}^n \frac {\partial^2 f}{\partial x^2_i}\)</span>，在上一节的结尾，我们其实提到了这个算子。它的特征向量其实就是傅里叶变换中的正交基。实际上，实际上函数的傅里叶变换是定义在所有欧几里得空间上的函数的分解到其在拉普拉斯算子连续谱中的分量<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://en.wikipedia.org/wiki/Hilbert_space#Fourier_analysis](https://en.wikipedia.org/wiki/Hilbert_space#Fourier_analysis)">[7]</span></a></sup>。</p>
-<p>拉普拉斯矩阵是一个实对称矩阵，上一节中提到实对称矩阵的一些优良性质，存在标准正交基构成的矩阵<span class="math inline">\(U\)</span>及其对应的特征值对角矩阵<span class="math inline">\(\Lambda\)</span>使得拉普拉斯矩阵<span class="math inline">\(L\)</span>满足<span class="math inline">\(U^TLU=\Lambda\)</span>。其中<span class="math inline">\(U=[\vec u_1, \vec u_2,..., \vec u_n]\)</span>中的<span class="math inline">\(\vec u_i\)</span>可以视为离散的傅里叶基，而所对应的特征值则为频率。如果每个结点的特征（简单起见，每个结点只有一维特征）组成的向量<span class="math inline">\(\vec x=[x_1,x_2,...,x_n]\)</span>，那么如果我们将其转化为频域向量<span class="math inline">\(\vec y=U^T\vec x\)</span>，正如我们在第一节、第二节提到的方式一样。然后就可以在频域中操作，再转换为时域即可。</p>
-<h2 id="图的频域分量">图的频域分量</h2>
-<p>在讲图（Graph）之前，我们可以先聊聊图像（Image）。图像通常由一个矩阵表示，矩阵中的每一个值为像素点的值。根据通道数，图像又可以分为彩色图像和灰度图像。</p>
+\]</span> 由于 <span class="math inline">\(L\in \mathbb{R}^{n \times n}\)</span> 是实对称、半正定矩阵，上一节中提到实对称矩阵的一些优良性质，存在标准正交基构成的矩阵 <span class="math inline">\(U\)</span> 及其对应的特征值对角矩阵 <span class="math inline">\(\Lambda\)</span> 使得拉普拉斯矩阵 <span class="math inline">\(L\)</span> 满足 <span class="math display">\[
+U^TLU=\Lambda
+\]</span> 由于拉普拉斯矩阵 <span class="math inline">\(L\)</span> 为<strong>半正定</strong>矩阵（利用瑞丽熵即可证明），其对应的特征值按从小到大排序分别为 <span class="math inline">\(0=\lambda_{1},\lambda_{2},\dots,\lambda_{n}\)</span> ，并构成对角矩阵 <span class="math inline">\(\Lambda\)</span> ；其对应的特征向量构成矩阵 <span class="math inline">\(U=[ u_1, u_2,..., u_n]\)</span> ，其中 <span class="math inline">\(\ u_i\)</span> 为 <span class="math inline">\(n\)</span> 个标准正交的特征向量。</p>
+<p>我们<strong>暂且</strong>将 <span class="math inline">\(U\)</span> 矩阵中的标准正交基看作是一组傅里叶基，那么我们希望得到各个基的分量，在<a href="#内积与基">内积与基</a>以及<a href="#傅里叶变换">傅里叶变换</a>这两个小节都已提到相关的操作，类似的，就有以下等式： <span class="math display">\[
+\begin{gathered}
+x=U\hat{x}=\hat{x}_{1}u_{1}+\hat{x}_{2}u_{2}+\dots+\hat{x}_{n}u_{n} \\
+\Rightarrow~ \hat{x}=U^Tx
+\end{gathered}
+\]</span> <span class="math inline">\(\hat{x}\)</span> 即为各个基的分量，或者用傅里叶变换的角度来说就是各个频域的分量。</p>
+<p>问题来了，我们前面是暂且将它视为傅里叶基，那凭什么可以这么类比呢？我们来回忆一下傅里叶变换，它是将时序信号也是通过基变换，分解成了各个频率相互正交的频域信号的加权求和，而所谓的傅里叶基就是不同频率的频域信号。问题就在于，拉普拉斯矩阵 <span class="math inline">\(L\)</span> 的特征向量，何以表示频域信号。</p>
+<p>我们只需利用简单的变换，即可说明。 <span class="math display">\[
+u_{i}^TLu_{i}=u_{i}^T\lambda_{i} u_{i}=\lambda_{i}
+\]</span> 其中，<span class="math inline">\(u_{i}^TLu_{i}\)</span> 为二次型的形式。它可以表示什么呢？</p>
+<p>根据小节<a href="#二次型">二次型</a>的公式，我们有以下公式推导： <span class="math display">\[
+\begin{align*}
+x^TLx&amp;=\sum_{i\in \mathcal{V}}d_{i}x_{i}^2-\sum_{(i,j)\in \mathcal{E}}2x_{i}x_{j}\\
+&amp;=\sum_{(i,j)\in \mathcal{E}}(x_{i}^2-2x_{i}x_{j}+x_{j}^2)\\
+&amp;=\sum_{(i,j)\in \mathcal{E}}(x_{i}-x_{j})^2\\
+\end{align*}
+\]</span> 因此，二次型 <span class="math inline">\(x^TLx\)</span> 可以衡量结点特征之间的差异。其结点之间差异越大，其震荡就越大，即越粗糙；否则，震荡越小，也就越平滑。</p>
+<p>也就是说特征值 <span class="math inline">\(\lambda_{i}\)</span> 可以体现特征向量的平滑程度。<strong>特征向量所对应的特征值越大，就说明震荡越明显，越不平滑，对应的是傅里叶变换中的高频信号；反之，则越平滑，对应傅里叶变换中的低频信号。</strong></p>
+<p>因此，我们将拉普拉斯矩阵的特征基视作一组傅里叶基是合理，我们利用拉普拉斯的特征分解，达到了和时序信号傅里叶变换类似的效果。我们将这种分解方法称为谱分解（Spectral Decomposition），相关的分析方式称为图的谱分析（Graph Spectral Analysis），相关理论称为谱图理论（Graph Spectral Theory）。</p>
+<h2 id="可视化">可视化</h2>
+<p>如何可视化呢图的频域信号呢？事实上，我们可以借助图像（Image）的结构来可视化。图像通常由一个矩阵表示，矩阵中的每一个值为像素点的值。根据通道数，图像又可以分为彩色图像和灰度图像。</p>
 <p>事实上图像它也可表示称图的结构。如下图所示<sup id="fnref:11" class="footnote-ref"><a href="#fn:11" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://distill.pub/2021/gnn-intro/](https://distill.pub/2021/gnn-intro/)">[11]</span></a></sup>：</p>
-<p><img src="https://imagehost.vitaminz-image.top/gnn-note-8.png" srcset="/img/loading.gif" lazyload></p>
-<p>其中，每个像素与上下左右对角线相邻接。</p>
-<p>为了方便可视化图数据的频域分量，我们使用上述图数据的结构，即讲图像转化为图。具体执行如下操作<sup id="fnref:12" class="footnote-ref"><a href="#fn:12" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://distill.pub/2021/understanding-gnns/#learning](https://distill.pub/2021/understanding-gnns/#learning)">[12]</span></a></sup>：</p>
+<p><img src="https://imagehost.vitaminz-image.top/gnn-note-8.png" srcset="/img/loading.gif" lazyload alt="gnn-note-8.png"> <img src="https://imagehost.vitaminz-image.top/gnn-note-8.png" srcset="/img/loading.gif" lazyload></p>
+<p>其中，每个像素与上下左右对角线相邻接。类似的，一个序列也可以转变为图的结构，同样也可以借助它来做可视化 。这里暂且利用图像的结构来可视化。</p>
+<p>可视化的算法可描述如下：</p>
 <ul>
 <li>step1. 选择(10, 10)尺寸的图像结构，</li>
-<li>step2. 根据每个像素与上下左右对角线相邻接的规则构造邻接矩阵A, shape: (100, 10)</li>
+<li>step2. 根据每个像素与上下左右对角线相邻接的规则构造邻接矩阵A, shape: (100, 100)</li>
 <li>step3. 根据邻接矩阵A构造拉普拉斯矩阵L, shape: (100, 100)</li>
 <li>step4. 对拉普拉斯矩阵进行对角化, 求得特征基矩阵U, shape(100, 100)，对角矩阵P, shape(100, 100)，注意上述2个矩阵均按特征值的大小升序排序。</li>
 <li>step5. 取特征值大小前10的特征基，每个特征基重构为图像结构Image, shape(10, 10)，进行可视化</li>
@@ -358,11 +382,10 @@ L=\left(\begin{array}{rrrrrr}
 <p>经过以上的操作后，最后的结果如下图所示，特征值按从小到大排序。这就是每个频率所对应的分量。可以看到图像一开始是纯色的，后来开始出现了类似波形的渐变过程，随着频率的增加，其波形也越复杂。</p>
 <p><img src="https://imagehost.vitaminz-image.top/gnn-note-9.png" srcset="/img/loading.gif" lazyload></p>
 <p>以下为实现代码</p>
-<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> math<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">getLaplacianOfImage</span>(<span class="hljs-params">M, N</span>):<br>    idx = np.array([i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(M * N)]).reshape((M, N))<br>    tmp = np.ones((M+<span class="hljs-number">2</span>, N+<span class="hljs-number">2</span>), dtype=np.int32) * M * N<br>    tmp[<span class="hljs-number">1</span>:M+<span class="hljs-number">1</span>, <span class="hljs-number">1</span>:N+<span class="hljs-number">1</span>] = idx<br>    <span class="hljs-comment"># print(tmp)</span><br>    directH = [<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>]<br>    directV = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">1</span>]<br>    A = np.zeros((M * N + <span class="hljs-number">1</span>, M * N + <span class="hljs-number">1</span>))<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, M+<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, N+<span class="hljs-number">1</span>):<br>            <span class="hljs-keyword">for</span> h, v <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(directH, directV):<br>                A[tmp[i, j], tmp[i+h, j+v]] = <span class="hljs-number">1</span><br>    A = A[<span class="hljs-number">0</span>:M*N, <span class="hljs-number">0</span>:M*N]<br>    L = np.diag(np.<span class="hljs-built_in">sum</span>(A, axis=<span class="hljs-number">1</span>)) - A<br>    <span class="hljs-keyword">return</span> L<br><br>M, N = <span class="hljs-number">10</span>, <span class="hljs-number">10</span><br>L = getLaplacianOfImage(M, N)<br><span class="hljs-comment"># print(L)</span><br><span class="hljs-comment"># print(np.prod(L == L.T))</span><br><span class="hljs-comment"># plt.imshow(L)</span><br>eigenvalue, featurevector = np.linalg.eigh(L)<br>eigenbase = featurevector.T<br><br>min_val, max_val = np.<span class="hljs-built_in">min</span>(eigenbase), np.<span class="hljs-built_in">max</span>(eigenbase)<br>plt.figure(figsize=(<span class="hljs-number">15</span>, <span class="hljs-number">15</span>))<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">9</span>):<br>    fv = eigenbase[i].reshape((M, N))<br>    plt.subplot(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>, i+<span class="hljs-number">1</span>)<br>    plt.imshow(fv, vmin=min_val, vmax=max_val)<br>    plt.colorbar(fraction=<span class="hljs-number">0.045</span>)<br></code></pre></td></tr></tbody></table></figure>
-<h2 id="总结">总结</h2>
-<p>写该博客的起因是学习GNN时，不理解为什么使用<span class="math inline">\(L\)</span>矩阵，而不是用邻接矩阵或者其他实对称矩阵，以及在文献中<sup id="fnref:13" class="footnote-ref"><a href="#fn:13" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022.](https://arxiv.org/abs/2205.07308)">[13]</span></a></sup>看到<span class="math inline">\(L\)</span>矩阵的谱分解其实就是傅里叶变换在图领域的应用。为了深入了解这二者的关系，捡起了以前学过但又未深入理解的知识。完成这篇博客，还是很有收获的。</p>
-<p><span id="ckwx"> </span></p>
-<h2 id="参考资料">参考资料</h2>
+<figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np<br><span class="hljs-keyword">import</span> math<br><span class="hljs-keyword">import</span> matplotlib.pyplot <span class="hljs-keyword">as</span> plt<br><br><span class="hljs-keyword">def</span> <span class="hljs-title function_">getLaplacianOfImage</span>(<span class="hljs-params">M, N</span>):<br>    idx = np.array([i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(M * N)]).reshape((M, N))<br>    tmp = np.ones((M+<span class="hljs-number">2</span>, N+<span class="hljs-number">2</span>), dtype=np.int32) * M * N<br>    tmp[<span class="hljs-number">1</span>:M+<span class="hljs-number">1</span>, <span class="hljs-number">1</span>:N+<span class="hljs-number">1</span>] = idx<br><br>    directH = [<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>]<br>    directV = [<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, -<span class="hljs-number">1</span>, <span class="hljs-number">1</span>]<br>    A = np.zeros((M * N + <span class="hljs-number">1</span>, M * N + <span class="hljs-number">1</span>))<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, M+<span class="hljs-number">1</span>):<br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">1</span>, N+<span class="hljs-number">1</span>):<br>            <span class="hljs-keyword">for</span> h, v <span class="hljs-keyword">in</span> <span class="hljs-built_in">zip</span>(directH, directV):<br>                A[tmp[i, j], tmp[i+h, j+v]] = <span class="hljs-number">1</span><br>    A = A[<span class="hljs-number">0</span>:M*N, <span class="hljs-number">0</span>:M*N]<br>    L = np.diag(np.<span class="hljs-built_in">sum</span>(A, axis=<span class="hljs-number">1</span>)) - A<br>    <span class="hljs-keyword">return</span> L<br><br>M, N = <span class="hljs-number">10</span>, <span class="hljs-number">10</span><br>L = getLaplacianOfImage(M, N)<br>eigenvalue, featurevector = np.linalg.eigh(L)<br>eigenbase = featurevector.T<br><br>min_val, max_val = np.<span class="hljs-built_in">min</span>(eigenbase), np.<span class="hljs-built_in">max</span>(eigenbase)<br>plt.figure(figsize=(<span class="hljs-number">15</span>, <span class="hljs-number">15</span>))<br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">9</span>):<br>    fv = eigenbase[i].reshape((M, N))<br>    plt.subplot(<span class="hljs-number">3</span>, <span class="hljs-number">3</span>, i+<span class="hljs-number">1</span>)<br>    plt.imshow(fv, vmin=min_val, vmax=max_val)<br>    plt.colorbar(fraction=<span class="hljs-number">0.045</span>)<br></code></pre></td></tr></tbody></table></figure>
+<h1 id="总结">总结</h1>
+<p>写该博客的起因是学习GNN时，不理解为什么使用<span class="math inline">\(L\)</span>矩阵，而不是用邻接矩阵或者其他实对称矩阵，以及在文献中<sup id="fnref:13" class="footnote-ref"><a href="#fn:13" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022.](https://arxiv.org/abs/2205.07308)">[13]</span></a></sup>看到 <span class="math inline">\(L\)</span> 矩阵的谱分解其实就是傅里叶变换在图领域的应用。为了深入了解这二者的关系，捡起了以前学过但又未深入理解的知识。完成这篇博客，还是很有收获的。</p>
+<h1 id="参考资料">参考资料</h1>
 <section class="footnotes">
 <div class="footnote-list">
 <ol>
@@ -462,7 +485,7 @@ L=\left(\begin{array}{rrrrrr}
   <div class="license-box my-3">
     <div class="license-title">
       <div>图（Graph）数据的频域</div>
-      <div>http://vitaminzl.com/2022/08/20/gnn/tu-graph-shu-ju-de-pin-yu/</div>
+      <div>http://vitaminzl.com/2022/08/20/gnn/spetcral-theory/</div>
     </div>
     <div class="license-meta">
       
@@ -499,6 +522,29 @@ L=\left(\begin{array}{rrrrrr}
 
 
 
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/08/30/gnn/pin-pu-zai-ju-lei-zhong-de-ying-yong/" title="谱在聚类中的应用">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">谱在聚类中的应用</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/07/16/kg/lun-wen-su-du-1-guan-xi-chou-qu/" title="论文速读&lt;一&gt;：关系抽取与提示学习">
+                        <span class="hidden-mobile">论文速读&lt;一&gt;：关系抽取与提示学习</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 
