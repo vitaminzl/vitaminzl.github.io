@@ -16,12 +16,12 @@
   <meta name="author" content="vitaminzl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="谱在聚类中的应用 本文主要对谱聚类的几篇论文进行解读，并对一部分的结果进行复现。本文首先从谱聚类的一般过程入手，介绍传统的谱聚类方法NCuts、NJW。针对传统方法的相似度量的缺陷，引入改进方法ZP；又针对特征向量的选择问题，引入改进方法PI。结合以上2种方式，加入TKNN，引入改进方法ROSC，接着对ROSC中修正相似度矩阵的缺陷，结合trace lasso正则项，引入改进方法CAST。最后，对">
+    <meta name="description" content="谱聚类 本文主要对谱聚类的几篇论文进行解读，并对一部分的结果进行复现。本文首先从谱聚类的一般过程入手，介绍传统的谱聚类方法NCuts、NJW。针对传统方法的相似度量的缺陷，引入改进方法ZP；又针对特征向量的选择问题，引入改进方法PI。结合以上2种方式，加入TKNN，引入改进方法ROSC，接着对ROSC中修正相似度矩阵的缺陷，结合trace lasso正则项，引入改进方法CAST。最后，对于ROSC">
 <meta property="og:type" content="article">
 <meta property="og:title" content="谱聚类">
-<meta property="og:url" content="http://vitaminzl.com/2022/08/30/gnn/pin-pu-zai-ju-lei-zhong-de-ying-yong/index.html">
+<meta property="og:url" content="http://vitaminzl.com/2022/08/30/gnn/spectral-cluster/index.html">
 <meta property="og:site_name" content="闲渔">
-<meta property="og:description" content="谱在聚类中的应用 本文主要对谱聚类的几篇论文进行解读，并对一部分的结果进行复现。本文首先从谱聚类的一般过程入手，介绍传统的谱聚类方法NCuts、NJW。针对传统方法的相似度量的缺陷，引入改进方法ZP；又针对特征向量的选择问题，引入改进方法PI。结合以上2种方式，加入TKNN，引入改进方法ROSC，接着对ROSC中修正相似度矩阵的缺陷，结合trace lasso正则项，引入改进方法CAST。最后，对">
+<meta property="og:description" content="谱聚类 本文主要对谱聚类的几篇论文进行解读，并对一部分的结果进行复现。本文首先从谱聚类的一般过程入手，介绍传统的谱聚类方法NCuts、NJW。针对传统方法的相似度量的缺陷，引入改进方法ZP；又针对特征向量的选择问题，引入改进方法PI。结合以上2种方式，加入TKNN，引入改进方法ROSC，接着对ROSC中修正相似度矩阵的缺陷，结合trace lasso正则项，引入改进方法CAST。最后，对于ROSC">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-10.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/li-spectral-cluster-4.png">
@@ -38,7 +38,7 @@
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/li-spectral-cluster-15.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/li-spectral-cluster-16.png">
 <meta property="article:published_time" content="2022-08-30T04:00:00.000Z">
-<meta property="article:modified_time" content="2023-11-24T11:59:09.433Z">
+<meta property="article:modified_time" content="2023-11-24T11:59:24.481Z">
 <meta property="article:author" content="vitaminzl">
 <meta property="article:tag" content="频域">
 <meta property="article:tag" content="聚类">
@@ -299,7 +299,7 @@
             
               <div class="markdown-body">
                 
-                <h1 id="谱在聚类中的应用">谱在聚类中的应用</h1>
+                <h1 id="谱聚类">谱聚类</h1>
 <p>本文主要对谱聚类的几篇论文进行解读，并对一部分的结果进行复现。本文首先从谱聚类的一般过程入手，介绍传统的谱聚类方法NCuts、NJW。针对传统方法的相似度量的缺陷，引入改进方法ZP；又针对特征向量的选择问题，引入改进方法PI。结合以上2种方式，加入TKNN，引入改进方法ROSC，接着对ROSC中修正相似度矩阵的缺陷，结合trace lasso正则项，引入改进方法CAST。最后，对于ROSC和CAST中都提到的Group Effect进行解读。文章结尾补充了幂代法和矩阵求导的内容。其中我分别对PI方法和ROSC方法进行代码复现。</p>
 <p>代码的仓库地址：<a target="_blank" rel="noopener" href="https://github.com/vitaminzl/SpectralCluster">https://github.com/vitaminzl/SpectralCluster</a></p>
 <p>备用镜像：<a target="_blank" rel="noopener" href="https://gitee.com/murphy_z/spectral-cluster">https://gitee.com/murphy_z/spectral-cluster</a></p>
@@ -627,7 +627,7 @@ Z^*=(2X^TX+\alpha_1 I+\alpha_2 I)^{-1}(X^TX+\alpha_2W)
   <div class="license-box my-3">
     <div class="license-title">
       <div>谱聚类</div>
-      <div>http://vitaminzl.com/2022/08/30/gnn/pin-pu-zai-ju-lei-zhong-de-ying-yong/</div>
+      <div>http://vitaminzl.com/2022/08/30/gnn/spectral-cluster/</div>
     </div>
     <div class="license-meta">
       
@@ -664,6 +664,29 @@ Z^*=(2X^TX+\alpha_1 I+\alpha_2 I)^{-1}(X^TX+\alpha_2W)
 
 
 
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2022/09/02/gnn/lun-wen-su-du-2-gnn-xi-lie/" title="论文速读&lt;二&gt;：GNN系列">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">论文速读&lt;二&gt;：GNN系列</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2022/08/20/gnn/spetcral-theory/" title="谱图理论">
+                        <span class="hidden-mobile">谱图理论</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
               
             </div>
 

@@ -6,7 +6,7 @@
   <link href="http://vitaminzl.com/atom.xml" rel="self"/>
   
   <link href="http://vitaminzl.com/"/>
-  <updated>2023-08-30T04:05:56.000Z</updated>
+  <updated>2024-04-22T04:22:14.538Z</updated>
   <id>http://vitaminzl.com/</id>
   
   <author>
@@ -15,6 +15,32 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>博客搭建总结报告</title>
+    <link href="http://vitaminzl.com/2024/04/22/others/opensource-hw1/"/>
+    <id>http://vitaminzl.com/2024/04/22/others/opensource-hw1/</id>
+    <published>2024-04-22T04:00:00.000Z</published>
+    <updated>2024-04-22T04:22:14.538Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;简介&lt;/h1&gt;
+&lt;p&gt;本文将简要介绍使用 hexo 框架搭建静态博客，并部署在 Github Pages 上。&lt;sup id=&quot;fnref:2&quot; class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn:2&quot;</summary>
+        
+      
+    
+    
+    
+    <category term="课程作业" scheme="http://vitaminzl.com/categories/%E8%AF%BE%E7%A8%8B%E4%BD%9C%E4%B8%9A/"/>
+    
+    
+    <category term="blog" scheme="http://vitaminzl.com/tags/blog/"/>
+    
+  </entry>
   
   <entry>
     <title>GNN论文精选-第二组</title>
@@ -37,9 +63,9 @@
     <category term="GNN" scheme="http://vitaminzl.com/categories/GNN/"/>
     
     
-    <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
-    
     <category term="GNN" scheme="http://vitaminzl.com/tags/GNN/"/>
+    
+    <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
     
     <category term="综述" scheme="http://vitaminzl.com/tags/%E7%BB%BC%E8%BF%B0/"/>
     
@@ -69,20 +95,20 @@
     <category term="GNN" scheme="http://vitaminzl.com/categories/GNN/"/>
     
     
-    <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
-    
     <category term="GNN" scheme="http://vitaminzl.com/tags/GNN/"/>
+    
+    <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
     
     <category term="论文速读" scheme="http://vitaminzl.com/tags/%E8%AE%BA%E6%96%87%E9%80%9F%E8%AF%BB/"/>
     
   </entry>
   
   <entry>
-    <title>谱在聚类中的应用</title>
-    <link href="http://vitaminzl.com/2022/08/30/gnn/pin-pu-zai-ju-lei-zhong-de-ying-yong/"/>
-    <id>http://vitaminzl.com/2022/08/30/gnn/pin-pu-zai-ju-lei-zhong-de-ying-yong/</id>
+    <title>谱聚类</title>
+    <link href="http://vitaminzl.com/2022/08/30/gnn/spectral-cluster/"/>
+    <id>http://vitaminzl.com/2022/08/30/gnn/spectral-cluster/</id>
     <published>2022-08-30T04:00:00.000Z</published>
-    <updated>2022-11-12T04:30:52.000Z</updated>
+    <updated>2023-11-24T11:59:24.481Z</updated>
     
     
       
@@ -100,22 +126,22 @@
     
     <category term="频域" scheme="http://vitaminzl.com/tags/%E9%A2%91%E5%9F%9F/"/>
     
-    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
-    
     <category term="聚类" scheme="http://vitaminzl.com/tags/%E8%81%9A%E7%B1%BB/"/>
     
     <category term="谱聚类" scheme="http://vitaminzl.com/tags/%E8%B0%B1%E8%81%9A%E7%B1%BB/"/>
     
     <category term="多尺度数据" scheme="http://vitaminzl.com/tags/%E5%A4%9A%E5%B0%BA%E5%BA%A6%E6%95%B0%E6%8D%AE/"/>
     
+    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
+    
   </entry>
   
   <entry>
-    <title>图（Graph）数据的频域</title>
+    <title>谱图理论</title>
     <link href="http://vitaminzl.com/2022/08/20/gnn/spetcral-theory/"/>
     <id>http://vitaminzl.com/2022/08/20/gnn/spetcral-theory/</id>
     <published>2022-08-20T04:00:00.000Z</published>
-    <updated>2023-11-24T11:44:39.930Z</updated>
+    <updated>2023-11-24T11:58:03.680Z</updated>
     
     
       
@@ -134,13 +160,13 @@
     
     <category term="频域" scheme="http://vitaminzl.com/tags/%E9%A2%91%E5%9F%9F/"/>
     
+    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
+    
     <category term="谱图理论" scheme="http://vitaminzl.com/tags/%E8%B0%B1%E5%9B%BE%E7%90%86%E8%AE%BA/"/>
     
     <category term="傅里叶变换" scheme="http://vitaminzl.com/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
     
     <category term="线性代数" scheme="http://vitaminzl.com/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
-    
-    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
     
   </entry>
   
@@ -167,9 +193,9 @@
     <category term="知识图谱" scheme="http://vitaminzl.com/categories/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
     
     
-    <category term="知识图谱" scheme="http://vitaminzl.com/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
-    
     <category term="图" scheme="http://vitaminzl.com/tags/%E5%9B%BE/"/>
+    
+    <category term="知识图谱" scheme="http://vitaminzl.com/tags/%E7%9F%A5%E8%AF%86%E5%9B%BE%E8%B0%B1/"/>
     
     <category term="关系抽取" scheme="http://vitaminzl.com/tags/%E5%85%B3%E7%B3%BB%E6%8A%BD%E5%8F%96/"/>
     
