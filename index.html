@@ -75,9 +75,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="闲渔" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="闲渔" type="application/atom+xml">
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 
@@ -238,7 +238,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/04/22/others/opensource-hw1/" target="_self">
         <div>
-          简介 本文将简要介绍使用 hexo 框架搭建静态博客，并部署在 Github Pages 上。[2] Hexo 是一个基于 Node.js 的快速、简单且强大的静态博客框架。它使用 Markdown 格式来书写文章，并能够通过主题和插件进行个性化定制。 使用 GitHub Pages 部署 Hexo 博客是一种简单且免费的方式，可以让你的博客快速上线，并且拥有稳定的托管服务。 搭建步骤 安装与初始
+          简介本文将简要介绍使用 hexo 框架搭建静态博客，并部署在 Github Pages 上。[2] Hexo 是一个基于 Node.js 的快速、简单且强大的静态博客框架。它使用 Markdown 格式来书写文章，并能够通过主题和插件进行个性化定制。 使用 GitHub Pages 部署 Hexo 博客是一种简单且免费的方式，可以让你的博客快速上线，并且拥有稳定的托管服务。 搭建步骤安装与初始化
         </div>
       </a>
 
@@ -299,7 +299,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/08/30/gnn/notes-for-collection-2/" target="_self">
         <div>
-          DropEdge Towards Deep Graph Convolutional Networks On Node Classification Drop Edge Drop Edge[1]，其方法顾名思义，就是丢弃图中的边。 具体来说，对于一个邻接矩阵 \(A\) ,对于其中的每一个元素以 \(p\) 的概率置0。 这看起来和 dropout 如出一辙，事实上在实现的时候，也是采用 dropo
+          DropEdge Towards Deep Graph Convolutional Networks On Node ClassificationDrop EdgeDrop Edge[1]，其方法顾名思义，就是丢弃图中的边。 具体来说，对于一个邻接矩阵 $A$ ,对于其中的每一个元素以 $p$ 的概率置0。 这看起来和 dropout 如出一辙，事实上在实现的时候，也是采用 dropout 算子来
         </div>
       </a>
 
@@ -366,7 +366,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/09/02/gnn/lun-wen-su-du-2-gnn-xi-lie/" target="_self">
         <div>
-          论文速读&lt;二&gt;：GNN系列 论文速读系列的第二期，论文速读主要提取论文的Key Idea，本期为GNN系列的论文速读，选取了4篇经典论文和3篇近期的论文。上期为知识图谱领域的关系抽取。 Key Idea Semi-supervised Classification with Graph Convolutional Networks[1] GCN的核心公式如下，其中\(\sigma\)表
+          论文速读&lt;二&gt;：GNN系列论文速读系列的第二期，论文速读主要提取论文的Key Idea，本期为GNN系列的论文速读，选取了4篇经典论文和3篇近期的论文。上期为知识图谱领域的关系抽取。 Key IdeaSemi-supervised Classification with Graph Convolutional Networks[1]GCN的核心公式如下，其中$\sigma$表示激活函数
         </div>
       </a>
 
@@ -431,7 +431,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/08/30/gnn/spectral-cluster/" target="_self">
         <div>
-          谱聚类 本文主要对谱聚类的几篇论文进行解读，并对一部分的结果进行复现。本文首先从谱聚类的一般过程入手，介绍传统的谱聚类方法NCuts、NJW。针对传统方法的相似度量的缺陷，引入改进方法ZP；又针对特征向量的选择问题，引入改进方法PI。结合以上2种方式，加入TKNN，引入改进方法ROSC，接着对ROSC中修正相似度矩阵的缺陷，结合trace lasso正则项，引入改进方法CAST。最后，对于ROSC
+          谱聚类本文主要对谱聚类的几篇论文进行解读，并对一部分的结果进行复现。本文首先从谱聚类的一般过程入手，介绍传统的谱聚类方法NCuts、NJW。针对传统方法的相似度量的缺陷，引入改进方法ZP；又针对特征向量的选择问题，引入改进方法PI。结合以上2种方式，加入TKNN，引入改进方法ROSC，接着对ROSC中修正相似度矩阵的缺陷，结合trace lasso正则项，引入改进方法CAST。最后，对于ROSC和
         </div>
       </a>
 
@@ -472,13 +472,13 @@
             
               <a href="/tags/%E9%A2%91%E5%9F%9F/">#频域</a>
             
+              <a href="/tags/python/">#python</a>
+            
               <a href="/tags/%E8%81%9A%E7%B1%BB/">#聚类</a>
             
               <a href="/tags/%E8%B0%B1%E8%81%9A%E7%B1%BB/">#谱聚类</a>
             
               <a href="/tags/%E5%A4%9A%E5%B0%BA%E5%BA%A6%E6%95%B0%E6%8D%AE/">#多尺度数据</a>
-            
-              <a href="/tags/python/">#python</a>
             
           </div>
         
@@ -500,7 +500,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/08/20/gnn/spetcral-theory/" target="_self">
         <div>
-          写在前面 图神经网络（GNN）是近年来愈发火热，用以对图（Graph）数据进行特征提取以及各种下游任务。注意这里的图（Graph）应和图像（Image）区分，图是一种由点集与边集组成的数据结构，常记作\(\mathcal{G}&#x3D;(\mathcal{V,E})\)。以下是我学习谱图理论时的一些记录。本文先介绍了线性代数的一些前置知识，包括内积与基、特征值与特征向量、二次型等内容。接着从基变换、频域信
+          写在前面图神经网络（GNN）是近年来愈发火热，用以对图（Graph）数据进行特征提取以及各种下游任务。注意这里的图（Graph）应和图像（Image）区分，图是一种由点集与边集组成的数据结构，常记作$\mathcal{G}&#x3D;(\mathcal{V,E})$。以下是我学习谱图理论时的一些记录。本文先介绍了线性代数的一些前置知识，包括内积与基、特征值与特征向量、二次型等内容。接着从基变换、频域信号的角
         </div>
       </a>
 
@@ -541,13 +541,13 @@
             
               <a href="/tags/%E9%A2%91%E5%9F%9F/">#频域</a>
             
-              <a href="/tags/python/">#python</a>
-            
               <a href="/tags/%E8%B0%B1%E5%9B%BE%E7%90%86%E8%AE%BA/">#谱图理论</a>
             
               <a href="/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/">#傅里叶变换</a>
             
               <a href="/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">#线性代数</a>
+            
+              <a href="/tags/python/">#python</a>
             
           </div>
         
@@ -569,7 +569,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/07/16/kg/lun-wen-su-du-1-guan-xi-chou-qu/" target="_self">
         <div>
-          论文速读&lt;一&gt;：关系抽取与提示学习 论文速读系列为对论文的核心思想进行快速抓取，仅记录论文的Key Idea。本期为论文速读系列的第一期，选取了5篇近期知识图谱领域的关系抽取相关论文。 Key Idea Enriching pre-trained language model with entity information for relation classification.[1]
+          论文速读&lt;一&gt;：关系抽取与提示学习论文速读系列为对论文的核心思想进行快速抓取，仅记录论文的Key Idea。本期为论文速读系列的第一期，选取了5篇近期知识图谱领域的关系抽取相关论文。 Key IdeaEnriching pre-trained language model with entity information for relation classification.[1] R
         </div>
       </a>
 
@@ -636,7 +636,7 @@
       
       <a class="index-excerpt index-excerpt__noimg" href="/2022/06/20/compiler/dong-shou-xie-yi-ge-bian-yi-qi/" target="_self">
         <div>
-          ToyC语言 本项目用于学习编译原理。 将参照龙书版本的《编译原理》， 以及LLVM的编译器制作教程：https:&#x2F;&#x2F;llvm.org&#x2F;docs&#x2F;tutorial&#x2F;MyFirstLanguageFrontend&#x2F;LangImpl01.html 制作一个完整的编译器前端。 编译器的结构   图1：摘自《Compilers Principles, Techniques &amp; Tools》第二版F
+          ToyC语言本项目用于学习编译原理。 将参照龙书版本的《编译原理》， 以及LLVM的编译器制作教程：https:&#x2F;&#x2F;llvm.org&#x2F;docs&#x2F;tutorial&#x2F;MyFirstLanguageFrontend&#x2F;LangImpl01.html 制作一个完整的编译器前端。 编译器的结构 图1：摘自《Compilers Principles, Techniques &amp; Tools》第二版Figu
         </div>
       </a>
 

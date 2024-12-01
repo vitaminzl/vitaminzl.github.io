@@ -16,12 +16,12 @@
   <meta name="author" content="vitaminzl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="谱在聚类中的应用 本文主要对谱聚类的几篇论文进行解读，并对一部分的结果进行复现。本文首先从谱聚类的一般过程入手，介绍传统的谱聚类方法NCuts、NJW。针对传统方法的相似度量的缺陷，引入改进方法ZP；又针对特征向量的选择问题，引入改进方法PI。结合以上2种方式，加入TKNN，引入改进方法ROSC，接着对ROSC中修正相似度矩阵的缺陷，结合trace lasso正则项，引入改进方法CAST。最后，对">
+    <meta name="description" content="谱在聚类中的应用本文主要对谱聚类的几篇论文进行解读，并对一部分的结果进行复现。本文首先从谱聚类的一般过程入手，介绍传统的谱聚类方法NCuts、NJW。针对传统方法的相似度量的缺陷，引入改进方法ZP；又针对特征向量的选择问题，引入改进方法PI。结合以上2种方式，加入TKNN，引入改进方法ROSC，接着对ROSC中修正相似度矩阵的缺陷，结合trace lasso正则项，引入改进方法CAST。最后，对于">
 <meta property="og:type" content="article">
 <meta property="og:title" content="谱聚类">
 <meta property="og:url" content="http://vitaminzl.com/2022/08/30/gnn/pin-pu-zai-ju-lei-zhong-de-ying-yong/index.html">
 <meta property="og:site_name" content="闲渔">
-<meta property="og:description" content="谱在聚类中的应用 本文主要对谱聚类的几篇论文进行解读，并对一部分的结果进行复现。本文首先从谱聚类的一般过程入手，介绍传统的谱聚类方法NCuts、NJW。针对传统方法的相似度量的缺陷，引入改进方法ZP；又针对特征向量的选择问题，引入改进方法PI。结合以上2种方式，加入TKNN，引入改进方法ROSC，接着对ROSC中修正相似度矩阵的缺陷，结合trace lasso正则项，引入改进方法CAST。最后，对">
+<meta property="og:description" content="谱在聚类中的应用本文主要对谱聚类的几篇论文进行解读，并对一部分的结果进行复现。本文首先从谱聚类的一般过程入手，介绍传统的谱聚类方法NCuts、NJW。针对传统方法的相似度量的缺陷，引入改进方法ZP；又针对特征向量的选择问题，引入改进方法PI。结合以上2种方式，加入TKNN，引入改进方法ROSC，接着对ROSC中修正相似度矩阵的缺陷，结合trace lasso正则项，引入改进方法CAST。最后，对于">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/gnn-note-10.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/li-spectral-cluster-4.png">
@@ -38,13 +38,13 @@
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/li-spectral-cluster-15.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/li-spectral-cluster-16.png">
 <meta property="article:published_time" content="2022-08-30T04:00:00.000Z">
-<meta property="article:modified_time" content="2023-11-24T11:59:09.433Z">
+<meta property="article:modified_time" content="2023-11-24T11:59:10.000Z">
 <meta property="article:author" content="vitaminzl">
 <meta property="article:tag" content="频域">
+<meta property="article:tag" content="python">
 <meta property="article:tag" content="聚类">
 <meta property="article:tag" content="谱聚类">
 <meta property="article:tag" content="多尺度数据">
-<meta property="article:tag" content="python">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://imagehost.vitaminz-image.top/gnn-note-10.png">
   
@@ -105,9 +105,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="闲渔" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="闲渔" type="application/atom+xml">
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 
@@ -256,7 +256,7 @@
         
         
         
-          53 分钟
+          54 分钟
         
       </span>
     
@@ -299,281 +299,179 @@
             
               <div class="markdown-body">
                 
-                <h1 id="谱在聚类中的应用">谱在聚类中的应用</h1>
-<p>本文主要对谱聚类的几篇论文进行解读，并对一部分的结果进行复现。本文首先从谱聚类的一般过程入手，介绍传统的谱聚类方法NCuts、NJW。针对传统方法的相似度量的缺陷，引入改进方法ZP；又针对特征向量的选择问题，引入改进方法PI。结合以上2种方式，加入TKNN，引入改进方法ROSC，接着对ROSC中修正相似度矩阵的缺陷，结合trace lasso正则项，引入改进方法CAST。最后，对于ROSC和CAST中都提到的Group Effect进行解读。文章结尾补充了幂代法和矩阵求导的内容。其中我分别对PI方法和ROSC方法进行代码复现。</p>
-<p>代码的仓库地址：<a target="_blank" rel="noopener" href="https://github.com/vitaminzl/SpectralCluster">https://github.com/vitaminzl/SpectralCluster</a></p>
+                <h1 id="谱在聚类中的应用"><a href="#谱在聚类中的应用" class="headerlink" title="谱在聚类中的应用"></a>谱在聚类中的应用</h1><p>本文主要对谱聚类的几篇论文进行解读，并对一部分的结果进行复现。本文首先从谱聚类的一般过程入手，介绍传统的谱聚类方法NCuts、NJW。针对传统方法的相似度量的缺陷，引入改进方法ZP；又针对特征向量的选择问题，引入改进方法PI。结合以上2种方式，加入TKNN，引入改进方法ROSC，接着对ROSC中修正相似度矩阵的缺陷，结合trace lasso正则项，引入改进方法CAST。最后，对于ROSC和CAST中都提到的Group Effect进行解读。文章结尾补充了幂代法和矩阵求导的内容。其中我分别对PI方法和ROSC方法进行代码复现。</p>
+<p>代码的仓库地址：<a target="_blank" rel="noopener" href="https://github.com/vitaminzl/SpectralCluster">https://github.com/vitaminzl/SpectralCluster</a> </p>
 <p>备用镜像：<a target="_blank" rel="noopener" href="https://gitee.com/murphy_z/spectral-cluster">https://gitee.com/murphy_z/spectral-cluster</a></p>
-<h2 id="pipeline">Pipeline</h2>
-<p><img src="https://imagehost.vitaminz-image.top/gnn-note-10.png" srcset="/img/loading.gif" lazyload></p>
-<p>谱聚类的一般过程如上图所示<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Li X, Kao B, Shan C, et al. CAST: a correlation-based adaptive spectral clustering algorithm on multi-scale data[C]//Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining. 2020: 439-449.](https://dl.acm.org/doi/abs/10.1145/3394486.3403086)">[2]</span></a></sup>。对于一系列的数据，我们首先计算数据之间的相似度矩阵<span class="math inline">\(S\)</span>，常用的相似度度量为高斯核<span class="math inline">\(S_{ij}=\exp(-\frac{||\vec x_i-\vec x_j||^2}{2\sigma^2})\)</span>，然后求其拉普拉斯矩阵<span class="math inline">\(L=D-S\)</span>，其中<span class="math inline">\(D\)</span>为对角矩阵，且<span class="math inline">\(D_{ii}=\sum A_{ij}\)</span>。然后求出拉普拉斯矩阵的特征向量，选择特征值<span class="math inline">\(k\)</span>小的特征向量进行k-means聚类。</p>
+<h2 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h2><p><img src="https://imagehost.vitaminz-image.top/gnn-note-10.png" srcset="/img/loading.gif" lazyload></p>
+<p>谱聚类的一般过程如上图所示<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Li X, Kao B, Shan C, et al. CAST: a correlation-based adaptive spectral clustering algorithm on multi-scale data[C]//Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining. 2020: 439-449.](https://dl.acm.org/doi/abs/10.1145/3394486.3403086)">[2]</span></a></sup>。对于一系列的数据，我们首先计算数据之间的相似度矩阵$S$，常用的相似度度量为高斯核$S_{ij}=\exp(-\frac{||\vec x_i-\vec x_j||^2}{2\sigma^2})$，然后求其拉普拉斯矩阵$L=D-S$，其中$D$为对角矩阵，且$D_{ii}=\sum A_{ij}$。然后求出拉普拉斯矩阵的特征向量，选择特征值$k$小的特征向量进行k-means聚类。</p>
 <p>以上过程可以理解为，将原数据利用相似度度量转化为图数据，即使得每个数据间连着一条”虚边“，相似度即为边的权重。接下来将数据转换到频域上，选择一些低频作为数据的特征向量，这是因为低频成分往往具有更高层次、更具信息量的特征，而高频成分则更可能是噪声。然后对这些特征向量进行聚类。</p>
 <p>而这种一般的方法在多尺度的数据聚类中往往表现不佳。</p>
-<h2 id="ncuts">NCuts</h2>
-<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-4.png" srcset="/img/loading.gif" lazyload></p>
-<p>我们首先介绍一些远古的谱聚类方法。Normalized Cut<sup id="fnref:8" class="footnote-ref"><a href="#fn:8" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Shi J, Malik J. Normalized cuts and image segmentation[J]. IEEE Transactions on pattern analysis and machine intelligence, 2000, 22(8): 888-905.](https://ieeexplore.ieee.org/abstract/document/868688)">[8]</span></a></sup>的想法来源于最小割。如果存在连通图<span class="math inline">\(\mathcal G=\{\mathcal V, \mathcal E\}\)</span>，每条边<span class="math inline">\(e_i\in \mathcal E\)</span>有着权重<span class="math inline">\(w_i\)</span>，为了使得连通图分割成2个连通子图，那么需要移掉一些边。若移掉这些边权之和最小，那么我们称这样的分割方法为最小割。这和聚类非常相似，边权可以表示点和点的联系，若存在两个类，那么类之间的联系应当是比较小的，类内的联系比较大。</p>
+<h2 id="NCuts"><a href="#NCuts" class="headerlink" title="NCuts"></a>NCuts</h2><p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-4.png" srcset="/img/loading.gif" lazyload></p>
+<p>我们首先介绍一些远古的谱聚类方法。Normalized Cut<sup id="fnref:8" class="footnote-ref"><a href="#fn:8" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Shi J, Malik J. Normalized cuts and image segmentation[J]. IEEE Transactions on pattern analysis and machine intelligence, 2000, 22(8): 888-905.](https://ieeexplore.ieee.org/abstract/document/868688)">[8]</span></a></sup>的想法来源于最小割。如果存在连通图$\mathcal G={\mathcal V, \mathcal E}$，每条边$e_i\in \mathcal E$有着权重$w_i$，为了使得连通图分割成2个连通子图，那么需要移掉一些边。若移掉这些边权之和最小，那么我们称这样的分割方法为最小割。这和聚类非常相似，边权可以表示点和点的联系，若存在两个类，那么类之间的联系应当是比较小的，类内的联系比较大。</p>
 <p>所以一种可行的想法是，首先对连通图进行一次取最小割，然后再对连通子图进一步地取最小割，直到到达某一阈值为止。但显然这样存在一个问题，如上图所示，要使去掉边权之和最小，那每次分割肯可能都会倾向于指割掉一条边，这自然不合理。</p>
-<p>一种自然的想法使对权重进行归一化处理 <span class="math display">\[
-NCut(A,B)=\frac{cut(A,B)}{assoc(A,V)}+\frac{cut(A,B)}{assoc(B,V)}
-\]</span> 其中<span class="math inline">\(assoc(A,V)\)</span>表示<span class="math inline">\(A\)</span>到所有连接的结点权重之和，<span class="math inline">\(cut(A,B)\)</span>则是分割后移掉边权之和。所以假如当某一侧的结点非常少时，那么这<span class="math inline">\(cut\)</span>的值可能比<span class="math inline">\(assoc\)</span>大，极端情况下值分割一个点，那么分母就是0了，则最后的结果是无穷大。</p>
-<p>因此利用前面的想法，每次使用<span class="math inline">\(NCut\)</span>，然后再对子图进行<span class="math inline">\(NCut\)</span>，不断进行二分就可以了。</p>
+<p>一种自然的想法使对权重进行归一化处理<br>$$<br>NCut(A,B)=\frac{cut(A,B)}{assoc(A,V)}+\frac{cut(A,B)}{assoc(B,V)}<br>$$<br>其中$assoc(A,V)$表示$A$到所有连接的结点权重之和，$cut(A,B)$则是分割后移掉边权之和。所以假如当某一侧的结点非常少时，那么这$cut$的值可能比$assoc$大，极端情况下值分割一个点，那么分母就是0了，则最后的结果是无穷大。</p>
+<p>因此利用前面的想法，每次使用$NCut$，然后再对子图进行$NCut$，不断进行二分就可以了。</p>
 <p>听起来很简单，但很遗憾的是，求最小割是一个NP难的问题，因此只能求其近似解。</p>
-<p>通过一系列的复杂推导（太难了哈哈），可以得到<span class="math inline">\(D^{-\frac{1}{2}}LD^{-\frac{1}{2}}\)</span>第2小的特征向量就是对应的最小割。当然这里需要设定一个阈值，因为特征向量求出来是浮点数，但其数据会偏向两级。然后利用上面的二分法求解即可。</p>
-<p>但是现在多数使用的NCuts是<span class="math inline">\(\min NCut(A,B)\)</span>问题转化为以下优化问题。 <span class="math display">\[
-\min \vec x^T(D^{-\frac{1}{2}}LD^{-\frac{1}{2}})\vec x\\
-st. \vec x^T\vec x=1
-\]</span> 上面这个形式其实就是瑞丽熵，那么只要取<span class="math inline">\(k\)</span>个最小的特征值对应的特征向量进行聚类即可。</p>
-<h2 id="njw">NJW</h2>
-<p>NJW算法<sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Ng A, Jordan M, Weiss Y. On spectral clustering: Analysis and an algorithm[J]. Advances in neural information processing systems, 2001, 14.](https://proceedings.neurips.cc/paper/2001/hash/801272ee79cfde7fa5960571fee36b9b-Abstract.html)">[6]</span></a></sup>是取3个人名的首字母命名的。该算法和NCuts非常类似，甚至可以看作是其变形。 <span class="math display">\[
-\begin{align*}
-D^{-\frac{1}{2}}LD^{-\frac{1}{2}}&amp;=D^{-\frac{1}{2}}(D-S)D^{-\frac{1}{2}}\\
-&amp;=I-D^{-\frac{1}{2}}SD^{\frac{1}{2}}
-\end{align*}
-\]</span> 所以我们可以转而去求<span class="math inline">\(D^{-\frac{1}{2}}SD^{\frac{1}{2}}\)</span>最大的<span class="math inline">\(k\)</span>个特征向量，然后进行聚类。</p>
-<h2 id="zp">ZP</h2>
-<p>前面提到计算相似度矩阵时，我们常用高斯核<span class="math inline">\(S_{ij}=\exp(-\frac{||\vec x_i-\vec x_j||^2}{2\sigma^2})\)</span>，而高斯核中<span class="math inline">\(\sigma\)</span>的选取是需要考虑的，很多时候常常人工设定<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Zelnik-Manor L, Perona P. Self-tuning spectral clustering[J]. Advances in neural information processing systems, 2004, 17.](https://proceedings.neurips.cc/paper/2004/hash/40173ea48d9567f1f393b20c855bb40b-Abstract.html)">[3]</span></a></sup>。但更重要的是<span class="math inline">\(\sigma\)</span>是一个全局的参数，这在多尺度数据中具有一些缺陷。如设定的值较大时，稠密图的数据会趋于相似，设定较小时，稀疏图的数据则相似度过小。</p>
+<p>通过一系列的复杂推导（太难了哈哈），可以得到$D^{-\frac{1}{2}}LD^{-\frac{1}{2}}$第2小的特征向量就是对应的最小割。当然这里需要设定一个阈值，因为特征向量求出来是浮点数，但其数据会偏向两级。然后利用上面的二分法求解即可。</p>
+<p>但是现在多数使用的NCuts是$\min NCut(A,B)$问题转化为以下优化问题。<br>$$<br>\min \vec x^T(D^{-\frac{1}{2}}LD^{-\frac{1}{2}})\vec x\<br>st. \vec x^T\vec x=1<br>$$<br>上面这个形式其实就是瑞丽熵，那么只要取$k$个最小的特征值对应的特征向量进行聚类即可。</p>
+<h2 id="NJW"><a href="#NJW" class="headerlink" title="NJW"></a>NJW</h2><p>NJW算法<sup id="fnref:6" class="footnote-ref"><a href="#fn:6" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Ng A, Jordan M, Weiss Y. On spectral clustering: Analysis and an algorithm[J]. Advances in neural information processing systems, 2001, 14.](https://proceedings.neurips.cc/paper/2001/hash/801272ee79cfde7fa5960571fee36b9b-Abstract.html)">[6]</span></a></sup>是取3个人名的首字母命名的。该算法和NCuts非常类似，甚至可以看作是其变形。<br>$$<br>\begin{align*}<br>D^{-\frac{1}{2}}LD^{-\frac{1}{2}}&amp;=D^{-\frac{1}{2}}(D-S)D^{-\frac{1}{2}}\<br>&amp;=I-D^{-\frac{1}{2}}SD^{\frac{1}{2}}<br>\end{align*}<br>$$<br>所以我们可以转而去求$D^{-\frac{1}{2}}SD^{\frac{1}{2}}$最大的$k$个特征向量，然后进行聚类。</p>
+<h2 id="ZP"><a href="#ZP" class="headerlink" title="ZP"></a>ZP</h2><p>前面提到计算相似度矩阵时，我们常用高斯核$S_{ij}=\exp(-\frac{||\vec x_i-\vec x_j||^2}{2\sigma^2})$，而高斯核中$\sigma$的选取是需要考虑的，很多时候常常人工设定<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Zelnik-Manor L, Perona P. Self-tuning spectral clustering[J]. Advances in neural information processing systems, 2004, 17.](https://proceedings.neurips.cc/paper/2004/hash/40173ea48d9567f1f393b20c855bb40b-Abstract.html)">[3]</span></a></sup>。但更重要的是$\sigma$是一个全局的参数，这在多尺度数据中具有一些缺陷。如设定的值较大时，稠密图的数据会趋于相似，设定较小时，稀疏图的数据则相似度过小。</p>
 <p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-8.png" srcset="/img/loading.gif" lazyload></p>
-<p>ZP方法提出里一种局部调整<span class="math inline">\(\sigma\)</span>的设定，距离度量修正为<span class="math inline">\(S_{ij}=\exp(-\frac{||\vec x_i-\vec x_j||^2}{2\sigma_i\sigma_j})\)</span>。其中<span class="math inline">\(\sigma_i, \sigma_j\)</span>是依附于<span class="math inline">\(\vec x_i, \vec x_j\)</span>的是一种局部的参数。这一参数的设定应通过样本的特征取选取。在论文中<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Zelnik-Manor L, Perona P. Self-tuning spectral clustering[J]. Advances in neural information processing systems, 2004, 17.](https://proceedings.neurips.cc/paper/2004/hash/40173ea48d9567f1f393b20c855bb40b-Abstract.html)">[3]</span></a></sup>中选择的方法是<span class="math inline">\(\vec x_i\)</span>到第<span class="math inline">\(K\)</span>个邻居的欧式距离，实验表明<span class="math inline">\(K\)</span>取7在多个数据集上的效果表现良好。如上图所示，结点之间的边厚度表示数据间的权重大小（仅显示周围数据的权重）。图b是原来的高斯核距离度量，图c是修正后的。可以看到图b中靠近蓝点的边仍然比较厚，而图c则避免了的这种现象。</p>
-<h2 id="pi">PI</h2>
-<p>PI(Power Iteration)为幂迭代法<sup id="fnref:5" class="footnote-ref"><a href="#fn:5" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Lin F, Cohen W W. Power iteration clustering[C]//ICML. 2010.](https://openreview.net/forum?id=SyWcksbu-H)">[5]</span></a></sup>。其灵感来源于幂迭代法用求主特征值（在<a href="##Dominant%20Eigenvalue">文章的后面部分</a>会更详细地说明）。</p>
-<p>我们设<span class="math inline">\(W=D^{-1}A\)</span>，该矩阵有时候叫转移矩阵，因为它和马尔可夫的状态转移矩阵非常类似。每行的和为1，每个元素<span class="math inline">\(W_{i,j}\)</span>可以看作是<span class="math inline">\(i\)</span>结点到<span class="math inline">\(j\)</span>结点转移的概率。它和归一化随机游走矩阵<span class="math inline">\(L_r=I-W\)</span>有着重要的联系。NCuts算法证明了<span class="math inline">\(L_r\)</span>第2小的特征值所对应的特征向量可以作为NCuts算法的一种近似。</p>
-<p>这里需要说明的是，<span class="math inline">\(L_r\)</span>最小的特征值为0，容易证明<span class="math inline">\(\vec 1=[1, 1, ..., 1]\)</span>是<span class="math inline">\(L_r\)</span>的0所对应的特征向量。而对于<span class="math inline">\(W\)</span>来说则，其最大的特征值为1，且<span class="math inline">\(\vec 1\)</span>是对应的特征向量。需要说明的是，<span class="math inline">\(L_r\)</span>最小的几个特征向量或<span class="math inline">\(W\)</span>最大的几个特征向量是有效的，其余可能是噪声。</p>
-<p>首先给定一个向量<span class="math inline">\(\vec v^{(0)}= c_1\vec e_1 + c_2\vec e_2,..., +c_n\vec e_n\)</span>，其中<span class="math inline">\(\vec e_i\)</span>为<span class="math inline">\(W\)</span>的特征向量。且<span class="math inline">\(\vec e_i\)</span>所对应的特征值<span class="math inline">\(\lambda_i\)</span>满足<span class="math inline">\(1=\lambda_1 &gt; \lambda_2&gt;...&gt;\lambda_n\)</span>。</p>
-<p><span class="math display">\[
-\vec v^{(t+1)} = \frac{W\vec v^{(t)}}{||W\vec v^{(t)}||_1}
-\]</span> 假如我们按照如上的迭代公式进行迭代，则有如下过程（暂且忽略迭代公式的分母归一化项） <span class="math display">\[
-\begin{align*}
-\vec v^{(1)} &amp;= W \vec v^{(0)} 
-\\&amp;=c_1W\vec  e_1 + c_2W\vec e_2,..., +c_nW\vec e_n
-\\&amp;=c_1\lambda_1  e_1 + c_2\lambda_2\vec e_2,..., +c_n\lambda_n\vec e_n
-\end{align*}
-\]</span> 则 <span class="math display">\[
-\begin{align*}
-\vec v^{(t)} &amp;= Wv^{(t−1)} = W^2v^{(t−2)} = ... = W^tv^{(0)}
-\\&amp;=c_1W^t\vec  e_1 + c_2W^t\vec e_2,..., +c_nW^t\vec e_n
-\\&amp;=c_1\lambda_1^t  e_1 + c_2\lambda_2^t\vec e_2,..., +c_n\lambda_n^t\vec e_n
-\\&amp;=c_1\lambda_1^t\bigg[e_1+\sum\frac{c_2}{c_1}\bigg(\frac{\lambda_i}{\lambda_1}\bigg)^t\vec e_i)\bigg]
-\end{align*}
-\]</span> 当<span class="math inline">\(t\rightarrow +\infty\)</span>时，<span class="math inline">\(\frac{c_2}{c_1}(\frac{\lambda_i}{\lambda_1})^t\)</span>会趋向于0。该方法的提出者认为，在有效成分<span class="math inline">\(\vec e_i\)</span>的<span class="math inline">\(\lambda_i\)</span>往往会接近于<span class="math inline">\(\lambda_1\)</span>，而高频的一些噪声成分<span class="math inline">\(\lambda_j\)</span>会接近于0。在迭代过程中使得有效成分<span class="math inline">\(\vec e_i\)</span>前面的权重和噪声成分前的权重的差距会迅速扩大。</p>
-<p>但是迭代的次数不宜过多，因为最后的结果会趋向于<span class="math inline">\(k\vec 1\)</span>，因为<span class="math inline">\(W\)</span>的主特征向量就是<span class="math inline">\(\vec 1\)</span>。因此我们需设置一个迭代的门限值，以截断迭代过程。具体的算法如下。</p>
-<p><img src="https://imagehost.vitaminz-image.top/gnn-note-11.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
+<p>ZP方法提出里一种局部调整$\sigma$的设定，距离度量修正为$S_{ij}=\exp(-\frac{||\vec x_i-\vec x_j||^2}{2\sigma_i\sigma_j})$。其中$\sigma_i, \sigma_j$是依附于$\vec x_i, \vec x_j$的是一种局部的参数。这一参数的设定应通过样本的特征取选取。在论文中<sup id="fnref:3" class="footnote-ref"><a href="#fn:3" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Zelnik-Manor L, Perona P. Self-tuning spectral clustering[J]. Advances in neural information processing systems, 2004, 17.](https://proceedings.neurips.cc/paper/2004/hash/40173ea48d9567f1f393b20c855bb40b-Abstract.html)">[3]</span></a></sup>中选择的方法是$\vec x_i$到第$K$个邻居的欧式距离，实验表明$K$取7在多个数据集上的效果表现良好。如上图所示，结点之间的边厚度表示数据间的权重大小（仅显示周围数据的权重）。图b是原来的高斯核距离度量，图c是修正后的。可以看到图b中靠近蓝点的边仍然比较厚，而图c则避免了的这种现象。</p>
+<h2 id="PI"><a href="#PI" class="headerlink" title="PI"></a>PI</h2><p>PI(Power Iteration)为幂迭代法<sup id="fnref:5" class="footnote-ref"><a href="#fn:5" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Lin F, Cohen W W. Power iteration clustering[C]//ICML. 2010.](https://openreview.net/forum?id=SyWcksbu-H)">[5]</span></a></sup>。其灵感来源于幂迭代法用求主特征值（在[文章的后面部分](##Dominant Eigenvalue)会更详细地说明）。</p>
+<p>我们设$W=D^{-1}A$，该矩阵有时候叫转移矩阵，因为它和马尔可夫的状态转移矩阵非常类似。每行的和为1，每个元素$W_{i,j}$可以看作是$i$结点到$j$结点转移的概率。它和归一化随机游走矩阵$L_r=I-W$有着重要的联系。NCuts算法证明了$L_r$第2小的特征值所对应的特征向量可以作为NCuts算法的一种近似。</p>
+<p>这里需要说明的是，$L_r$最小的特征值为0，容易证明$\vec 1=[1, 1, …, 1]$是$L_r$的0所对应的特征向量。而对于$W$来说则，其最大的特征值为1，且$\vec 1$是对应的特征向量。需要说明的是，$L_r$最小的几个特征向量或$W$最大的几个特征向量是有效的，其余可能是噪声。</p>
+<p>首先给定一个向量$\vec v^{(0)}= c_1\vec  e_1 + c_2\vec e_2,…, +c_n\vec e_n$，其中$\vec e_i$为$W$的特征向量。且$\vec e_i$所对应的特征值$\lambda_i$满足$1=\lambda_1 &gt; \lambda_2&gt;…&gt;\lambda_n$。</p>
+<p>$$<br>\vec v^{(t+1)} = \frac{W\vec v^{(t)}}{||W\vec v^{(t)}||_1}<br>$$<br>假如我们按照如上的迭代公式进行迭代，则有如下过程（暂且忽略迭代公式的分母归一化项）<br>$$<br>\begin{align*}<br>\vec v^{(1)} &amp;= W \vec v^{(0)}<br>\&amp;=c_1W\vec  e_1 + c_2W\vec e_2,…, +c_nW\vec e_n<br>\&amp;=c_1\lambda_1  e_1 + c_2\lambda_2\vec e_2,…, +c_n\lambda_n\vec e_n<br>\end{align*}<br>$$<br>则<br>$$<br>\begin{align*}<br>\vec v^{(t)} &amp;= Wv^{(t−1)} = W^2v^{(t−2)} = … = W^tv^{(0)}<br>\&amp;=c_1W^t\vec  e_1 + c_2W^t\vec e_2,…, +c_nW^t\vec e_n<br>\&amp;=c_1\lambda_1^t  e_1 + c_2\lambda_2^t\vec e_2,…, +c_n\lambda_n^t\vec e_n<br>\&amp;=c_1\lambda_1^t\bigg[e_1+\sum\frac{c_2}{c_1}\bigg(\frac{\lambda_i}{\lambda_1}\bigg)^t\vec e_i)\bigg]<br>\end{align*}<br>$$<br>当$t\rightarrow +\infty$时，$\frac{c_2}{c_1}(\frac{\lambda_i}{\lambda_1})^t$会趋向于0。该方法的提出者认为，在有效成分$\vec e_i$的$\lambda_i$往往会接近于$\lambda_1$，而高频的一些噪声成分$\lambda_j$会接近于0。在迭代过程中使得有效成分$\vec e_i$前面的权重和噪声成分前的权重的差距会迅速扩大。</p>
+<p>但是迭代的次数不宜过多，因为最后的结果会趋向于$k\vec 1$，因为$W$的主特征向量就是$\vec 1$。因此我们需设置一个迭代的门限值，以截断迭代过程。具体的算法如下。</p>
+<img src="https://imagehost.vitaminz-image.top/gnn-note-11.png" srcset="/img/loading.gif" lazyload style="zoom:50%;">
+
 <p>这里以论文中开始提到的3圆圈数据集为例子，进行结果的复现，如下图所示。</p>
-<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-5.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
-<p>通过以上的算法，我选取几次的迭代结果<span class="math inline">\(\vec v^{(t)}\)</span>进行可视化，同一个类别在后面的迭代过程中逐渐局部收敛到一个值。</p>
-<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-7.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;"></p>
-<p>在实验中发现，其结果和许多因素有关，其中包括高斯核距离度量中的<span class="math inline">\(\sigma\)</span>，初始的向量<span class="math inline">\(\vec v^{(0)}\)</span>（论文中取<span class="math inline">\(\vec v^{(0)}= \frac{\sum_j A_{ij}}{\sum_i\sum_j A_{ij}}\)</span>），结束时的<span class="math inline">\(\hat\epsilon\)</span>设置，甚至发现使用<span class="math inline">\(W^T\)</span>具有更好的效果，这是因为<span class="math inline">\(W^T\)</span>的主特征值的特征向量就已经具有分类的效果（其意义尚待研究），而<span class="math inline">\(W\)</span>的主特征向量是<span class="math inline">\(\vec 1\)</span>，但这仅仅针对于3圆圈这一数据集而言。在<a href="#问题与总结">问题与总结</a>中，会提到这一点。此外还有计算机的运算精度也会影响结果。</p>
+<img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-5.png" srcset="/img/loading.gif" lazyload style="zoom:50%;">
+
+<p>通过以上的算法，我选取几次的迭代结果$\vec v^{(t)}$进行可视化，同一个类别在后面的迭代过程中逐渐局部收敛到一个值。</p>
+<img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-7.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<p>在实验中发现，其结果和许多因素有关，其中包括高斯核距离度量中的$\sigma$，初始的向量$\vec v^{(0)}$（论文中取$\vec v^{(0)}= \frac{\sum_j A_{ij}}{\sum_i\sum_j A_{ij}}$），结束时的$\hat\epsilon$设置，甚至发现使用$W^T$具有更好的效果，这是因为$W^T$的主特征值的特征向量就已经具有分类的效果（其意义尚待研究），而$W$的主特征向量是$\vec 1$，但这仅仅针对于3圆圈这一数据集而言。在<a href="#%E9%97%AE%E9%A2%98%E4%B8%8E%E6%80%BB%E7%BB%93">问题与总结</a>中，会提到这一点。此外还有计算机的运算精度也会影响结果。</p>
 <p>该方法的一个重要优点是简单高效，其收敛速度快，在百万级别的数据中也能在几秒内收敛。缺陷是过分拔高了特征值大的部分，在多尺度数据中存在一些低特征值但仍然重要的信息。</p>
-<p>以下是主函数的代码，完整代码见：https://github.com/vitaminzl/SpectralCluster/blob/master/PI.py</p>
+<p>以下是主函数的代码，完整代码见：<a target="_blank" rel="noopener" href="https://github.com/vitaminzl/SpectralCluster/blob/master/PI.py">https://github.com/vitaminzl/SpectralCluster/blob/master/PI.py</a></p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>():<br>    data, labels = get3CircleData(radius=[<span class="hljs-number">0.1</span>, <span class="hljs-number">6</span>, <span class="hljs-number">17</span>], nums=[<span class="hljs-number">10</span>, <span class="hljs-number">30</span>, <span class="hljs-number">80</span>])<br>    draw3CircleData(x=data[:, <span class="hljs-number">0</span>], y=data[:, <span class="hljs-number">1</span>], labels=labels, title=<span class="hljs-string">"Data Set"</span>)<br>    S_mtx = getSimilarMatrix(data, sigma=<span class="hljs-number">1.8</span>)<br>    W = np.diag(<span class="hljs-number">1</span> / np.<span class="hljs-built_in">sum</span>(S_mtx, axis=<span class="hljs-number">0</span>)) @ S_mtx<br>    v_t = PowerIter(W, iter_nums=<span class="hljs-number">300</span>, eps=<span class="hljs-number">1e-5</span>, labels=labels)<br>    plt.show()<br></code></pre></td></tr></tbody></table></figure>
-<h2 id="tknn">TKNN</h2>
-<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-10.png" srcset="/img/loading.gif" lazyload></p>
-<p>聚类问题转化为图问题时，需要解决邻接问题。定义结点之间的连接常常有2种方式<sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://csustan.csustan.edu/~tom/Clustering/GraphLaplacian-tutorial.pdf](https://csustan.csustan.edu/~tom/Clustering/GraphLaplacian-tutorial.pdf)">[4]</span></a></sup>。第一种如上图左，每个数据选择自己最近的K个邻居相邻接，得到的图被称为K邻接图（K Nearest Neighbor Graph）；第二种如上图右，每个结点选择半径<span class="math inline">\(\epsilon\)</span>的邻居相邻接。</p>
+
+
+
+<h2 id="TKNN"><a href="#TKNN" class="headerlink" title="TKNN"></a>TKNN</h2><p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-10.png" srcset="/img/loading.gif" lazyload></p>
+<p>聚类问题转化为图问题时，需要解决邻接问题。定义结点之间的连接常常有2种方式<sup id="fnref:4" class="footnote-ref"><a href="#fn:4" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://csustan.csustan.edu/~tom/Clustering/GraphLaplacian-tutorial.pdf](https://csustan.csustan.edu/~tom/Clustering/GraphLaplacian-tutorial.pdf)">[4]</span></a></sup>。第一种如上图左，每个数据选择自己最近的K个邻居相邻接，得到的图被称为K邻接图（K Nearest Neighbor Graph）；第二种如上图右，每个结点选择半径$\epsilon$的邻居相邻接。</p>
 <p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-14.png" srcset="/img/loading.gif" lazyload></p>
 <p>假如我们使用KNN的方法，K取4。如上图a所示，红色结点的4个最近邻用红线连接，绿色结点的4个最近邻用绿线连接。我们会发现，虽然红色的最近邻包括绿色，但绿色不包括红色，我们称红色和绿色不是<strong>相互近邻</strong>。但如图b所示，则红色和绿色则为相互近邻。若2个结点是相互近邻，则称这2个结点<strong>相互可达</strong>。如图c所示，红色与绿色是相互近邻，绿色和黄色相互近邻，那么红色和绿色也<strong>相互可达</strong>。</p>
-<p>Transitive K Nearest Neighbor(TKNN) Graph 是指当2个结点时相互可达的，则二者连接一条边。因此其邻接矩阵<span class="math inline">\(W\)</span>中，若2个点<span class="math inline">\(i,j\)</span>相互可达，<span class="math inline">\(W_{i,j}=W_{j,i}=1\)</span>。</p>
+<p>Transitive K Nearest Neighbor(TKNN) Graph 是指当2个结点时相互可达的，则二者连接一条边。因此其邻接矩阵$W$中，若2个点$i,j$相互可达，$W_{i,j}=W_{j,i}=1$。</p>
 <p>构造的过程可描述如下：</p>
 <ul>
-<li>step1: 构造K邻接矩阵<span class="math inline">\(A\)</span>，对于结点<span class="math inline">\(i\)</span>由<span class="math inline">\(k\)</span>个邻居<span class="math inline">\(j\)</span>，则<span class="math inline">\(A_{i, j}=1\)</span></li>
-<li>step2: 构造相互近邻矩阵<span class="math inline">\(A'=A A^T\)</span>，若为相互近邻，则为1，否则为0。</li>
-<li>step3: 寻找<span class="math inline">\(A'\)</span>的所有连通分量<span class="math inline">\(S\)</span></li>
-<li>step4: 对于连通分量<span class="math inline">\(S_i\)</span>中的每2个元素<span class="math inline">\(S_{i,j}, S_{i,k}\)</span>，令<span class="math inline">\(W_{S_{i,j},S_{i,k}}=W_{S_{i,k},S_{i,j}}=1\)</span>，其余为0。</li>
+<li>step1: 构造K邻接矩阵$A$，对于结点$i$由$k$个邻居$j$，则$A_{i, j}=1$</li>
+<li>step2: 构造相互近邻矩阵$A’=A A^T$，若为相互近邻，则为1，否则为0。</li>
+<li>step3: 寻找$A’$的所有连通分量$S$</li>
+<li>step4: 对于连通分量$S_i$中的每2个元素$S_{i,j}, S_{i,k}$，令$W_{S_{i,j},S_{i,k}}=W_{S_{i,k},S_{i,j}}=1$，其余为0。</li>
 </ul>
 <p>代码如下：</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">getTKNN_W</span>(<span class="hljs-params">S_mtx, K</span>):<br>    N = S_mtx.shape[<span class="hljs-number">0</span>]<br>    KNN_A = np.zeros((N, N), dtype=np.int32)<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(N):<br>        idx = np.argsort(S_mtx[i, :])<br>        KNN_A[i, idx[(N-K):]] = <span class="hljs-number">1</span><br>    MKNN_A = KNN_A * KNN_A.T<br>    G = nx.from_numpy_array(MKNN_A)<br>    compo_list = [c <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> nx.connected_components(G)]<br>    TKNN_W = np.zeros((N, N), dtype=np.int32)<br>    <span class="hljs-keyword">for</span> c_i <span class="hljs-keyword">in</span> compo_list:<br>        c = np.array(<span class="hljs-built_in">list</span>(c_i), dtype=np.int32)<br>        idx_c = np.tile(c, (<span class="hljs-built_in">len</span>(c), <span class="hljs-number">1</span>))<br>        TKNN_W[idx_c.T, idx_c] = <span class="hljs-number">1</span> - np.identity(<span class="hljs-built_in">len</span>(c))<br><br>    <span class="hljs-keyword">return</span> TKNN_W<br></code></pre></td></tr></tbody></table></figure>
-<h2 id="rosc">ROSC</h2>
-<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-9.png" srcset="/img/loading.gif" lazyload></p>
+
+
+
+<h2 id="ROSC"><a href="#ROSC" class="headerlink" title="ROSC"></a>ROSC</h2><p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-9.png" srcset="/img/loading.gif" lazyload></p>
 <p>如上图所示为ROSC方法的流程图。ROSC方法<sup id="fnref:1" class="footnote-ref"><a href="#fn:1" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Li X, Kao B, Luo S, et al. Rosc: Robust spectral clustering on multi-scale data[C]//Proceedings of the 2018 World Wide Web Conference. 2018: 157-166.](https://dl.acm.org/doi/abs/10.1145/3178876.3185993)">[1]</span></a></sup>结合了以上2种方法，但相比于PI方法不同的是，它并不是将PI得到的输出直接作为k-means聚类的输入，而是增加了一个求修正相似矩阵的过程。</p>
-<p>首先随机设置不同的<span class="math inline">\(\vec v^{(0)}\)</span>获取<span class="math inline">\(p\)</span>个“伪特征向量”，拼成一个<span class="math inline">\(p\times n\)</span>的矩阵矩阵<span class="math inline">\(X\)</span>，并对<span class="math inline">\(X\)</span>进行标准化，即使得<span class="math inline">\(XX^T=I\)</span>。</p>
-<p>ROSC论文中认为，相似度矩阵的意义可以表示为某一个实体能够被其他实体所描述的程度。即任何一个实体<span class="math inline">\(x_{i}=\sum Z_{i,j}x_j\)</span>，这里<span class="math inline">\(Z_{i,j}\)</span>即为修正相似度矩阵。因此就有： <span class="math display">\[
-X=XZ+O
-\]</span> 其中<span class="math inline">\(O\)</span>表示噪声矩阵。</p>
-<p>定义优化问题 <span class="math display">\[
-\min_{Z}||X-XZ||_F^2+\alpha_1||Z||_F+\alpha_2||W-Z||_F
-\]</span> 优化问题的第一项表示最小化噪声，第二项则是<span class="math inline">\(Z\)</span>的Frobenius 范数<sup id="fnref:12" class="footnote-ref"><a href="#fn:12" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://mathworld.wolfram.com/FrobeniusNorm.html](https://mathworld.wolfram.com/FrobeniusNorm.html)">[12]</span></a></sup>），为正则化项，用于平衡其他2项，第三项则是减小与前文中TKNN的邻接矩阵<span class="math inline">\(W\)</span>的差距。<span class="math inline">\(\alpha_1,\alpha_2\)</span>是平衡参数，需要人工设置。</p>
-<p>求解以上优化问题，可以先对<span class="math inline">\(Z\)</span>求导（<a href="##Derivatives%20of%20Matrix">文章的后面</a>还会做一些补充），使导数为0即可。对三项项求导有 <span class="math display">\[
-\begin{align*}
-\frac{\partial ||X-XZ||^2_F}{\partial Z}&amp;=-2X^T(X-XZ)\\
-\frac{\partial\alpha_1||Z||^2_F}{\partial Z}&amp;=2\alpha_1Z\\
-\frac{\partial\alpha_2||W-Z||^2_F}{\partial Z}&amp;=-2\alpha_2(W-Z)
-\end{align*}
-\]</span> 三项相加有 <span class="math display">\[
--X^T(X-XZ)+\alpha_1Z-\alpha_2(W-Z)=0
-\]</span> 整理可得 <span class="math display">\[
-Z^*=(2X^TX+\alpha_1 I+\alpha_2 I)^{-1}(X^TX+\alpha_2W)
-\]</span> 但这样求出来的<span class="math inline">\(Z^*\)</span>可能使不对称的，且可能存在负数。所以这里再次做了一个修正<span class="math inline">\(\tilde Z=(|Z^*|+|Z^*|^T)/2\)</span>。</p>
+<p>首先随机设置不同的$\vec v^{(0)}$获取$p$个“伪特征向量”，拼成一个$p\times n$的矩阵矩阵$X$，并对$X$进行标准化，即使得$XX^T=I$。</p>
+<p>ROSC论文中认为，相似度矩阵的意义可以表示为某一个实体能够被其他实体所描述的程度。即任何一个实体$x_{i}=\sum Z_{i,j}x_j$，这里$Z_{i,j}$即为修正相似度矩阵。因此就有：<br>$$<br>X=XZ+O<br>$$<br>其中$O$表示噪声矩阵。</p>
+<p>定义优化问题<br>$$<br>\min_{Z}||X-XZ||_F^2+\alpha_1||Z||_F+\alpha_2||W-Z||_F<br>$$<br>优化问题的第一项表示最小化噪声，第二项则是$Z$的Frobenius 范数<sup id="fnref:12" class="footnote-ref"><a href="#fn:12" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://mathworld.wolfram.com/FrobeniusNorm.html](https://mathworld.wolfram.com/FrobeniusNorm.html)">[12]</span></a></sup>），为正则化项，用于平衡其他2项，第三项则是减小与前文中TKNN的邻接矩阵$W$的差距。$\alpha_1,\alpha_2$是平衡参数，需要人工设置。</p>
+<p>求解以上优化问题，可以先对$Z$求导（[文章的后面](##Derivatives of Matrix)还会做一些补充），使导数为0即可。对三项项求导有<br>$$<br>\begin{align*}<br>\frac{\partial ||X-XZ||^2_F}{\partial Z}&amp;=-2X^T(X-XZ)\<br>\frac{\partial\alpha_1||Z||^2_F}{\partial Z}&amp;=2\alpha_1Z\<br>\frac{\partial\alpha_2||W-Z||^2_F}{\partial Z}&amp;=-2\alpha_2(W-Z)<br>\end{align*}<br>$$<br>三项相加有<br>$$<br>-X^T(X-XZ)+\alpha_1Z-\alpha_2(W-Z)=0<br>$$<br>整理可得<br>$$<br>Z^*=(2X^TX+\alpha_1 I+\alpha_2 I)^{-1}(X^TX+\alpha_2W)<br>$$<br>但这样求出来的$Z^*$可能使不对称的，且可能存在负数。所以这里再次做了一个修正$\tilde Z=(|Z^*|+|Z^*|^T)/2$。</p>
 <p>接下来就可以执行一般的谱聚类方法了。具体的算法流程可以用如下图所示：</p>
-<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-12.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;"></p>
+<img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-12.png" srcset="/img/loading.gif" lazyload style="zoom: 33%;">
+
 <p>算法第4行中的whiten为白化处理<sup id="fnref:9" class="footnote-ref"><a href="#fn:9" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://en.wikipedia.org/wiki/Whitening_transformation](https://en.wikipedia.org/wiki/Whitening_transformation)">[9]</span></a></sup>，是数据预处理的一种常用方法。它类似于PCA，但与PCA不同的是，PCA往往用来降维，而白化则是利用PCA的特征向量，将数据转换到新的特征空间，然后对新的坐标进行方差归一化，目的是去除输入数据的冗余信息。</p>
 <p>根据上述算法，以下使用python对其进行复现。</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">ROSC</span>(<span class="hljs-params">S, C_k, t_k, alpha1, alpha2</span>):<br>    W_tknn = getTKNN_W(S, K=t_k)<br>    W = np.diag(np.<span class="hljs-built_in">sum</span>(S, axis=<span class="hljs-number">0</span>)) @ S<br>    X = prep.PIC_k(W, k=C_k)<br>    X = prep.whiten(X)<br>    X = prep.norm(X)<br>    Z = getROSC_Z(X.T, W_tknn, alpha1, alpha2)<br>    Z = (np.<span class="hljs-built_in">abs</span>(Z) + np.<span class="hljs-built_in">abs</span>(Z.T)) / <span class="hljs-number">2</span><br>    C = postp.ncuts(Z, C_k)<br>    <span class="hljs-keyword">return</span> C<br></code></pre></td></tr></tbody></table></figure>
+
 <p>主函数的代码如下</p>
 <figure class="highlight python"><table><tbody><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">def</span> <span class="hljs-title function_">main</span>(<span class="hljs-params">data_name</span>):<br>    path = <span class="hljs-string">"dataset/"</span> + data_name + <span class="hljs-string">".txt"</span><br>    data = np.loadtxt(<span class="hljs-string">"dataset/Syn.txt"</span>, delimiter=<span class="hljs-string">','</span>, dtype=np.float64)<br>    label = np.loadtxt(<span class="hljs-string">"dataset/SynLabel.txt"</span>, dtype=np.int32)<br>    C_k = <span class="hljs-built_in">len</span>(<span class="hljs-built_in">set</span>(label))<br>    S = prep.getSimilarMatrix2(data=data)<br>    C = ROSC(S, C_k=C_k, t_k=t, alpha1=<span class="hljs-number">1</span>, alpha2=<span class="hljs-number">0.01</span>)<br>    prt, AMI, RI = postp.assess(label_true=label, label_pred=C)<br>    <span class="hljs-built_in">print</span>(<span class="hljs-string">f"<span class="hljs-subst">{data_name}</span>\nPurity: <span class="hljs-subst">{prt}</span>\nAMI: <span class="hljs-subst">{AMI}</span>\nRI: <span class="hljs-subst">{RI}</span>\n"</span>)<br></code></pre></td></tr></tbody></table></figure>
-<p>完整代码见https://github.com/vitaminzl/SpectralCluster/blob/master/ROSC.py</p>
+
+<p>完整代码见<a target="_blank" rel="noopener" href="https://github.com/vitaminzl/SpectralCluster/blob/master/ROSC.py">https://github.com/vitaminzl/SpectralCluster/blob/master/ROSC.py</a></p>
 <p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-20.png" srcset="/img/loading.gif" lazyload></p>
 <p>我首先使用了人工合成的数据集，如上图左所示。使用论文中的参数效果并不是很好，然后调整了一下求解TKNN矩阵的K，原文使用的是4，我调整为8，结果效果猛增，甚至优于论文的结果，如上图右所示，只有极个别点分错。不过根据数据集调参还是不科学的哈哈哈😂。其中Purity=0.9861，AMI=0.9307，RI=0.9784。</p>
 <p>然后我对TKNN的K参数从1到12开始调整，3个指标的变化曲线如下图所示。感觉变化还是蛮明显的。</p>
-<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-17.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;"></p>
-<p>以下是5个数据集的实验结果，参数除了TKNN是的K是8以外，其他都和原论文相同，即<span class="math inline">\(\alpha_1=1,\alpha_2=0.01\)</span>。大部分的数据集都没有论文的结果好（比论文结果好的加了粗），但也相差不多。除了MNist0127这个数据集是例外，其结果异常地差劲，也不知道是什么原因。</p>
+<img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-17.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;">
+
+<p>以下是5个数据集的实验结果，参数除了TKNN是的K是8以外，其他都和原论文相同，即$\alpha_1=1,\alpha_2=0.01$。大部分的数据集都没有论文的结果好（比论文结果好的加了粗），但也相差不多。除了MNist0127这个数据集是例外，其结果异常地差劲，也不知道是什么原因。</p>
 <table>
 <thead>
-<tr class="header">
+<tr>
 <th>数据集</th>
 <th>Purity</th>
 <th>AMI</th>
 <th>RI</th>
 </tr>
 </thead>
-<tbody>
-<tr class="odd">
+<tbody><tr>
 <td>COIL20</td>
 <td>0.8486</td>
 <td>0.9339</td>
 <td>0.9683</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Glass</td>
 <td><strong>0.6074</strong></td>
 <td>0.2949</td>
 <td><strong>0.7233</strong></td>
 </tr>
-<tr class="odd">
+<tr>
 <td>MNIST0127</td>
 <td>0.2767</td>
 <td>0.0156</td>
 <td>0.3981</td>
 </tr>
-<tr class="even">
+<tr>
 <td>Isolet</td>
 <td>0.7067</td>
 <td>0.6151</td>
 <td>0.8459</td>
 </tr>
-<tr class="odd">
+<tr>
 <td>Yale</td>
 <td>0.5636</td>
 <td>0.3215</td>
 <td>0.7704</td>
 </tr>
-</tbody>
-</table>
-<h2 id="trace-lasso">Trace Lasso</h2>
-<p>Trace Lasso<sup id="fnref:13" class="footnote-ref"><a href="#fn:13" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Grave E, Obozinski G R, Bach F. Trace lasso: a trace norm regularization for correlated designs[J]. Advances in Neural Information Processing Systems, 2011, 24.](https://proceedings.neurips.cc/paper/2011/hash/33ceb07bf4eeb3da587e268d663aba1a-Abstract.html)">[13]</span></a></sup>是一种介于L1和L2正则的正则化项。其形式为 <span class="math display">\[
-\Omega(W)=||XDiag(W)||_*
-\]</span> 其中<span class="math inline">\(X\)</span>为已归一化的特征矩阵，即对于特征<span class="math inline">\(\vec x_i\)</span>有<span class="math inline">\(\vec x_i \vec x_i^T=1\)</span>。<span class="math inline">\(W\)</span>为待求参数。<span class="math inline">\(||·||_*\)</span>为核范数<sup id="fnref:14" class="footnote-ref"><a href="#fn:14" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://en.wikipedia.org/wiki/Matrix_norm](https://en.wikipedia.org/wiki/Matrix_norm)">[14]</span></a></sup>（或迹范数）,<span class="math inline">\(||Z||_*=tr(\sqrt{Z^TZ})\)</span>，表示所有奇异值之和。</p>
+</tbody></table>
+<h2 id="Trace-Lasso"><a href="#Trace-Lasso" class="headerlink" title="Trace Lasso"></a>Trace Lasso</h2><p>Trace Lasso<sup id="fnref:13" class="footnote-ref"><a href="#fn:13" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Grave E, Obozinski G R, Bach F. Trace lasso: a trace norm regularization for correlated designs[J]. Advances in Neural Information Processing Systems, 2011, 24.](https://proceedings.neurips.cc/paper/2011/hash/33ceb07bf4eeb3da587e268d663aba1a-Abstract.html)">[13]</span></a></sup>是一种介于L1和L2正则的正则化项。其形式为<br>$$<br>\Omega(W)=||XDiag(W)||<em>*<br>$$<br>其中$X$为已归一化的特征矩阵，即对于特征$\vec x_i$有$\vec x_i \vec x_i^T=1$。$W$为待求参数。$||·||</em><em>$为核范数<sup id="fnref:14" class="footnote-ref"><a href="#fn:14" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://en.wikipedia.org/wiki/Matrix_norm](https://en.wikipedia.org/wiki/Matrix_norm)">[14]</span></a></sup>（或迹范数）,$||Z||_</em>=tr(\sqrt{Z^TZ})$，表示所有奇异值之和。</p>
 <p>Trace Lasso具有如下性质：</p>
 <ul>
-<li><p>当<span class="math inline">\(X^TX=I\)</span>时，即特征之间的相关性为0，或者正交，那么 <span class="math display">\[
-\Omega(W)=||W||_1
-\]</span> 即退化为1范式。</p></li>
-<li><p>当<span class="math inline">\(X^TX=\vec 1^T\vec 1\)</span>时，即所有特征都完全相关，那么 <span class="math display">\[
-\Omega(W)=||W||_2
-\]</span> 即退化为2范式</p></li>
-<li><p>其他情况下，在1范式和2范式之间。</p></li>
+<li><p>当$X^TX=I$时，即特征之间的相关性为0，或者正交，那么<br>$$<br>\Omega(W)=||W||_1<br>$$<br>即退化为1范式。</p>
+</li>
+<li><p>当$X^TX=\vec 1^T\vec 1$时，即所有特征都完全相关，那么<br>$$<br>\Omega(W)=||W||_2<br>$$<br>即退化为2范式</p>
+</li>
+<li><p>其他情况下，在1范式和2范式之间。</p>
+</li>
 </ul>
 <p>Trace Lasso的优点就是它可以根据数据的特征，接近合适的范式，这相比弹性网络更好。</p>
-<h2 id="cast">CAST</h2>
-<p>ROSC方法虽然可以加强类内数据的联系，但没有使得类间的间距增大。</p>
-<p>而CAST相比于ROSC的区别就在于修改了优化函数<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Li X, Kao B, Shan C, et al. CAST: a correlation-based adaptive spectral clustering algorithm on multi-scale data[C]//Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining. 2020: 439-449.](https://dl.acm.org/doi/abs/10.1145/3394486.3403086)">[2]</span></a></sup>，成为如下形式： <span class="math display">\[
-\min_{Z} \frac{1}{2} ||\vec x-X\vec z||_2+\alpha_1||XDiag(\vec z)||_*+\frac{\alpha_2}{2}||W-\vec z||_2
-\]</span> 其中<span class="math inline">\(\vec x\)</span>是<span class="math inline">\(X\)</span>的其中一个特征向量，<span class="math inline">\(z\)</span>是修正相似度矩阵<span class="math inline">\(Z\)</span>中的一个向量。于ROSC的主要区别在于范数的选择，通过trace lasso可以使得其具有类内聚合也有类外稀疏的特性。</p>
+<h2 id="CAST"><a href="#CAST" class="headerlink" title="CAST"></a>CAST</h2><p>ROSC方法虽然可以加强类内数据的联系，但没有使得类间的间距增大。</p>
+<p>而CAST相比于ROSC的区别就在于修改了优化函数<sup id="fnref:2" class="footnote-ref"><a href="#fn:2" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Li X, Kao B, Shan C, et al. CAST: a correlation-based adaptive spectral clustering algorithm on multi-scale data[C]//Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining. 2020: 439-449.](https://dl.acm.org/doi/abs/10.1145/3394486.3403086)">[2]</span></a></sup>，成为如下形式：<br>$$<br>\min_{Z} \frac{1}{2} ||\vec x-X\vec z||<em>2+\alpha_1||XDiag(\vec z)||</em>*+\frac{\alpha_2}{2}||W-\vec z||_2<br>$$<br>其中$\vec x$是$X$的其中一个特征向量，$z$是修正相似度矩阵$Z$中的一个向量。于ROSC的主要区别在于范数的选择，通过trace lasso可以使得其具有类内聚合也有类外稀疏的特性。</p>
 <p>该优化问题的求解已经超出了我的能力范围，在此直接贴出论文中的算法流程</p>
-<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-15.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;"></p>
-<p>整个CAST算法的流程如下：</p>
-<p><img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-16.png" srcset="/img/loading.gif" lazyload style="zoom:50%;"></p>
-<p>对比ROSC，他们的区别就在于求解<span class="math inline">\(Z^*\)</span>的方法不同，其余都是一样的。</p>
-<p>由于Inexcat ALM的算法超出了我的知识范畴，并且最近事情较多，CAST算法的代码并没有复现。若后面有时间再填补空缺。</p>
-<h2 id="group-effect">Group Effect</h2>
-<p>Group Effect在ROSC和CAST论文中都提及了，以及一篇关于GNN的论文<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022](https://arxiv.org/abs/2205.07308)">[7]</span></a></sup>中也提及了，可以说精髓所在了。</p>
-<p>首先定义一些符号：若有一系列的实体<span class="math inline">\(X=\{x_1,x_2,...,x_n\}\)</span>，设<span class="math inline">\(w_q\)</span>为<span class="math inline">\(W\)</span>的第<span class="math inline">\(q\)</span>列，设<span class="math inline">\(x_i\rightarrow x_j\)</span>表示，<span class="math inline">\(x_i^Tx_j\rightarrow 1\)</span>且<span class="math inline">\(||w_i-w_j||_2\rightarrow 0\)</span>。</p>
-<p>如果矩阵<span class="math inline">\(Z\)</span>满足当<span class="math inline">\(x_i\rightarrow x_j\)</span>时，有<span class="math inline">\(|Z_{ip}-Z_{jp}|\rightarrow 0\)</span>，则称<span class="math inline">\(Z\)</span>具有Group Effect。</p>
-<p>翻译成人话就是当2个实体足够接近，<span class="math inline">\(Z\)</span>矩阵中实体对应的元素也足够的接近。这说明了<span class="math inline">\(Z\)</span>矩阵确实能够反映实体之间的联系紧密程度。2个实体足够接近，它可以指实体的特征足够接近，也可以指实体附近的结构接近。事实上在另一篇关于GNN的论文<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022](https://arxiv.org/abs/2205.07308)">[7]</span></a></sup>里还包括了实体附近的结构信息。</p>
-<p>可以证明的是，ROSC和CAST中的稀疏矩阵都有Group Effect，证明的过程过于复杂，也超出了我的能力范围了😂。</p>
-<h2 id="补充">补充</h2>
-<h3 id="dominant-eigenvalue">Dominant Eigenvalue</h3>
-<p>若一个方阵<span class="math inline">\(A\)</span>存在一系列特征值<span class="math inline">\(\lambda_1,\lambda_2,...,\lambda_n\)</span>，且满足<span class="math inline">\(|\lambda_1|&gt;|\lambda_2|\ge...\ge|\lambda_n|\)</span>，则称<span class="math inline">\(\lambda_1\)</span>为该方阵的主特征值<sup id="fnref:10" class="footnote-ref"><a href="#fn:10" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://www.cs.huji.ac.il/w~csip/tirgul2.pdf](https://www.cs.huji.ac.il/w~csip/tirgul2.pdf)">[10]</span></a></sup>。前文中的幂迭代法原本就是用来求主特征值的。 <span class="math display">\[
-\begin{align*}
- A^kq^{(0)} &amp;= A^{k-1}q^{(1)} = ... =Aq^{(k−1)} 
-\\&amp;=a_1A^k\vec  e_1 + a_2A^k\vec e_2,..., +a_nA^k\vec e_n
-\\&amp;=a_1\lambda_1^k  e_1 + a_2\lambda_2^k\vec e_2,..., +a_n\lambda_n^k\vec e_n
-\\&amp;=a_1\lambda_1^k\bigg[e_1+\sum_{i=2}^{n}\frac{a_i}{a_1}\bigg(\frac{\lambda_i}{\lambda_1}\bigg)^k\vec e_i)\bigg]
-\end{align*}
-\]</span> 经过一系列迭代后又如上式子。显然，当<span class="math inline">\(k\rightarrow\infty\)</span>时，<span class="math inline">\(q^{(k)}=Aq^{(k−1)}=A^kq^{(0)}\rightarrow a_1\lambda^kx_1\)</span>。并且<span class="math inline">\([q^{k}]^TAq^{(k)}\approx [q^{(k)}]^T\lambda q^{(k)}=\lambda\|q^{(k)}\|_2=\lambda\)</span>，当<span class="math inline">\(\|q^{(k)}\|_2=1\)</span>。所以每次迭代需要对<span class="math inline">\(q\)</span>进行一次标准化。这样通过经过式子就可求出主特征值了。</p>
-<h3 id="derivatives-of-matrix">Derivatives of Matrix</h3>
-<p>矩阵求导是矩阵论中的相关知识<sup id="fnref:11" class="footnote-ref"><a href="#fn:11" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Petersen K B, Pedersen M S. The matrix cookbook[J]. Technical University of Denmark, 2008, 7(15): 510.](https://ece.uwaterloo.ca/~ece602/MISC/matrixcookbook.pdf)">[11]</span></a></sup>，这里仅对前文用到的Frobenius范式矩阵的求导过程进行介绍。</p>
-<p>Frobenius范式可以表示成如下的迹形式 <span class="math display">\[
-||X||_F=\sqrt{tr(X^TX)}
-\]</span> 首先引入2个求导法则</p>
-<ul>
-<li><p>法则1：若<span class="math inline">\(A,X\)</span>为<span class="math inline">\(m\times n\)</span>的矩阵，有 <span class="math display">\[
-\frac{\partial tr(A^TX)}{\partial X}=\frac{\partial tr(X^TA)}{\partial X}=A
-\]</span></p></li>
-<li><p>法则2：若<span class="math inline">\(A\)</span>为<span class="math inline">\(m\times m\)</span>的矩阵，<span class="math inline">\(X\)</span>为<span class="math inline">\(m\times n\)</span>的矩阵，有</p></li>
-</ul>
-<p><span class="math display">\[
-\frac{\partial tr(X^TAX)}{\partial X}=AX+A^TX
-\]</span></p>
-<p>因此若求以下导数 <span class="math display">\[
-\frac{\partial ||A-BX||^2_F}{\partial X}
-\]</span> 利用以上法则有： <span class="math display">\[
-\begin{align*}
-\frac{\partial||A-BX||^2_F}{\partial X}&amp;=\frac{\partial tr[(A-BX)^T(A-BX)]}{\partial X}\\
-&amp;=\frac{\partial tr[(A^T-X^TB^T)(A-BX)]}{\partial X}\\
-&amp;=\frac{\partial[tr(A^TA)-2tr(A^TBX)+tr(X^TB^TBX)]}{\partial X}\\
-&amp;=0-2A^TB+B^TBX+B^TBX\\
-&amp;=-2B^T(A+BX)
-\end{align*}
-\]</span></p>
-<h2 id="问题与总结">问题与总结</h2>
-<p>在这次深入解读论文的过程中，有很多收获，学到了很多，但也发觉不明白的东西也很多。实验中也遇到各种问题，比如在PI方法的实验中，发现对<span class="math inline">\(W^T=D^{-1}S\)</span>的最小特征向量在3圆圈数据集中，具有明显的分层，其分层特征和类别基本一致，这是一次代码写错时发现的。以及论文中出现了非常多优化问题求解，也触及到了很多知识盲区。但同时也激发了我的求知欲望，需要学的东西还有很多。</p>
-<h2 id="参考资料">参考资料</h2>
-<section class="footnotes">
-<div class="footnote-list">
-<ol>
-<li>
-<span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1145/3178876.3185993">Li X, Kao B, Luo S, et al. Rosc: Robust spectral clustering on multi-scale data[C]//Proceedings of the 2018 World Wide Web Conference. 2018: 157-166.</a> <a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
-</li>
-<li>
-<span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1145/3394486.3403086">Li X, Kao B, Shan C, et al. CAST: a correlation-based adaptive spectral clustering algorithm on multi-scale data[C]//Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining. 2020: 439-449.</a> <a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
-</li>
-<li>
-<span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper/2004/hash/40173ea48d9567f1f393b20c855bb40b-Abstract.html">Zelnik-Manor L, Perona P. Self-tuning spectral clustering[J]. Advances in neural information processing systems, 2004, 17.</a> <a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
-</li>
-<li>
-<span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://csustan.csustan.edu/~tom/Clustering/GraphLaplacian-tutorial.pdf">https://csustan.csustan.edu/~tom/Clustering/GraphLaplacian-tutorial.pdf</a> <a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
-</li>
-<li>
-<span id="fn:5" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=SyWcksbu-H">Lin F, Cohen W W. Power iteration clustering[C]//ICML. 2010.</a> <a href="#fnref:5" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
-</li>
-<li>
-<span id="fn:6" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper/2001/hash/801272ee79cfde7fa5960571fee36b9b-Abstract.html">Ng A, Jordan M, Weiss Y. On spectral clustering: Analysis and an algorithm[J]. Advances in neural information processing systems, 2001, 14.</a> <a href="#fnref:6" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
-</li>
-<li>
-<span id="fn:7" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.07308">Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022</a> <a href="#fnref:7" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
-</li>
-<li>
-<span id="fn:8" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/868688">Shi J, Malik J. Normalized cuts and image segmentation[J]. IEEE Transactions on pattern analysis and machine intelligence, 2000, 22(8): 888-905.</a> <a href="#fnref:8" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
-</li>
-<li>
-<span id="fn:9" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Whitening_transformation">https://en.wikipedia.org/wiki/Whitening_transformation</a> <a href="#fnref:9" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
-</li>
-<li>
-<span id="fn:10" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.cs.huji.ac.il/w~csip/tirgul2.pdf">https://www.cs.huji.ac.il/w~csip/tirgul2.pdf</a> <a href="#fnref:10" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
-</li>
-<li>
-<span id="fn:11" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://ece.uwaterloo.ca/~ece602/MISC/matrixcookbook.pdf">Petersen K B, Pedersen M S. The matrix cookbook[J]. Technical University of Denmark, 2008, 7(15): 510.</a> <a href="#fnref:11" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
-</li>
-<li>
-<span id="fn:12" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://mathworld.wolfram.com/FrobeniusNorm.html">https://mathworld.wolfram.com/FrobeniusNorm.html</a> <a href="#fnref:12" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
-</li>
-<li>
-<span id="fn:13" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper/2011/hash/33ceb07bf4eeb3da587e268d663aba1a-Abstract.html">Grave E, Obozinski G R, Bach F. Trace lasso: a trace norm regularization for correlated designs[J]. Advances in Neural Information Processing Systems, 2011, 24.</a> <a href="#fnref:13" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
-</li>
-<li>
-<span id="fn:14" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Matrix_norm">https://en.wikipedia.org/wiki/Matrix_norm</a> <a href="#fnref:14" rev="footnote" class="footnote-backref"> ↩︎</a></span></span>
-</li>
-</ol>
-</div>
-</section>
+<img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-15.png" srcset="/img/loading.gif" lazyload style="zoom: 50%;">
 
+<p>整个CAST算法的流程如下：</p>
+<img src="https://imagehost.vitaminz-image.top/li-spectral-cluster-16.png" srcset="/img/loading.gif" lazyload style="zoom:50%;">
+
+<p>对比ROSC，他们的区别就在于求解$Z^*$的方法不同，其余都是一样的。</p>
+<p>由于Inexcat ALM的算法超出了我的知识范畴，并且最近事情较多，CAST算法的代码并没有复现。若后面有时间再填补空缺。</p>
+<h2 id="Group-Effect"><a href="#Group-Effect" class="headerlink" title="Group Effect"></a>Group Effect</h2><p>Group Effect在ROSC和CAST论文中都提及了，以及一篇关于GNN的论文<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022](https://arxiv.org/abs/2205.07308)">[7]</span></a></sup>中也提及了，可以说精髓所在了。</p>
+<p>首先定义一些符号：若有一系列的实体$X={x_1,x_2,…,x_n}$，设$w_q$为$W$的第$q$列，设$x_i\rightarrow x_j$表示，$x_i^Tx_j\rightarrow 1$且$||w_i-w_j||_2\rightarrow 0$。</p>
+<p>如果矩阵$Z$满足当$x_i\rightarrow x_j$时，有$|Z_{ip}-Z_{jp}|\rightarrow 0$，则称$Z$具有Group Effect。</p>
+<p>翻译成人话就是当2个实体足够接近，$Z$矩阵中实体对应的元素也足够的接近。这说明了$Z$矩阵确实能够反映实体之间的联系紧密程度。2个实体足够接近，它可以指实体的特征足够接近，也可以指实体附近的结构接近。事实上在另一篇关于GNN的论文<sup id="fnref:7" class="footnote-ref"><a href="#fn:7" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022](https://arxiv.org/abs/2205.07308)">[7]</span></a></sup>里还包括了实体附近的结构信息。</p>
+<p>可以证明的是，ROSC和CAST中的稀疏矩阵都有Group Effect，证明的过程过于复杂，也超出了我的能力范围了😂。</p>
+<h2 id="补充"><a href="#补充" class="headerlink" title="补充"></a>补充</h2><h3 id="Dominant-Eigenvalue"><a href="#Dominant-Eigenvalue" class="headerlink" title="Dominant Eigenvalue"></a>Dominant Eigenvalue</h3><p>若一个方阵$A$存在一系列特征值$\lambda_1,\lambda_2,…,\lambda_n$，且满足$|\lambda_1|&gt;|\lambda_2|\ge…\ge|\lambda_n|$，则称$\lambda_1$为该方阵的主特征值<sup id="fnref:10" class="footnote-ref"><a href="#fn:10" rel="footnote"><span class="hint--top hint--rounded" aria-label="[https://www.cs.huji.ac.il/w~csip/tirgul2.pdf](https://www.cs.huji.ac.il/w~csip/tirgul2.pdf)">[10]</span></a></sup>。前文中的幂迭代法原本就是用来求主特征值的。<br>$$<br>\begin{align*}<br> A^kq^{(0)} &amp;= A^{k-1}q^{(1)} = … =Aq^{(k−1)}<br>\&amp;=a_1A^k\vec  e_1 + a_2A^k\vec e_2,…, +a_nA^k\vec e_n<br>\&amp;=a_1\lambda_1^k  e_1 + a_2\lambda_2^k\vec e_2,…, +a_n\lambda_n^k\vec e_n<br>\&amp;=a_1\lambda_1^k\bigg[e_1+\sum_{i=2}^{n}\frac{a_i}{a_1}\bigg(\frac{\lambda_i}{\lambda_1}\bigg)^k\vec e_i)\bigg]<br>\end{align*}<br>$$<br>经过一系列迭代后又如上式子。显然，当$k\rightarrow\infty$时，$q^{(k)}=Aq^{(k−1)}=A^kq^{(0)}\rightarrow a_1\lambda^kx_1$。并且$[q^{k}]^TAq^{(k)}\approx [q^{(k)}]^T\lambda q^{(k)}=\lambda|q^{(k)}|_2=\lambda$，当$|q^{(k)}|_2=1$。所以每次迭代需要对$q$进行一次标准化。这样通过经过式子就可求出主特征值了。</p>
+<h3 id="Derivatives-of-Matrix"><a href="#Derivatives-of-Matrix" class="headerlink" title="Derivatives of Matrix"></a>Derivatives of Matrix</h3><p>矩阵求导是矩阵论中的相关知识<sup id="fnref:11" class="footnote-ref"><a href="#fn:11" rel="footnote"><span class="hint--top hint--rounded" aria-label="[Petersen K B, Pedersen M S. The matrix cookbook[J]. Technical University of Denmark, 2008, 7(15): 510.](https://ece.uwaterloo.ca/~ece602/MISC/matrixcookbook.pdf)">[11]</span></a></sup>，这里仅对前文用到的Frobenius范式矩阵的求导过程进行介绍。</p>
+<p>Frobenius范式可以表示成如下的迹形式<br>$$<br>||X||_F=\sqrt{tr(X^TX)}<br>$$<br>首先引入2个求导法则</p>
+<ul>
+<li><p>法则1：若$A,X$为$m\times n$的矩阵，有<br>$$<br>\frac{\partial tr(A^TX)}{\partial X}=\frac{\partial tr(X^TA)}{\partial X}=A<br>$$</p>
+</li>
+<li><p>法则2：若$A$为$m\times m$的矩阵，$X$为$m\times n$的矩阵，有</p>
+</li>
+</ul>
+<p>$$<br>\frac{\partial tr(X^TAX)}{\partial X}=AX+A^TX<br>$$</p>
+<p>因此若求以下导数<br>$$<br>\frac{\partial ||A-BX||^2_F}{\partial X}<br>$$<br>利用以上法则有：<br>$$<br>\begin{align*}<br>\frac{\partial||A-BX||^2_F}{\partial X}&amp;=\frac{\partial tr[(A-BX)^T(A-BX)]}{\partial X}\<br>&amp;=\frac{\partial tr[(A^T-X^TB^T)(A-BX)]}{\partial X}\<br>&amp;=\frac{\partial[tr(A^TA)-2tr(A^TBX)+tr(X^TB^TBX)]}{\partial X}\<br>&amp;=0-2A^TB+B^TBX+B^TBX\<br>&amp;=-2B^T(A+BX)<br>\end{align*}<br>$$</p>
+<h2 id="问题与总结"><a href="#问题与总结" class="headerlink" title="问题与总结"></a>问题与总结</h2><p>在这次深入解读论文的过程中，有很多收获，学到了很多，但也发觉不明白的东西也很多。实验中也遇到各种问题，比如在PI方法的实验中，发现对$W^T=D^{-1}S$的最小特征向量在3圆圈数据集中，具有明显的分层，其分层特征和类别基本一致，这是一次代码写错时发现的。以及论文中出现了非常多优化问题求解，也触及到了很多知识盲区。但同时也激发了我的求知欲望，需要学的东西还有很多。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><section class="footnotes"><div class="footnote-list"><ol><li><span id="fn:1" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1145/3178876.3185993">Li X, Kao B, Luo S, et al. Rosc: Robust spectral clustering on multi-scale data[C]//Proceedings of the 2018 World Wide Web Conference. 2018: 157-166.</a>
+<a href="#fnref:1" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:2" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://dl.acm.org/doi/abs/10.1145/3394486.3403086">Li X, Kao B, Shan C, et al. CAST: a correlation-based adaptive spectral clustering algorithm on multi-scale data[C]//Proceedings of the 26th ACM SIGKDD International Conference on Knowledge Discovery &amp; Data Mining. 2020: 439-449.</a>
+<a href="#fnref:2" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:3" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper/2004/hash/40173ea48d9567f1f393b20c855bb40b-Abstract.html">Zelnik-Manor L, Perona P. Self-tuning spectral clustering[J]. Advances in neural information processing systems, 2004, 17.</a>
+<a href="#fnref:3" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:4" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://csustan.csustan.edu/~tom/Clustering/GraphLaplacian-tutorial.pdf">https://csustan.csustan.edu/~tom/Clustering/GraphLaplacian-tutorial.pdf</a>
+<a href="#fnref:4" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:5" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://openreview.net/forum?id=SyWcksbu-H">Lin F, Cohen W W. Power iteration clustering[C]//ICML. 2010.</a>
+<a href="#fnref:5" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:6" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper/2001/hash/801272ee79cfde7fa5960571fee36b9b-Abstract.html">Ng A, Jordan M, Weiss Y. On spectral clustering: Analysis and an algorithm[J]. Advances in neural information processing systems, 2001, 14.</a>
+<a href="#fnref:6" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:7" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://arxiv.org/abs/2205.07308">Li X, Zhu R, Cheng Y, et al. Finding Global Homophily in Graph Neural Networks When Meeting Heterophily[J]. arXiv preprint arXiv:2205.07308, 2022</a>
+<a href="#fnref:7" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:8" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/868688">Shi J, Malik J. Normalized cuts and image segmentation[J]. IEEE Transactions on pattern analysis and machine intelligence, 2000, 22(8): 888-905.</a>
+<a href="#fnref:8" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:9" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Whitening_transformation">https://en.wikipedia.org/wiki/Whitening_transformation</a>
+<a href="#fnref:9" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:10" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://www.cs.huji.ac.il/w~csip/tirgul2.pdf">https://www.cs.huji.ac.il/w~csip/tirgul2.pdf</a>
+<a href="#fnref:10" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:11" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://ece.uwaterloo.ca/~ece602/MISC/matrixcookbook.pdf">Petersen K B, Pedersen M S. The matrix cookbook[J]. Technical University of Denmark, 2008, 7(15): 510.</a>
+<a href="#fnref:11" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:12" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://mathworld.wolfram.com/FrobeniusNorm.html">https://mathworld.wolfram.com/FrobeniusNorm.html</a>
+<a href="#fnref:12" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:13" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://proceedings.neurips.cc/paper/2011/hash/33ceb07bf4eeb3da587e268d663aba1a-Abstract.html">Grave E, Obozinski G R, Bach F. Trace lasso: a trace norm regularization for correlated designs[J]. Advances in Neural Information Processing Systems, 2011, 24.</a>
+<a href="#fnref:13" rev="footnote" class="footnote-backref"> ↩</a></span></span></li><li><span id="fn:14" class="footnote-text"><span><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Matrix_norm">https://en.wikipedia.org/wiki/Matrix_norm</a>
+<a href="#fnref:14" rev="footnote" class="footnote-backref"> ↩</a></span></span></li></ol></div></section>
                 
               </div>
             
@@ -608,13 +506,13 @@ Z^*=(2X^TX+\alpha_1 I+\alpha_2 I)^{-1}(X^TX+\alpha_2W)
       
         <a href="/tags/%E9%A2%91%E5%9F%9F/">#频域</a>
       
+        <a href="/tags/python/">#python</a>
+      
         <a href="/tags/%E8%81%9A%E7%B1%BB/">#聚类</a>
       
         <a href="/tags/%E8%B0%B1%E8%81%9A%E7%B1%BB/">#谱聚类</a>
       
         <a href="/tags/%E5%A4%9A%E5%B0%BA%E5%BA%A6%E6%95%B0%E6%8D%AE/">#多尺度数据</a>
-      
-        <a href="/tags/python/">#python</a>
       
     </div>
   

@@ -6,7 +6,7 @@
   <link href="http://vitaminzl.com/atom.xml" rel="self"/>
   
   <link href="http://vitaminzl.com/"/>
-  <updated>2024-04-22T04:22:14.538Z</updated>
+  <updated>2024-04-22T04:22:16.000Z</updated>
   <id>http://vitaminzl.com/</id>
   
   <author>
@@ -21,15 +21,14 @@
     <link href="http://vitaminzl.com/2024/04/22/others/opensource-hw1/"/>
     <id>http://vitaminzl.com/2024/04/22/others/opensource-hw1/</id>
     <published>2024-04-22T04:00:00.000Z</published>
-    <updated>2024-04-22T04:22:14.538Z</updated>
+    <updated>2024-04-22T04:22:16.000Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;简介&lt;/h1&gt;
-&lt;p&gt;本文将简要介绍使用 hexo 框架搭建静态博客，并部署在 Github Pages 上。&lt;sup id=&quot;fnref:2&quot; class=&quot;footnote-ref&quot;&gt;&lt;a href=&quot;#fn:2&quot;</summary>
+    <summary type="html">&lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;本文将简要介绍使用 hexo 框架搭建静态博客，并部署在 Github Pages 上。&lt;sup id=&quot;fnref:2&quot;</summary>
         
       
     
@@ -54,7 +53,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;dropedge-towards-deep-graph-convolutional-networks-on-node-classification&quot;&gt;&lt;strong&gt;DropEdge&lt;/strong&gt; Towards Deep Graph</summary>
+    <summary type="html">&lt;h1 id=&quot;DropEdge-Towards-Deep-Graph-Convolutional-Networks-On-Node-Classification&quot;&gt;&lt;a</summary>
         
       
     
@@ -85,8 +84,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;论文速读gnn系列&quot;&gt;论文速读&amp;lt;二&amp;gt;：GNN系列&lt;/h1&gt;
-&lt;p&gt;论文速读系列的第二期，论文速读主要提取论文的Key Idea，本期为GNN系列的论文速读，选取了4篇经典论文和3篇近期的论文。&lt;a</summary>
+    <summary type="html">&lt;h1 id=&quot;论文速读：GNN系列&quot;&gt;&lt;a href=&quot;#论文速读：GNN系列&quot; class=&quot;headerlink&quot; title=&quot;论文速读&lt;二&gt;：GNN系列&quot;&gt;&lt;/a&gt;论文速读&amp;lt;二&amp;gt;：GNN系列&lt;/h1&gt;&lt;p&gt;论文速读系列的第二期，论文速读主要提取论文的Key</summary>
         
       
     
@@ -108,14 +106,14 @@
     <link href="http://vitaminzl.com/2022/08/30/gnn/spectral-cluster/"/>
     <id>http://vitaminzl.com/2022/08/30/gnn/spectral-cluster/</id>
     <published>2022-08-30T04:00:00.000Z</published>
-    <updated>2023-11-24T11:59:24.481Z</updated>
+    <updated>2023-11-24T11:59:26.000Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1</summary>
+    <summary type="html">&lt;h1 id=&quot;谱聚类&quot;&gt;&lt;a href=&quot;#谱聚类&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -126,13 +124,13 @@
     
     <category term="频域" scheme="http://vitaminzl.com/tags/%E9%A2%91%E5%9F%9F/"/>
     
+    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
+    
     <category term="聚类" scheme="http://vitaminzl.com/tags/%E8%81%9A%E7%B1%BB/"/>
     
     <category term="谱聚类" scheme="http://vitaminzl.com/tags/%E8%B0%B1%E8%81%9A%E7%B1%BB/"/>
     
     <category term="多尺度数据" scheme="http://vitaminzl.com/tags/%E5%A4%9A%E5%B0%BA%E5%BA%A6%E6%95%B0%E6%8D%AE/"/>
-    
-    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
     
   </entry>
   
@@ -141,15 +139,14 @@
     <link href="http://vitaminzl.com/2022/08/20/gnn/spetcral-theory/"/>
     <id>http://vitaminzl.com/2022/08/20/gnn/spetcral-theory/</id>
     <published>2022-08-20T04:00:00.000Z</published>
-    <updated>2023-11-24T11:58:03.680Z</updated>
+    <updated>2023-11-24T11:58:04.000Z</updated>
     
     
       
       
         
         
-    <summary type="html">&lt;h1 id=&quot;写在前面&quot;&gt;写在前面&lt;/h1&gt;
-&lt;p&gt;图神经网络（GNN）是近年来愈发火热，用以对图（Graph）数据进行特征提取以及各种下游任务。注意这里的图（Graph）应和图像（Image）区分，图是一种由点集与边集组成的数据结构，常记作&lt;span class=&quot;math</summary>
+    <summary type="html">&lt;h1 id=&quot;写在前面&quot;&gt;&lt;a href=&quot;#写在前面&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -160,13 +157,13 @@
     
     <category term="频域" scheme="http://vitaminzl.com/tags/%E9%A2%91%E5%9F%9F/"/>
     
-    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
-    
     <category term="谱图理论" scheme="http://vitaminzl.com/tags/%E8%B0%B1%E5%9B%BE%E7%90%86%E8%AE%BA/"/>
     
     <category term="傅里叶变换" scheme="http://vitaminzl.com/tags/%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/"/>
     
     <category term="线性代数" scheme="http://vitaminzl.com/tags/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/"/>
+    
+    <category term="python" scheme="http://vitaminzl.com/tags/python/"/>
     
   </entry>
   
@@ -182,9 +179,7 @@
       
         
         
-    <summary type="html">&lt;h1 id=&quot;论文速读关系抽取与提示学习&quot;&gt;论文速读&amp;lt;一&amp;gt;：关系抽取与提示学习&lt;/h1&gt;
-&lt;p&gt;论文速读系列为对论文的核心思想进行快速抓取，仅记录论文的Key Idea。本期为论文速读系列的第一期，选取了5篇近期知识图谱领域的关系抽取相关论文。&lt;/p&gt;
-&lt;h2</summary>
+    <summary type="html">&lt;h1 id=&quot;论文速读：关系抽取与提示学习&quot;&gt;&lt;a href=&quot;#论文速读：关系抽取与提示学习&quot; class=&quot;headerlink&quot;</summary>
         
       
     
@@ -215,7 +210,7 @@
       
         
         
-    <summary type="html">&lt;h1</summary>
+    <summary type="html">&lt;h1 id=&quot;ToyC语言&quot;&gt;&lt;a href=&quot;#ToyC语言&quot; class=&quot;headerlink&quot;</summary>
         
       
     

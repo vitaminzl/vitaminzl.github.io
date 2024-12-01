@@ -16,12 +16,12 @@
   <meta name="author" content="vitaminzl">
   <meta name="keywords" content="">
   
-    <meta name="description" content="GNN：一篇经典综述的解读 本文是对一篇GNN领域的经典综述A Comprehensive Survey on Graph Neural Networks[^1]进行解读。对其中提到的部分论文会进行深入解读。 Embedding: Network embedding covers various kinds of methods targeting the same task. GNN: GNNs">
+    <meta name="description" content="GNN：一篇经典综述的解读本文是对一篇GNN领域的经典综述A Comprehensive Survey on Graph Neural Networks[^1]进行解读。对其中提到的部分论文会进行深入解读。 Embedding: Network embedding covers various kinds of methods targeting the same task. GNN: GNNs">
 <meta property="og:type" content="article">
 <meta property="og:title" content="GNN：一篇经典综述的解读">
 <meta property="og:url" content="http://vitaminzl.com/2022/11/19/gnn/gnn-zong-shu/index.html">
 <meta property="og:site_name" content="闲渔">
-<meta property="og:description" content="GNN：一篇经典综述的解读 本文是对一篇GNN领域的经典综述A Comprehensive Survey on Graph Neural Networks[^1]进行解读。对其中提到的部分论文会进行深入解读。 Embedding: Network embedding covers various kinds of methods targeting the same task. GNN: GNNs">
+<meta property="og:description" content="GNN：一篇经典综述的解读本文是对一篇GNN领域的经典综述A Comprehensive Survey on Graph Neural Networks[^1]进行解读。对其中提到的部分论文会进行深入解读。 Embedding: Network embedding covers various kinds of methods targeting the same task. GNN: GNNs">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/Review-GNN-1.png">
 <meta property="og:image" content="https://imagehost.vitaminz-image.top/Review-GNN-2.png">
@@ -92,9 +92,9 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0">
-<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style>
-<link rel="alternate" href="/atom.xml" title="闲渔" type="application/atom+xml"><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.0.0"><link rel="alternate" href="/atom.xml" title="闲渔" type="application/atom+xml">
+
+<style>.github-emoji { position: relative; display: inline-block; width: 1.2em; min-height: 1.2em; overflow: hidden; vertical-align: top; color: transparent; }  .github-emoji > span { position: relative; z-index: 10; }  .github-emoji img, .github-emoji .fancybox { margin: 0 !important; padding: 0 !important; border: none !important; outline: none !important; text-decoration: none !important; user-select: none !important; cursor: auto !important; }  .github-emoji img { height: 1.2em !important; width: 1.2em !important; position: absolute !important; left: 50% !important; top: 50% !important; transform: translate(-50%, -50%) !important; user-select: none !important; cursor: auto !important; } .github-emoji-fallback { color: inherit; } .github-emoji-fallback img { opacity: 0 !important; }</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 
@@ -232,7 +232,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          955 字
+          956 字
         
       </span>
     
@@ -286,29 +286,17 @@
             
               <div class="markdown-body">
                 
-                <h1 id="gnn一篇经典综述的解读">GNN：一篇经典综述的解读</h1>
-<p>本文是对一篇GNN领域的<strong>经典综述</strong>A Comprehensive Survey on Graph Neural Networks[^1]进行解读。对其中提到的部分论文会进行深入解读。</p>
+                <h1 id="GNN：一篇经典综述的解读"><a href="#GNN：一篇经典综述的解读" class="headerlink" title="GNN：一篇经典综述的解读"></a>GNN：一篇经典综述的解读</h1><p>本文是对一篇GNN领域的<strong>经典综述</strong>A Comprehensive Survey on Graph Neural Networks[^1]进行解读。对其中提到的部分论文会进行深入解读。</p>
 <p>Embedding: Network embedding covers various kinds of methods targeting the same task.</p>
-<p>GNN: GNNs are a group of neural network models which are designed for various tasks while</p>
+<p>GNN: GNNs are a group of neural network models which are designed for various tasks while </p>
 <p>Graph Kernel Methods: Employ a kernel function to measure the similarity between pairs of graphs so that kernel-based algorithms like support vector machines can be used for supervised learning on graphs. 计算复杂度高</p>
-<h2 id="四种类型">四种类型</h2>
-<p>本文将GNN分成了四种类型：</p>
-<h3 id="recgnns">RecGNNs</h3>
-<p>Recurrent Graph Neural Network <span class="math display">\[
-\bold{h}^{(t)}_v=\sum_{u\in N(v)}f(\bold{x}_v,\bold{x}_u,\bold{x^e}_{(u,v)},\bold{h}_u^{(t-1)})
-\]</span> Learn node representations with recurrent neural architectures.</p>
+<h2 id="四种类型"><a href="#四种类型" class="headerlink" title="四种类型"></a>四种类型</h2><p>本文将GNN分成了四种类型：</p>
+<h3 id="RecGNNs"><a href="#RecGNNs" class="headerlink" title="RecGNNs"></a>RecGNNs</h3><p>Recurrent Graph Neural Network<br>$$<br>\bold{h}^{(t)}<em>v=\sum</em>{u\in N(v)}f(\bold{x}_v,\bold{x}<em>u,\bold{x^e}</em>{(u,v)},\bold{h}_u^{(t-1)})<br>$$<br>Learn node representations with recurrent neural architectures.</p>
 <p><img src="https://imagehost.vitaminz-image.top/Review-GNN-1.png" srcset="/img/loading.gif" lazyload></p>
-<h3 id="convgnns">ConvGNNs</h3>
-<h4 id="spectral-convolution">Spectral Convolution</h4>
-<p>Spectral Networks and Deep Locally Connected Networks on Graphs</p>
+<h3 id="ConvGNNs"><a href="#ConvGNNs" class="headerlink" title="ConvGNNs"></a>ConvGNNs</h3><h4 id="Spectral-Convolution"><a href="#Spectral-Convolution" class="headerlink" title="Spectral Convolution"></a>Spectral Convolution</h4><p>Spectral Networks and Deep Locally Connected Networks on Graphs</p>
 <p><img src="https://imagehost.vitaminz-image.top/Review-GNN-2.png" srcset="/img/loading.gif" lazyload></p>
 <p>Convolutional Neural Networks on Graphs with Fast Localized Spectral Filtering</p>
-<h3 id="gaes">GAEs</h3>
-<h3 id="stgnns">STGNNs</h3>
-<h2 id="未来的方向">未来的方向</h2>
-<h2 id="补充知识">补充知识</h2>
-<h2 id="参考文献">参考文献</h2>
-<p>[1]: <a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/9046288">Wu Z, Pan S, Chen F, et al. A comprehensive survey on graph neural networks[J]. IEEE transactions on neural networks and learning systems, 2020, 32(1): 4-24.</a></p>
+<h3 id="GAEs"><a href="#GAEs" class="headerlink" title="GAEs"></a>GAEs</h3><h3 id="STGNNs"><a href="#STGNNs" class="headerlink" title="STGNNs"></a>STGNNs</h3><h2 id="未来的方向"><a href="#未来的方向" class="headerlink" title="未来的方向"></a>未来的方向</h2><h2 id="补充知识"><a href="#补充知识" class="headerlink" title="补充知识"></a>补充知识</h2><h2 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h2><p>[1]: <a target="_blank" rel="noopener" href="https://ieeexplore.ieee.org/abstract/document/9046288">Wu Z, Pan S, Chen F, et al. A comprehensive survey on graph neural networks[J]. IEEE transactions on neural networks and learning systems, 2020, 32(1): 4-24.</a></p>
 <p>off-the-shelf</p>
 
                 
